@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('fio');
             $table->string('email')->unique();
             $table->string('password');            
-            $table->integer('id_role')->default(0);
-            $table->integer('id_shop')->nullable();
+            $table->integer('role_id')->default(0);
+            $table->integer('shop_id')->nullable();
             $table->timestamps();
         });
     }

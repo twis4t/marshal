@@ -15,9 +15,9 @@ class CreateCarsTable extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_user');
-            $table->integer('id_carbrand')->nullable();
-            $table->integer('id_carmodel')->nullable();
+            $table->integer('user_id');
+            $table->integer('car_brand_id')->nullable();
+            $table->integer('car_model_id')->nullable();
             $table->integer('year')->nullable();
             $table->string('vin')->nullable();
             $table->integer('updated_by')->nullable();

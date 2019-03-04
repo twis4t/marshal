@@ -15,10 +15,10 @@ class CreateRequestsTable extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_user');
-            $table->integer('id_car');
-            $table->integer('id_category');
-            $table->integer('id_shop')->nullable();
+            $table->integer('user_id');
+            $table->integer('car_id');
+            $table->integer('category_id');
+            $table->integer('shop_id')->nullable();
             $table->string('text')->nullable();
             $table->string('vin')->nullable();
             $table->integer('updated_by')->nullable();

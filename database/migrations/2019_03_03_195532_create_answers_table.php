@@ -15,10 +15,10 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_request');
-            $table->integer('id_status');
-            $table->integer('id_shop');
-            $table->integer('id_user');            
+            $table->integer('request_id');
+            $table->integer('status_id');
+            $table->integer('shop_id');
+            $table->integer('user_id');            
             $table->string('description')->nullable();
             $table->float('price')->nullable();
             $table->boolean('is_new')->nullable();

@@ -15,8 +15,8 @@ class CreateFavoriteShopsTable extends Migration
     {
         Schema::create('favorite_shops', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_user');
-            $table->integer('id_shop');
+            $table->integer('user_id');
+            $table->integer('shop_id');
             $table->string('comment')->nullable();
             $table->timestamps();
         });

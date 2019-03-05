@@ -14,3 +14,5 @@
     - параметры подключения к БД	
 6. Запускаем команду `php artisan key:generate`
 7. Запускаем команду `php artisan migrate`
+8. Запускаем команду `php artisan passport:install --force`
+9. Запускаем команду `php artisan passport:client --password`. Имя приложения: `marshal-back`

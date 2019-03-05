@@ -17,7 +17,7 @@ class ClientApp extends Model
 
     public static function getInfo($appName)
     {
-        $result = DB::table('oauth_clients (NOLOCK)')->select('id', 'secret')->where('name', '=', $appName)->first();
+        $result = DB::table('oauth_clients')->select('id', 'secret')->where('name', '=', $appName)->first();
         return $result;
     }
 }

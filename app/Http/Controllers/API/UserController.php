@@ -21,10 +21,24 @@ class UserController extends Controller
      */
     public function login(){
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
-            $user = Auth::user();
-            $http = new GuzzleHttp\Client;
-            $client = ClientApp::getInfo(request('application'));
+
+            // Валидация входных параметров
+            $validator = Validator::make(request()->all(), [
+                'application' => 'required'
+            ]);    
+            if ($validator->fails()) {
+                return response()->json(['error'=>$validator->errors()], 401);            
+            }
             
+            // Ищем приложение (клиент)
+            $client = ClientApp::getInfo(request('application'));
+            if (is_null($client)) {
+                return response()->json(['error'=>'Application does not exist'], 401);
+            }
+
+            // Запрашиваем ключ
+            $user = Auth::user();
+            $http = new Client;
             $response = $http->post($_SERVER['HTTP_HOST'].'/oauth/token', [
                 'form_params' => [
                     'grant_type' => 'password',
@@ -71,18 +85,14 @@ class UserController extends Controller
             'c_password' => 'required|same:password',
         ]);
 
-
         if ($validator->fails()) {
             return response()->json(['error'=>$validator->errors()], 401);            
         }
 
-
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')->accessToken;
-        $success['name'] =  $user->name;
-
+        $success['name'] = $user->name;
 
         return response()->json(['success'=>$success], $this->successStatus);
     }

@@ -39,5 +39,18 @@ class User extends Authenticatable
         'password'
     ];
 
+    /**
+     * Passport auth
+     * 
+     */
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+    
+    public function findForPassport($username) {
+        return $this->where('name', $username)->first();
+    }
+
     
 }

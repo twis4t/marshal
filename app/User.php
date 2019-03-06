@@ -39,5 +39,13 @@ class User extends Authenticatable
         'password'
     ];
 
+
+    public function role(){
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function shop(){
+        return $this->belongsTo(Shop::class, 'shop_id');
+    }
     
 }

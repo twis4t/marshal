@@ -25,4 +25,8 @@ class CarModel extends Model
         'car_brand_id' => 'integer'        
     ];
 
+    public function car_brand(){
+        return $this->belongsTo(CarBrand::class, 'car_brand_id');
+    }
+
 }

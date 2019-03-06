@@ -30,4 +30,16 @@ class Car extends Model
         'car_model_id' => 'integer'
     ];
 
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function car_brand(){
+        return $this->hasOne(CarBrand::class, 'car_brand_id');
+    }
+
+    public function car_model(){
+        return $this->hasOne(CarModel::class, 'car_model_id');
+    }
+
 }

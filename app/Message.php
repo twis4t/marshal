@@ -28,5 +28,13 @@ class Message extends Model
         'user_id' => 'integer',
     ];
 
+    public function answer(){
+        return $this->belongsTo(Answer::class, 'answer_id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 
 }

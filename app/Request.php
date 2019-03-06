@@ -32,5 +32,16 @@ class Request extends Model
         'shop_id' => 'integer'
     ];
 
+    public function category(){
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function car(){
+        return $this->belongsTo(Car::class, 'car_id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
 }

@@ -34,5 +34,18 @@ class Answer extends Model
         'is_new' => 'boolean'
     ];
 
+    public function message(){
+        return $this->hasMany(Message::class);
+    }
+
+    public function request(){
+        return $this->belongsTo(Request::class, 'request_id');
+    }
+
+    public function status(){
+        return $this->hasOne(Status::class, 'status_id');
+    }
+
+
 
 }

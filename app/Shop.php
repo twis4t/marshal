@@ -19,4 +19,6 @@ class Shop extends Model
         'comment'
     ];
 
+    
+
 }

@@ -11,7 +11,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
     
-   /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -20,7 +20,7 @@ class User extends Authenticatable
         'name', 'email', 'password'
     ];
 
-     /**
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array

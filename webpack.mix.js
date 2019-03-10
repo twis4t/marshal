@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require('laravel-mix')
 
 /*
  |--------------------------------------------------------------------------
@@ -11,5 +11,21 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.react('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+mix
+  .webpackConfig({
+    module: {
+      rules: [
+        {
+          test: /\.(jsx|js|vue)$/,
+          loader: 'eslint-loader',
+          enforce: 'pre',
+          exclude: /(node_modules)/,
+          options: {
+            formatter: require('eslint-friendly-formatter'),
+          },
+        },
+      ],
+    },
+  })
+  .react('resources/js/app.js', 'public/js')
+  .sass('resources/sass/app.scss', 'public/css')

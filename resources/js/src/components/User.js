@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Button from '@material-ui/core/Button'
 
 export class User extends React.Component {
   onBtnClick(name) {
@@ -28,6 +29,10 @@ export class User extends React.Component {
         >
           Получить
         </button>
+        <Button variant="contained" color="primary">
+          Hello World
+        </Button>
+
         {isFetching ? <div>Загрузка...</div> : <div />}
       </div>
     )

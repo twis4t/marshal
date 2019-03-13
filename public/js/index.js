@@ -57572,7 +57572,7 @@ object-assign
           /*! redux-thunk */ './node_modules/redux-thunk/es/index.js'
         )
 
-        var history = Object(history__WEBPACK_IMPORTED_MODULE_1__['createBrowserHistory'])()
+        var history = Object(history__WEBPACK_IMPORTED_MODULE_1__['createHashHistory'])()
         function configureStore(preloadedState) {
           var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__['createStore'])(
             Object(_reducers__WEBPACK_IMPORTED_MODULE_3__['rootReducer'])(history),

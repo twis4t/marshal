@@ -57093,10 +57093,10 @@ object-assign
         /***/
       },
 
-    /***/ './resources/js/src/containers/App.js':
-      /*!********************************************!*\
-  !*** ./resources/js/src/containers/App.js ***!
-  \********************************************/
+    /***/ './resources/js/src/containers/App/index.js':
+      /*!**************************************************!*\
+  !*** ./resources/js/src/containers/App/index.js ***!
+  \**************************************************/
       /*! exports provided: default */
       /***/ function(module, __webpack_exports__, __webpack_require__) {
         'use strict'
@@ -57117,10 +57117,10 @@ object-assign
           prop_types__WEBPACK_IMPORTED_MODULE_2__
         )
         /* harmony import */ var _components_User__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-          /*! ../components/User */ './resources/js/src/components/User.js'
+          /*! @/components/User */ './resources/js/src/components/User.js'
         )
         /* harmony import */ var _actions_UserActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-          /*! ../actions/UserActions */ './resources/js/src/actions/UserActions.js'
+          /*! @/actions/UserActions */ './resources/js/src/actions/UserActions.js'
         )
         function _typeof(obj) {
           if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
@@ -57315,23 +57315,17 @@ object-assign
         /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
           /*! react-redux */ './node_modules/react-redux/es/index.js'
         )
-        /* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-          /*! react-router */ './node_modules/react-router/es/index.js'
-        )
-        /* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+        /* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
           /*! connected-react-router */ './node_modules/connected-react-router/esm/index.js'
         )
-        /* harmony import */ var _store_configureStore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-          /*! ./store/configureStore */ './resources/js/src/store/configureStore.js'
+        /* harmony import */ var _store_configureStore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+          /*! @/store/configureStore */ './resources/js/src/store/configureStore.js'
         )
-        /* harmony import */ var _containers_App__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-          /*! ./containers/App */ './resources/js/src/containers/App.js'
-        )
-        /* harmony import */ var _components_Login__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-          /*! ./components/Login */ './resources/js/src/components/Login/index.js'
+        /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+          /*! @/routes */ './resources/js/src/routes/index.js'
         )
 
-        var store = Object(_store_configureStore__WEBPACK_IMPORTED_MODULE_5__['default'])()
+        var store = Object(_store_configureStore__WEBPACK_IMPORTED_MODULE_4__['default'])()
         react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(
           react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
             react_redux__WEBPACK_IMPORTED_MODULE_2__['Provider'],
@@ -57339,52 +57333,11 @@ object-assign
               store: store,
             },
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-              connected_react_router__WEBPACK_IMPORTED_MODULE_4__['ConnectedRouter'],
+              connected_react_router__WEBPACK_IMPORTED_MODULE_3__['ConnectedRouter'],
               {
-                history: _store_configureStore__WEBPACK_IMPORTED_MODULE_5__['history'],
+                history: _store_configureStore__WEBPACK_IMPORTED_MODULE_4__['history'],
               },
-              react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment,
-                null,
-                react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                  react_router__WEBPACK_IMPORTED_MODULE_3__['Switch'],
-                  null,
-                  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                    react_router__WEBPACK_IMPORTED_MODULE_3__['Route'],
-                    {
-                      exact: true,
-                      path: '/',
-                      render: function render() {
-                        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                          _containers_App__WEBPACK_IMPORTED_MODULE_6__['default'],
-                          null
-                        )
-                      },
-                    }
-                  ),
-                  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                    react_router__WEBPACK_IMPORTED_MODULE_3__['Route'],
-                    {
-                      exact: true,
-                      path: '/login',
-                      render: function render() {
-                        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                          _components_Login__WEBPACK_IMPORTED_MODULE_7__['default'],
-                          null
-                        )
-                      },
-                    }
-                  ),
-                  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                    react_router__WEBPACK_IMPORTED_MODULE_3__['Route'],
-                    {
-                      render: function render() {
-                        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', null, 'Miss')
-                      },
-                    }
-                  )
-                )
-              )
+              _routes__WEBPACK_IMPORTED_MODULE_5__['default']
             )
           ),
           document.getElementById('root')
@@ -57462,7 +57415,7 @@ object-assign
           return userReducer
         })
         /* harmony import */ var _actions_UserActions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-          /*! ../actions/UserActions */ './resources/js/src/actions/UserActions.js'
+          /*! @/actions/UserActions */ './resources/js/src/actions/UserActions.js'
         )
         function _objectSpread(target) {
           for (var i = 1; i < arguments.length; i++) {
@@ -57523,6 +57476,66 @@ object-assign
         /***/
       },
 
+    /***/ './resources/js/src/routes/index.js':
+      /*!******************************************!*\
+  !*** ./resources/js/src/routes/index.js ***!
+  \******************************************/
+      /*! exports provided: default */
+      /***/ function(module, __webpack_exports__, __webpack_require__) {
+        'use strict'
+        __webpack_require__.r(__webpack_exports__)
+        /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+          /*! react */ './node_modules/react/index.js'
+        )
+        /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/ __webpack_require__.n(
+          react__WEBPACK_IMPORTED_MODULE_0__
+        )
+        /* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+          /*! react-router */ './node_modules/react-router/es/index.js'
+        )
+        /* harmony import */ var _containers_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+          /*! @/containers/App */ './resources/js/src/containers/App/index.js'
+        )
+        /* harmony import */ var _components_Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+          /*! @/components/Login */ './resources/js/src/components/Login/index.js'
+        )
+
+        var routes = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+          'div',
+          null,
+          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+            react_router__WEBPACK_IMPORTED_MODULE_1__['Switch'],
+            null,
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+              react_router__WEBPACK_IMPORTED_MODULE_1__['Route'],
+              {
+                exact: true,
+                path: '/',
+                component: _containers_App__WEBPACK_IMPORTED_MODULE_2__['default'],
+              }
+            ),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+              react_router__WEBPACK_IMPORTED_MODULE_1__['Route'],
+              {
+                path: '/login',
+                component: _components_Login__WEBPACK_IMPORTED_MODULE_3__['default'],
+              }
+            ),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+              react_router__WEBPACK_IMPORTED_MODULE_1__['Route'],
+              {
+                render: function render() {
+                  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', null, 'Miss')
+                },
+              }
+            )
+          )
+        )
+        /* harmony default export */ __webpack_exports__['default'] = routes
+
+        /***/
+      },
+
     /***/ './resources/js/src/store/configureStore.js':
       /*!**************************************************!*\
   !*** ./resources/js/src/store/configureStore.js ***!
@@ -57547,7 +57560,7 @@ object-assign
           /*! connected-react-router */ './node_modules/connected-react-router/esm/index.js'
         )
         /* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-          /*! ../reducers */ './resources/js/src/reducers/index.js'
+          /*! @/reducers */ './resources/js/src/reducers/index.js'
         )
         /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
           /*! redux-logger */ './node_modules/redux-logger/dist/redux-logger.js'
@@ -57594,8 +57607,10 @@ object-assign
   \*******************************************************************/
       /*! no static exports found */
       /***/ function(module, exports, __webpack_require__) {
-        __webpack_require__(/*! D:\www\marshal\resources\js\src\index.js */ './resources/js/src/index.js')
-        module.exports = __webpack_require__(/*! D:\www\marshal\resources\sass\app.scss */ './resources/sass/app.scss')
+        __webpack_require__(/*! D:\www\marshal\marshal\resources\js\src\index.js */ './resources/js/src/index.js')
+        module.exports = __webpack_require__(
+          /*! D:\www\marshal\marshal\resources\sass\app.scss */ './resources/sass/app.scss'
+        )
 
         /***/
       },

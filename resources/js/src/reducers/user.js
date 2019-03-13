@@ -1,4 +1,4 @@
-import { SET_NAME, GET_USER_REQUEST, GET_USER_RESULT } from '../actions/UserActions'
+import { SET_NAME, GET_USER_REQUEST, GET_USER_RESULT } from '@/actions/UserActions'
 
 const initialState = {
   name: 'guest',

@@ -53,7 +53,7 @@ export class Login extends React.Component {
         <Paper className={classes.paper}>
           <Avatar className={classes.avatar}>L</Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Авторизация
           </Typography>
           <form className={classes.form}>
             <FormControl margin="normal" required fullWidth>

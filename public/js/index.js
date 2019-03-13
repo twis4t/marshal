@@ -671,6 +671,248 @@
         /***/
       },
 
+    /***/ './node_modules/@material-ui/core/AppBar/AppBar.js':
+      /*!*********************************************************!*\
+  !*** ./node_modules/@material-ui/core/AppBar/AppBar.js ***!
+  \*********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.default = exports.styles = void 0
+
+        var _extends2 = _interopRequireDefault(
+          __webpack_require__(/*! @babel/runtime/helpers/extends */ './node_modules/@babel/runtime/helpers/extends.js')
+        )
+
+        var _defineProperty2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/defineProperty */ './node_modules/@babel/runtime/helpers/defineProperty.js'
+          )
+        )
+
+        var _objectWithoutProperties2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/objectWithoutProperties */ './node_modules/@babel/runtime/helpers/objectWithoutProperties.js'
+          )
+        )
+
+        var _react = _interopRequireDefault(__webpack_require__(/*! react */ './node_modules/react/index.js'))
+
+        var _propTypes = _interopRequireDefault(
+          __webpack_require__(/*! prop-types */ './node_modules/prop-types/index.js')
+        )
+
+        var _classnames = _interopRequireDefault(
+          __webpack_require__(/*! classnames */ './node_modules/classnames/index.js')
+        )
+
+        var _withStyles = _interopRequireDefault(
+          __webpack_require__(/*! ../styles/withStyles */ './node_modules/@material-ui/core/styles/withStyles.js')
+        )
+
+        var _helpers = __webpack_require__(/*! ../utils/helpers */ './node_modules/@material-ui/core/utils/helpers.js')
+
+        var _Paper = _interopRequireDefault(
+          __webpack_require__(/*! ../Paper */ './node_modules/@material-ui/core/Paper/index.js')
+        )
+
+        // @inheritedComponent Paper
+        var styles = function styles(theme) {
+          var backgroundColorDefault =
+            theme.palette.type === 'light' ? theme.palette.grey[100] : theme.palette.grey[900]
+          return {
+            /* Styles applied to the root element. */
+            root: {
+              display: 'flex',
+              flexDirection: 'column',
+              width: '100%',
+              boxSizing: 'border-box',
+              // Prevent padding issue with the Modal and fixed positioned AppBar.
+              zIndex: theme.zIndex.appBar,
+              flexShrink: 0,
+            },
+
+            /* Styles applied to the root element if `position="fixed"`. */
+            positionFixed: {
+              position: 'fixed',
+              top: 0,
+              left: 'auto',
+              right: 0,
+            },
+
+            /* Styles applied to the root element if `position="absolute"`. */
+            positionAbsolute: {
+              position: 'absolute',
+              top: 0,
+              left: 'auto',
+              right: 0,
+            },
+
+            /* Styles applied to the root element if `position="sticky"`. */
+            positionSticky: {
+              position: 'sticky',
+              top: 0,
+              left: 'auto',
+              right: 0,
+            },
+
+            /* Styles applied to the root element if `position="static"`. */
+            positionStatic: {
+              position: 'static',
+            },
+
+            /* Styles applied to the root element if `position="relative"`. */
+            positionRelative: {
+              position: 'relative',
+            },
+
+            /* Styles applied to the root element if `color="default"`. */
+            colorDefault: {
+              backgroundColor: backgroundColorDefault,
+              color: theme.palette.getContrastText(backgroundColorDefault),
+            },
+
+            /* Styles applied to the root element if `color="primary"`. */
+            colorPrimary: {
+              backgroundColor: theme.palette.primary.main,
+              color: theme.palette.primary.contrastText,
+            },
+
+            /* Styles applied to the root element if `color="secondary"`. */
+            colorSecondary: {
+              backgroundColor: theme.palette.secondary.main,
+              color: theme.palette.secondary.contrastText,
+            },
+          }
+        }
+
+        exports.styles = styles
+
+        function AppBar(props) {
+          var _classNames
+
+          var children = props.children,
+            classes = props.classes,
+            classNameProp = props.className,
+            color = props.color,
+            position = props.position,
+            other = (0, _objectWithoutProperties2.default)(props, [
+              'children',
+              'classes',
+              'className',
+              'color',
+              'position',
+            ])
+          var className = (0, _classnames.default)(
+            classes.root,
+            classes['position'.concat((0, _helpers.capitalize)(position))],
+            ((_classNames = {}),
+            (0, _defineProperty2.default)(
+              _classNames,
+              classes['color'.concat((0, _helpers.capitalize)(color))],
+              color !== 'inherit'
+            ),
+            (0, _defineProperty2.default)(_classNames, 'mui-fixed', position === 'fixed'),
+            _classNames),
+            classNameProp
+          )
+          return _react.default.createElement(
+            _Paper.default,
+            (0, _extends2.default)(
+              {
+                square: true,
+                component: 'header',
+                elevation: 4,
+                className: className,
+              },
+              other
+            ),
+            children
+          )
+        }
+
+        true
+          ? (AppBar.propTypes = {
+              /**
+               * The content of the component.
+               */
+              children: _propTypes.default.node.isRequired,
+
+              /**
+               * Override or extend the styles applied to the component.
+               * See [CSS API](#css-api) below for more details.
+               */
+              classes: _propTypes.default.object.isRequired,
+
+              /**
+               * @ignore
+               */
+              className: _propTypes.default.string,
+
+              /**
+               * The color of the component. It supports those theme colors that make sense for this component.
+               */
+              color: _propTypes.default.oneOf(['inherit', 'primary', 'secondary', 'default']),
+
+              /**
+               * The positioning type. The behavior of the different options is described
+               * [in the MDN web docs](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Positioning).
+               * Note: `sticky` is not universally supported and will fall back to `static` when unavailable.
+               */
+              position: _propTypes.default.oneOf(['fixed', 'absolute', 'sticky', 'static', 'relative']),
+            })
+          : undefined
+        AppBar.defaultProps = {
+          color: 'primary',
+          position: 'fixed',
+        }
+
+        var _default = (0, _withStyles.default)(styles, {
+          name: 'MuiAppBar',
+        })(AppBar)
+
+        exports.default = _default
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/AppBar/index.js':
+      /*!********************************************************!*\
+  !*** ./node_modules/@material-ui/core/AppBar/index.js ***!
+  \********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        Object.defineProperty(exports, 'default', {
+          enumerable: true,
+          get: function get() {
+            return _AppBar.default
+          },
+        })
+
+        var _AppBar = _interopRequireDefault(
+          __webpack_require__(/*! ./AppBar */ './node_modules/@material-ui/core/AppBar/AppBar.js')
+        )
+
+        /***/
+      },
+
     /***/ './node_modules/@material-ui/core/Avatar/Avatar.js':
       /*!*********************************************************!*\
   !*** ./node_modules/@material-ui/core/Avatar/Avatar.js ***!
@@ -922,6 +1164,494 @@
 
         var _Avatar = _interopRequireDefault(
           __webpack_require__(/*! ./Avatar */ './node_modules/@material-ui/core/Avatar/Avatar.js')
+        )
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Backdrop/Backdrop.js':
+      /*!*************************************************************!*\
+  !*** ./node_modules/@material-ui/core/Backdrop/Backdrop.js ***!
+  \*************************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.default = exports.styles = void 0
+
+        var _extends2 = _interopRequireDefault(
+          __webpack_require__(/*! @babel/runtime/helpers/extends */ './node_modules/@babel/runtime/helpers/extends.js')
+        )
+
+        var _defineProperty2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/defineProperty */ './node_modules/@babel/runtime/helpers/defineProperty.js'
+          )
+        )
+
+        var _objectWithoutProperties2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/objectWithoutProperties */ './node_modules/@babel/runtime/helpers/objectWithoutProperties.js'
+          )
+        )
+
+        var _react = _interopRequireDefault(__webpack_require__(/*! react */ './node_modules/react/index.js'))
+
+        var _propTypes = _interopRequireDefault(
+          __webpack_require__(/*! prop-types */ './node_modules/prop-types/index.js')
+        )
+
+        var _classnames = _interopRequireDefault(
+          __webpack_require__(/*! classnames */ './node_modules/classnames/index.js')
+        )
+
+        var _withStyles = _interopRequireDefault(
+          __webpack_require__(/*! ../styles/withStyles */ './node_modules/@material-ui/core/styles/withStyles.js')
+        )
+
+        var _Fade = _interopRequireDefault(
+          __webpack_require__(/*! ../Fade */ './node_modules/@material-ui/core/Fade/index.js')
+        )
+
+        var styles = {
+          /* Styles applied to the root element. */
+          root: {
+            zIndex: -1,
+            position: 'fixed',
+            right: 0,
+            bottom: 0,
+            top: 0,
+            left: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            // Remove grey highlight
+            WebkitTapHighlightColor: 'transparent',
+            // Disable scroll capabilities.
+            touchAction: 'none',
+          },
+
+          /* Styles applied to the root element if `invisible={true}`. */
+          invisible: {
+            backgroundColor: 'transparent',
+          },
+        }
+        exports.styles = styles
+
+        function Backdrop(props) {
+          var classes = props.classes,
+            className = props.className,
+            invisible = props.invisible,
+            open = props.open,
+            transitionDuration = props.transitionDuration,
+            other = (0, _objectWithoutProperties2.default)(props, [
+              'classes',
+              'className',
+              'invisible',
+              'open',
+              'transitionDuration',
+            ])
+          return _react.default.createElement(
+            _Fade.default,
+            (0, _extends2.default)(
+              {
+                in: open,
+                timeout: transitionDuration,
+              },
+              other
+            ),
+            _react.default.createElement('div', {
+              className: (0, _classnames.default)(
+                classes.root,
+                (0, _defineProperty2.default)({}, classes.invisible, invisible),
+                className
+              ),
+              'aria-hidden': 'true',
+            })
+          )
+        }
+
+        true
+          ? (Backdrop.propTypes = {
+              /**
+               * Override or extend the styles applied to the component.
+               * See [CSS API](#css-api) below for more details.
+               */
+              classes: _propTypes.default.object.isRequired,
+
+              /**
+               * @ignore
+               */
+              className: _propTypes.default.string,
+
+              /**
+               * If `true`, the backdrop is invisible.
+               * It can be used when rendering a popover or a custom select component.
+               */
+              invisible: _propTypes.default.bool,
+
+              /**
+               * If `true`, the backdrop is open.
+               */
+              open: _propTypes.default.bool.isRequired,
+
+              /**
+               * The duration for the transition, in milliseconds.
+               * You may specify a single timeout for all transitions, or individually with an object.
+               */
+              transitionDuration: _propTypes.default.oneOfType([
+                _propTypes.default.number,
+                _propTypes.default.shape({
+                  enter: _propTypes.default.number,
+                  exit: _propTypes.default.number,
+                }),
+              ]),
+            })
+          : undefined
+        Backdrop.defaultProps = {
+          invisible: false,
+        }
+
+        var _default = (0, _withStyles.default)(styles, {
+          name: 'MuiBackdrop',
+        })(Backdrop)
+
+        exports.default = _default
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Backdrop/index.js':
+      /*!**********************************************************!*\
+  !*** ./node_modules/@material-ui/core/Backdrop/index.js ***!
+  \**********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        Object.defineProperty(exports, 'default', {
+          enumerable: true,
+          get: function get() {
+            return _Backdrop.default
+          },
+        })
+
+        var _Backdrop = _interopRequireDefault(
+          __webpack_require__(/*! ./Backdrop */ './node_modules/@material-ui/core/Backdrop/Backdrop.js')
+        )
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Badge/Badge.js':
+      /*!*******************************************************!*\
+  !*** ./node_modules/@material-ui/core/Badge/Badge.js ***!
+  \*******************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.default = exports.styles = void 0
+
+        var _extends2 = _interopRequireDefault(
+          __webpack_require__(/*! @babel/runtime/helpers/extends */ './node_modules/@babel/runtime/helpers/extends.js')
+        )
+
+        var _defineProperty2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/defineProperty */ './node_modules/@babel/runtime/helpers/defineProperty.js'
+          )
+        )
+
+        var _objectWithoutProperties2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/objectWithoutProperties */ './node_modules/@babel/runtime/helpers/objectWithoutProperties.js'
+          )
+        )
+
+        var _react = _interopRequireDefault(__webpack_require__(/*! react */ './node_modules/react/index.js'))
+
+        var _propTypes = _interopRequireDefault(
+          __webpack_require__(/*! prop-types */ './node_modules/prop-types/index.js')
+        )
+
+        var _classnames = _interopRequireDefault(
+          __webpack_require__(/*! classnames */ './node_modules/classnames/index.js')
+        )
+
+        var _utils = __webpack_require__(/*! @material-ui/utils */ './node_modules/@material-ui/utils/index.es.js')
+
+        var _withStyles = _interopRequireDefault(
+          __webpack_require__(/*! ../styles/withStyles */ './node_modules/@material-ui/core/styles/withStyles.js')
+        )
+
+        var _helpers = __webpack_require__(/*! ../utils/helpers */ './node_modules/@material-ui/core/utils/helpers.js')
+
+        var RADIUS = 10
+
+        var styles = function styles(theme) {
+          return {
+            /* Styles applied to the root element. */
+            root: {
+              position: 'relative',
+              display: 'inline-flex',
+              // For correct alignment with the text.
+              verticalAlign: 'middle',
+            },
+
+            /* Styles applied to the badge `span` element. */
+            badge: {
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              alignContent: 'center',
+              alignItems: 'center',
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              boxSizing: 'border-box',
+              fontFamily: theme.typography.fontFamily,
+              fontWeight: theme.typography.fontWeightMedium,
+              fontSize: theme.typography.pxToRem(12),
+              minWidth: RADIUS * 2,
+              padding: '0 4px',
+              height: RADIUS * 2,
+              borderRadius: RADIUS,
+              backgroundColor: theme.palette.color,
+              color: theme.palette.textColor,
+              zIndex: 1,
+              // Render the badge on top of potential ripples.
+              transform: 'scale(1) translate(50%, -50%)',
+              transformOrigin: '100% 0%',
+              transition: theme.transitions.create('transform', {
+                easing: theme.transitions.easing.easeInOut,
+                duration: theme.transitions.duration.enteringScreen,
+              }),
+            },
+
+            /* Styles applied to the root element if `color="primary"`. */
+            colorPrimary: {
+              backgroundColor: theme.palette.primary.main,
+              color: theme.palette.primary.contrastText,
+            },
+
+            /* Styles applied to the root element if `color="secondary"`. */
+            colorSecondary: {
+              backgroundColor: theme.palette.secondary.main,
+              color: theme.palette.secondary.contrastText,
+            },
+
+            /* Styles applied to the root element if `color="error"`. */
+            colorError: {
+              backgroundColor: theme.palette.error.main,
+              color: theme.palette.error.contrastText,
+            },
+
+            /* Styles applied to the badge `span` element if `invisible={true}`. */
+            invisible: {
+              transition: theme.transitions.create('transform', {
+                easing: theme.transitions.easing.easeInOut,
+                duration: theme.transitions.duration.leavingScreen,
+              }),
+              transform: 'scale(0) translate(50%, -50%)',
+              transformOrigin: '100% 0%',
+            },
+
+            /* Styles applied to the root element if `variant="dot"`. */
+            dot: {
+              height: 6,
+              minWidth: 6,
+              padding: 0,
+            },
+          }
+        }
+
+        exports.styles = styles
+
+        function Badge(props) {
+          var _classNames
+
+          var badgeContent = props.badgeContent,
+            children = props.children,
+            classes = props.classes,
+            className = props.className,
+            color = props.color,
+            ComponentProp = props.component,
+            invisibleProp = props.invisible,
+            showZero = props.showZero,
+            max = props.max,
+            variant = props.variant,
+            other = (0, _objectWithoutProperties2.default)(props, [
+              'badgeContent',
+              'children',
+              'classes',
+              'className',
+              'color',
+              'component',
+              'invisible',
+              'showZero',
+              'max',
+              'variant',
+            ])
+          var invisible = invisibleProp
+
+          if (invisibleProp == null && Number(badgeContent) === 0 && !showZero) {
+            invisible = true
+          }
+
+          var badgeClassName = (0, _classnames.default)(
+            classes.badge,
+            ((_classNames = {}),
+            (0, _defineProperty2.default)(
+              _classNames,
+              classes['color'.concat((0, _helpers.capitalize)(color))],
+              color !== 'default'
+            ),
+            (0, _defineProperty2.default)(_classNames, classes.invisible, invisible),
+            (0, _defineProperty2.default)(_classNames, classes.dot, variant === 'dot'),
+            _classNames)
+          )
+          var displayValue = ''
+
+          if (variant !== 'dot') {
+            displayValue = badgeContent > max ? ''.concat(max, '+') : badgeContent
+          }
+
+          return _react.default.createElement(
+            ComponentProp,
+            (0, _extends2.default)(
+              {
+                className: (0, _classnames.default)(classes.root, className),
+              },
+              other
+            ),
+            children,
+            _react.default.createElement(
+              'span',
+              {
+                className: badgeClassName,
+              },
+              displayValue
+            )
+          )
+        }
+
+        true
+          ? (Badge.propTypes = {
+              /**
+               * The content rendered within the badge.
+               */
+              badgeContent: _propTypes.default.node,
+
+              /**
+               * The badge will be added relative to this node.
+               */
+              children: _propTypes.default.node.isRequired,
+
+              /**
+               * Override or extend the styles applied to the component.
+               * See [CSS API](#css-api) below for more details.
+               */
+              classes: _propTypes.default.object.isRequired,
+
+              /**
+               * @ignore
+               */
+              className: _propTypes.default.string,
+
+              /**
+               * The color of the component. It supports those theme colors that make sense for this component.
+               */
+              color: _propTypes.default.oneOf(['default', 'primary', 'secondary', 'error']),
+
+              /**
+               * The component used for the root node.
+               * Either a string to use a DOM element or a component.
+               */
+              component: _utils.componentPropType,
+
+              /**
+               * If `true`, the badge will be invisible.
+               */
+              invisible: _propTypes.default.bool,
+
+              /**
+               * Max count to show.
+               */
+              max: _propTypes.default.number,
+
+              /**
+               * Controls whether the badge is hidden when `badgeContent` is zero.
+               */
+              showZero: _propTypes.default.bool,
+
+              /**
+               * The variant to use.
+               */
+              variant: _propTypes.default.oneOf(['standard', 'dot']),
+            })
+          : undefined
+        Badge.defaultProps = {
+          color: 'default',
+          component: 'span',
+          max: 99,
+          showZero: false,
+          variant: 'standard',
+        }
+
+        var _default = (0, _withStyles.default)(styles, {
+          name: 'MuiBadge',
+        })(Badge)
+
+        exports.default = _default
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Badge/index.js':
+      /*!*******************************************************!*\
+  !*** ./node_modules/@material-ui/core/Badge/index.js ***!
+  \*******************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        Object.defineProperty(exports, 'default', {
+          enumerable: true,
+          get: function get() {
+            return _Badge.default
+          },
+        })
+
+        var _Badge = _interopRequireDefault(
+          __webpack_require__(/*! ./Badge */ './node_modules/@material-ui/core/Badge/Badge.js')
         )
 
         /***/
@@ -3612,6 +4342,1024 @@
 
         var _CssBaseline = _interopRequireDefault(
           __webpack_require__(/*! ./CssBaseline */ './node_modules/@material-ui/core/CssBaseline/CssBaseline.js')
+        )
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Divider/Divider.js':
+      /*!***********************************************************!*\
+  !*** ./node_modules/@material-ui/core/Divider/Divider.js ***!
+  \***********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.default = exports.styles = void 0
+
+        var _extends2 = _interopRequireDefault(
+          __webpack_require__(/*! @babel/runtime/helpers/extends */ './node_modules/@babel/runtime/helpers/extends.js')
+        )
+
+        var _defineProperty2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/defineProperty */ './node_modules/@babel/runtime/helpers/defineProperty.js'
+          )
+        )
+
+        var _objectWithoutProperties2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/objectWithoutProperties */ './node_modules/@babel/runtime/helpers/objectWithoutProperties.js'
+          )
+        )
+
+        var _react = _interopRequireDefault(__webpack_require__(/*! react */ './node_modules/react/index.js'))
+
+        var _propTypes = _interopRequireDefault(
+          __webpack_require__(/*! prop-types */ './node_modules/prop-types/index.js')
+        )
+
+        var _classnames = _interopRequireDefault(
+          __webpack_require__(/*! classnames */ './node_modules/classnames/index.js')
+        )
+
+        var _utils = __webpack_require__(/*! @material-ui/utils */ './node_modules/@material-ui/utils/index.es.js')
+
+        var _withStyles = _interopRequireDefault(
+          __webpack_require__(/*! ../styles/withStyles */ './node_modules/@material-ui/core/styles/withStyles.js')
+        )
+
+        var _colorManipulator = __webpack_require__(
+          /*! ../styles/colorManipulator */ './node_modules/@material-ui/core/styles/colorManipulator.js'
+        )
+
+        var styles = function styles(theme) {
+          return {
+            /* Styles applied to the root element. */
+            root: {
+              height: 1,
+              margin: 0,
+              // Reset browser default style.
+              border: 'none',
+              flexShrink: 0,
+              backgroundColor: theme.palette.divider,
+            },
+
+            /* Styles applied to the root element if `absolute={true}`. */
+            absolute: {
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              width: '100%',
+            },
+
+            /* Styles applied to the root element if `variant="inset"`. */
+            inset: {
+              marginLeft: 72,
+            },
+
+            /* Styles applied to the root element if `light={true}`. */
+            light: {
+              backgroundColor: (0, _colorManipulator.fade)(theme.palette.divider, 0.08),
+            },
+
+            /* Styles applied to the root element if `variant="middle"`. */
+            middle: {
+              marginLeft: theme.spacing.unit * 2,
+              marginRight: theme.spacing.unit * 2,
+            },
+          }
+        }
+
+        exports.styles = styles
+
+        function Divider(props) {
+          var _classNames
+
+          var absolute = props.absolute,
+            classes = props.classes,
+            className = props.className,
+            Component = props.component,
+            inset = props.inset,
+            light = props.light,
+            variant = props.variant,
+            other = (0, _objectWithoutProperties2.default)(props, [
+              'absolute',
+              'classes',
+              'className',
+              'component',
+              'inset',
+              'light',
+              'variant',
+            ])
+          return _react.default.createElement(
+            Component,
+            (0, _extends2.default)(
+              {
+                className: (0, _classnames.default)(
+                  classes.root,
+                  ((_classNames = {}),
+                  (0, _defineProperty2.default)(_classNames, classes.inset, inset || variant === 'inset'),
+                  (0, _defineProperty2.default)(_classNames, classes.middle, variant === 'middle'),
+                  (0, _defineProperty2.default)(_classNames, classes.absolute, absolute),
+                  (0, _defineProperty2.default)(_classNames, classes.light, light),
+                  _classNames),
+                  className
+                ),
+              },
+              other
+            )
+          )
+        }
+
+        true
+          ? (Divider.propTypes = {
+              /**
+               * Absolutely position the element.
+               */
+              absolute: _propTypes.default.bool,
+
+              /**
+               * Override or extend the styles applied to the component.
+               * See [CSS API](#css-api) below for more details.
+               */
+              classes: _propTypes.default.object.isRequired,
+
+              /**
+               * @ignore
+               */
+              className: _propTypes.default.string,
+
+              /**
+               * The component used for the root node.
+               * Either a string to use a DOM element or a component.
+               */
+              component: _utils.componentPropType,
+
+              /**
+               * If `true`, the divider will be indented.
+               * __WARNING__: `inset` is deprecated.
+               * Instead use `variant="inset"`.
+               */
+              inset: (0, _utils.chainPropTypes)(_propTypes.default.bool, function(props) {
+                /* istanbul ignore if */
+                if (props.inset) {
+                  return new Error(
+                    'Material-UI: you are using the deprecated `inset` property ' +
+                      'that will be removed in the next major release. The property `variant="inset"` ' +
+                      'is equivalent and should be used instead.'
+                  )
+                }
+
+                return null
+              }),
+
+              /**
+               * If `true`, the divider will have a lighter color.
+               */
+              light: _propTypes.default.bool,
+
+              /**
+               *  The variant to use.
+               */
+              variant: _propTypes.default.oneOf(['fullWidth', 'inset', 'middle']),
+            })
+          : undefined
+        Divider.defaultProps = {
+          absolute: false,
+          component: 'hr',
+          light: false,
+          variant: 'fullWidth',
+        }
+
+        var _default = (0, _withStyles.default)(styles, {
+          name: 'MuiDivider',
+        })(Divider)
+
+        exports.default = _default
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Divider/index.js':
+      /*!*********************************************************!*\
+  !*** ./node_modules/@material-ui/core/Divider/index.js ***!
+  \*********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        Object.defineProperty(exports, 'default', {
+          enumerable: true,
+          get: function get() {
+            return _Divider.default
+          },
+        })
+
+        var _Divider = _interopRequireDefault(
+          __webpack_require__(/*! ./Divider */ './node_modules/@material-ui/core/Divider/Divider.js')
+        )
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Drawer/Drawer.js':
+      /*!*********************************************************!*\
+  !*** ./node_modules/@material-ui/core/Drawer/Drawer.js ***!
+  \*********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.isHorizontal = isHorizontal
+        exports.getAnchor = getAnchor
+        exports.default = exports.styles = void 0
+
+        var _extends2 = _interopRequireDefault(
+          __webpack_require__(/*! @babel/runtime/helpers/extends */ './node_modules/@babel/runtime/helpers/extends.js')
+        )
+
+        var _defineProperty2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/defineProperty */ './node_modules/@babel/runtime/helpers/defineProperty.js'
+          )
+        )
+
+        var _objectWithoutProperties2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/objectWithoutProperties */ './node_modules/@babel/runtime/helpers/objectWithoutProperties.js'
+          )
+        )
+
+        var _classCallCheck2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/classCallCheck */ './node_modules/@babel/runtime/helpers/classCallCheck.js'
+          )
+        )
+
+        var _createClass2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/createClass */ './node_modules/@babel/runtime/helpers/createClass.js'
+          )
+        )
+
+        var _possibleConstructorReturn2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/possibleConstructorReturn */ './node_modules/@babel/runtime/helpers/possibleConstructorReturn.js'
+          )
+        )
+
+        var _getPrototypeOf3 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/getPrototypeOf */ './node_modules/@babel/runtime/helpers/getPrototypeOf.js'
+          )
+        )
+
+        var _inherits2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/inherits */ './node_modules/@babel/runtime/helpers/inherits.js'
+          )
+        )
+
+        var _react = _interopRequireDefault(__webpack_require__(/*! react */ './node_modules/react/index.js'))
+
+        var _propTypes = _interopRequireDefault(
+          __webpack_require__(/*! prop-types */ './node_modules/prop-types/index.js')
+        )
+
+        var _classnames = _interopRequireDefault(
+          __webpack_require__(/*! classnames */ './node_modules/classnames/index.js')
+        )
+
+        var _Modal = _interopRequireDefault(
+          __webpack_require__(/*! ../Modal */ './node_modules/@material-ui/core/Modal/index.js')
+        )
+
+        var _withStyles = _interopRequireDefault(
+          __webpack_require__(/*! ../styles/withStyles */ './node_modules/@material-ui/core/styles/withStyles.js')
+        )
+
+        var _Slide = _interopRequireDefault(
+          __webpack_require__(/*! ../Slide */ './node_modules/@material-ui/core/Slide/index.js')
+        )
+
+        var _Paper = _interopRequireDefault(
+          __webpack_require__(/*! ../Paper */ './node_modules/@material-ui/core/Paper/index.js')
+        )
+
+        var _helpers = __webpack_require__(/*! ../utils/helpers */ './node_modules/@material-ui/core/utils/helpers.js')
+
+        var _transitions = __webpack_require__(
+          /*! ../styles/transitions */ './node_modules/@material-ui/core/styles/transitions.js'
+        )
+
+        var oppositeDirection = {
+          left: 'right',
+          right: 'left',
+          top: 'down',
+          bottom: 'up',
+        }
+
+        function isHorizontal(props) {
+          return ['left', 'right'].indexOf(props.anchor) !== -1
+        }
+
+        function getAnchor(props) {
+          return props.theme.direction === 'rtl' && isHorizontal(props) ? oppositeDirection[props.anchor] : props.anchor
+        }
+
+        var styles = function styles(theme) {
+          return {
+            /* Styles applied to the root element. */
+            root: {},
+
+            /* Styles applied to the root element if `variant="permanent or persistent"`. */
+            docked: {
+              flex: '0 0 auto',
+            },
+
+            /* Styles applied to the `Paper` component. */
+            paper: {
+              overflowY: 'auto',
+              display: 'flex',
+              flexDirection: 'column',
+              height: '100%',
+              flex: '1 0 auto',
+              zIndex: theme.zIndex.drawer,
+              WebkitOverflowScrolling: 'touch',
+              // Add iOS momentum scrolling.
+              // temporary style
+              position: 'fixed',
+              top: 0,
+              // We disable the focus ring for mouse, touch and keyboard users.
+              // At some point, it would be better to keep it for keyboard users.
+              // :focus-ring CSS pseudo-class will help.
+              outline: 'none',
+            },
+
+            /* Styles applied to the `Paper` component if `anchor="left"`. */
+            paperAnchorLeft: {
+              left: 0,
+              right: 'auto',
+            },
+
+            /* Styles applied to the `Paper` component if `anchor="right"`. */
+            paperAnchorRight: {
+              left: 'auto',
+              right: 0,
+            },
+
+            /* Styles applied to the `Paper` component if `anchor="top"`. */
+            paperAnchorTop: {
+              top: 0,
+              left: 0,
+              bottom: 'auto',
+              right: 0,
+              height: 'auto',
+              maxHeight: '100%',
+            },
+
+            /* Styles applied to the `Paper` component if `anchor="bottom"`. */
+            paperAnchorBottom: {
+              top: 'auto',
+              left: 0,
+              bottom: 0,
+              right: 0,
+              height: 'auto',
+              maxHeight: '100%',
+            },
+
+            /* Styles applied to the `Paper` component if `anchor="left"` & `variant` is not "temporary". */
+            paperAnchorDockedLeft: {
+              borderRight: '1px solid '.concat(theme.palette.divider),
+            },
+
+            /* Styles applied to the `Paper` component if `anchor="top"` & `variant` is not "temporary". */
+            paperAnchorDockedTop: {
+              borderBottom: '1px solid '.concat(theme.palette.divider),
+            },
+
+            /* Styles applied to the `Paper` component if `anchor="right"` & `variant` is not "temporary". */
+            paperAnchorDockedRight: {
+              borderLeft: '1px solid '.concat(theme.palette.divider),
+            },
+
+            /* Styles applied to the `Paper` component if `anchor="bottom"` & `variant` is not "temporary". */
+            paperAnchorDockedBottom: {
+              borderTop: '1px solid '.concat(theme.palette.divider),
+            },
+
+            /* Styles applied to the `Modal` component. */
+            modal: {},
+          }
+        }
+        /**
+         * The properties of the [Modal](/api/modal/) component are available
+         * when `variant="temporary"` is set.
+         */
+
+        exports.styles = styles
+
+        var Drawer =
+          /*#__PURE__*/
+          (function(_React$Component) {
+            ;(0, _inherits2.default)(Drawer, _React$Component)
+
+            function Drawer() {
+              var _getPrototypeOf2
+
+              var _this
+
+              ;(0, _classCallCheck2.default)(this, Drawer)
+
+              for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+                args[_key] = arguments[_key]
+              }
+
+              _this = (0, _possibleConstructorReturn2.default)(
+                this,
+                (_getPrototypeOf2 = (0, _getPrototypeOf3.default)(Drawer)).call.apply(
+                  _getPrototypeOf2,
+                  [this].concat(args)
+                )
+              )
+              _this.mounted = false
+              return _this
+            }
+
+            ;(0, _createClass2.default)(Drawer, [
+              {
+                key: 'componentDidMount',
+                value: function componentDidMount() {
+                  this.mounted = true
+                },
+              },
+              {
+                key: 'render',
+                value: function render() {
+                  var _this$props = this.props,
+                    anchorProp = _this$props.anchor,
+                    BackdropProps = _this$props.BackdropProps,
+                    children = _this$props.children,
+                    classes = _this$props.classes,
+                    className = _this$props.className,
+                    elevation = _this$props.elevation,
+                    _this$props$ModalProp = _this$props.ModalProps
+                  _this$props$ModalProp = _this$props$ModalProp === void 0 ? {} : _this$props$ModalProp
+                  var BackdropPropsProp = _this$props$ModalProp.BackdropProps,
+                    ModalProps = (0, _objectWithoutProperties2.default)(_this$props$ModalProp, ['BackdropProps']),
+                    onClose = _this$props.onClose,
+                    open = _this$props.open,
+                    PaperProps = _this$props.PaperProps,
+                    SlideProps = _this$props.SlideProps,
+                    theme = _this$props.theme,
+                    transitionDuration = _this$props.transitionDuration,
+                    variant = _this$props.variant,
+                    other = (0, _objectWithoutProperties2.default)(_this$props, [
+                      'anchor',
+                      'BackdropProps',
+                      'children',
+                      'classes',
+                      'className',
+                      'elevation',
+                      'ModalProps',
+                      'onClose',
+                      'open',
+                      'PaperProps',
+                      'SlideProps',
+                      'theme',
+                      'transitionDuration',
+                      'variant',
+                    ])
+                  var anchor = getAnchor(this.props)
+
+                  var drawer = _react.default.createElement(
+                    _Paper.default,
+                    (0, _extends2.default)(
+                      {
+                        elevation: variant === 'temporary' ? elevation : 0,
+                        square: true,
+                        className: (0, _classnames.default)(
+                          classes.paper,
+                          classes['paperAnchor'.concat((0, _helpers.capitalize)(anchor))],
+                          (0, _defineProperty2.default)(
+                            {},
+                            classes['paperAnchorDocked'.concat((0, _helpers.capitalize)(anchor))],
+                            variant !== 'temporary'
+                          )
+                        ),
+                      },
+                      PaperProps
+                    ),
+                    children
+                  )
+
+                  if (variant === 'permanent') {
+                    return _react.default.createElement(
+                      'div',
+                      (0, _extends2.default)(
+                        {
+                          className: (0, _classnames.default)(classes.root, classes.docked, className),
+                        },
+                        other
+                      ),
+                      drawer
+                    )
+                  }
+
+                  var slidingDrawer = _react.default.createElement(
+                    _Slide.default,
+                    (0, _extends2.default)(
+                      {
+                        in: open,
+                        direction: oppositeDirection[anchor],
+                        timeout: transitionDuration,
+                        appear: this.mounted,
+                      },
+                      SlideProps
+                    ),
+                    drawer
+                  )
+
+                  if (variant === 'persistent') {
+                    return _react.default.createElement(
+                      'div',
+                      (0, _extends2.default)(
+                        {
+                          className: (0, _classnames.default)(classes.root, classes.docked, className),
+                        },
+                        other
+                      ),
+                      slidingDrawer
+                    )
+                  } // variant === temporary
+
+                  return _react.default.createElement(
+                    _Modal.default,
+                    (0, _extends2.default)(
+                      {
+                        BackdropProps: (0, _extends2.default)({}, BackdropProps, BackdropPropsProp, {
+                          transitionDuration: transitionDuration,
+                        }),
+                        className: (0, _classnames.default)(classes.root, classes.modal, className),
+                        open: open,
+                        onClose: onClose,
+                      },
+                      other,
+                      ModalProps
+                    ),
+                    slidingDrawer
+                  )
+                },
+              },
+            ])
+            return Drawer
+          })(_react.default.Component)
+
+        true
+          ? (Drawer.propTypes = {
+              /**
+               * Side from which the drawer will appear.
+               */
+              anchor: _propTypes.default.oneOf(['left', 'top', 'right', 'bottom']),
+
+              /**
+               * @ignore
+               */
+              BackdropProps: _propTypes.default.object,
+
+              /**
+               * The contents of the drawer.
+               */
+              children: _propTypes.default.node,
+
+              /**
+               * Override or extend the styles applied to the component.
+               * See [CSS API](#css-api) below for more details.
+               */
+              classes: _propTypes.default.object.isRequired,
+
+              /**
+               * @ignore
+               */
+              className: _propTypes.default.string,
+
+              /**
+               * The elevation of the drawer.
+               */
+              elevation: _propTypes.default.number,
+
+              /**
+               * Properties applied to the [`Modal`](/api/modal/) element.
+               */
+              ModalProps: _propTypes.default.object,
+
+              /**
+               * Callback fired when the component requests to be closed.
+               *
+               * @param {object} event The event source of the callback
+               */
+              onClose: _propTypes.default.func,
+
+              /**
+               * If `true`, the drawer is open.
+               */
+              open: _propTypes.default.bool,
+
+              /**
+               * Properties applied to the [`Paper`](/api/paper/) element.
+               */
+              PaperProps: _propTypes.default.object,
+
+              /**
+               * Properties applied to the [`Slide`](/api/slide/) element.
+               */
+              SlideProps: _propTypes.default.object,
+
+              /**
+               * @ignore
+               */
+              theme: _propTypes.default.object.isRequired,
+
+              /**
+               * The duration for the transition, in milliseconds.
+               * You may specify a single timeout for all transitions, or individually with an object.
+               */
+              transitionDuration: _propTypes.default.oneOfType([
+                _propTypes.default.number,
+                _propTypes.default.shape({
+                  enter: _propTypes.default.number,
+                  exit: _propTypes.default.number,
+                }),
+              ]),
+
+              /**
+               * The variant to use.
+               */
+              variant: _propTypes.default.oneOf(['permanent', 'persistent', 'temporary']),
+            })
+          : undefined
+        Drawer.defaultProps = {
+          anchor: 'left',
+          elevation: 16,
+          open: false,
+          transitionDuration: {
+            enter: _transitions.duration.enteringScreen,
+            exit: _transitions.duration.leavingScreen,
+          },
+          variant: 'temporary', // Mobile first.
+        }
+
+        var _default = (0, _withStyles.default)(styles, {
+          name: 'MuiDrawer',
+          flip: false,
+          withTheme: true,
+        })(Drawer)
+
+        exports.default = _default
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Drawer/index.js':
+      /*!********************************************************!*\
+  !*** ./node_modules/@material-ui/core/Drawer/index.js ***!
+  \********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        Object.defineProperty(exports, 'default', {
+          enumerable: true,
+          get: function get() {
+            return _Drawer.default
+          },
+        })
+
+        var _Drawer = _interopRequireDefault(
+          __webpack_require__(/*! ./Drawer */ './node_modules/@material-ui/core/Drawer/Drawer.js')
+        )
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Fade/Fade.js':
+      /*!*****************************************************!*\
+  !*** ./node_modules/@material-ui/core/Fade/Fade.js ***!
+  \*****************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.default = void 0
+
+        var _extends2 = _interopRequireDefault(
+          __webpack_require__(/*! @babel/runtime/helpers/extends */ './node_modules/@babel/runtime/helpers/extends.js')
+        )
+
+        var _objectWithoutProperties2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/objectWithoutProperties */ './node_modules/@babel/runtime/helpers/objectWithoutProperties.js'
+          )
+        )
+
+        var _classCallCheck2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/classCallCheck */ './node_modules/@babel/runtime/helpers/classCallCheck.js'
+          )
+        )
+
+        var _createClass2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/createClass */ './node_modules/@babel/runtime/helpers/createClass.js'
+          )
+        )
+
+        var _possibleConstructorReturn2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/possibleConstructorReturn */ './node_modules/@babel/runtime/helpers/possibleConstructorReturn.js'
+          )
+        )
+
+        var _getPrototypeOf3 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/getPrototypeOf */ './node_modules/@babel/runtime/helpers/getPrototypeOf.js'
+          )
+        )
+
+        var _inherits2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/inherits */ './node_modules/@babel/runtime/helpers/inherits.js'
+          )
+        )
+
+        var _react = _interopRequireDefault(__webpack_require__(/*! react */ './node_modules/react/index.js'))
+
+        var _propTypes = _interopRequireDefault(
+          __webpack_require__(/*! prop-types */ './node_modules/prop-types/index.js')
+        )
+
+        var _Transition = _interopRequireDefault(
+          __webpack_require__(
+            /*! react-transition-group/Transition */ './node_modules/react-transition-group/Transition.js'
+          )
+        )
+
+        var _transitions = __webpack_require__(
+          /*! ../styles/transitions */ './node_modules/@material-ui/core/styles/transitions.js'
+        )
+
+        var _withTheme = _interopRequireDefault(
+          __webpack_require__(/*! ../styles/withTheme */ './node_modules/@material-ui/core/styles/withTheme.js')
+        )
+
+        var _utils = __webpack_require__(
+          /*! ../transitions/utils */ './node_modules/@material-ui/core/transitions/utils.js'
+        )
+
+        // @inheritedComponent Transition
+        var styles = {
+          entering: {
+            opacity: 1,
+          },
+          entered: {
+            opacity: 1,
+          },
+        }
+        /**
+         * The Fade transition is used by the [Modal](/utils/modal/) component.
+         * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
+         */
+
+        var Fade =
+          /*#__PURE__*/
+          (function(_React$Component) {
+            ;(0, _inherits2.default)(Fade, _React$Component)
+
+            function Fade() {
+              var _getPrototypeOf2
+
+              var _this
+
+              ;(0, _classCallCheck2.default)(this, Fade)
+
+              for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+                args[_key] = arguments[_key]
+              }
+
+              _this = (0, _possibleConstructorReturn2.default)(
+                this,
+                (_getPrototypeOf2 = (0, _getPrototypeOf3.default)(Fade)).call.apply(
+                  _getPrototypeOf2,
+                  [this].concat(args)
+                )
+              )
+
+              _this.handleEnter = function(node) {
+                var theme = _this.props.theme
+                ;(0, _utils.reflow)(node) // So the animation always start from the start.
+
+                var transitionProps = (0, _utils.getTransitionProps)(_this.props, {
+                  mode: 'enter',
+                })
+                node.style.webkitTransition = theme.transitions.create('opacity', transitionProps)
+                node.style.transition = theme.transitions.create('opacity', transitionProps)
+
+                if (_this.props.onEnter) {
+                  _this.props.onEnter(node)
+                }
+              }
+
+              _this.handleExit = function(node) {
+                var theme = _this.props.theme
+                var transitionProps = (0, _utils.getTransitionProps)(_this.props, {
+                  mode: 'exit',
+                })
+                node.style.webkitTransition = theme.transitions.create('opacity', transitionProps)
+                node.style.transition = theme.transitions.create('opacity', transitionProps)
+
+                if (_this.props.onExit) {
+                  _this.props.onExit(node)
+                }
+              }
+
+              return _this
+            }
+
+            ;(0, _createClass2.default)(Fade, [
+              {
+                key: 'render',
+                value: function render() {
+                  var _this$props = this.props,
+                    children = _this$props.children,
+                    onEnter = _this$props.onEnter,
+                    onExit = _this$props.onExit,
+                    styleProp = _this$props.style,
+                    theme = _this$props.theme,
+                    other = (0, _objectWithoutProperties2.default)(_this$props, [
+                      'children',
+                      'onEnter',
+                      'onExit',
+                      'style',
+                      'theme',
+                    ])
+                  var style = (0, _extends2.default)(
+                    {},
+                    styleProp,
+                    _react.default.isValidElement(children) ? children.props.style : {}
+                  )
+                  return _react.default.createElement(
+                    _Transition.default,
+                    (0, _extends2.default)(
+                      {
+                        appear: true,
+                        onEnter: this.handleEnter,
+                        onExit: this.handleExit,
+                      },
+                      other
+                    ),
+                    function(state, childProps) {
+                      return _react.default.cloneElement(
+                        children,
+                        (0, _extends2.default)(
+                          {
+                            style: (0, _extends2.default)(
+                              {
+                                opacity: 0,
+                              },
+                              styles[state],
+                              style
+                            ),
+                          },
+                          childProps
+                        )
+                      )
+                    }
+                  )
+                },
+              },
+            ])
+            return Fade
+          })(_react.default.Component)
+
+        true
+          ? (Fade.propTypes = {
+              /**
+               * A single child content element.
+               */
+              children: _propTypes.default.oneOfType([_propTypes.default.element, _propTypes.default.func]),
+
+              /**
+               * If `true`, the component will transition in.
+               */
+              in: _propTypes.default.bool,
+
+              /**
+               * @ignore
+               */
+              onEnter: _propTypes.default.func,
+
+              /**
+               * @ignore
+               */
+              onExit: _propTypes.default.func,
+
+              /**
+               * @ignore
+               */
+              style: _propTypes.default.object,
+
+              /**
+               * @ignore
+               */
+              theme: _propTypes.default.object.isRequired,
+
+              /**
+               * The duration for the transition, in milliseconds.
+               * You may specify a single timeout for all transitions, or individually with an object.
+               */
+              timeout: _propTypes.default.oneOfType([
+                _propTypes.default.number,
+                _propTypes.default.shape({
+                  enter: _propTypes.default.number,
+                  exit: _propTypes.default.number,
+                }),
+              ]),
+            })
+          : undefined
+        Fade.defaultProps = {
+          timeout: {
+            enter: _transitions.duration.enteringScreen,
+            exit: _transitions.duration.leavingScreen,
+          },
+        }
+
+        var _default = (0, _withTheme.default)()(Fade)
+
+        exports.default = _default
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Fade/index.js':
+      /*!******************************************************!*\
+  !*** ./node_modules/@material-ui/core/Fade/index.js ***!
+  \******************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        Object.defineProperty(exports, 'default', {
+          enumerable: true,
+          get: function get() {
+            return _Fade.default
+          },
+        })
+
+        var _Fade = _interopRequireDefault(
+          __webpack_require__(/*! ./Fade */ './node_modules/@material-ui/core/Fade/Fade.js')
         )
 
         /***/
@@ -7100,6 +8848,1096 @@
         /***/
       },
 
+    /***/ './node_modules/@material-ui/core/Modal/Modal.js':
+      /*!*******************************************************!*\
+  !*** ./node_modules/@material-ui/core/Modal/Modal.js ***!
+  \*******************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.default = exports.styles = void 0
+
+        var _extends2 = _interopRequireDefault(
+          __webpack_require__(/*! @babel/runtime/helpers/extends */ './node_modules/@babel/runtime/helpers/extends.js')
+        )
+
+        var _defineProperty2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/defineProperty */ './node_modules/@babel/runtime/helpers/defineProperty.js'
+          )
+        )
+
+        var _objectWithoutProperties2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/objectWithoutProperties */ './node_modules/@babel/runtime/helpers/objectWithoutProperties.js'
+          )
+        )
+
+        var _classCallCheck2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/classCallCheck */ './node_modules/@babel/runtime/helpers/classCallCheck.js'
+          )
+        )
+
+        var _createClass2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/createClass */ './node_modules/@babel/runtime/helpers/createClass.js'
+          )
+        )
+
+        var _possibleConstructorReturn2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/possibleConstructorReturn */ './node_modules/@babel/runtime/helpers/possibleConstructorReturn.js'
+          )
+        )
+
+        var _getPrototypeOf2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/getPrototypeOf */ './node_modules/@babel/runtime/helpers/getPrototypeOf.js'
+          )
+        )
+
+        var _inherits2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/inherits */ './node_modules/@babel/runtime/helpers/inherits.js'
+          )
+        )
+
+        var _assertThisInitialized2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/assertThisInitialized */ './node_modules/@babel/runtime/helpers/assertThisInitialized.js'
+          )
+        )
+
+        var _react = _interopRequireDefault(__webpack_require__(/*! react */ './node_modules/react/index.js'))
+
+        var _reactDom = _interopRequireDefault(
+          __webpack_require__(/*! react-dom */ './node_modules/react-dom/index.js')
+        )
+
+        var _propTypes = _interopRequireDefault(
+          __webpack_require__(/*! prop-types */ './node_modules/prop-types/index.js')
+        )
+
+        var _classnames = _interopRequireDefault(
+          __webpack_require__(/*! classnames */ './node_modules/classnames/index.js')
+        )
+
+        var _warning = _interopRequireDefault(__webpack_require__(/*! warning */ './node_modules/warning/warning.js'))
+
+        var _utils = __webpack_require__(/*! @material-ui/utils */ './node_modules/@material-ui/utils/index.es.js')
+
+        var _ownerDocument = _interopRequireDefault(
+          __webpack_require__(/*! ../utils/ownerDocument */ './node_modules/@material-ui/core/utils/ownerDocument.js')
+        )
+
+        var _RootRef = _interopRequireDefault(
+          __webpack_require__(/*! ../RootRef */ './node_modules/@material-ui/core/RootRef/index.js')
+        )
+
+        var _Portal = _interopRequireDefault(
+          __webpack_require__(/*! ../Portal */ './node_modules/@material-ui/core/Portal/index.js')
+        )
+
+        var _helpers = __webpack_require__(/*! ../utils/helpers */ './node_modules/@material-ui/core/utils/helpers.js')
+
+        var _withStyles = _interopRequireDefault(
+          __webpack_require__(/*! ../styles/withStyles */ './node_modules/@material-ui/core/styles/withStyles.js')
+        )
+
+        var _ModalManager = _interopRequireDefault(
+          __webpack_require__(/*! ./ModalManager */ './node_modules/@material-ui/core/Modal/ModalManager.js')
+        )
+
+        var _Backdrop = _interopRequireDefault(
+          __webpack_require__(/*! ../Backdrop */ './node_modules/@material-ui/core/Backdrop/index.js')
+        )
+
+        var _manageAriaHidden = __webpack_require__(
+          /*! ./manageAriaHidden */ './node_modules/@material-ui/core/Modal/manageAriaHidden.js'
+        )
+
+        function getContainer(container, defaultContainer) {
+          container = typeof container === 'function' ? container() : container
+          return _reactDom.default.findDOMNode(container) || defaultContainer
+        }
+
+        function getHasTransition(props) {
+          return props.children ? props.children.props.hasOwnProperty('in') : false
+        }
+
+        var styles = function styles(theme) {
+          return {
+            /* Styles applied to the root element. */
+            root: {
+              position: 'fixed',
+              zIndex: theme.zIndex.modal,
+              right: 0,
+              bottom: 0,
+              top: 0,
+              left: 0,
+            },
+
+            /* Styles applied to the root element if the `Modal` has exited. */
+            hidden: {
+              visibility: 'hidden',
+            },
+          }
+        }
+        /* istanbul ignore if */
+
+        exports.styles = styles
+
+        if (true && !_react.default.createContext) {
+          throw new Error('Material-UI: react@16.3.0 or greater is required.')
+        }
+        /**
+         * Modal is a lower-level construct that is leveraged by the following components:
+         *
+         * - [Dialog](/api/dialog/)
+         * - [Drawer](/api/drawer/)
+         * - [Menu](/api/menu/)
+         * - [Popover](/api/popover/)
+         *
+         * If you are creating a modal dialog, you probably want to use the [Dialog](/api/dialog/) component
+         * rather than directly using Modal.
+         *
+         * This component shares many concepts with [react-overlays](https://react-bootstrap.github.io/react-overlays/#modals).
+         */
+
+        var Modal =
+          /*#__PURE__*/
+          (function(_React$Component) {
+            ;(0, _inherits2.default)(Modal, _React$Component)
+
+            function Modal(props) {
+              var _this
+
+              ;(0, _classCallCheck2.default)(this, Modal)
+              _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Modal).call(this))
+              _this.mounted = false
+
+              _this.handleOpen = function() {
+                var doc = (0, _ownerDocument.default)(_this.mountNode)
+                var container = getContainer(_this.props.container, doc.body)
+
+                _this.props.manager.add(
+                  (0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)),
+                  container
+                )
+
+                doc.addEventListener('focus', _this.enforceFocus, true)
+
+                if (_this.dialogRef) {
+                  _this.handleOpened()
+                }
+              }
+
+              _this.handleRendered = function() {
+                if (_this.props.onRendered) {
+                  _this.props.onRendered()
+                }
+
+                if (_this.props.open) {
+                  _this.handleOpened()
+                } else {
+                  ;(0, _manageAriaHidden.ariaHidden)(_this.modalRef, true)
+                }
+              }
+
+              _this.handleOpened = function() {
+                _this.autoFocus()
+
+                _this.props.manager.mount(
+                  (0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this))
+                ) // Fix a bug on Chrome where the scroll isn't initially 0.
+
+                _this.modalRef.scrollTop = 0
+              }
+
+              _this.handleClose = function(reason) {
+                var hasTransition = getHasTransition(_this.props)
+                /* If the component does not have a transition or is unmounting remove the Modal
+      otherwise let the transition handle removing the style, this prevents elements
+      moving around when the Modal is closed. */
+
+                if (!(hasTransition && _this.props.closeAfterTransition) || reason === 'unmount') {
+                  _this.props.manager.remove(
+                    (0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this))
+                  )
+                }
+
+                var doc = (0, _ownerDocument.default)(_this.mountNode)
+                doc.removeEventListener('focus', _this.enforceFocus, true)
+
+                _this.restoreLastFocus()
+              }
+
+              _this.handleExited = function() {
+                if (_this.props.closeAfterTransition) {
+                  _this.props.manager.remove(
+                    (0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this))
+                  )
+                }
+
+                _this.setState({
+                  exited: true,
+                })
+              }
+
+              _this.handleBackdropClick = function(event) {
+                if (event.target !== event.currentTarget) {
+                  return
+                }
+
+                if (_this.props.onBackdropClick) {
+                  _this.props.onBackdropClick(event)
+                }
+
+                if (!_this.props.disableBackdropClick && _this.props.onClose) {
+                  _this.props.onClose(event, 'backdropClick')
+                }
+              }
+
+              _this.handleKeyDown = function(event) {
+                // event.defaultPrevented:
+                //
+                // Ignore events that have been `event.preventDefault()` marked.
+                // preventDefault() is meant to stop default behaviours like
+                // clicking a checkbox to check it, hitting a button to submit a form,
+                // and hitting left arrow to move the cursor in a text input etc.
+                // Only special HTML elements have these default bahaviours.
+                //
+                // To remove in v4.
+                if (event.key !== 'Escape' || !_this.isTopModal() || event.defaultPrevented) {
+                  return
+                } // Swallow the event, in case someone is listening for the escape key on the body.
+
+                event.stopPropagation()
+
+                if (_this.props.onEscapeKeyDown) {
+                  _this.props.onEscapeKeyDown(event)
+                }
+
+                if (!_this.props.disableEscapeKeyDown && _this.props.onClose) {
+                  _this.props.onClose(event, 'escapeKeyDown')
+                }
+              }
+
+              _this.enforceFocus = function() {
+                // The Modal might not already be mounted.
+                if (!_this.isTopModal() || _this.props.disableEnforceFocus || !_this.mounted || !_this.dialogRef) {
+                  return
+                }
+
+                var currentActiveElement = (0, _ownerDocument.default)(_this.mountNode).activeElement
+
+                if (!_this.dialogRef.contains(currentActiveElement)) {
+                  _this.dialogRef.focus()
+                }
+              }
+
+              _this.handlePortalRef = function(ref) {
+                _this.mountNode = ref ? ref.getMountNode() : ref
+              }
+
+              _this.handleModalRef = function(ref) {
+                _this.modalRef = ref
+              }
+
+              _this.onRootRef = function(ref) {
+                _this.dialogRef = ref
+              }
+
+              _this.state = {
+                exited: !props.open,
+              }
+              return _this
+            }
+
+            ;(0, _createClass2.default)(
+              Modal,
+              [
+                {
+                  key: 'componentDidMount',
+                  value: function componentDidMount() {
+                    this.mounted = true
+
+                    if (this.props.open) {
+                      this.handleOpen()
+                    }
+                  },
+                },
+                {
+                  key: 'componentDidUpdate',
+                  value: function componentDidUpdate(prevProps) {
+                    if (prevProps.open && !this.props.open) {
+                      this.handleClose()
+                    } else if (!prevProps.open && this.props.open) {
+                      this.lastFocus = (0, _ownerDocument.default)(this.mountNode).activeElement
+                      this.handleOpen()
+                    }
+                  },
+                },
+                {
+                  key: 'componentWillUnmount',
+                  value: function componentWillUnmount() {
+                    this.mounted = false
+
+                    if (this.props.open || (getHasTransition(this.props) && !this.state.exited)) {
+                      this.handleClose('unmount')
+                    }
+                  },
+                },
+                {
+                  key: 'autoFocus',
+                  value: function autoFocus() {
+                    // We might render an empty child.
+                    if (this.props.disableAutoFocus || !this.dialogRef) {
+                      return
+                    }
+
+                    var currentActiveElement = (0, _ownerDocument.default)(this.mountNode).activeElement
+
+                    if (!this.dialogRef.contains(currentActiveElement)) {
+                      if (!this.dialogRef.hasAttribute('tabIndex')) {
+                        true
+                          ? (0, _warning.default)(
+                              false,
+                              [
+                                'Material-UI: the modal content node does not accept focus.',
+                                'For the benefit of assistive technologies, ' +
+                                  'the tabIndex of the node is being set to "-1".',
+                              ].join('\n')
+                            )
+                          : undefined
+                        this.dialogRef.setAttribute('tabIndex', -1)
+                      }
+
+                      this.lastFocus = currentActiveElement
+                      this.dialogRef.focus()
+                    }
+                  },
+                },
+                {
+                  key: 'restoreLastFocus',
+                  value: function restoreLastFocus() {
+                    if (this.props.disableRestoreFocus || !this.lastFocus) {
+                      return
+                    } // Not all elements in IE 11 have a focus method.
+                    // Because IE 11 market share is low, we accept the restore focus being broken
+                    // and we silent the issue.
+
+                    if (this.lastFocus.focus) {
+                      this.lastFocus.focus()
+                    }
+
+                    this.lastFocus = null
+                  },
+                },
+                {
+                  key: 'isTopModal',
+                  value: function isTopModal() {
+                    return this.props.manager.isTopModal(this)
+                  },
+                },
+                {
+                  key: 'render',
+                  value: function render() {
+                    var _this$props = this.props,
+                      BackdropComponent = _this$props.BackdropComponent,
+                      BackdropProps = _this$props.BackdropProps,
+                      children = _this$props.children,
+                      classes = _this$props.classes,
+                      className = _this$props.className,
+                      closeAfterTransition = _this$props.closeAfterTransition,
+                      container = _this$props.container,
+                      disableAutoFocus = _this$props.disableAutoFocus,
+                      disableBackdropClick = _this$props.disableBackdropClick,
+                      disableEnforceFocus = _this$props.disableEnforceFocus,
+                      disableEscapeKeyDown = _this$props.disableEscapeKeyDown,
+                      disablePortal = _this$props.disablePortal,
+                      disableRestoreFocus = _this$props.disableRestoreFocus,
+                      hideBackdrop = _this$props.hideBackdrop,
+                      keepMounted = _this$props.keepMounted,
+                      manager = _this$props.manager,
+                      onBackdropClick = _this$props.onBackdropClick,
+                      onClose = _this$props.onClose,
+                      onEscapeKeyDown = _this$props.onEscapeKeyDown,
+                      onRendered = _this$props.onRendered,
+                      open = _this$props.open,
+                      other = (0, _objectWithoutProperties2.default)(_this$props, [
+                        'BackdropComponent',
+                        'BackdropProps',
+                        'children',
+                        'classes',
+                        'className',
+                        'closeAfterTransition',
+                        'container',
+                        'disableAutoFocus',
+                        'disableBackdropClick',
+                        'disableEnforceFocus',
+                        'disableEscapeKeyDown',
+                        'disablePortal',
+                        'disableRestoreFocus',
+                        'hideBackdrop',
+                        'keepMounted',
+                        'manager',
+                        'onBackdropClick',
+                        'onClose',
+                        'onEscapeKeyDown',
+                        'onRendered',
+                        'open',
+                      ])
+                    var exited = this.state.exited
+                    var hasTransition = getHasTransition(this.props)
+
+                    if (!keepMounted && !open && (!hasTransition || exited)) {
+                      return null
+                    }
+
+                    var childProps = {} // It's a Transition like component
+
+                    if (hasTransition) {
+                      childProps.onExited = (0, _helpers.createChainedFunction)(
+                        this.handleExited,
+                        children.props.onExited
+                      )
+                    }
+
+                    if (children.props.role === undefined) {
+                      childProps.role = children.props.role || 'document'
+                    }
+
+                    if (children.props.tabIndex === undefined) {
+                      childProps.tabIndex = children.props.tabIndex || '-1'
+                    }
+
+                    return _react.default.createElement(
+                      _Portal.default,
+                      {
+                        ref: this.handlePortalRef,
+                        container: container,
+                        disablePortal: disablePortal,
+                        onRendered: this.handleRendered,
+                      },
+                      _react.default.createElement(
+                        'div',
+                        (0, _extends2.default)(
+                          {
+                            ref: this.handleModalRef,
+                            onKeyDown: this.handleKeyDown,
+                            role: 'presentation',
+                            className: (0, _classnames.default)(
+                              classes.root,
+                              className,
+                              (0, _defineProperty2.default)({}, classes.hidden, exited)
+                            ),
+                          },
+                          other
+                        ),
+                        hideBackdrop
+                          ? null
+                          : _react.default.createElement(
+                              BackdropComponent,
+                              (0, _extends2.default)(
+                                {
+                                  open: open,
+                                  onClick: this.handleBackdropClick,
+                                },
+                                BackdropProps
+                              )
+                            ),
+                        _react.default.createElement(
+                          _RootRef.default,
+                          {
+                            rootRef: this.onRootRef,
+                          },
+                          _react.default.cloneElement(children, childProps)
+                        )
+                      )
+                    )
+                  },
+                },
+              ],
+              [
+                {
+                  key: 'getDerivedStateFromProps',
+                  value: function getDerivedStateFromProps(nextProps) {
+                    if (nextProps.open) {
+                      return {
+                        exited: false,
+                      }
+                    }
+
+                    if (!getHasTransition(nextProps)) {
+                      // Otherwise let handleExited take care of marking exited.
+                      return {
+                        exited: true,
+                      }
+                    }
+
+                    return null
+                  },
+                },
+              ]
+            )
+            return Modal
+          })(_react.default.Component)
+
+        true
+          ? (Modal.propTypes = {
+              /**
+               * A backdrop component. This property enables custom backdrop rendering.
+               */
+              BackdropComponent: _utils.componentPropType,
+
+              /**
+               * Properties applied to the [`Backdrop`](/api/backdrop/) element.
+               */
+              BackdropProps: _propTypes.default.object,
+
+              /**
+               * A single child content element.
+               */
+              children: _propTypes.default.element,
+
+              /**
+               * Override or extend the styles applied to the component.
+               * See [CSS API](#css-api) below for more details.
+               */
+              classes: _propTypes.default.object.isRequired,
+
+              /**
+               * @ignore
+               */
+              className: _propTypes.default.string,
+
+              /**
+               * When set to true the Modal waits until a nested Transition is completed before closing.
+               */
+              closeAfterTransition: _propTypes.default.bool,
+
+              /**
+               * A node, component instance, or function that returns either.
+               * The `container` will have the portal children appended to it.
+               */
+              container: _propTypes.default.oneOfType([_propTypes.default.object, _propTypes.default.func]),
+
+              /**
+               * If `true`, the modal will not automatically shift focus to itself when it opens, and
+               * replace it to the last focused element when it closes.
+               * This also works correctly with any modal children that have the `disableAutoFocus` prop.
+               *
+               * Generally this should never be set to `true` as it makes the modal less
+               * accessible to assistive technologies, like screen readers.
+               */
+              disableAutoFocus: _propTypes.default.bool,
+
+              /**
+               * If `true`, clicking the backdrop will not fire any callback.
+               */
+              disableBackdropClick: _propTypes.default.bool,
+
+              /**
+               * If `true`, the modal will not prevent focus from leaving the modal while open.
+               *
+               * Generally this should never be set to `true` as it makes the modal less
+               * accessible to assistive technologies, like screen readers.
+               */
+              disableEnforceFocus: _propTypes.default.bool,
+
+              /**
+               * If `true`, hitting escape will not fire any callback.
+               */
+              disableEscapeKeyDown: _propTypes.default.bool,
+
+              /**
+               * Disable the portal behavior.
+               * The children stay within it's parent DOM hierarchy.
+               */
+              disablePortal: _propTypes.default.bool,
+
+              /**
+               * If `true`, the modal will not restore focus to previously focused element once
+               * modal is hidden.
+               */
+              disableRestoreFocus: _propTypes.default.bool,
+
+              /**
+               * If `true`, the backdrop is not rendered.
+               */
+              hideBackdrop: _propTypes.default.bool,
+
+              /**
+               * Always keep the children in the DOM.
+               * This property can be useful in SEO situation or
+               * when you want to maximize the responsiveness of the Modal.
+               */
+              keepMounted: _propTypes.default.bool,
+
+              /**
+               * @ignore
+               *
+               * A modal manager used to track and manage the state of open
+               * Modals. This enables customizing how modals interact within a container.
+               */
+              manager: _propTypes.default.object,
+
+              /**
+               * Callback fired when the backdrop is clicked.
+               */
+              onBackdropClick: _propTypes.default.func,
+
+              /**
+               * Callback fired when the component requests to be closed.
+               * The `reason` parameter can optionally be used to control the response to `onClose`.
+               *
+               * @param {object} event The event source of the callback
+               * @param {string} reason Can be:`"escapeKeyDown"`, `"backdropClick"`
+               */
+              onClose: _propTypes.default.func,
+
+              /**
+               * Callback fired when the escape key is pressed,
+               * `disableEscapeKeyDown` is false and the modal is in focus.
+               */
+              onEscapeKeyDown: _propTypes.default.func,
+
+              /**
+               * Callback fired once the children has been mounted into the `container`.
+               * It signals that the `open={true}` property took effect.
+               */
+              onRendered: _propTypes.default.func,
+
+              /**
+               * If `true`, the modal is open.
+               */
+              open: _propTypes.default.bool.isRequired,
+            })
+          : undefined
+        Modal.defaultProps = {
+          BackdropComponent: _Backdrop.default,
+          closeAfterTransition: false,
+          disableAutoFocus: false,
+          disableBackdropClick: false,
+          disableEnforceFocus: false,
+          disableEscapeKeyDown: false,
+          disablePortal: false,
+          disableRestoreFocus: false,
+          hideBackdrop: false,
+          keepMounted: false,
+          // Modals don't open on the server so this won't conflict with concurrent requests.
+          manager: new _ModalManager.default(),
+        }
+
+        var _default = (0, _withStyles.default)(styles, {
+          flip: false,
+          name: 'MuiModal',
+        })(Modal)
+
+        exports.default = _default
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Modal/ModalManager.js':
+      /*!**************************************************************!*\
+  !*** ./node_modules/@material-ui/core/Modal/ModalManager.js ***!
+  \**************************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.default = void 0
+
+        var _classCallCheck2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/classCallCheck */ './node_modules/@babel/runtime/helpers/classCallCheck.js'
+          )
+        )
+
+        var _createClass2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/createClass */ './node_modules/@babel/runtime/helpers/createClass.js'
+          )
+        )
+
+        var _style = _interopRequireDefault(
+          __webpack_require__(/*! dom-helpers/style */ './node_modules/dom-helpers/style/index.js')
+        )
+
+        var _scrollbarSize = _interopRequireDefault(
+          __webpack_require__(/*! dom-helpers/util/scrollbarSize */ './node_modules/dom-helpers/util/scrollbarSize.js')
+        )
+
+        var _ownerDocument = _interopRequireDefault(
+          __webpack_require__(/*! ../utils/ownerDocument */ './node_modules/@material-ui/core/utils/ownerDocument.js')
+        )
+
+        var _isOverflowing = _interopRequireDefault(
+          __webpack_require__(/*! ./isOverflowing */ './node_modules/@material-ui/core/Modal/isOverflowing.js')
+        )
+
+        var _manageAriaHidden = __webpack_require__(
+          /*! ./manageAriaHidden */ './node_modules/@material-ui/core/Modal/manageAriaHidden.js'
+        )
+
+        function findIndexOf(data, callback) {
+          var idx = -1
+          data.some(function(item, index) {
+            if (callback(item)) {
+              idx = index
+              return true
+            }
+
+            return false
+          })
+          return idx
+        }
+
+        function getPaddingRight(node) {
+          return parseInt((0, _style.default)(node, 'paddingRight') || 0, 10)
+        }
+
+        function setContainerStyle(data) {
+          // We are only interested in the actual `style` here because we will override it.
+          data.style = {
+            overflow: data.container.style.overflow,
+            paddingRight: data.container.style.paddingRight,
+          }
+          var style = {
+            overflow: 'hidden',
+          }
+
+          if (data.overflowing) {
+            var scrollbarSize = (0, _scrollbarSize.default)() // Use computed style, here to get the real padding to add our scrollbar width.
+
+            style.paddingRight = ''.concat(getPaddingRight(data.container) + scrollbarSize, 'px') // .mui-fixed is a global helper.
+
+            var fixedNodes = (0, _ownerDocument.default)(data.container).querySelectorAll('.mui-fixed')
+
+            for (var i = 0; i < fixedNodes.length; i += 1) {
+              var paddingRight = getPaddingRight(fixedNodes[i])
+              data.prevPaddings.push(paddingRight)
+              fixedNodes[i].style.paddingRight = ''.concat(paddingRight + scrollbarSize, 'px')
+            }
+          }
+
+          Object.keys(style).forEach(function(key) {
+            data.container.style[key] = style[key]
+          })
+        }
+
+        function removeContainerStyle(data) {
+          // The modal might be closed before it had the chance to be mounted in the DOM.
+          if (data.style) {
+            Object.keys(data.style).forEach(function(key) {
+              data.container.style[key] = data.style[key]
+            })
+          }
+
+          var fixedNodes = (0, _ownerDocument.default)(data.container).querySelectorAll('.mui-fixed')
+
+          for (var i = 0; i < fixedNodes.length; i += 1) {
+            fixedNodes[i].style.paddingRight = ''.concat(data.prevPaddings[i], 'px')
+          }
+        }
+        /**
+         * @ignore - do not document.
+         *
+         * Proper state management for containers and the modals in those containers.
+         * Simplified, but inspired by react-overlay's ModalManager class.
+         * Used by the Modal to ensure proper styling of containers.
+         */
+
+        var ModalManager =
+          /*#__PURE__*/
+          (function() {
+            function ModalManager() {
+              var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {}
+              ;(0, _classCallCheck2.default)(this, ModalManager)
+              var _options$hideSiblingN = options.hideSiblingNodes,
+                hideSiblingNodes = _options$hideSiblingN === void 0 ? true : _options$hideSiblingN,
+                _options$handleContai = options.handleContainerOverflow,
+                handleContainerOverflow = _options$handleContai === void 0 ? true : _options$handleContai
+              this.hideSiblingNodes = hideSiblingNodes
+              this.handleContainerOverflow = handleContainerOverflow // this.modals[modalIdx] = modal
+
+              this.modals = [] // this.data[containerIdx] = {
+              //   modals: [],
+              //   container,
+              //   overflowing,
+              //   prevPaddings,
+              // }
+
+              this.data = []
+            }
+
+            ;(0, _createClass2.default)(ModalManager, [
+              {
+                key: 'add',
+                value: function add(modal, container) {
+                  var modalIdx = this.modals.indexOf(modal)
+
+                  if (modalIdx !== -1) {
+                    return modalIdx
+                  }
+
+                  modalIdx = this.modals.length
+                  this.modals.push(modal) // If the modal we are adding is already in the DOM.
+
+                  if (modal.modalRef) {
+                    ;(0, _manageAriaHidden.ariaHidden)(modal.modalRef, false)
+                  }
+
+                  if (this.hideSiblingNodes) {
+                    ;(0, _manageAriaHidden.ariaHiddenSiblings)(container, modal.mountNode, modal.modalRef, true)
+                  }
+
+                  var containerIdx = findIndexOf(this.data, function(item) {
+                    return item.container === container
+                  })
+
+                  if (containerIdx !== -1) {
+                    this.data[containerIdx].modals.push(modal)
+                    return modalIdx
+                  }
+
+                  var data = {
+                    modals: [modal],
+                    container: container,
+                    overflowing: (0, _isOverflowing.default)(container),
+                    prevPaddings: [],
+                  }
+                  this.data.push(data)
+                  return modalIdx
+                },
+              },
+              {
+                key: 'mount',
+                value: function mount(modal) {
+                  var containerIdx = findIndexOf(this.data, function(item) {
+                    return item.modals.indexOf(modal) !== -1
+                  })
+                  var data = this.data[containerIdx]
+
+                  if (!data.style && this.handleContainerOverflow) {
+                    setContainerStyle(data)
+                  }
+                },
+              },
+              {
+                key: 'remove',
+                value: function remove(modal) {
+                  var modalIdx = this.modals.indexOf(modal)
+
+                  if (modalIdx === -1) {
+                    return modalIdx
+                  }
+
+                  var containerIdx = findIndexOf(this.data, function(item) {
+                    return item.modals.indexOf(modal) !== -1
+                  })
+                  var data = this.data[containerIdx]
+                  data.modals.splice(data.modals.indexOf(modal), 1)
+                  this.modals.splice(modalIdx, 1) // If that was the last modal in a container, clean up the container.
+
+                  if (data.modals.length === 0) {
+                    if (this.handleContainerOverflow) {
+                      removeContainerStyle(data)
+                    } // In case the modal wasn't in the DOM yet.
+
+                    if (modal.modalRef) {
+                      ;(0, _manageAriaHidden.ariaHidden)(modal.modalRef, true)
+                    }
+
+                    if (this.hideSiblingNodes) {
+                      ;(0, _manageAriaHidden.ariaHiddenSiblings)(data.container, modal.mountNode, modal.modalRef, false)
+                    }
+
+                    this.data.splice(containerIdx, 1)
+                  } else if (this.hideSiblingNodes) {
+                    // Otherwise make sure the next top modal is visible to a screen reader.
+                    var nextTop = data.modals[data.modals.length - 1] // as soon as a modal is adding its modalRef is undefined. it can't set
+                    // aria-hidden because the dom element doesn't exist either
+                    // when modal was unmounted before modalRef gets null
+
+                    if (nextTop.modalRef) {
+                      ;(0, _manageAriaHidden.ariaHidden)(nextTop.modalRef, false)
+                    }
+                  }
+
+                  return modalIdx
+                },
+              },
+              {
+                key: 'isTopModal',
+                value: function isTopModal(modal) {
+                  return !!this.modals.length && this.modals[this.modals.length - 1] === modal
+                },
+              },
+            ])
+            return ModalManager
+          })()
+
+        var _default = ModalManager
+        exports.default = _default
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Modal/index.js':
+      /*!*******************************************************!*\
+  !*** ./node_modules/@material-ui/core/Modal/index.js ***!
+  \*******************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        Object.defineProperty(exports, 'default', {
+          enumerable: true,
+          get: function get() {
+            return _Modal.default
+          },
+        })
+        Object.defineProperty(exports, 'ModalManager', {
+          enumerable: true,
+          get: function get() {
+            return _ModalManager.default
+          },
+        })
+
+        var _Modal = _interopRequireDefault(
+          __webpack_require__(/*! ./Modal */ './node_modules/@material-ui/core/Modal/Modal.js')
+        )
+
+        var _ModalManager = _interopRequireDefault(
+          __webpack_require__(/*! ./ModalManager */ './node_modules/@material-ui/core/Modal/ModalManager.js')
+        )
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Modal/isOverflowing.js':
+      /*!***************************************************************!*\
+  !*** ./node_modules/@material-ui/core/Modal/isOverflowing.js ***!
+  \***************************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.isBody = isBody
+        exports.default = isOverflowing
+
+        var _isWindow = _interopRequireDefault(
+          __webpack_require__(/*! dom-helpers/query/isWindow */ './node_modules/dom-helpers/query/isWindow.js')
+        )
+
+        var _ownerDocument = _interopRequireDefault(
+          __webpack_require__(/*! ../utils/ownerDocument */ './node_modules/@material-ui/core/utils/ownerDocument.js')
+        )
+
+        var _ownerWindow = _interopRequireDefault(
+          __webpack_require__(/*! ../utils/ownerWindow */ './node_modules/@material-ui/core/utils/ownerWindow.js')
+        )
+
+        function isBody(node) {
+          return node && node.tagName.toLowerCase() === 'body'
+        } // Do we have a vertical scroll bar?
+
+        function isOverflowing(container) {
+          var doc = (0, _ownerDocument.default)(container)
+          var win = (0, _ownerWindow.default)(doc)
+          /* istanbul ignore next */
+
+          if (!(0, _isWindow.default)(doc) && !isBody(container)) {
+            return container.scrollHeight > container.clientHeight
+          } // Takes in account potential non zero margin on the body.
+
+          var style = win.getComputedStyle(doc.body)
+          var marginLeft = parseInt(style.getPropertyValue('margin-left'), 10)
+          var marginRight = parseInt(style.getPropertyValue('margin-right'), 10)
+          return marginLeft + doc.body.clientWidth + marginRight < win.innerWidth
+        }
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Modal/manageAriaHidden.js':
+      /*!******************************************************************!*\
+  !*** ./node_modules/@material-ui/core/Modal/manageAriaHidden.js ***!
+  \******************************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.ariaHidden = ariaHidden
+        exports.ariaHiddenSiblings = ariaHiddenSiblings
+        var BLACKLIST = ['template', 'script', 'style']
+
+        function isHideable(node) {
+          return node.nodeType === 1 && BLACKLIST.indexOf(node.tagName.toLowerCase()) === -1
+        }
+
+        function siblings(container, mount, currentNode, callback) {
+          var blacklist = [mount, currentNode]
+          ;[].forEach.call(container.children, function(node) {
+            if (blacklist.indexOf(node) === -1 && isHideable(node)) {
+              callback(node)
+            }
+          })
+        }
+
+        function ariaHidden(node, show) {
+          if (show) {
+            node.setAttribute('aria-hidden', 'true')
+          } else {
+            node.removeAttribute('aria-hidden')
+          }
+        }
+
+        function ariaHiddenSiblings(container, mountNode, currentNode, show) {
+          siblings(container, mountNode, currentNode, function(node) {
+            return ariaHidden(node, show)
+          })
+        }
+
+        /***/
+      },
+
     /***/ './node_modules/@material-ui/core/NoSsr/NoSsr.js':
       /*!*******************************************************!*\
   !*** ./node_modules/@material-ui/core/NoSsr/NoSsr.js ***!
@@ -7500,6 +10338,922 @@
         /***/
       },
 
+    /***/ './node_modules/@material-ui/core/Portal/Portal.js':
+      /*!*********************************************************!*\
+  !*** ./node_modules/@material-ui/core/Portal/Portal.js ***!
+  \*********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.default = void 0
+
+        var _classCallCheck2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/classCallCheck */ './node_modules/@babel/runtime/helpers/classCallCheck.js'
+          )
+        )
+
+        var _createClass2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/createClass */ './node_modules/@babel/runtime/helpers/createClass.js'
+          )
+        )
+
+        var _possibleConstructorReturn2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/possibleConstructorReturn */ './node_modules/@babel/runtime/helpers/possibleConstructorReturn.js'
+          )
+        )
+
+        var _getPrototypeOf3 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/getPrototypeOf */ './node_modules/@babel/runtime/helpers/getPrototypeOf.js'
+          )
+        )
+
+        var _inherits2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/inherits */ './node_modules/@babel/runtime/helpers/inherits.js'
+          )
+        )
+
+        var _react = _interopRequireDefault(__webpack_require__(/*! react */ './node_modules/react/index.js'))
+
+        var _reactDom = _interopRequireDefault(
+          __webpack_require__(/*! react-dom */ './node_modules/react-dom/index.js')
+        )
+
+        var _propTypes = _interopRequireDefault(
+          __webpack_require__(/*! prop-types */ './node_modules/prop-types/index.js')
+        )
+
+        var _ownerDocument = _interopRequireDefault(
+          __webpack_require__(/*! ../utils/ownerDocument */ './node_modules/@material-ui/core/utils/ownerDocument.js')
+        )
+
+        var _utils = __webpack_require__(/*! @material-ui/utils */ './node_modules/@material-ui/utils/index.es.js')
+
+        function getContainer(container, defaultContainer) {
+          container = typeof container === 'function' ? container() : container
+          return _reactDom.default.findDOMNode(container) || defaultContainer
+        }
+
+        function getOwnerDocument(element) {
+          return (0, _ownerDocument.default)(_reactDom.default.findDOMNode(element))
+        }
+        /**
+         * Portals provide a first-class way to render children into a DOM node
+         * that exists outside the DOM hierarchy of the parent component.
+         */
+
+        var Portal =
+          /*#__PURE__*/
+          (function(_React$Component) {
+            ;(0, _inherits2.default)(Portal, _React$Component)
+
+            function Portal() {
+              var _getPrototypeOf2
+
+              var _this
+
+              ;(0, _classCallCheck2.default)(this, Portal)
+
+              for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+                args[_key] = arguments[_key]
+              }
+
+              _this = (0, _possibleConstructorReturn2.default)(
+                this,
+                (_getPrototypeOf2 = (0, _getPrototypeOf3.default)(Portal)).call.apply(
+                  _getPrototypeOf2,
+                  [this].concat(args)
+                )
+              )
+
+              _this.getMountNode = function() {
+                return _this.mountNode
+              }
+
+              return _this
+            }
+
+            ;(0, _createClass2.default)(Portal, [
+              {
+                key: 'componentDidMount',
+                value: function componentDidMount() {
+                  this.setMountNode(this.props.container) // Only rerender if needed
+
+                  if (!this.props.disablePortal) {
+                    this.forceUpdate(this.props.onRendered)
+                  }
+                },
+              },
+              {
+                key: 'componentDidUpdate',
+                value: function componentDidUpdate(prevProps) {
+                  var _this2 = this
+
+                  if (
+                    prevProps.container !== this.props.container ||
+                    prevProps.disablePortal !== this.props.disablePortal
+                  ) {
+                    this.setMountNode(this.props.container) // Only rerender if needed
+
+                    if (!this.props.disablePortal) {
+                      this.forceUpdate(function() {
+                        if (_this2.props.onRendered) {
+                          // This might be triggered earlier than the componentDidUpdate of a parent element.
+                          // We need to account for it.
+                          clearTimeout(_this2.renderedTimer)
+                          _this2.renderedTimer = setTimeout(_this2.props.onRendered)
+                        }
+                      })
+                    }
+                  }
+                },
+              },
+              {
+                key: 'componentWillUnmount',
+                value: function componentWillUnmount() {
+                  this.mountNode = null
+                  clearTimeout(this.renderedTimer)
+                },
+              },
+              {
+                key: 'setMountNode',
+                value: function setMountNode(container) {
+                  if (this.props.disablePortal) {
+                    this.mountNode = _reactDom.default.findDOMNode(this).parentElement
+                    return
+                  }
+
+                  this.mountNode = getContainer(container, getOwnerDocument(this).body)
+                },
+                /**
+                 * @public
+                 */
+              },
+              {
+                key: 'render',
+                value: function render() {
+                  var _this$props = this.props,
+                    children = _this$props.children,
+                    disablePortal = _this$props.disablePortal
+
+                  if (disablePortal) {
+                    return children
+                  }
+
+                  return this.mountNode ? _reactDom.default.createPortal(children, this.mountNode) : null
+                },
+              },
+            ])
+            return Portal
+          })(_react.default.Component)
+
+        true
+          ? (Portal.propTypes = {
+              /**
+               * The children to render into the `container`.
+               */
+              children: _propTypes.default.node.isRequired,
+
+              /**
+               * A node, component instance, or function that returns either.
+               * The `container` will have the portal children appended to it.
+               * By default, it uses the body of the top-level document object,
+               * so it's simply `document.body` most of the time.
+               */
+              container: _propTypes.default.oneOfType([_propTypes.default.object, _propTypes.default.func]),
+
+              /**
+               * Disable the portal behavior.
+               * The children stay within it's parent DOM hierarchy.
+               */
+              disablePortal: _propTypes.default.bool,
+
+              /**
+               * Callback fired once the children has been mounted into the `container`.
+               */
+              onRendered: _propTypes.default.func,
+            })
+          : undefined
+        Portal.defaultProps = {
+          disablePortal: false,
+        }
+
+        if (true) {
+          true ? (Portal.propTypes = (0, _utils.exactProp)(Portal.propTypes)) : undefined
+        }
+
+        var _default = Portal
+        exports.default = _default
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Portal/index.js':
+      /*!********************************************************!*\
+  !*** ./node_modules/@material-ui/core/Portal/index.js ***!
+  \********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        Object.defineProperty(exports, 'default', {
+          enumerable: true,
+          get: function get() {
+            return _Portal.default
+          },
+        })
+
+        var _Portal = _interopRequireDefault(
+          __webpack_require__(/*! ./Portal */ './node_modules/@material-ui/core/Portal/Portal.js')
+        )
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/RootRef/RootRef.js':
+      /*!***********************************************************!*\
+  !*** ./node_modules/@material-ui/core/RootRef/RootRef.js ***!
+  \***********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.default = void 0
+
+        var _classCallCheck2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/classCallCheck */ './node_modules/@babel/runtime/helpers/classCallCheck.js'
+          )
+        )
+
+        var _createClass2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/createClass */ './node_modules/@babel/runtime/helpers/createClass.js'
+          )
+        )
+
+        var _possibleConstructorReturn2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/possibleConstructorReturn */ './node_modules/@babel/runtime/helpers/possibleConstructorReturn.js'
+          )
+        )
+
+        var _getPrototypeOf2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/getPrototypeOf */ './node_modules/@babel/runtime/helpers/getPrototypeOf.js'
+          )
+        )
+
+        var _inherits2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/inherits */ './node_modules/@babel/runtime/helpers/inherits.js'
+          )
+        )
+
+        var _react = _interopRequireDefault(__webpack_require__(/*! react */ './node_modules/react/index.js'))
+
+        var _reactDom = _interopRequireDefault(
+          __webpack_require__(/*! react-dom */ './node_modules/react-dom/index.js')
+        )
+
+        var _propTypes = _interopRequireDefault(
+          __webpack_require__(/*! prop-types */ './node_modules/prop-types/index.js')
+        )
+
+        var _utils = __webpack_require__(/*! @material-ui/utils */ './node_modules/@material-ui/utils/index.es.js')
+
+        var _reactHelpers = __webpack_require__(
+          /*! ../utils/reactHelpers */ './node_modules/@material-ui/core/utils/reactHelpers.js'
+        )
+
+        /**
+         * Helper component to allow attaching a ref to a
+         * wrapped element to access the underlying DOM element.
+         *
+         * It's highly inspired by https://github.com/facebook/react/issues/11401#issuecomment-340543801.
+         * For example:
+         * ```jsx
+         * import React from 'react';
+         * import RootRef from '@material-ui/core/RootRef';
+         *
+         * class MyComponent extends React.Component {
+         *   constructor() {
+         *     super();
+         *     this.domRef = React.createRef();
+         *   }
+         *
+         *   componentDidMount() {
+         *     console.log(this.domRef.current); // DOM node
+         *   }
+         *
+         *   render() {
+         *     return (
+         *       <RootRef rootRef={this.domRef}>
+         *         <SomeChildComponent />
+         *       </RootRef>
+         *     );
+         *   }
+         * }
+         * ```
+         */
+        var RootRef =
+          /*#__PURE__*/
+          (function(_React$Component) {
+            ;(0, _inherits2.default)(RootRef, _React$Component)
+
+            function RootRef() {
+              ;(0, _classCallCheck2.default)(this, RootRef)
+              return (0, _possibleConstructorReturn2.default)(
+                this,
+                (0, _getPrototypeOf2.default)(RootRef).apply(this, arguments)
+              )
+            }
+
+            ;(0, _createClass2.default)(RootRef, [
+              {
+                key: 'componentDidMount',
+                value: function componentDidMount() {
+                  this.ref = _reactDom.default.findDOMNode(this)
+                  ;(0, _reactHelpers.setRef)(this.props.rootRef, this.ref)
+                },
+              },
+              {
+                key: 'componentDidUpdate',
+                value: function componentDidUpdate(prevProps) {
+                  var ref = _reactDom.default.findDOMNode(this)
+
+                  if (prevProps.rootRef !== this.props.rootRef || this.ref !== ref) {
+                    if (prevProps.rootRef !== this.props.rootRef) {
+                      ;(0, _reactHelpers.setRef)(prevProps.rootRef, null)
+                    }
+
+                    this.ref = ref
+                    ;(0, _reactHelpers.setRef)(this.props.rootRef, this.ref)
+                  }
+                },
+              },
+              {
+                key: 'componentWillUnmount',
+                value: function componentWillUnmount() {
+                  this.ref = null
+                  ;(0, _reactHelpers.setRef)(this.props.rootRef, null)
+                },
+              },
+              {
+                key: 'render',
+                value: function render() {
+                  return this.props.children
+                },
+              },
+            ])
+            return RootRef
+          })(_react.default.Component)
+
+        true
+          ? (RootRef.propTypes = {
+              /**
+               * The wrapped element.
+               */
+              children: _propTypes.default.element.isRequired,
+
+              /**
+               * Provide a way to access the DOM node of the wrapped element.
+               * You can provide a callback ref or a `React.createRef()` ref.
+               */
+              rootRef: _propTypes.default.oneOfType([_propTypes.default.func, _propTypes.default.object]).isRequired,
+            })
+          : undefined
+
+        if (true) {
+          true ? (RootRef.propTypes = (0, _utils.exactProp)(RootRef.propTypes)) : undefined
+        }
+
+        var _default = RootRef
+        exports.default = _default
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/RootRef/index.js':
+      /*!*********************************************************!*\
+  !*** ./node_modules/@material-ui/core/RootRef/index.js ***!
+  \*********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        Object.defineProperty(exports, 'default', {
+          enumerable: true,
+          get: function get() {
+            return _RootRef.default
+          },
+        })
+
+        var _RootRef = _interopRequireDefault(
+          __webpack_require__(/*! ./RootRef */ './node_modules/@material-ui/core/RootRef/RootRef.js')
+        )
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Slide/Slide.js':
+      /*!*******************************************************!*\
+  !*** ./node_modules/@material-ui/core/Slide/Slide.js ***!
+  \*******************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.setTranslateValue = setTranslateValue
+        exports.default = void 0
+
+        var _objectWithoutProperties2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/objectWithoutProperties */ './node_modules/@babel/runtime/helpers/objectWithoutProperties.js'
+          )
+        )
+
+        var _extends2 = _interopRequireDefault(
+          __webpack_require__(/*! @babel/runtime/helpers/extends */ './node_modules/@babel/runtime/helpers/extends.js')
+        )
+
+        var _classCallCheck2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/classCallCheck */ './node_modules/@babel/runtime/helpers/classCallCheck.js'
+          )
+        )
+
+        var _createClass2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/createClass */ './node_modules/@babel/runtime/helpers/createClass.js'
+          )
+        )
+
+        var _possibleConstructorReturn2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/possibleConstructorReturn */ './node_modules/@babel/runtime/helpers/possibleConstructorReturn.js'
+          )
+        )
+
+        var _getPrototypeOf2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/getPrototypeOf */ './node_modules/@babel/runtime/helpers/getPrototypeOf.js'
+          )
+        )
+
+        var _inherits2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/inherits */ './node_modules/@babel/runtime/helpers/inherits.js'
+          )
+        )
+
+        var _react = _interopRequireDefault(__webpack_require__(/*! react */ './node_modules/react/index.js'))
+
+        var _propTypes = _interopRequireDefault(
+          __webpack_require__(/*! prop-types */ './node_modules/prop-types/index.js')
+        )
+
+        var _reactDom = _interopRequireDefault(
+          __webpack_require__(/*! react-dom */ './node_modules/react-dom/index.js')
+        )
+
+        var _reactEventListener = _interopRequireDefault(
+          __webpack_require__(
+            /*! react-event-listener */ './node_modules/react-event-listener/dist/react-event-listener.cjs.js'
+          )
+        )
+
+        var _debounce = _interopRequireDefault(__webpack_require__(/*! debounce */ './node_modules/debounce/index.js'))
+
+        var _Transition = _interopRequireDefault(
+          __webpack_require__(
+            /*! react-transition-group/Transition */ './node_modules/react-transition-group/Transition.js'
+          )
+        )
+
+        var _ownerWindow = _interopRequireDefault(
+          __webpack_require__(/*! ../utils/ownerWindow */ './node_modules/@material-ui/core/utils/ownerWindow.js')
+        )
+
+        var _withTheme = _interopRequireDefault(
+          __webpack_require__(/*! ../styles/withTheme */ './node_modules/@material-ui/core/styles/withTheme.js')
+        )
+
+        var _transitions = __webpack_require__(
+          /*! ../styles/transitions */ './node_modules/@material-ui/core/styles/transitions.js'
+        )
+
+        var _utils = __webpack_require__(
+          /*! ../transitions/utils */ './node_modules/@material-ui/core/transitions/utils.js'
+        )
+
+        // @inheritedComponent Transition
+        // < 1kb payload overhead when lodash/debounce is > 3kb.
+        var GUTTER = 24 // Translate the node so he can't be seen on the screen.
+        // Later, we gonna translate back the node to his original location
+        // with `translate3d(0, 0, 0)`.`
+
+        function getTranslateValue(props, node) {
+          var direction = props.direction
+          var rect = node.getBoundingClientRect()
+          var transform
+
+          if (node.fakeTransform) {
+            transform = node.fakeTransform
+          } else {
+            var computedStyle = (0, _ownerWindow.default)(node).getComputedStyle(node)
+            transform =
+              computedStyle.getPropertyValue('-webkit-transform') || computedStyle.getPropertyValue('transform')
+          }
+
+          var offsetX = 0
+          var offsetY = 0
+
+          if (transform && transform !== 'none' && typeof transform === 'string') {
+            var transformValues = transform
+              .split('(')[1]
+              .split(')')[0]
+              .split(',')
+            offsetX = parseInt(transformValues[4], 10)
+            offsetY = parseInt(transformValues[5], 10)
+          }
+
+          if (direction === 'left') {
+            return 'translateX(100vw) translateX(-'.concat(rect.left - offsetX, 'px)')
+          }
+
+          if (direction === 'right') {
+            return 'translateX(-'.concat(rect.left + rect.width + GUTTER - offsetX, 'px)')
+          }
+
+          if (direction === 'up') {
+            return 'translateY(100vh) translateY(-'.concat(rect.top - offsetY, 'px)')
+          } // direction === 'down'
+
+          return 'translateY(-'.concat(rect.top + rect.height + GUTTER - offsetY, 'px)')
+        }
+
+        function setTranslateValue(props, node) {
+          var transform = getTranslateValue(props, node)
+
+          if (transform) {
+            node.style.webkitTransform = transform
+            node.style.transform = transform
+          }
+        }
+        /**
+         * The Slide transition is used by the [Snackbar](/demos/snackbars/) component.
+         * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
+         */
+
+        var Slide =
+          /*#__PURE__*/
+          (function(_React$Component) {
+            ;(0, _inherits2.default)(Slide, _React$Component)
+
+            function Slide() {
+              var _this
+
+              ;(0, _classCallCheck2.default)(this, Slide)
+              _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Slide).call(this))
+              _this.mounted = false
+
+              _this.handleEnter = function(node) {
+                setTranslateValue(_this.props, node)
+                ;(0, _utils.reflow)(node)
+
+                if (_this.props.onEnter) {
+                  _this.props.onEnter(node)
+                }
+              }
+
+              _this.handleEntering = function(node) {
+                var theme = _this.props.theme
+                var transitionProps = (0, _utils.getTransitionProps)(_this.props, {
+                  mode: 'enter',
+                })
+                node.style.webkitTransition = theme.transitions.create(
+                  '-webkit-transform',
+                  (0, _extends2.default)({}, transitionProps, {
+                    easing: theme.transitions.easing.easeOut,
+                  })
+                )
+                node.style.transition = theme.transitions.create(
+                  'transform',
+                  (0, _extends2.default)({}, transitionProps, {
+                    easing: theme.transitions.easing.easeOut,
+                  })
+                )
+                node.style.webkitTransform = 'translate(0, 0)'
+                node.style.transform = 'translate(0, 0)'
+
+                if (_this.props.onEntering) {
+                  _this.props.onEntering(node)
+                }
+              }
+
+              _this.handleExit = function(node) {
+                var theme = _this.props.theme
+                var transitionProps = (0, _utils.getTransitionProps)(_this.props, {
+                  mode: 'exit',
+                })
+                node.style.webkitTransition = theme.transitions.create(
+                  '-webkit-transform',
+                  (0, _extends2.default)({}, transitionProps, {
+                    easing: theme.transitions.easing.sharp,
+                  })
+                )
+                node.style.transition = theme.transitions.create(
+                  'transform',
+                  (0, _extends2.default)({}, transitionProps, {
+                    easing: theme.transitions.easing.sharp,
+                  })
+                )
+                setTranslateValue(_this.props, node)
+
+                if (_this.props.onExit) {
+                  _this.props.onExit(node)
+                }
+              }
+
+              _this.handleExited = function(node) {
+                // No need for transitions when the component is hidden
+                node.style.webkitTransition = ''
+                node.style.transition = ''
+
+                if (_this.props.onExited) {
+                  _this.props.onExited(node)
+                }
+              }
+
+              if (typeof window !== 'undefined') {
+                _this.handleResize = (0, _debounce.default)(function() {
+                  // Skip configuration where the position is screen size invariant.
+                  if (_this.props.in || _this.props.direction === 'down' || _this.props.direction === 'right') {
+                    return
+                  }
+
+                  if (_this.transitionRef) {
+                    setTranslateValue(_this.props, _this.transitionRef)
+                  }
+                }, 166) // Corresponds to 10 frames at 60 Hz.
+              }
+
+              return _this
+            }
+
+            ;(0, _createClass2.default)(Slide, [
+              {
+                key: 'componentDidMount',
+                value: function componentDidMount() {
+                  this.mounted = true // state.mounted handle SSR, once the component is mounted, we need
+                  // to properly hide it.
+
+                  if (!this.props.in) {
+                    // We need to set initial translate values of transition element
+                    // otherwise component will be shown when in=false.
+                    this.updatePosition()
+                  }
+                },
+              },
+              {
+                key: 'componentDidUpdate',
+                value: function componentDidUpdate(prevProps) {
+                  if (prevProps.direction !== this.props.direction && !this.props.in) {
+                    // We need to update the position of the drawer when the direction change and
+                    // when it's hidden.
+                    this.updatePosition()
+                  }
+                },
+              },
+              {
+                key: 'componentWillUnmount',
+                value: function componentWillUnmount() {
+                  this.handleResize.clear()
+                },
+              },
+              {
+                key: 'updatePosition',
+                value: function updatePosition() {
+                  if (this.transitionRef) {
+                    this.transitionRef.style.visibility = 'inherit'
+                    setTranslateValue(this.props, this.transitionRef)
+                  }
+                },
+              },
+              {
+                key: 'render',
+                value: function render() {
+                  var _this2 = this
+
+                  var _this$props = this.props,
+                    children = _this$props.children,
+                    direction = _this$props.direction,
+                    onEnter = _this$props.onEnter,
+                    onEntering = _this$props.onEntering,
+                    onExit = _this$props.onExit,
+                    onExited = _this$props.onExited,
+                    styleProp = _this$props.style,
+                    theme = _this$props.theme,
+                    other = (0, _objectWithoutProperties2.default)(_this$props, [
+                      'children',
+                      'direction',
+                      'onEnter',
+                      'onEntering',
+                      'onExit',
+                      'onExited',
+                      'style',
+                      'theme',
+                    ])
+                  var style = {} // We use this state to handle the server-side rendering.
+                  // We don't know the width of the children ahead of time.
+                  // We need to render it.
+
+                  if (!this.props.in && !this.mounted) {
+                    style.visibility = 'hidden'
+                  }
+
+                  style = (0, _extends2.default)(
+                    {},
+                    style,
+                    styleProp,
+                    _react.default.isValidElement(children) ? children.props.style : {}
+                  )
+                  return _react.default.createElement(
+                    _reactEventListener.default,
+                    {
+                      target: 'window',
+                      onResize: this.handleResize,
+                    },
+                    _react.default.createElement(
+                      _Transition.default,
+                      (0, _extends2.default)(
+                        {
+                          onEnter: this.handleEnter,
+                          onEntering: this.handleEntering,
+                          onExit: this.handleExit,
+                          onExited: this.handleExited,
+                          appear: true,
+                          style: style,
+                          ref: function ref(_ref) {
+                            _this2.transitionRef = _reactDom.default.findDOMNode(_ref)
+                          },
+                        },
+                        other
+                      ),
+                      children
+                    )
+                  )
+                },
+              },
+            ])
+            return Slide
+          })(_react.default.Component)
+
+        true
+          ? (Slide.propTypes = {
+              /**
+               * A single child content element.
+               */
+              children: _propTypes.default.oneOfType([_propTypes.default.element, _propTypes.default.func]),
+
+              /**
+               * Direction the child node will enter from.
+               */
+              direction: _propTypes.default.oneOf(['left', 'right', 'up', 'down']),
+
+              /**
+               * If `true`, show the component; triggers the enter or exit animation.
+               */
+              in: _propTypes.default.bool,
+
+              /**
+               * @ignore
+               */
+              onEnter: _propTypes.default.func,
+
+              /**
+               * @ignore
+               */
+              onEntering: _propTypes.default.func,
+
+              /**
+               * @ignore
+               */
+              onExit: _propTypes.default.func,
+
+              /**
+               * @ignore
+               */
+              onExited: _propTypes.default.func,
+
+              /**
+               * @ignore
+               */
+              style: _propTypes.default.object,
+
+              /**
+               * @ignore
+               */
+              theme: _propTypes.default.object.isRequired,
+
+              /**
+               * The duration for the transition, in milliseconds.
+               * You may specify a single timeout for all transitions, or individually with an object.
+               */
+              timeout: _propTypes.default.oneOfType([
+                _propTypes.default.number,
+                _propTypes.default.shape({
+                  enter: _propTypes.default.number,
+                  exit: _propTypes.default.number,
+                }),
+              ]),
+            })
+          : undefined
+        Slide.defaultProps = {
+          direction: 'down',
+          timeout: {
+            enter: _transitions.duration.enteringScreen,
+            exit: _transitions.duration.leavingScreen,
+          },
+        }
+
+        var _default = (0, _withTheme.default)()(Slide)
+
+        exports.default = _default
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Slide/index.js':
+      /*!*******************************************************!*\
+  !*** ./node_modules/@material-ui/core/Slide/index.js ***!
+  \*******************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        Object.defineProperty(exports, 'default', {
+          enumerable: true,
+          get: function get() {
+            return _Slide.default
+          },
+        })
+
+        var _Slide = _interopRequireDefault(
+          __webpack_require__(/*! ./Slide */ './node_modules/@material-ui/core/Slide/Slide.js')
+        )
+
+        /***/
+      },
+
     /***/ './node_modules/@material-ui/core/SvgIcon/SvgIcon.js':
       /*!***********************************************************!*\
   !*** ./node_modules/@material-ui/core/SvgIcon/SvgIcon.js ***!
@@ -7771,6 +11525,180 @@
 
         var _SvgIcon = _interopRequireDefault(
           __webpack_require__(/*! ./SvgIcon */ './node_modules/@material-ui/core/SvgIcon/SvgIcon.js')
+        )
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Toolbar/Toolbar.js':
+      /*!***********************************************************!*\
+  !*** ./node_modules/@material-ui/core/Toolbar/Toolbar.js ***!
+  \***********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.default = exports.styles = void 0
+
+        var _extends2 = _interopRequireDefault(
+          __webpack_require__(/*! @babel/runtime/helpers/extends */ './node_modules/@babel/runtime/helpers/extends.js')
+        )
+
+        var _defineProperty2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/defineProperty */ './node_modules/@babel/runtime/helpers/defineProperty.js'
+          )
+        )
+
+        var _objectWithoutProperties2 = _interopRequireDefault(
+          __webpack_require__(
+            /*! @babel/runtime/helpers/objectWithoutProperties */ './node_modules/@babel/runtime/helpers/objectWithoutProperties.js'
+          )
+        )
+
+        var _react = _interopRequireDefault(__webpack_require__(/*! react */ './node_modules/react/index.js'))
+
+        var _propTypes = _interopRequireDefault(
+          __webpack_require__(/*! prop-types */ './node_modules/prop-types/index.js')
+        )
+
+        var _classnames = _interopRequireDefault(
+          __webpack_require__(/*! classnames */ './node_modules/classnames/index.js')
+        )
+
+        var _withStyles = _interopRequireDefault(
+          __webpack_require__(/*! ../styles/withStyles */ './node_modules/@material-ui/core/styles/withStyles.js')
+        )
+
+        var styles = function styles(theme) {
+          return {
+            /* Styles applied to the root element. */
+            root: {
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'center',
+            },
+
+            /* Styles applied to the root element if `disableGutters={false}`. */
+            gutters: theme.mixins.gutters(),
+
+            /* Styles applied to the root element if `variant="regular"`. */
+            regular: theme.mixins.toolbar,
+
+            /* Styles applied to the root element if `variant="dense"`. */
+            dense: {
+              minHeight: 48,
+            },
+          }
+        }
+
+        exports.styles = styles
+
+        function Toolbar(props) {
+          var children = props.children,
+            classes = props.classes,
+            classNameProp = props.className,
+            disableGutters = props.disableGutters,
+            variant = props.variant,
+            other = (0, _objectWithoutProperties2.default)(props, [
+              'children',
+              'classes',
+              'className',
+              'disableGutters',
+              'variant',
+            ])
+          var className = (0, _classnames.default)(
+            classes.root,
+            classes[variant],
+            (0, _defineProperty2.default)({}, classes.gutters, !disableGutters),
+            classNameProp
+          )
+          return _react.default.createElement(
+            'div',
+            (0, _extends2.default)(
+              {
+                className: className,
+              },
+              other
+            ),
+            children
+          )
+        }
+
+        true
+          ? (Toolbar.propTypes = {
+              /**
+               * Toolbar children, usually a mixture of `IconButton`, `Button` and `Typography`.
+               */
+              children: _propTypes.default.node,
+
+              /**
+               * Override or extend the styles applied to the component.
+               * See [CSS API](#css-api) below for more details.
+               */
+              classes: _propTypes.default.object.isRequired,
+
+              /**
+               * @ignore
+               */
+              className: _propTypes.default.string,
+
+              /**
+               * If `true`, disables gutter padding.
+               */
+              disableGutters: _propTypes.default.bool,
+
+              /**
+               * The variant to use.
+               */
+              variant: _propTypes.default.oneOf(['regular', 'dense']),
+            })
+          : undefined
+        Toolbar.defaultProps = {
+          disableGutters: false,
+          variant: 'regular',
+        }
+
+        var _default = (0, _withStyles.default)(styles, {
+          name: 'MuiToolbar',
+        })(Toolbar)
+
+        exports.default = _default
+
+        /***/
+      },
+
+    /***/ './node_modules/@material-ui/core/Toolbar/index.js':
+      /*!*********************************************************!*\
+  !*** ./node_modules/@material-ui/core/Toolbar/index.js ***!
+  \*********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        Object.defineProperty(exports, 'default', {
+          enumerable: true,
+          get: function get() {
+            return _Toolbar.default
+          },
+        })
+
+        var _Toolbar = _interopRequireDefault(
+          __webpack_require__(/*! ./Toolbar */ './node_modules/@material-ui/core/Toolbar/Toolbar.js')
         )
 
         /***/
@@ -12272,6 +16200,39 @@
         /***/
       },
 
+    /***/ './node_modules/@material-ui/core/transitions/utils.js':
+      /*!*************************************************************!*\
+  !*** ./node_modules/@material-ui/core/transitions/utils.js ***!
+  \*************************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        })
+        exports.getTransitionProps = getTransitionProps
+        exports.reflow = void 0
+
+        var reflow = function reflow(node) {
+          return node.scrollTop
+        }
+
+        exports.reflow = reflow
+
+        function getTransitionProps(props, options) {
+          var timeout = props.timeout,
+            _props$style = props.style,
+            style = _props$style === void 0 ? {} : _props$style
+          return {
+            duration: style.transitionDuration || typeof timeout === 'number' ? timeout : timeout[options.mode],
+            delay: style.transitionDelay,
+          }
+        }
+
+        /***/
+      },
+
     /***/ './node_modules/@material-ui/core/utils/helpers.js':
       /*!*********************************************************!*\
   !*** ./node_modules/@material-ui/core/utils/helpers.js ***!
@@ -14141,6 +18102,491 @@
         debounce.debounce = debounce
 
         module.exports = debounce
+
+        /***/
+      },
+
+    /***/ './node_modules/dom-helpers/query/isWindow.js':
+      /*!****************************************************!*\
+  !*** ./node_modules/dom-helpers/query/isWindow.js ***!
+  \****************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        exports.__esModule = true
+        exports.default = getWindow
+
+        function getWindow(node) {
+          return node === node.window ? node : node.nodeType === 9 ? node.defaultView || node.parentWindow : false
+        }
+
+        module.exports = exports['default']
+
+        /***/
+      },
+
+    /***/ './node_modules/dom-helpers/style/getComputedStyle.js':
+      /*!************************************************************!*\
+  !*** ./node_modules/dom-helpers/style/getComputedStyle.js ***!
+  \************************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        exports.__esModule = true
+        exports.default = _getComputedStyle
+
+        var _camelizeStyle = _interopRequireDefault(
+          __webpack_require__(/*! ../util/camelizeStyle */ './node_modules/dom-helpers/util/camelizeStyle.js')
+        )
+
+        var rposition = /^(top|right|bottom|left)$/
+        var rnumnonpx = /^([+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|))(?!px)[a-z%]+$/i
+
+        function _getComputedStyle(node) {
+          if (!node) throw new TypeError('No Element passed to `getComputedStyle()`')
+          var doc = node.ownerDocument
+          return 'defaultView' in doc
+            ? doc.defaultView.opener
+              ? node.ownerDocument.defaultView.getComputedStyle(node, null)
+              : window.getComputedStyle(node, null)
+            : {
+                //ie 8 "magic" from: https://github.com/jquery/jquery/blob/1.11-stable/src/css/curCSS.js#L72
+                getPropertyValue: function getPropertyValue(prop) {
+                  var style = node.style
+                  prop = (0, _camelizeStyle.default)(prop)
+                  if (prop == 'float') prop = 'styleFloat'
+                  var current = node.currentStyle[prop] || null
+                  if (current == null && style && style[prop]) current = style[prop]
+
+                  if (rnumnonpx.test(current) && !rposition.test(prop)) {
+                    // Remember the original values
+                    var left = style.left
+                    var runStyle = node.runtimeStyle
+                    var rsLeft = runStyle && runStyle.left // Put in the new values to get a computed value out
+
+                    if (rsLeft) runStyle.left = node.currentStyle.left
+                    style.left = prop === 'fontSize' ? '1em' : current
+                    current = style.pixelLeft + 'px' // Revert the changed values
+
+                    style.left = left
+                    if (rsLeft) runStyle.left = rsLeft
+                  }
+
+                  return current
+                },
+              }
+        }
+
+        module.exports = exports['default']
+
+        /***/
+      },
+
+    /***/ './node_modules/dom-helpers/style/index.js':
+      /*!*************************************************!*\
+  !*** ./node_modules/dom-helpers/style/index.js ***!
+  \*************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        exports.__esModule = true
+        exports.default = style
+
+        var _camelizeStyle = _interopRequireDefault(
+          __webpack_require__(/*! ../util/camelizeStyle */ './node_modules/dom-helpers/util/camelizeStyle.js')
+        )
+
+        var _hyphenateStyle = _interopRequireDefault(
+          __webpack_require__(/*! ../util/hyphenateStyle */ './node_modules/dom-helpers/util/hyphenateStyle.js')
+        )
+
+        var _getComputedStyle2 = _interopRequireDefault(
+          __webpack_require__(/*! ./getComputedStyle */ './node_modules/dom-helpers/style/getComputedStyle.js')
+        )
+
+        var _removeStyle = _interopRequireDefault(
+          __webpack_require__(/*! ./removeStyle */ './node_modules/dom-helpers/style/removeStyle.js')
+        )
+
+        var _properties = __webpack_require__(
+          /*! ../transition/properties */ './node_modules/dom-helpers/transition/properties.js'
+        )
+
+        var _isTransform = _interopRequireDefault(
+          __webpack_require__(/*! ../transition/isTransform */ './node_modules/dom-helpers/transition/isTransform.js')
+        )
+
+        function style(node, property, value) {
+          var css = ''
+          var transforms = ''
+          var props = property
+
+          if (typeof property === 'string') {
+            if (value === undefined) {
+              return (
+                node.style[(0, _camelizeStyle.default)(property)] ||
+                (0, _getComputedStyle2.default)(node).getPropertyValue((0, _hyphenateStyle.default)(property))
+              )
+            } else {
+              ;(props = {})[property] = value
+            }
+          }
+
+          Object.keys(props).forEach(function(key) {
+            var value = props[key]
+
+            if (!value && value !== 0) {
+              ;(0, _removeStyle.default)(node, (0, _hyphenateStyle.default)(key))
+            } else if ((0, _isTransform.default)(key)) {
+              transforms += key + '(' + value + ') '
+            } else {
+              css += (0, _hyphenateStyle.default)(key) + ': ' + value + ';'
+            }
+          })
+
+          if (transforms) {
+            css += _properties.transform + ': ' + transforms + ';'
+          }
+
+          node.style.cssText += ';' + css
+        }
+
+        module.exports = exports['default']
+
+        /***/
+      },
+
+    /***/ './node_modules/dom-helpers/style/removeStyle.js':
+      /*!*******************************************************!*\
+  !*** ./node_modules/dom-helpers/style/removeStyle.js ***!
+  \*******************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        exports.__esModule = true
+        exports.default = removeStyle
+
+        function removeStyle(node, key) {
+          return 'removeProperty' in node.style ? node.style.removeProperty(key) : node.style.removeAttribute(key)
+        }
+
+        module.exports = exports['default']
+
+        /***/
+      },
+
+    /***/ './node_modules/dom-helpers/transition/isTransform.js':
+      /*!************************************************************!*\
+  !*** ./node_modules/dom-helpers/transition/isTransform.js ***!
+  \************************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        exports.__esModule = true
+        exports.default = isTransform
+        var supportedTransforms = /^((translate|rotate|scale)(X|Y|Z|3d)?|matrix(3d)?|perspective|skew(X|Y)?)$/i
+
+        function isTransform(property) {
+          return !!(property && supportedTransforms.test(property))
+        }
+
+        module.exports = exports['default']
+
+        /***/
+      },
+
+    /***/ './node_modules/dom-helpers/transition/properties.js':
+      /*!***********************************************************!*\
+  !*** ./node_modules/dom-helpers/transition/properties.js ***!
+  \***********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        exports.__esModule = true
+        exports.default = exports.animationEnd = exports.animationDelay = exports.animationTiming = exports.animationDuration = exports.animationName = exports.transitionEnd = exports.transitionDuration = exports.transitionDelay = exports.transitionTiming = exports.transitionProperty = exports.transform = void 0
+
+        var _inDOM = _interopRequireDefault(
+          __webpack_require__(/*! ../util/inDOM */ './node_modules/dom-helpers/util/inDOM.js')
+        )
+
+        var transform = 'transform'
+        exports.transform = transform
+        var prefix, transitionEnd, animationEnd
+        exports.animationEnd = animationEnd
+        exports.transitionEnd = transitionEnd
+        var transitionProperty, transitionDuration, transitionTiming, transitionDelay
+        exports.transitionDelay = transitionDelay
+        exports.transitionTiming = transitionTiming
+        exports.transitionDuration = transitionDuration
+        exports.transitionProperty = transitionProperty
+        var animationName, animationDuration, animationTiming, animationDelay
+        exports.animationDelay = animationDelay
+        exports.animationTiming = animationTiming
+        exports.animationDuration = animationDuration
+        exports.animationName = animationName
+
+        if (_inDOM.default) {
+          var _getTransitionPropert = getTransitionProperties()
+
+          prefix = _getTransitionPropert.prefix
+          exports.transitionEnd = transitionEnd = _getTransitionPropert.transitionEnd
+          exports.animationEnd = animationEnd = _getTransitionPropert.animationEnd
+          exports.transform = transform = prefix + '-' + transform
+          exports.transitionProperty = transitionProperty = prefix + '-transition-property'
+          exports.transitionDuration = transitionDuration = prefix + '-transition-duration'
+          exports.transitionDelay = transitionDelay = prefix + '-transition-delay'
+          exports.transitionTiming = transitionTiming = prefix + '-transition-timing-function'
+          exports.animationName = animationName = prefix + '-animation-name'
+          exports.animationDuration = animationDuration = prefix + '-animation-duration'
+          exports.animationTiming = animationTiming = prefix + '-animation-delay'
+          exports.animationDelay = animationDelay = prefix + '-animation-timing-function'
+        }
+
+        var _default = {
+          transform: transform,
+          end: transitionEnd,
+          property: transitionProperty,
+          timing: transitionTiming,
+          delay: transitionDelay,
+          duration: transitionDuration,
+        }
+        exports.default = _default
+
+        function getTransitionProperties() {
+          var style = document.createElement('div').style
+          var vendorMap = {
+            O: function O(e) {
+              return 'o' + e.toLowerCase()
+            },
+            Moz: function Moz(e) {
+              return e.toLowerCase()
+            },
+            Webkit: function Webkit(e) {
+              return 'webkit' + e
+            },
+            ms: function ms(e) {
+              return 'MS' + e
+            },
+          }
+          var vendors = Object.keys(vendorMap)
+          var transitionEnd, animationEnd
+          var prefix = ''
+
+          for (var i = 0; i < vendors.length; i++) {
+            var vendor = vendors[i]
+
+            if (vendor + 'TransitionProperty' in style) {
+              prefix = '-' + vendor.toLowerCase()
+              transitionEnd = vendorMap[vendor]('TransitionEnd')
+              animationEnd = vendorMap[vendor]('AnimationEnd')
+              break
+            }
+          }
+
+          if (!transitionEnd && 'transitionProperty' in style) transitionEnd = 'transitionend'
+          if (!animationEnd && 'animationName' in style) animationEnd = 'animationend'
+          style = null
+          return {
+            animationEnd: animationEnd,
+            transitionEnd: transitionEnd,
+            prefix: prefix,
+          }
+        }
+
+        /***/
+      },
+
+    /***/ './node_modules/dom-helpers/util/camelize.js':
+      /*!***************************************************!*\
+  !*** ./node_modules/dom-helpers/util/camelize.js ***!
+  \***************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        exports.__esModule = true
+        exports.default = camelize
+        var rHyphen = /-(.)/g
+
+        function camelize(string) {
+          return string.replace(rHyphen, function(_, chr) {
+            return chr.toUpperCase()
+          })
+        }
+
+        module.exports = exports['default']
+
+        /***/
+      },
+
+    /***/ './node_modules/dom-helpers/util/camelizeStyle.js':
+      /*!********************************************************!*\
+  !*** ./node_modules/dom-helpers/util/camelizeStyle.js ***!
+  \********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        exports.__esModule = true
+        exports.default = camelizeStyleName
+
+        var _camelize = _interopRequireDefault(
+          __webpack_require__(/*! ./camelize */ './node_modules/dom-helpers/util/camelize.js')
+        )
+
+        /**
+         * Copyright 2014-2015, Facebook, Inc.
+         * All rights reserved.
+         * https://github.com/facebook/react/blob/2aeb8a2a6beb00617a4217f7f8284924fa2ad819/src/vendor/core/camelizeStyleName.js
+         */
+        var msPattern = /^-ms-/
+
+        function camelizeStyleName(string) {
+          return (0, _camelize.default)(string.replace(msPattern, 'ms-'))
+        }
+
+        module.exports = exports['default']
+
+        /***/
+      },
+
+    /***/ './node_modules/dom-helpers/util/hyphenate.js':
+      /*!****************************************************!*\
+  !*** ./node_modules/dom-helpers/util/hyphenate.js ***!
+  \****************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        exports.__esModule = true
+        exports.default = hyphenate
+        var rUpper = /([A-Z])/g
+
+        function hyphenate(string) {
+          return string.replace(rUpper, '-$1').toLowerCase()
+        }
+
+        module.exports = exports['default']
+
+        /***/
+      },
+
+    /***/ './node_modules/dom-helpers/util/hyphenateStyle.js':
+      /*!*********************************************************!*\
+  !*** ./node_modules/dom-helpers/util/hyphenateStyle.js ***!
+  \*********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        exports.__esModule = true
+        exports.default = hyphenateStyleName
+
+        var _hyphenate = _interopRequireDefault(
+          __webpack_require__(/*! ./hyphenate */ './node_modules/dom-helpers/util/hyphenate.js')
+        )
+
+        /**
+         * Copyright 2013-2014, Facebook, Inc.
+         * All rights reserved.
+         * https://github.com/facebook/react/blob/2aeb8a2a6beb00617a4217f7f8284924fa2ad819/src/vendor/core/hyphenateStyleName.js
+         */
+        var msPattern = /^ms-/
+
+        function hyphenateStyleName(string) {
+          return (0, _hyphenate.default)(string).replace(msPattern, '-ms-')
+        }
+
+        module.exports = exports['default']
+
+        /***/
+      },
+
+    /***/ './node_modules/dom-helpers/util/inDOM.js':
+      /*!************************************************!*\
+  !*** ./node_modules/dom-helpers/util/inDOM.js ***!
+  \************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        exports.__esModule = true
+        exports.default = void 0
+
+        var _default = !!(typeof window !== 'undefined' && window.document && window.document.createElement)
+
+        exports.default = _default
+        module.exports = exports['default']
+
+        /***/
+      },
+
+    /***/ './node_modules/dom-helpers/util/scrollbarSize.js':
+      /*!********************************************************!*\
+  !*** ./node_modules/dom-helpers/util/scrollbarSize.js ***!
+  \********************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict'
+
+        var _interopRequireDefault = __webpack_require__(
+          /*! @babel/runtime/helpers/interopRequireDefault */ './node_modules/@babel/runtime/helpers/interopRequireDefault.js'
+        )
+
+        exports.__esModule = true
+        exports.default = scrollbarSize
+
+        var _inDOM = _interopRequireDefault(
+          __webpack_require__(/*! ./inDOM */ './node_modules/dom-helpers/util/inDOM.js')
+        )
+
+        var size
+
+        function scrollbarSize(recalc) {
+          if ((!size && size !== 0) || recalc) {
+            if (_inDOM.default) {
+              var scrollDiv = document.createElement('div')
+              scrollDiv.style.position = 'absolute'
+              scrollDiv.style.top = '-9999px'
+              scrollDiv.style.width = '50px'
+              scrollDiv.style.height = '50px'
+              scrollDiv.style.overflow = 'scroll'
+              document.body.appendChild(scrollDiv)
+              size = scrollDiv.offsetWidth - scrollDiv.clientWidth
+              document.body.removeChild(scrollDiv)
+            }
+          }
+
+          return size
+        }
+
+        module.exports = exports['default']
 
         /***/
       },
@@ -56531,367 +60977,6 @@ object-assign
         /***/
       },
 
-    /***/ './resources/js/src/components/Login/index.js':
-      /*!****************************************************!*\
-  !*** ./resources/js/src/components/Login/index.js ***!
-  \****************************************************/
-      /*! exports provided: Login, default */
-      /***/ function(module, __webpack_exports__, __webpack_require__) {
-        'use strict'
-        __webpack_require__.r(__webpack_exports__)
-        /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, 'Login', function() {
-          return Login
-        })
-        /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-          /*! react */ './node_modules/react/index.js'
-        )
-        /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/ __webpack_require__.n(
-          react__WEBPACK_IMPORTED_MODULE_0__
-        )
-        /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-          /*! prop-types */ './node_modules/prop-types/index.js'
-        )
-        /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/ __webpack_require__.n(
-          prop_types__WEBPACK_IMPORTED_MODULE_1__
-        )
-        /* harmony import */ var _material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-          /*! @material-ui/core/Avatar */ './node_modules/@material-ui/core/Avatar/index.js'
-        )
-        /* harmony import */ var _material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/ __webpack_require__.n(
-          _material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_2__
-        )
-        /* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-          /*! @material-ui/core/Button */ './node_modules/@material-ui/core/Button/index.js'
-        )
-        /* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/ __webpack_require__.n(
-          _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3__
-        )
-        /* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-          /*! @material-ui/core/CssBaseline */ './node_modules/@material-ui/core/CssBaseline/index.js'
-        )
-        /* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/ __webpack_require__.n(
-          _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_4__
-        )
-        /* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-          /*! @material-ui/core/FormControl */ './node_modules/@material-ui/core/FormControl/index.js'
-        )
-        /* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/ __webpack_require__.n(
-          _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5__
-        )
-        /* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-          /*! @material-ui/core/FormControlLabel */ './node_modules/@material-ui/core/FormControlLabel/index.js'
-        )
-        /* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/ __webpack_require__.n(
-          _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_6__
-        )
-        /* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-          /*! @material-ui/core/Checkbox */ './node_modules/@material-ui/core/Checkbox/index.js'
-        )
-        /* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/ __webpack_require__.n(
-          _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_7__
-        )
-        /* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
-          /*! @material-ui/core/Input */ './node_modules/@material-ui/core/Input/index.js'
-        )
-        /* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/ __webpack_require__.n(
-          _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_8__
-        )
-        /* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
-          /*! @material-ui/core/InputLabel */ './node_modules/@material-ui/core/InputLabel/index.js'
-        )
-        /* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/ __webpack_require__.n(
-          _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_9__
-        )
-        /* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
-          /*! @material-ui/core/Paper */ './node_modules/@material-ui/core/Paper/index.js'
-        )
-        /* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/ __webpack_require__.n(
-          _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_10__
-        )
-        /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
-          /*! @material-ui/core/Typography */ './node_modules/@material-ui/core/Typography/index.js'
-        )
-        /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/ __webpack_require__.n(
-          _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11__
-        )
-        /* harmony import */ var _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
-          /*! @material-ui/core/styles/withStyles */ './node_modules/@material-ui/core/styles/withStyles.js'
-        )
-        /* harmony import */ var _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/ __webpack_require__.n(
-          _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_12__
-        )
-        function _typeof(obj) {
-          if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
-            _typeof = function _typeof(obj) {
-              return typeof obj
-            }
-          } else {
-            _typeof = function _typeof(obj) {
-              return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype
-                ? 'symbol'
-                : typeof obj
-            }
-          }
-          return _typeof(obj)
-        }
-
-        function _classCallCheck(instance, Constructor) {
-          if (!(instance instanceof Constructor)) {
-            throw new TypeError('Cannot call a class as a function')
-          }
-        }
-
-        function _defineProperties(target, props) {
-          for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i]
-            descriptor.enumerable = descriptor.enumerable || false
-            descriptor.configurable = true
-            if ('value' in descriptor) descriptor.writable = true
-            Object.defineProperty(target, descriptor.key, descriptor)
-          }
-        }
-
-        function _createClass(Constructor, protoProps, staticProps) {
-          if (protoProps) _defineProperties(Constructor.prototype, protoProps)
-          if (staticProps) _defineProperties(Constructor, staticProps)
-          return Constructor
-        }
-
-        function _possibleConstructorReturn(self, call) {
-          if (call && (_typeof(call) === 'object' || typeof call === 'function')) {
-            return call
-          }
-          return _assertThisInitialized(self)
-        }
-
-        function _assertThisInitialized(self) {
-          if (self === void 0) {
-            throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
-          }
-          return self
-        }
-
-        function _getPrototypeOf(o) {
-          _getPrototypeOf = Object.setPrototypeOf
-            ? Object.getPrototypeOf
-            : function _getPrototypeOf(o) {
-                return o.__proto__ || Object.getPrototypeOf(o)
-              }
-          return _getPrototypeOf(o)
-        }
-
-        function _inherits(subClass, superClass) {
-          if (typeof superClass !== 'function' && superClass !== null) {
-            throw new TypeError('Super expression must either be null or a function')
-          }
-          subClass.prototype = Object.create(superClass && superClass.prototype, {
-            constructor: { value: subClass, writable: true, configurable: true },
-          })
-          if (superClass) _setPrototypeOf(subClass, superClass)
-        }
-
-        function _setPrototypeOf(o, p) {
-          _setPrototypeOf =
-            Object.setPrototypeOf ||
-            function _setPrototypeOf(o, p) {
-              o.__proto__ = p
-              return o
-            }
-          return _setPrototypeOf(o, p)
-        }
-
-        function _defineProperty(obj, key, value) {
-          if (key in obj) {
-            Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true })
-          } else {
-            obj[key] = value
-          }
-          return obj
-        }
-
-        var styles = function styles(theme) {
-          return {
-            main: _defineProperty(
-              {
-                width: 'auto',
-                display: 'block',
-                // Fix IE 11 issue.
-                marginLeft: theme.spacing.unit * 3,
-                marginRight: theme.spacing.unit * 3,
-              },
-              theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2),
-              {
-                width: 400,
-                marginLeft: 'auto',
-                marginRight: 'auto',
-              }
-            ),
-            paper: {
-              marginTop: theme.spacing.unit * 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              padding: ''
-                .concat(theme.spacing.unit * 2, 'px ')
-                .concat(theme.spacing.unit * 3, 'px ')
-                .concat(theme.spacing.unit * 3, 'px'),
-            },
-            avatar: {
-              margin: theme.spacing.unit,
-              backgroundColor: theme.palette.secondary.main,
-            },
-            form: {
-              width: '100%',
-              // Fix IE 11 issue.
-              marginTop: theme.spacing.unit,
-            },
-            submit: {
-              marginTop: theme.spacing.unit * 3,
-            },
-          }
-        }
-
-        var Login =
-          /*#__PURE__*/
-          (function(_React$Component) {
-            _inherits(Login, _React$Component)
-
-            function Login() {
-              _classCallCheck(this, Login)
-
-              return _possibleConstructorReturn(this, _getPrototypeOf(Login).apply(this, arguments))
-            }
-
-            _createClass(Login, [
-              {
-                key: 'render',
-                value: function render() {
-                  var classes = this.props.classes
-                  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                    'main',
-                    {
-                      className: classes.main,
-                    },
-                    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                      _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_4___default.a,
-                      null
-                    ),
-                    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                      _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_10___default.a,
-                      {
-                        className: classes.paper,
-                      },
-                      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                        _material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_2___default.a,
-                        {
-                          className: classes.avatar,
-                        },
-                        'L'
-                      ),
-                      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                        _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11___default.a,
-                        {
-                          component: 'h1',
-                          variant: 'h5',
-                        },
-                        'Sign in'
-                      ),
-                      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                        'form',
-                        {
-                          className: classes.form,
-                        },
-                        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                          _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5___default.a,
-                          {
-                            margin: 'normal',
-                            required: true,
-                            fullWidth: true,
-                          },
-                          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                            _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_9___default.a,
-                            {
-                              htmlFor: 'email',
-                            },
-                            'Email Address'
-                          ),
-                          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                            _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_8___default.a,
-                            {
-                              id: 'email',
-                              name: 'email',
-                              autoComplete: 'email',
-                              autoFocus: true,
-                            }
-                          )
-                        ),
-                        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                          _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5___default.a,
-                          {
-                            margin: 'normal',
-                            required: true,
-                            fullWidth: true,
-                          },
-                          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                            _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_9___default.a,
-                            {
-                              htmlFor: 'password',
-                            },
-                            'Password'
-                          ),
-                          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                            _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_8___default.a,
-                            {
-                              name: 'password',
-                              type: 'password',
-                              id: 'password',
-                              autoComplete: 'current-password',
-                            }
-                          )
-                        ),
-                        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                          _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_6___default.a,
-                          {
-                            control: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                              _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_7___default.a,
-                              {
-                                value: 'remember',
-                                color: 'primary',
-                              }
-                            ),
-                            label: 'Remember me',
-                          }
-                        ),
-                        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                          _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3___default.a,
-                          {
-                            type: 'submit',
-                            fullWidth: true,
-                            variant: 'contained',
-                            color: 'primary',
-                            className: classes.submit,
-                          },
-                          'Sign in'
-                        )
-                      )
-                    )
-                  )
-                },
-              },
-            ])
-
-            return Login
-          })(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component)
-        Login.propTypes = {
-          classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
-        }
-        /* harmony default export */ __webpack_exports__[
-          'default'
-        ] = _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_12___default()(styles)(Login)
-
-        /***/
-      },
-
     /***/ './resources/js/src/components/User.js':
       /*!*********************************************!*\
   !*** ./resources/js/src/components/User.js ***!
@@ -57292,6 +61377,627 @@ object-assign
         /***/
       },
 
+    /***/ './resources/js/src/containers/Login/index.js':
+      /*!****************************************************!*\
+  !*** ./resources/js/src/containers/Login/index.js ***!
+  \****************************************************/
+      /*! exports provided: Login, default */
+      /***/ function(module, __webpack_exports__, __webpack_require__) {
+        'use strict'
+        __webpack_require__.r(__webpack_exports__)
+        /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, 'Login', function() {
+          return Login
+        })
+        /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+          /*! react */ './node_modules/react/index.js'
+        )
+        /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/ __webpack_require__.n(
+          react__WEBPACK_IMPORTED_MODULE_0__
+        )
+        /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+          /*! prop-types */ './node_modules/prop-types/index.js'
+        )
+        /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/ __webpack_require__.n(
+          prop_types__WEBPACK_IMPORTED_MODULE_1__
+        )
+        /* harmony import */ var _material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+          /*! @material-ui/core/Avatar */ './node_modules/@material-ui/core/Avatar/index.js'
+        )
+        /* harmony import */ var _material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_2__
+        )
+        /* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+          /*! @material-ui/core/Button */ './node_modules/@material-ui/core/Button/index.js'
+        )
+        /* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3__
+        )
+        /* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+          /*! @material-ui/core/CssBaseline */ './node_modules/@material-ui/core/CssBaseline/index.js'
+        )
+        /* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_4__
+        )
+        /* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+          /*! @material-ui/core/FormControl */ './node_modules/@material-ui/core/FormControl/index.js'
+        )
+        /* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5__
+        )
+        /* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+          /*! @material-ui/core/FormControlLabel */ './node_modules/@material-ui/core/FormControlLabel/index.js'
+        )
+        /* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_6__
+        )
+        /* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+          /*! @material-ui/core/Checkbox */ './node_modules/@material-ui/core/Checkbox/index.js'
+        )
+        /* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_7__
+        )
+        /* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+          /*! @material-ui/core/Input */ './node_modules/@material-ui/core/Input/index.js'
+        )
+        /* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_8__
+        )
+        /* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+          /*! @material-ui/core/InputLabel */ './node_modules/@material-ui/core/InputLabel/index.js'
+        )
+        /* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_9__
+        )
+        /* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+          /*! @material-ui/core/Paper */ './node_modules/@material-ui/core/Paper/index.js'
+        )
+        /* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_10__
+        )
+        /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+          /*! @material-ui/core/Typography */ './node_modules/@material-ui/core/Typography/index.js'
+        )
+        /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11__
+        )
+        /* harmony import */ var _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+          /*! @material-ui/core/styles/withStyles */ './node_modules/@material-ui/core/styles/withStyles.js'
+        )
+        /* harmony import */ var _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_12__
+        )
+        function _typeof(obj) {
+          if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
+            _typeof = function _typeof(obj) {
+              return typeof obj
+            }
+          } else {
+            _typeof = function _typeof(obj) {
+              return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype
+                ? 'symbol'
+                : typeof obj
+            }
+          }
+          return _typeof(obj)
+        }
+
+        function _classCallCheck(instance, Constructor) {
+          if (!(instance instanceof Constructor)) {
+            throw new TypeError('Cannot call a class as a function')
+          }
+        }
+
+        function _defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i]
+            descriptor.enumerable = descriptor.enumerable || false
+            descriptor.configurable = true
+            if ('value' in descriptor) descriptor.writable = true
+            Object.defineProperty(target, descriptor.key, descriptor)
+          }
+        }
+
+        function _createClass(Constructor, protoProps, staticProps) {
+          if (protoProps) _defineProperties(Constructor.prototype, protoProps)
+          if (staticProps) _defineProperties(Constructor, staticProps)
+          return Constructor
+        }
+
+        function _possibleConstructorReturn(self, call) {
+          if (call && (_typeof(call) === 'object' || typeof call === 'function')) {
+            return call
+          }
+          return _assertThisInitialized(self)
+        }
+
+        function _assertThisInitialized(self) {
+          if (self === void 0) {
+            throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
+          }
+          return self
+        }
+
+        function _getPrototypeOf(o) {
+          _getPrototypeOf = Object.setPrototypeOf
+            ? Object.getPrototypeOf
+            : function _getPrototypeOf(o) {
+                return o.__proto__ || Object.getPrototypeOf(o)
+              }
+          return _getPrototypeOf(o)
+        }
+
+        function _inherits(subClass, superClass) {
+          if (typeof superClass !== 'function' && superClass !== null) {
+            throw new TypeError('Super expression must either be null or a function')
+          }
+          subClass.prototype = Object.create(superClass && superClass.prototype, {
+            constructor: { value: subClass, writable: true, configurable: true },
+          })
+          if (superClass) _setPrototypeOf(subClass, superClass)
+        }
+
+        function _setPrototypeOf(o, p) {
+          _setPrototypeOf =
+            Object.setPrototypeOf ||
+            function _setPrototypeOf(o, p) {
+              o.__proto__ = p
+              return o
+            }
+          return _setPrototypeOf(o, p)
+        }
+
+        function _defineProperty(obj, key, value) {
+          if (key in obj) {
+            Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true })
+          } else {
+            obj[key] = value
+          }
+          return obj
+        }
+
+        var styles = function styles(theme) {
+          return {
+            main: _defineProperty(
+              {
+                width: 'auto',
+                display: 'block',
+                // Fix IE 11 issue.
+                marginLeft: theme.spacing.unit * 3,
+                marginRight: theme.spacing.unit * 3,
+              },
+              theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2),
+              {
+                width: 400,
+                marginLeft: 'auto',
+                marginRight: 'auto',
+              }
+            ),
+            paper: {
+              marginTop: theme.spacing.unit * 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              padding: ''
+                .concat(theme.spacing.unit * 2, 'px ')
+                .concat(theme.spacing.unit * 3, 'px ')
+                .concat(theme.spacing.unit * 3, 'px'),
+            },
+            avatar: {
+              margin: theme.spacing.unit,
+              backgroundColor: theme.palette.secondary.main,
+            },
+            form: {
+              width: '100%',
+              // Fix IE 11 issue.
+              marginTop: theme.spacing.unit,
+            },
+            submit: {
+              marginTop: theme.spacing.unit * 3,
+            },
+          }
+        }
+
+        var Login =
+          /*#__PURE__*/
+          (function(_React$Component) {
+            _inherits(Login, _React$Component)
+
+            function Login() {
+              _classCallCheck(this, Login)
+
+              return _possibleConstructorReturn(this, _getPrototypeOf(Login).apply(this, arguments))
+            }
+
+            _createClass(Login, [
+              {
+                key: 'render',
+                value: function render() {
+                  var classes = this.props.classes
+                  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                    'main',
+                    {
+                      className: classes.main,
+                    },
+                    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                      _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_4___default.a,
+                      null
+                    ),
+                    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                      _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_10___default.a,
+                      {
+                        className: classes.paper,
+                      },
+                      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                        _material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_2___default.a,
+                        {
+                          className: classes.avatar,
+                        },
+                        'L'
+                      ),
+                      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                        _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11___default.a,
+                        {
+                          component: 'h1',
+                          variant: 'h5',
+                        },
+                        '\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0438\u044F'
+                      ),
+                      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                        'form',
+                        {
+                          className: classes.form,
+                        },
+                        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                          _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5___default.a,
+                          {
+                            margin: 'normal',
+                            required: true,
+                            fullWidth: true,
+                          },
+                          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                            _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_9___default.a,
+                            {
+                              htmlFor: 'email',
+                            },
+                            'Email Address'
+                          ),
+                          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                            _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_8___default.a,
+                            {
+                              id: 'email',
+                              name: 'email',
+                              autoComplete: 'email',
+                              autoFocus: true,
+                            }
+                          )
+                        ),
+                        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                          _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_5___default.a,
+                          {
+                            margin: 'normal',
+                            required: true,
+                            fullWidth: true,
+                          },
+                          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                            _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_9___default.a,
+                            {
+                              htmlFor: 'password',
+                            },
+                            'Password'
+                          ),
+                          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                            _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_8___default.a,
+                            {
+                              name: 'password',
+                              type: 'password',
+                              id: 'password',
+                              autoComplete: 'current-password',
+                            }
+                          )
+                        ),
+                        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                          _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_6___default.a,
+                          {
+                            control: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                              _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_7___default.a,
+                              {
+                                value: 'remember',
+                                color: 'primary',
+                              }
+                            ),
+                            label: 'Remember me',
+                          }
+                        ),
+                        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                          _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3___default.a,
+                          {
+                            type: 'submit',
+                            fullWidth: true,
+                            variant: 'contained',
+                            color: 'primary',
+                            className: classes.submit,
+                          },
+                          'Sign in'
+                        )
+                      )
+                    )
+                  )
+                },
+              },
+            ])
+
+            return Login
+          })(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component)
+        Login.propTypes = {
+          classes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
+        }
+        /* harmony default export */ __webpack_exports__[
+          'default'
+        ] = _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_12___default()(styles)(Login)
+
+        /***/
+      },
+
+    /***/ './resources/js/src/containers/layouts/main/index.js':
+      /*!***********************************************************!*\
+  !*** ./resources/js/src/containers/layouts/main/index.js ***!
+  \***********************************************************/
+      /*! exports provided: default */
+      /***/ function(module, __webpack_exports__, __webpack_require__) {
+        'use strict'
+        __webpack_require__.r(__webpack_exports__)
+        /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, 'default', function() {
+          return MainLayout
+        })
+        /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+          /*! react */ './node_modules/react/index.js'
+        )
+        /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/ __webpack_require__.n(
+          react__WEBPACK_IMPORTED_MODULE_0__
+        )
+        /* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+          /*! @material-ui/core/CssBaseline */ './node_modules/@material-ui/core/CssBaseline/index.js'
+        )
+        /* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_1__
+        )
+        /* harmony import */ var _material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+          /*! @material-ui/core/Drawer */ './node_modules/@material-ui/core/Drawer/index.js'
+        )
+        /* harmony import */ var _material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_2__
+        )
+        /* harmony import */ var _material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+          /*! @material-ui/core/AppBar */ './node_modules/@material-ui/core/AppBar/index.js'
+        )
+        /* harmony import */ var _material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_3__
+        )
+        /* harmony import */ var _material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+          /*! @material-ui/core/Toolbar */ './node_modules/@material-ui/core/Toolbar/index.js'
+        )
+        /* harmony import */ var _material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_4__
+        )
+        /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+          /*! @material-ui/core/Typography */ './node_modules/@material-ui/core/Typography/index.js'
+        )
+        /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__
+        )
+        /* harmony import */ var _material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+          /*! @material-ui/core/Divider */ './node_modules/@material-ui/core/Divider/index.js'
+        )
+        /* harmony import */ var _material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_6__
+        )
+        /* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+          /*! @material-ui/core/IconButton */ './node_modules/@material-ui/core/IconButton/index.js'
+        )
+        /* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_7__
+        )
+        /* harmony import */ var _material_ui_core_Badge__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+          /*! @material-ui/core/Badge */ './node_modules/@material-ui/core/Badge/index.js'
+        )
+        /* harmony import */ var _material_ui_core_Badge__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/ __webpack_require__.n(
+          _material_ui_core_Badge__WEBPACK_IMPORTED_MODULE_8__
+        )
+        function _typeof(obj) {
+          if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
+            _typeof = function _typeof(obj) {
+              return typeof obj
+            }
+          } else {
+            _typeof = function _typeof(obj) {
+              return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype
+                ? 'symbol'
+                : typeof obj
+            }
+          }
+          return _typeof(obj)
+        }
+
+        function _classCallCheck(instance, Constructor) {
+          if (!(instance instanceof Constructor)) {
+            throw new TypeError('Cannot call a class as a function')
+          }
+        }
+
+        function _defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i]
+            descriptor.enumerable = descriptor.enumerable || false
+            descriptor.configurable = true
+            if ('value' in descriptor) descriptor.writable = true
+            Object.defineProperty(target, descriptor.key, descriptor)
+          }
+        }
+
+        function _createClass(Constructor, protoProps, staticProps) {
+          if (protoProps) _defineProperties(Constructor.prototype, protoProps)
+          if (staticProps) _defineProperties(Constructor, staticProps)
+          return Constructor
+        }
+
+        function _possibleConstructorReturn(self, call) {
+          if (call && (_typeof(call) === 'object' || typeof call === 'function')) {
+            return call
+          }
+          return _assertThisInitialized(self)
+        }
+
+        function _assertThisInitialized(self) {
+          if (self === void 0) {
+            throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
+          }
+          return self
+        }
+
+        function _getPrototypeOf(o) {
+          _getPrototypeOf = Object.setPrototypeOf
+            ? Object.getPrototypeOf
+            : function _getPrototypeOf(o) {
+                return o.__proto__ || Object.getPrototypeOf(o)
+              }
+          return _getPrototypeOf(o)
+        }
+
+        function _inherits(subClass, superClass) {
+          if (typeof superClass !== 'function' && superClass !== null) {
+            throw new TypeError('Super expression must either be null or a function')
+          }
+          subClass.prototype = Object.create(superClass && superClass.prototype, {
+            constructor: { value: subClass, writable: true, configurable: true },
+          })
+          if (superClass) _setPrototypeOf(subClass, superClass)
+        }
+
+        function _setPrototypeOf(o, p) {
+          _setPrototypeOf =
+            Object.setPrototypeOf ||
+            function _setPrototypeOf(o, p) {
+              o.__proto__ = p
+              return o
+            }
+          return _setPrototypeOf(o, p)
+        }
+
+        function MainLayout(Component) {
+          var MainLayoutComponent =
+            /*#__PURE__*/
+            (function(_React$Component) {
+              _inherits(MainLayoutComponent, _React$Component)
+
+              function MainLayoutComponent() {
+                _classCallCheck(this, MainLayoutComponent)
+
+                return _possibleConstructorReturn(this, _getPrototypeOf(MainLayoutComponent).apply(this, arguments))
+              }
+
+              _createClass(MainLayoutComponent, [
+                {
+                  key: 'render',
+                  value: function render() {
+                    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                      'div',
+                      null,
+                      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                        _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_1___default.a,
+                        null
+                      ),
+                      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                        _material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_3___default.a,
+                        {
+                          position: 'absolute',
+                        },
+                        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                          _material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_4___default.a,
+                          null,
+                          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                            _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_7___default.a,
+                            {
+                              color: 'inherit',
+                              'aria-label': 'Open drawer',
+                              onClick: function onClick() {
+                                return true
+                              },
+                            },
+                            'icon'
+                          ),
+                          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                            _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default.a,
+                            {
+                              component: 'h1',
+                              variant: 'h6',
+                              color: 'inherit',
+                              noWrap: true,
+                            },
+                            'Dashboard'
+                          ),
+                          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                            _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_7___default.a,
+                            {
+                              color: 'inherit',
+                            },
+                            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                              _material_ui_core_Badge__WEBPACK_IMPORTED_MODULE_8___default.a,
+                              {
+                                badgeContent: 4,
+                                color: 'secondary',
+                              },
+                              'icon'
+                            )
+                          )
+                        )
+                      ),
+                      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                        _material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_2___default.a,
+                        {
+                          variant: 'permanent',
+                          open: true,
+                        },
+                        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                          'div',
+                          null,
+                          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                            _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_7___default.a,
+                            {
+                              onClick: function onClick() {
+                                return true
+                              },
+                            },
+                            'ert'
+                          )
+                        ),
+                        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                          _material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_6___default.a,
+                          null
+                        ),
+                        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                          _material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_6___default.a,
+                          null
+                        )
+                      ),
+                      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                        'main',
+                        null,
+                        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, this.props)
+                      )
+                    )
+                  },
+                },
+              ])
+
+              return MainLayoutComponent
+            })(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component)
+
+          return MainLayoutComponent
+        }
+
+        /***/
+      },
+
     /***/ './resources/js/src/index.js':
       /*!***********************************!*\
   !*** ./resources/js/src/index.js ***!
@@ -57493,11 +62199,14 @@ object-assign
         /* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
           /*! react-router */ './node_modules/react-router/es/index.js'
         )
-        /* harmony import */ var _containers_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+        /* harmony import */ var _containers_layouts_main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+          /*! @/containers/layouts/main */ './resources/js/src/containers/layouts/main/index.js'
+        )
+        /* harmony import */ var _containers_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
           /*! @/containers/App */ './resources/js/src/containers/App/index.js'
         )
-        /* harmony import */ var _components_Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-          /*! @/components/Login */ './resources/js/src/components/Login/index.js'
+        /* harmony import */ var _containers_Login__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+          /*! @/containers/Login */ './resources/js/src/containers/Login/index.js'
         )
 
         var routes = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
@@ -57511,14 +62220,16 @@ object-assign
               {
                 exact: true,
                 path: '/',
-                component: _containers_App__WEBPACK_IMPORTED_MODULE_2__['default'],
+                component: Object(_containers_layouts_main__WEBPACK_IMPORTED_MODULE_2__['default'])(
+                  _containers_App__WEBPACK_IMPORTED_MODULE_3__['default']
+                ),
               }
             ),
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
               react_router__WEBPACK_IMPORTED_MODULE_1__['Route'],
               {
                 path: '/login',
-                component: _components_Login__WEBPACK_IMPORTED_MODULE_3__['default'],
+                component: _containers_Login__WEBPACK_IMPORTED_MODULE_4__['default'],
               }
             ),
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
@@ -57607,10 +62318,8 @@ object-assign
   \*******************************************************************/
       /*! no static exports found */
       /***/ function(module, exports, __webpack_require__) {
-        __webpack_require__(/*! D:\www\marshal\marshal\resources\js\src\index.js */ './resources/js/src/index.js')
-        module.exports = __webpack_require__(
-          /*! D:\www\marshal\marshal\resources\sass\app.scss */ './resources/sass/app.scss'
-        )
+        __webpack_require__(/*! D:\www\marshal\resources\js\src\index.js */ './resources/js/src/index.js')
+        module.exports = __webpack_require__(/*! D:\www\marshal\resources\sass\app.scss */ './resources/sass/app.scss')
 
         /***/
       },

@@ -45,6 +45,9 @@ const styles = theme => ({
     ...theme.mixins.toolbar,
   },
   appBar: {
+    background: '#fff',
+    color: '#3e424c',
+    boxShadow: '1px 3px 13px 0px rgba(164, 167, 169, 0.3)',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -67,7 +70,7 @@ const styles = theme => ({
     display: 'none',
   },
   title: {
-    flexGrow: 1,
+    paddingRight: theme.spacing.unit * 3,
   },
   drawerPaper: {
     position: 'relative',
@@ -89,6 +92,9 @@ const styles = theme => ({
   appBarSpacer: theme.mixins.toolbar,
   chartContainer: {
     marginLeft: -22,
+  },
+  flexGrow: {
+    flexGrow: 1,
   },
 })
 
@@ -125,6 +131,9 @@ export default function MainLayout(Component) {
               <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                 Dashboard
               </Typography>
+
+              <div className={classes.flexGrow} />
+
               <IconButton color="inherit">
                 <Badge badgeContent={4} color="secondary">
                   <NotificationsIcon />

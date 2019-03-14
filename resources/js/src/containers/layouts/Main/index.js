@@ -1,41 +1,70 @@
 import React from 'react'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Drawer from '@material-ui/core/Drawer'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import Divider from '@material-ui/core/Divider'
-import IconButton from '@material-ui/core/IconButton'
-import Badge from '@material-ui/core/Badge'
+import {
+  CssBaseline,
+  Drawer,
+  AppBar,
+  Toolbar,
+  Typography,
+  Divider,
+  IconButton,
+  Badge,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core'
+import {
+  Menu as MenuIcon,
+  Notifications as NotificationsIcon,
+  ChevronLeft as ChevronLeftIcon,
+} from '@material-ui/icons'
 
 export default function MainLayout(Component) {
   class MainLayoutComponent extends React.Component {
+    state = {
+      openNavigate: false,
+    }
+    handleDrawerOpen = () => {
+      this.setState({ openNavigate: true })
+    }
+
+    handleDrawerClose = () => {
+      this.setState({ openNavigate: false })
+    }
     render() {
       return (
         <div>
           <CssBaseline />
           <AppBar position="absolute">
-            <Toolbar>
-              <IconButton color="inherit" aria-label="Open drawer" onClick={() => true}>
-                icon
+            <Toolbar disableGutters={!this.state.openNavigate}>
+              <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerOpen}>
+                <MenuIcon />
               </IconButton>
               <Typography component="h1" variant="h6" color="inherit" noWrap>
                 Dashboard
               </Typography>
               <IconButton color="inherit">
                 <Badge badgeContent={4} color="secondary">
-                  icon
+                  <NotificationsIcon />
                 </Badge>
               </IconButton>
             </Toolbar>
           </AppBar>
-          <Drawer variant="permanent" open={true}>
+          <Drawer anchor="left" open={this.state.openNavigate}>
             <div>
-              <IconButton onClick={() => true}>ert</IconButton>
+              <IconButton onClick={this.handleDrawerClose}>
+                <ChevronLeftIcon />
+              </IconButton>
             </div>
             <Divider />
-
-            <Divider />
+            <List>
+              {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                <ListItem button key={text}>
+                  <ListItemIcon>{index % 2 === 0 ? <NotificationsIcon /> : <MenuIcon />}</ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItem>
+              ))}
+            </List>
           </Drawer>
           <main>
             <Component {...this.props} />

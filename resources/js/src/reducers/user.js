@@ -6,7 +6,12 @@ const initialState = {
   isFetching: false,
 }
 
-export const userReducer = (state = initialState, action) => {
+const lsUser = JSON.parse(localStorage.getItem('user')) || {}
+lsUser.isAuth = lsUser.hasOwnProperty('token')
+console.log(lsUser)
+const resultState = { ...initialState, ...lsUser }
+
+export const userReducer = (state = resultState, action) => {
   switch (action.type) {
     case GET_USER_REQUEST:
       return { ...state, isFetching: true }

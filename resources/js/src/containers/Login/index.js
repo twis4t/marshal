@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router'
 import classNames from 'classnames'
 import { getUser } from '@/actions/UserActions'
-import { LockOpen as LockOpenIcon } from '@material-ui/icons'
+import { Star as StarIcon } from '@material-ui/icons'
+
 import {
   Avatar,
   Button,
@@ -76,13 +78,13 @@ export class Login extends React.Component {
 
   render() {
     const { classes, user } = this.props
-
+    if (user.isAuth) return <Redirect to="/" />
     return (
       <main className={classes.main}>
         <CssBaseline />
         <Paper className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOpenIcon />
+            <StarIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Авторизация

@@ -1,5 +1,3 @@
-import { push } from 'connected-react-router'
-
 export const GET_USER_REQUEST = 'GET_USER_REQUEST'
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
 
@@ -20,7 +18,9 @@ export const getUser = (email, password) => dispatch => {
         name: 'test',
       },
     })
-
-    dispatch(push('/'))
+    localStorage.setItem(
+      'user',
+      JSON.stringify({ token: 'sdfg345g43wrtg', name: 'Test User Name', email: 'test@test.et' })
+    )
   }, 2000)
 }

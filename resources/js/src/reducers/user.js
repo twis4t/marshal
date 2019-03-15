@@ -1,4 +1,11 @@
-import { GET_USER_REQUEST, GET_USER_SUCCESS } from '@/actions/UserActions'
+import {
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_ERROR,
+  GET_USER_DETAIL_SUCCESS,
+  GET_USER_DETAIL_ERROR,
+  USER_LOGOUT,
+} from '@/actions/UserActions'
 
 const initialState = {
   name: 'guest',
@@ -7,8 +14,7 @@ const initialState = {
 }
 
 const lsUser = JSON.parse(localStorage.getItem('user')) || {}
-lsUser.isAuth = lsUser.hasOwnProperty('token')
-console.log(lsUser)
+lsUser.isAuth = lsUser.hasOwnProperty('access_token')
 const resultState = { ...initialState, ...lsUser }
 
 export const userReducer = (state = resultState, action) => {
@@ -17,7 +23,14 @@ export const userReducer = (state = resultState, action) => {
       return { ...state, isFetching: true }
     case GET_USER_SUCCESS:
       return { ...state, ...action.payload, isFetching: false }
-
+    case GET_USER_ERROR:
+      return { ...state, isFetching: false }
+    case GET_USER_DETAIL_SUCCESS:
+      return { ...state, ...action.payload, isFetching: false }
+    case GET_USER_DETAIL_ERROR:
+      return { ...state, isFetching: false }
+    case USER_LOGOUT:
+      return { isFetching: false, isAuth: false }
     default:
       return state
   }

@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { logOut } from '@/actions/UserActions'
 import { withStyles } from '@material-ui/core/styles'
 import classNames from 'classnames'
 import {
@@ -18,6 +20,7 @@ import {
 } from '@material-ui/core'
 import {
   Menu as MenuIcon,
+  AccountBox as AccountBoxIcon,
   Notifications as NotificationsIcon,
   ChevronLeft as ChevronLeftIcon,
 } from '@material-ui/icons'
@@ -110,6 +113,11 @@ export default function MainLayout(Component) {
     handleDrawerClose = () => {
       this.setState({ openNavigate: false })
     }
+
+    userLogOut = () => {
+      this.props.logOut()
+    }
+
     render() {
       const { classes } = this.props
       return (
@@ -162,6 +170,14 @@ export default function MainLayout(Component) {
                 </ListItem>
               ))}
             </List>
+            <Divider />
+            <div className={classes.flexGrow} />
+            <ListItem button onClick={this.userLogOut}>
+              <ListItemIcon>
+                <AccountBoxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Выход" />
+            </ListItem>
           </Drawer>
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
@@ -174,7 +190,22 @@ export default function MainLayout(Component) {
 
   MainLayoutComponent.propTypes = {
     classes: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
+    logOut: PropTypes.func.isRequired,
   }
 
-  return withStyles(styles)(MainLayoutComponent)
+  const mapStateToProps = store => {
+    return {
+      user: store.user,
+    }
+  }
+
+  const mapDispatchToProps = dispatch => ({
+    logOut: () => dispatch(logOut()),
+  })
+
+  return connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(withStyles(styles)(MainLayoutComponent))
 }

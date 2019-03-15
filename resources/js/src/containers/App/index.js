@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { User } from '@/components/User'
-import { setName, getUser } from '@/actions/UserActions'
+import { getUser } from '@/actions/UserActions'
 
 class App extends Component {
   render() {
-    const { user, setName, getUser } = this.props
+    const { user, getUser } = this.props
     return (
       <div className="App">
         Интро
-        <User name={user.name} setName={setName} getUser={getUser} isFetching={user.isFetching} />
+        <User name={user.name} getUser={getUser} isFetching={user.isFetching} />
       </div>
     )
   }
@@ -23,13 +23,11 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setName: name => dispatch(setName(name)),
-  getUser: id => dispatch(getUser(id)),
+  getUser: (email, password) => dispatch(getUser(email, password)),
 })
 
 App.propTypes = {
   user: PropTypes.object.isRequired,
-  setName: PropTypes.func.isRequired,
   getUser: PropTypes.func.isRequired,
 }
 

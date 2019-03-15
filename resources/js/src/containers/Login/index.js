@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { getUser } from '@/actions/UserActions'
+import { LockOpen as LockOpenIcon } from '@material-ui/icons'
 import {
   Avatar,
   Button,
@@ -13,7 +16,6 @@ import {
   Typography,
   withStyles,
 } from '@material-ui/core'
-import { LockOpen as LockOpenIcon } from '@material-ui/icons'
 
 const styles = theme => ({
   main: {
@@ -54,8 +56,27 @@ const styles = theme => ({
 })
 
 export class Login extends React.Component {
+  state = {
+    email: '',
+    password: '',
+    remember: true,
+  }
+
+  onEmailChange = e => {
+    this.setState({ email: e.currentTarget.value })
+  }
+
+  onPasswordChange = e => {
+    this.setState({ password: e.currentTarget.value })
+  }
+
+  getUser(email, password) {
+    this.props.getUser(email, password)
+  }
+
   render() {
-    const { classes } = this.props
+    const { classes, user } = this.props
+
     return (
       <main className={classes.main}>
         <CssBaseline />
@@ -73,8 +94,10 @@ export class Login extends React.Component {
                 variant="outlined"
                 id="email"
                 name="email"
+                value={this.state.email}
                 autoComplete="email"
                 autoFocus
+                onChange={this.onEmailChange}
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
@@ -84,18 +107,22 @@ export class Login extends React.Component {
                 name="password"
                 type="password"
                 id="password"
+                value={this.state.password}
                 autoComplete="current-password"
+                onChange={this.onPasswordChange}
               />
             </FormControl>
             <FormControlLabel control={<Checkbox value="remember" color="secondary" />} label="Запомнить меня" />
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="secondary"
               className={classNames(classes.submit, classes.mainColorBg)}
+              onClick={() => {
+                this.getUser(this.state.email, this.state.password)
+              }}
             >
-              Войти
+              {user.isFetching ? 'Загрузка...' : 'Войти'}
             </Button>
           </form>
         </Paper>
@@ -106,6 +133,21 @@ export class Login extends React.Component {
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  getUser: PropTypes.func.isRequired,
 }
 
-export default withStyles(styles)(Login)
+const mapStateToProps = store => {
+  return {
+    user: store.user,
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  getUser: (email, password) => dispatch(getUser(email, password)),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Login))

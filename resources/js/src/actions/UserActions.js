@@ -1,26 +1,26 @@
-export const GET_USER_REQUEST = 'GET_USER_REQUEST'
-export const GET_USER_RESULT = 'GET_USER_RESULT'
-export const SET_NAME = 'SET_NAME'
+import { push } from 'connected-react-router'
 
-export const getUser = id => dispatch => {
+export const GET_USER_REQUEST = 'GET_USER_REQUEST'
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
+
+export const getUser = (email, password) => dispatch => {
   dispatch({
     type: GET_USER_REQUEST,
-    payload: id,
+    payload: {
+      email: email,
+      password: password,
+    },
   })
   setTimeout(() => {
-    console.log('get user by id - ' + id)
+    console.log('get user by mail - ' + email)
     dispatch({
-      type: GET_USER_RESULT,
+      type: GET_USER_SUCCESS,
       payload: {
+        isAuth: true,
         name: 'test',
       },
     })
-  }, 1000)
-}
 
-export const setName = name => {
-  return {
-    type: SET_NAME,
-    payload: name,
-  }
+    dispatch(push('/'))
+  }, 2000)
 }

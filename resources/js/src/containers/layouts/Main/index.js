@@ -20,7 +20,7 @@ import {
 } from '@material-ui/core'
 import {
   Menu as MenuIcon,
-  AccountBox as AccountBoxIcon,
+  ExitToApp as ExitToAppIcon,
   Notifications as NotificationsIcon,
   ChevronLeft as ChevronLeftIcon,
 } from '@material-ui/icons'
@@ -174,7 +174,7 @@ export default function MainLayout(Component) {
             <div className={classes.flexGrow} />
             <ListItem button onClick={this.userLogOut}>
               <ListItemIcon>
-                <AccountBoxIcon />
+                <ExitToAppIcon />
               </ListItemIcon>
               <ListItemText primary="Выход" />
             </ListItem>

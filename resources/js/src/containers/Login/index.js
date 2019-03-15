@@ -17,6 +17,7 @@ import {
   Paper,
   Typography,
   withStyles,
+  LinearProgress,
 } from '@material-ui/core'
 
 const styles = theme => ({
@@ -55,6 +56,11 @@ const styles = theme => ({
       backgroundColor: theme.palette.marshal.dark,
     },
   },
+  progress: {
+    width: '100%',
+    position: 'absolute',
+    top: 0,
+  },
 })
 
 export class Login extends React.Component {
@@ -80,55 +86,58 @@ export class Login extends React.Component {
     const { classes, user } = this.props
     if (user.isAuth) return <Redirect to="/" />
     return (
-      <main className={classes.main}>
-        <CssBaseline />
-        <Paper className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <StarIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Авторизация
-          </Typography>
-          <form className={classes.form}>
-            <FormControl margin="normal" required fullWidth>
-              <TextField
-                label="Email Адрес"
-                variant="outlined"
-                id="email"
-                name="email"
-                value={this.state.email}
-                autoComplete="email"
-                autoFocus
-                onChange={this.onEmailChange}
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <TextField
-                label="Пароль"
-                variant="outlined"
-                name="password"
-                type="password"
-                id="password"
-                value={this.state.password}
-                autoComplete="current-password"
-                onChange={this.onPasswordChange}
-              />
-            </FormControl>
-            <FormControlLabel control={<Checkbox value="remember" color="secondary" />} label="Запомнить меня" />
-            <Button
-              fullWidth
-              variant="contained"
-              color="secondary"
-              className={classNames(classes.submit, classes.mainColorBg)}
-              onClick={() => {
-                this.getUser(this.state.email, this.state.password)
-              }}
-            >
-              {user.isFetching ? 'Загрузка...' : 'Войти'}
-            </Button>
-          </form>
-        </Paper>
-      </main>
+      <div>
+        {user.isFetching ? <LinearProgress className={classes.progress} color="secondary" /> : ''}
+        <main className={classes.main}>
+          <CssBaseline />
+          <Paper className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <StarIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Авторизация
+            </Typography>
+            <form className={classes.form}>
+              <FormControl margin="normal" required fullWidth>
+                <TextField
+                  label="Email Адрес"
+                  variant="outlined"
+                  id="email"
+                  name="email"
+                  value={this.state.email}
+                  autoComplete="email"
+                  autoFocus
+                  onChange={this.onEmailChange}
+                />
+              </FormControl>
+              <FormControl margin="normal" required fullWidth>
+                <TextField
+                  label="Пароль"
+                  variant="outlined"
+                  name="password"
+                  type="password"
+                  id="password"
+                  value={this.state.password}
+                  autoComplete="current-password"
+                  onChange={this.onPasswordChange}
+                />
+              </FormControl>
+              <FormControlLabel control={<Checkbox value="remember" color="secondary" />} label="Запомнить меня" />
+              <Button
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classNames(classes.submit, classes.mainColorBg)}
+                onClick={() => {
+                  this.getUser(this.state.email, this.state.password)
+                }}
+              >
+                {user.isFetching ? 'Загрузка...' : 'Войти'}
+              </Button>
+            </form>
+          </Paper>
+        </main>
+      </div>
     )
   }
 }

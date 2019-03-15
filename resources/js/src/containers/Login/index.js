@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 import classNames from 'classnames'
 import { getUser } from '@/actions/UserActions'
+import Notifier from '@/components/Notifier'
 import { Star as StarIcon } from '@material-ui/icons'
 
 import {
@@ -88,6 +89,7 @@ export class Login extends React.Component {
     return (
       <div>
         {user.isFetching ? <LinearProgress className={classes.progress} color="secondary" /> : ''}
+        <Notifier />
         <main className={classes.main}>
           <CssBaseline />
           <Paper className={classes.paper}>

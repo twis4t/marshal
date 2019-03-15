@@ -1,4 +1,5 @@
 import { instance as axios } from '@/axios'
+import { enqueueSnackbar } from './NotistackActions'
 
 export const GET_USER_REQUEST = 'GET_USER_REQUEST'
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
@@ -45,6 +46,14 @@ export const getUser = (email, password) => dispatch => {
           dispatch({
             type: GET_USER_DETAIL_ERROR,
           })
+          dispatch(
+            enqueueSnackbar({
+              message: 'Не удалось получить данные пользователя',
+              options: {
+                variant: 'warning',
+              },
+            })
+          )
           console.log('Get user detail failed', e)
         })
     })
@@ -52,6 +61,14 @@ export const getUser = (email, password) => dispatch => {
       dispatch({
         type: GET_USER_ERROR,
       })
+      dispatch(
+        enqueueSnackbar({
+          message: 'Не удалось войти',
+          options: {
+            variant: 'error',
+          },
+        })
+      )
       console.log('Authorization failed', e)
     })
 }

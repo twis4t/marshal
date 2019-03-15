@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
 import configureStore, { history } from '@/store/configureStore'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { SnackbarProvider } from 'notistack'
 import routes from '@/routes'
 
 const store = configureStore()
@@ -24,7 +25,14 @@ const theme = createMuiTheme({
 ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
-      <ConnectedRouter history={history}>{routes}</ConnectedRouter>
+      <SnackbarProvider
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        <ConnectedRouter history={history}>{routes}</ConnectedRouter>
+      </SnackbarProvider>
     </MuiThemeProvider>
   </Provider>,
   document.getElementById('root')

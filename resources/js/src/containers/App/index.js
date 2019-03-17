@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { User } from '@/components/User'
 import { getUser } from '@/actions/UserActions'
+import ModuleTitle from '@/components/ModuleTitle'
 
 class App extends Component {
   render() {
     const { user, getUser } = this.props
     return (
       <div className="App">
+        <ModuleTitle title="Главная" />
         Интро
         <User name={user.name} getUser={getUser} isFetching={user.isFetching} />
       </div>

@@ -26,10 +26,10 @@ export const styles = theme => ({
     padding: 8,
   },
   appBar: {
-    background: '#fff',
+    background: '#f4f4f7',
     color: '#3e424c',
     width: `calc(100% - ${theme.spacing.unit * 7}px)`,
-    boxShadow: '1px 3px 13px 0px rgba(164, 167, 169, 0.3)',
+    boxShadow: '0px 3px 6px 0px rgba(115, 127, 136, 0.3)',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,

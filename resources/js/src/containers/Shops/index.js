@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { AgGridReact } from 'ag-grid-react'
+import ModuleTitle from '@/components/ModuleTitle'
 
 import 'ag-grid/dist/styles/ag-grid.css'
 import 'ag-grid/dist/styles/ag-theme-material.css'
@@ -20,14 +21,17 @@ class Shops extends Component {
   }
   render() {
     return (
-      <div
-        className="ag-theme-material"
-        style={{
-          height: '500px',
-          width: '600px',
-        }}
-      >
-        <AgGridReact columnDefs={this.state.columnDefs} rowData={this.state.rowData} />
+      <div>
+        <ModuleTitle title="Управление магазинами" />
+        <div
+          className="ag-theme-material"
+          style={{
+            height: '500px',
+            width: '600px',
+          }}
+        >
+          <AgGridReact columnDefs={this.state.columnDefs} rowData={this.state.rowData} />
+        </div>
       </div>
     )
   }

@@ -2,6 +2,7 @@ import { NAVBAR_VISIBLE_CHANGE } from '@/actions/SettingsActions'
 
 const initialState = {
   lang: 'ru',
+  appName: 'Marshal system',
   navBarOpen: false,
 }
 

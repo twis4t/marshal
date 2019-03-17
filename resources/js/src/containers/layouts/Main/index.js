@@ -2,8 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { logOut } from '@/actions/UserActions'
+import { navBarVisible } from '@/actions/SettingsActions'
 import { withStyles } from '@material-ui/core/styles'
 import classNames from 'classnames'
+import ListItemLink from '@/components/listitemlink'
 import {
   CssBaseline,
   Drawer,
@@ -20,9 +22,11 @@ import {
 } from '@material-ui/core'
 import {
   Menu as MenuIcon,
+  Home as HomeIcon,
   ExitToApp as ExitToAppIcon,
   Notifications as NotificationsIcon,
   ChevronLeft as ChevronLeftIcon,
+  Store as StoreIcon,
 } from '@material-ui/icons'
 
 const drawerWidth = 240
@@ -40,16 +44,20 @@ const styles = theme => ({
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
   },
-  toolbarIcon: {
+  toolbarIconBox: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: '0 8px',
     ...theme.mixins.toolbar,
   },
+  toolbarIcon: {
+    padding: 8,
+  },
   appBar: {
     background: '#fff',
     color: '#3e424c',
+    width: `calc(100% - ${theme.spacing.unit * 7}px)`,
     boxShadow: '1px 3px 13px 0px rgba(164, 167, 169, 0.3)',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
@@ -78,6 +86,9 @@ const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    // backgroundColor: '#292938',
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -99,43 +110,39 @@ const styles = theme => ({
   flexGrow: {
     flexGrow: 1,
   },
+  darkListItem: {
+    color: '#fff',
+  },
 })
 
 export default function MainLayout(Component) {
   class MainLayoutComponent extends React.Component {
-    state = {
-      openNavigate: false,
-    }
     handleDrawerOpen = () => {
-      this.setState({ openNavigate: true })
+      this.props.navBarVisible(true)
     }
 
     handleDrawerClose = () => {
-      this.setState({ openNavigate: false })
+      this.props.navBarVisible(false)
     }
 
     userLogOut = () => {
       this.props.logOut()
     }
 
+    ListItemLink = props => {
+      return <ListItem button component="a" {...props} />
+    }
+
     render() {
-      const { classes } = this.props
+      const { classes, user, settings } = this.props
       return (
         <div className={classes.root}>
           <CssBaseline />
           <AppBar
             position="absolute"
-            className={classNames(classes.appBar, this.state.openNavigate && classes.appBarShift)}
+            className={classNames(classes.appBar, settings.navBarOpen && classes.appBarShift)}
           >
-            <Toolbar disableGutters={!this.state.openNavigate} className={classes.toolbar}>
-              <IconButton
-                color="inherit"
-                aria-label="Open drawer"
-                className={classNames(classes.menuButton, this.state.openNavigate && classes.menuButtonHidden)}
-                onClick={this.handleDrawerOpen}
-              >
-                <MenuIcon />
-              </IconButton>
+            <Toolbar className={classes.toolbar}>
               <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                 Dashboard
               </Typography>
@@ -151,18 +158,23 @@ export default function MainLayout(Component) {
           </AppBar>
           <Drawer
             variant="permanent"
-            open={this.state.openNavigate}
+            open={settings.navBarOpen}
             classes={{
-              paper: classNames(classes.drawerPaper, !this.state.openNavigate && classes.drawerPaperClose),
+              paper: classNames(classes.drawerPaper, !settings.navBarOpen && classes.drawerPaperClose),
             }}
           >
-            <div className={classes.toolbarIcon}>
-              <IconButton onClick={this.handleDrawerClose}>
-                <ChevronLeftIcon />
+            <div className={classes.toolbarIconBox}>
+              <IconButton
+                className={classes.toolbarIcon}
+                onClick={settings.navBarOpen ? this.handleDrawerClose : this.handleDrawerOpen}
+              >
+                {settings.navBarOpen ? <ChevronLeftIcon /> : <MenuIcon />}
               </IconButton>
             </div>
             <Divider />
             <List>
+              <ListItemLink to="/" primary="Главная" icon={<HomeIcon />} />
+              <ListItemLink to="/shops" primary="Магазины" icon={<StoreIcon />} />
               {['All mail', 'Trash', 'Spam'].map((text, index) => (
                 <ListItem button key={text}>
                   <ListItemIcon>{index % 2 === 0 ? <NotificationsIcon /> : <MenuIcon />}</ListItemIcon>
@@ -172,12 +184,14 @@ export default function MainLayout(Component) {
             </List>
             <Divider />
             <div className={classes.flexGrow} />
-            <ListItem button onClick={this.userLogOut}>
-              <ListItemIcon>
-                <ExitToAppIcon />
-              </ListItemIcon>
-              <ListItemText primary="Выход" />
-            </ListItem>
+            <List>
+              <ListItem button onClick={this.userLogOut}>
+                <ListItemIcon>
+                  <ExitToAppIcon />
+                </ListItemIcon>
+                <ListItemText primary="Выход" secondary={user.email} />
+              </ListItem>
+            </List>
           </Drawer>
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
@@ -191,17 +205,21 @@ export default function MainLayout(Component) {
   MainLayoutComponent.propTypes = {
     classes: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
+    settings: PropTypes.object.isRequired,
     logOut: PropTypes.func.isRequired,
+    navBarVisible: PropTypes.func.isRequired,
   }
 
   const mapStateToProps = store => {
     return {
       user: store.user,
+      settings: store.settings,
     }
   }
 
   const mapDispatchToProps = dispatch => ({
     logOut: () => dispatch(logOut()),
+    navBarVisible: visible => dispatch(navBarVisible(visible)),
   })
 
   return connect(

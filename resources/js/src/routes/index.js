@@ -1,12 +1,13 @@
 import React from 'react'
-import { Route, Switch } from 'react-router'
+import { Route, Switch, HashRouter } from 'react-router-dom'
 import createPrivateRoute from './PrivateRoute'
 import MainLayout from '@/containers/layouts/main'
 import App from '@/containers/App'
 import Login from '@/containers/Login'
+import Shops from '@/containers/Shops'
 
 const routes = (
-  <div>
+  <HashRouter>
     <Switch>
       <Route
         exact
@@ -15,10 +16,17 @@ const routes = (
           component: MainLayout(App),
         })}
       />
+      <Route
+        exact
+        path="/shops"
+        {...createPrivateRoute({
+          component: MainLayout(Shops),
+        })}
+      />
       <Route path="/login" component={Login} />
       <Route render={() => <div>Miss</div>} />
     </Switch>
-  </div>
+  </HashRouter>
 )
 
 export default routes

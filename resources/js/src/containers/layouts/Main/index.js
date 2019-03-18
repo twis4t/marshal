@@ -30,7 +30,7 @@ import {
   Store as StoreIcon,
   Search as SearchIcon,
 } from '@material-ui/icons'
-import { styles } from './styles'
+import styles from './styles'
 import Logo from '@/static/logo.svg'
 
 export default function MainLayout(Component) {
@@ -52,7 +52,7 @@ export default function MainLayout(Component) {
     }
 
     render() {
-      const { classes, user, settings } = this.props
+      const { classes, user, settings, ...other } = this.props
       return (
         <div className={classes.root}>
           <CssBaseline />
@@ -134,7 +134,7 @@ export default function MainLayout(Component) {
           </Drawer>
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
-            <Component {...this.props} />
+            <Component {...other} />
           </main>
         </div>
       )

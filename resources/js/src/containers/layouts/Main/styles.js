@@ -2,7 +2,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator'
 
 const drawerWidth = 240
 
-export const styles = theme => ({
+const styles = theme => ({
   root: {
     display: 'flex',
   },
@@ -133,3 +133,5 @@ export const styles = theme => ({
     },
   },
 })
+
+export default styles

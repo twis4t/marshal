@@ -1,40 +1,67 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { AgGridReact } from 'ag-grid-react'
 import ModuleTitle from '@/components/ModuleTitle'
+import { withStyles } from '@material-ui/core/styles'
+import classNames from 'classnames'
+import styles from './styles'
+import rowData from './data'
+
+import { Paper } from '@material-ui/core'
 
 import 'ag-grid/dist/styles/ag-grid.css'
 import 'ag-grid/dist/styles/ag-theme-material.css'
+import 'ag-grid/dist/styles/ag-theme-balham.css'
 
 class Shops extends Component {
   state = {
     columnDefs: [
-      { headerName: 'Make', field: 'make' },
-      { headerName: 'Model', field: 'model' },
-      { headerName: 'Price', field: 'price' },
+      {
+        headerName: 'Лого',
+        field: 'logo',
+      },
+      { headerName: 'Наименование', field: 'name' },
+      { headerName: 'Описание', field: 'description' },
+      { headerName: 'Сотрудники', field: 'staff' },
     ],
-    rowData: [
-      { make: 'Toyota', model: 'Celica', price: 35000 },
-      { make: 'Ford', model: 'Mondeo', price: 32000 },
-      { make: 'Porsche', model: 'Boxter', price: 72000 },
-    ],
+    rowData: rowData,
+    domLayout: 'autoHeight',
+    defaultColDef: {
+      sortable: true,
+      filter: true,
+      resizable: true,
+    },
   }
+
+  makeShopLogo = logo => {
+    return <img src={logo} />
+  }
+
   render() {
+    const { classes } = this.props
     return (
-      <div>
+      <div className={classes.flexGrow}>
         <ModuleTitle title="Управление магазинами" />
-        <div
-          className="ag-theme-material"
-          style={{
-            height: '500px',
-            width: '600px',
-          }}
-        >
-          <AgGridReact columnDefs={this.state.columnDefs} rowData={this.state.rowData} />
-        </div>
+
+        <Paper className={classNames(classes.paperCard, classes.flexGrow)}>
+          <div className="ag-theme-material">
+            <AgGridReact
+              animateRows={true}
+              defaultColDef={this.state.defaultColDef}
+              domLayout={this.state.domLayout}
+              columnDefs={this.state.columnDefs}
+              rowData={this.state.rowData}
+            />
+          </div>
+        </Paper>
       </div>
     )
   }
+}
+
+Shops.propTypes = {
+  classes: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = store => {
@@ -47,4 +74,4 @@ Shops.propTypes = {
   //
 }
 
-export default connect(mapStateToProps)(Shops)
+export default connect(mapStateToProps)(withStyles(styles)(Shops))

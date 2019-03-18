@@ -31,6 +31,7 @@ import {
   Search as SearchIcon,
 } from '@material-ui/icons'
 import { styles } from './styles'
+import Logo from '@/static/logo.svg'
 
 export default function MainLayout(Component) {
   class MainLayoutComponent extends React.Component {
@@ -94,6 +95,14 @@ export default function MainLayout(Component) {
             }}
           >
             <div className={classes.toolbarIconBox}>
+              {settings.navBarOpen ? (
+                <div className={classes.toolbarLogoBox}>
+                  <img src={Logo} alt="Logo" width="120px" />
+                  {/* <StarIcon /> <div className={classes.toolbarLogo}>МАРШАЛ</div> */}
+                </div>
+              ) : (
+                ''
+              )}
               <IconButton
                 className={classes.toolbarIcon}
                 onClick={settings.navBarOpen ? this.handleDrawerClose : this.handleDrawerOpen}

@@ -20,10 +20,22 @@ export const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: '0 8px',
+    background: '#F44336', //'#343940',
     ...theme.mixins.toolbar,
+  },
+  toolbarLogoBox: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexGrow: 1,
+    '& *': { color: 'white' },
   },
   toolbarIcon: {
     padding: 8,
+  },
+  toolbarLogo: {
+    display: 'flex',
+    alignItems: 'center',
   },
   appBar: {
     background: '#f4f4f7',
@@ -80,9 +92,6 @@ export const styles = theme => ({
   },
   flexGrow: {
     flexGrow: 1,
-  },
-  darkListItem: {
-    color: '#fff',
   },
   search: {
     position: 'relative',

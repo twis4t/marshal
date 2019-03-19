@@ -12,17 +12,17 @@ import { DataTypeProvider } from '@devexpress/dx-react-grid'
 import { SearchState, IntegratedFiltering } from '@devexpress/dx-react-grid'
 import { Paper } from '@material-ui/core'
 
-const ActionsList = [
+const ActionsList = meta => [
   {
     title: 'Сотрудники',
     action: () => {
-      console.log('users list')
+      console.log(meta.row.name + ' users list')
     },
   },
   {
     title: 'Редактировать',
     action: () => {
-      console.log('edit company')
+      console.log('edit company ' + meta.row.name)
     },
   },
   {
@@ -42,7 +42,7 @@ ShopImage.propTypes = {
 }
 const ActionTypeProvider = props => <DataTypeProvider formatterComponent={ActionButtonFormatter} {...props} />
 
-const ActionButtonFormatter = props => <ActionButton actions={ActionsList} {...props} />
+const ActionButtonFormatter = meta => <ActionButton actions={ActionsList(meta)} {...meta} />
 
 ShopImage.propTypes = {
   value: PropTypes.string.isRequired,

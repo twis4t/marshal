@@ -5,6 +5,7 @@ import MainLayout from '@/containers/layouts/main'
 import App from '@/containers/App'
 import Login from '@/containers/Login'
 import Shops from '@/containers/Shops'
+import Test from '@/components/Test'
 
 const routes = (
   <HashRouter>
@@ -17,13 +18,13 @@ const routes = (
         })}
       />
       <Route
-        exact
         path="/shops"
         {...createPrivateRoute({
           component: MainLayout(Shops),
         })}
       />
       <Route path="/login" component={Login} />
+      <Route path="/test" component={Test} />
       <Route render={() => <div>Miss</div>} />
     </Switch>
   </HashRouter>

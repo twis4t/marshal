@@ -1,41 +1,29 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { AgGridReact } from 'ag-grid-react'
 import ModuleTitle from '@/components/ModuleTitle'
 import { withStyles } from '@material-ui/core/styles'
 import classNames from 'classnames'
 import styles from './styles'
 import rowData from './data'
+import { Grid, Table, TableHeaderRow } from '@devexpress/dx-react-grid-material-ui'
 
 import { Paper } from '@material-ui/core'
 
-import 'ag-grid/dist/styles/ag-grid.css'
-import 'ag-grid/dist/styles/ag-theme-material.css'
-import 'ag-grid/dist/styles/ag-theme-balham.css'
-
 class Shops extends Component {
   state = {
-    columnDefs: [
-      {
-        headerName: 'Лого',
-        field: 'logo',
-      },
-      { headerName: 'Наименование', field: 'name' },
-      { headerName: 'Описание', field: 'description' },
-      { headerName: 'Сотрудники', field: 'staff' },
-    ],
     rowData: rowData,
-    domLayout: 'autoHeight',
-    defaultColDef: {
-      sortable: true,
-      filter: true,
-      resizable: true,
-    },
   }
 
   makeShopLogo = logo => {
     return <img src={logo} />
+  }
+
+  onGridReady = params => {
+    this.gridApi = params.api
+    this.gridColumnApi = params.columnApi
+
+    params.api.sizeColumnsToFit()
   }
 
   render() {
@@ -45,15 +33,18 @@ class Shops extends Component {
         <ModuleTitle title="Управление магазинами" />
 
         <Paper className={classNames(classes.paperCard, classes.flexGrow)}>
-          <div className="ag-theme-material">
-            <AgGridReact
-              animateRows={true}
-              defaultColDef={this.state.defaultColDef}
-              domLayout={this.state.domLayout}
-              columnDefs={this.state.columnDefs}
-              rowData={this.state.rowData}
-            />
-          </div>
+          <Grid
+            rows={this.state.rowData}
+            columns={[
+              { name: 'logo', title: 'logo' },
+              { name: 'name', title: 'name' },
+              { name: 'description', title: 'description' },
+              { name: 'staff', title: 'staff' },
+            ]}
+          >
+            <Table />
+            <TableHeaderRow />
+          </Grid>
         </Paper>
       </div>
     )

@@ -38,7 +38,7 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    boxShadow: '0px 0px 6px 0px rgba(115, 127, 136, 0.3)',
+    boxShadow: '0px 3px 6px 0px rgba(115, 127, 136, 0.3)',
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
   },
   avatar: {

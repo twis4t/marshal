@@ -45,10 +45,6 @@ const ActionTypeProvider = props => <DataTypeProvider formatterComponent={Action
 
 const ActionButtonFormatter = meta => <ActionButton actions={ActionsList(meta)} {...meta} />
 
-ShopImage.propTypes = {
-  value: PropTypes.string.isRequired,
-}
-
 class Shops extends Component {
   state = {
     rowData: rowData,

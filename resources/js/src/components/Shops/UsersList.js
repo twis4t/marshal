@@ -10,7 +10,6 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 class UsersList extends React.Component {
   render() {
     const { status, onOpen, onClose } = this.props
-    console.log(this.props)
     return (
       <div>
         <Button variant="outlined" color="primary" onClick={onOpen}>

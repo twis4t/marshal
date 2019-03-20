@@ -55,11 +55,11 @@ class Shops extends Component {
     userDialog: false,
   }
 
-  userDialogOpen() {
+  userDialogOpen = () => {
     this.setState({ userDialog: true })
   }
 
-  userDialogClose() {
+  userDialogClose = () => {
     this.setState({ userDialog: false })
   }
 

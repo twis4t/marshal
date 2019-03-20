@@ -34,6 +34,7 @@ class ActionButton extends React.Component {
     const { actions } = this.props
     const open = Boolean(anchorEl)
 
+    console.log(this.props)
     return (
       <div>
         <IconButton

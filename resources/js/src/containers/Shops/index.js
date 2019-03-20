@@ -7,6 +7,7 @@ import classNames from 'classnames'
 import styles from './styles'
 import rowData from './data'
 import ActionButton from '@/components/ActionButton'
+import UsersList from '@/components/Shops/UsersList'
 import { Grid as DxGrid, Table, TableHeaderRow, SearchPanel, Toolbar } from '@devexpress/dx-react-grid-material-ui'
 import { DataTypeProvider } from '@devexpress/dx-react-grid'
 import { SearchState, IntegratedFiltering } from '@devexpress/dx-react-grid'
@@ -51,13 +52,15 @@ ShopImage.propTypes = {
 class Shops extends Component {
   state = {
     rowData: rowData,
+    userDialog: false,
   }
 
-  onGridReady = params => {
-    this.gridApi = params.api
-    this.gridColumnApi = params.columnApi
+  userDialogOpen() {
+    this.setState({ userDialog: true })
+  }
 
-    params.api.sizeColumnsToFit()
+  userDialogClose() {
+    this.setState({ userDialog: false })
   }
 
   render() {
@@ -91,6 +94,7 @@ class Shops extends Component {
             <TableHeaderRow />
           </DxGrid>
         </Paper>
+        <UsersList status={this.state.userDialog} onOpen={this.userDialogOpen} onClose={this.userDialogClose} />
       </div>
     )
   }

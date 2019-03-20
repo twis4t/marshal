@@ -1,12 +1,13 @@
 
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
 
 // Variables
 @import 'variables';
 
-.html{
-  font-family: $font-family-sans-serif;
+html{
+  font-family: Roboto, sans-serif;
 }
 
 .navbar-laravel {

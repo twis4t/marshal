@@ -88,7 +88,7 @@ class Shops extends Component {
               columnExtensions={[{ columnName: 'logo', width: 130 }, { columnName: 'id', width: 100, align: 'center' }]}
             />
             <Toolbar />
-            <SearchPanel />
+            <SearchPanel defaultValue="" />
             <TableHeaderRow />
           </DxGrid>
         </Paper>

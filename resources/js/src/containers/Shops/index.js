@@ -14,20 +14,30 @@ import { SearchState, IntegratedFiltering } from '@devexpress/dx-react-grid'
 import { Paper } from '@material-ui/core'
 
 const ImageTypeProvider = props => <DataTypeProvider formatterComponent={ShopImage} {...props} />
-
 const ShopImage = ({ value }) => <img src={value} width={80} />
+
+const ActionTypeProvider = props => (
+  <DataTypeProvider formatterComponent={data => ActionButtonFormatter({ ...data, ...props })} {...props} />
+)
+
+const ActionButtonFormatter = meta => <ActionButton actions={meta.actions(meta.row)} />
 
 ShopImage.propTypes = {
   value: PropTypes.string.isRequired,
+}
+
+ActionTypeProvider.propTypes = {
+  actions: PropTypes.func.isRequired,
 }
 
 class Shops extends Component {
   state = {
     rowData: rowData,
     userDialog: false,
+    companyUsers: [{ name: 'Иван', phone: '8 921 345 45 45' }, { name: 'Петр', phone: '8 921 353 46 35' }],
   }
 
-  ActionsList = meta => [
+  ActionsList = data => [
     {
       title: 'Сотрудники',
       action: () => {
@@ -37,7 +47,7 @@ class Shops extends Component {
     {
       title: 'Редактировать',
       action: () => {
-        console.log('edit company ' + meta.row.name)
+        console.log('edit company ' + data.name)
       },
     },
     {
@@ -59,10 +69,6 @@ class Shops extends Component {
   render() {
     const { classes } = this.props
 
-    // TODO: Вынести из рендера
-    const ActionTypeProvider = props => <DataTypeProvider formatterComponent={ActionButtonFormatter} {...props} />
-    const ActionButtonFormatter = meta => <ActionButton actions={this.ActionsList(meta)} {...meta} />
-
     return (
       <div className={classes.flexGrow}>
         <ModuleTitle title="Управление магазинами" />
@@ -81,7 +87,7 @@ class Shops extends Component {
             ]}
           >
             <ImageTypeProvider for={['logo']} />
-            <ActionTypeProvider for={['id']} />
+            <ActionTypeProvider for={['id']} actions={this.ActionsList} />
             <SearchState defaultValue="" />
             <IntegratedFiltering />
             <Table
@@ -92,7 +98,12 @@ class Shops extends Component {
             <TableHeaderRow />
           </DxGrid>
         </Paper>
-        <UsersList status={this.state.userDialog} onOpen={this.userDialogOpen} onClose={this.userDialogClose} />
+        <UsersList
+          status={this.state.userDialog}
+          onOpen={this.userDialogOpen}
+          onClose={this.userDialogClose}
+          data={this.state.companyUsers}
+        />
       </div>
     )
   }

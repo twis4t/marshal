@@ -9,12 +9,9 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 
 class UsersList extends React.Component {
   render() {
-    const { status, onOpen, onClose } = this.props
+    const { status, onClose, data } = this.props
     return (
       <div>
-        <Button variant="outlined" color="primary" onClick={onOpen}>
-          Open alert dialog
-        </Button>
         <Dialog
           open={status}
           onClose={onClose}
@@ -26,6 +23,11 @@ class UsersList extends React.Component {
             <DialogContentText id="alert-dialog-description">
               Let Google help apps determine location. This means sending anonymous location data to Google, even when
               no apps are running.
+              {data.map(user => (
+                <p key={user.name}>
+                  {user.name} - {user.phone}
+                </p>
+              ))}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -44,8 +46,8 @@ class UsersList extends React.Component {
 
 UsersList.propTypes = {
   status: PropTypes.bool.isRequired,
-  onOpen: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
+  data: PropTypes.array.isRequired,
 }
 
 export default UsersList

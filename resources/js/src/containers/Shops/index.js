@@ -13,27 +13,6 @@ import { DataTypeProvider } from '@devexpress/dx-react-grid'
 import { SearchState, IntegratedFiltering } from '@devexpress/dx-react-grid'
 import { Paper } from '@material-ui/core'
 
-const ActionsList = meta => [
-  {
-    title: 'Сотрудники',
-    action: () => {
-      console.log(meta.row.name + ' users list')
-    },
-  },
-  {
-    title: 'Редактировать',
-    action: () => {
-      console.log('edit company ' + meta.row.name)
-    },
-  },
-  {
-    title: 'Удалить',
-    action: () => {
-      console.log('remove company')
-    },
-  },
-]
-
 const ImageTypeProvider = props => <DataTypeProvider formatterComponent={ShopImage} {...props} />
 
 const ShopImage = ({ value }) => <img src={value} width={80} />
@@ -41,15 +20,33 @@ const ShopImage = ({ value }) => <img src={value} width={80} />
 ShopImage.propTypes = {
   value: PropTypes.string.isRequired,
 }
-const ActionTypeProvider = props => <DataTypeProvider formatterComponent={ActionButtonFormatter} {...props} />
-
-const ActionButtonFormatter = meta => <ActionButton actions={ActionsList(meta)} {...meta} />
 
 class Shops extends Component {
   state = {
     rowData: rowData,
     userDialog: false,
   }
+
+  ActionsList = meta => [
+    {
+      title: 'Сотрудники',
+      action: () => {
+        this.userDialogOpen()
+      },
+    },
+    {
+      title: 'Редактировать',
+      action: () => {
+        console.log('edit company ' + meta.row.name)
+      },
+    },
+    {
+      title: 'Удалить',
+      action: () => {
+        console.log('remove company')
+      },
+    },
+  ]
 
   userDialogOpen = () => {
     this.setState({ userDialog: true })
@@ -61,6 +58,11 @@ class Shops extends Component {
 
   render() {
     const { classes } = this.props
+
+    // TODO: Вынести из рендера
+    const ActionTypeProvider = props => <DataTypeProvider formatterComponent={ActionButtonFormatter} {...props} />
+    const ActionButtonFormatter = meta => <ActionButton actions={this.ActionsList(meta)} {...meta} />
+
     return (
       <div className={classes.flexGrow}>
         <ModuleTitle title="Управление магазинами" />

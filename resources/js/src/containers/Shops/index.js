@@ -34,13 +34,14 @@ class Shops extends Component {
   state = {
     rowData: rowData,
     userDialog: false,
-    companyUsers: [{ name: 'Иван', phone: '8 921 345 45 45' }, { name: 'Петр', phone: '8 921 353 46 35' }],
+    currentCompany: {},
   }
 
   ActionsList = data => [
     {
       title: 'Сотрудники',
       action: () => {
+        this.setState({ currentCompany: data })
         this.userDialogOpen()
       },
     },
@@ -102,7 +103,7 @@ class Shops extends Component {
           status={this.state.userDialog}
           onOpen={this.userDialogOpen}
           onClose={this.userDialogClose}
-          data={this.state.companyUsers}
+          data={this.state.currentCompany}
         />
       </div>
     )

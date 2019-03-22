@@ -11,13 +11,28 @@ import {
   DialogContentText,
   DialogTitle,
   Typography,
+  List,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  IconButton,
+  Tooltip,
 } from '@material-ui/core'
+import { LinkOff as LinkOffIcon, Lock as LockIcon } from '@material-ui/icons'
 import SwipeableViews from 'react-swipeable-views'
 
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     width: 500,
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    color: '#fff',
+    backgroundColor: theme.palette.marshal.main,
   },
 })
 
@@ -48,7 +63,7 @@ class UsersList extends React.Component {
   }
 
   render() {
-    const { status, onClose, data, theme } = this.props
+    const { status, onClose, data, theme, classes } = this.props
     return (
       <div>
         <Dialog
@@ -75,8 +90,34 @@ class UsersList extends React.Component {
               index={this.state.value}
               onChangeIndex={this.handleChangeIndex}
             >
-              <TabContainer dir={theme.direction}>Список активных учетных записей</TabContainer>
+              {/* Список активных пользователей компании */}
+              <TabContainer dir={theme.direction}>
+                <List>
+                  {[...Array(8)].map(value => (
+                    <ListItem key={value} button>
+                      <ListItemAvatar>
+                        <Avatar className={classes.avatar}>U</Avatar>
+                      </ListItemAvatar>
+                      <ListItemText primary={`Line item ${value + 1}`} secondary={'test@test.ru'} />
+                      <ListItemSecondaryAction>
+                        <Tooltip title="Заблокировать">
+                          <IconButton aria-label="Ban">
+                            <LockIcon fontSize="small" />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Исключить">
+                          <IconButton aria-label="Delete">
+                            <LinkOffIcon fontSize="small" />
+                          </IconButton>
+                        </Tooltip>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))}
+                </List>
+              </TabContainer>
+              {/* Список пользователей, запросивших подтверждение */}
               <TabContainer dir={theme.direction}>Запросы на подтверждение</TabContainer>
+              {/* Список заблокированных пользователей компании */}
               <TabContainer dir={theme.direction}>Заблокированы</TabContainer>
             </SwipeableViews>
             <DialogContentText id="alert-dialog-description">
@@ -100,6 +141,7 @@ UsersList.propTypes = {
   onClose: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles, { withTheme: true })(UsersList)

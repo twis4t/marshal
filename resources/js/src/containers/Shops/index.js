@@ -84,18 +84,22 @@ class Shops extends Component {
               { name: 'address', title: 'Адрес' },
               { name: 'phone', title: 'Телефон' },
               { name: 'staff', title: 'Сотрудники' },
-              { name: 'id', title: 'Действия' },
+              { name: 'actions', title: 'Действия' },
             ]}
           >
             <ImageTypeProvider for={['logo']} />
-            <ActionTypeProvider for={['id']} actions={this.ActionsList} />
-            <SearchState defaultValue="" />
+            <ActionTypeProvider for={['actions']} actions={this.ActionsList} />
+            <SearchState defaultValue="" searchPlaceholder="Поиск" />
             <IntegratedFiltering />
             <Table
-              columnExtensions={[{ columnName: 'logo', width: 130 }, { columnName: 'id', width: 100, align: 'center' }]}
+              columnExtensions={[
+                { columnName: 'logo', width: 130 },
+                { columnName: 'actions', width: 100, align: 'center' },
+              ]}
+              messages={{ noData: 'Нет данных' }}
             />
             <Toolbar />
-            <SearchPanel defaultValue="" />
+            <SearchPanel defaultValue="" messages={{ searchPlaceholder: 'Поиск' }} />
             <TableHeaderRow />
           </DxGrid>
         </Paper>

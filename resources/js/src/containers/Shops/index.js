@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import ModuleTitle from '@/components/ModuleTitle'
-import { withStyles } from '@material-ui/core/styles'
 import classNames from 'classnames'
 import styles from './styles'
 import rowData from './data'
+
+import ModuleTitle from '@/components/ModuleTitle'
 import ActionButton from '@/components/ActionButton'
 import UsersList from '@/components/Shops/UsersList'
+import CompanyForm from '@/components/Shops/CompanyForm'
+
+import { withStyles } from '@material-ui/core/styles'
 import { Grid as DxGrid, Table, TableHeaderRow, SearchPanel, Toolbar } from '@devexpress/dx-react-grid-material-ui'
 import { DataTypeProvider } from '@devexpress/dx-react-grid'
 import { SearchState, IntegratedFiltering } from '@devexpress/dx-react-grid'
@@ -34,21 +37,23 @@ class Shops extends Component {
   state = {
     rowData: rowData,
     userDialog: false,
-    currentCompany: {},
+    companyFormDialog: false,
+    сompanyForm: {},
+    currentRow: {},
   }
 
   ActionsList = data => [
     {
       title: 'Сотрудники',
       action: () => {
-        this.setState({ currentCompany: data })
+        this.setState({ currentRow: data })
         this.userDialogOpen()
       },
     },
     {
       title: 'Редактировать',
       action: () => {
-        console.log('edit company ' + data.name)
+        this.companyFormOpen()
       },
     },
     {
@@ -65,6 +70,20 @@ class Shops extends Component {
 
   userDialogClose = () => {
     this.setState({ userDialog: false })
+  }
+
+  companyFormOpen = () => {
+    this.setState({ companyFormDialog: true })
+  }
+
+  companyFormClose = () => {
+    this.setState({ companyFormDialog: false })
+  }
+
+  companyFormSubmit = data => {
+    this.setState({
+      сompanyForm: data,
+    })
   }
 
   render() {
@@ -107,7 +126,14 @@ class Shops extends Component {
           status={this.state.userDialog}
           onOpen={this.userDialogOpen}
           onClose={this.userDialogClose}
-          data={this.state.currentCompany}
+          data={this.state.currentRow}
+        />
+        <CompanyForm
+          status={this.state.companyFormDialog}
+          onOpen={this.companyFormOpen}
+          onClose={this.companyFormClose}
+          onSubmit={this.companyFormSubmit}
+          data={this.state.сompanyForm}
         />
       </div>
     )

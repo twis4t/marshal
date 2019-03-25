@@ -54,6 +54,7 @@ class Shops extends Component {
     {
       title: 'Редактировать',
       action: () => {
+        this.setState({ сompanyForm: data, companyFormMode: false })
         this.companyFormOpen()
       },
     },

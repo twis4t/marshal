@@ -79,6 +79,7 @@ class CompanyForm extends React.Component {
   handleFormSubmit = () => {
     this.setState({ fields: this.defaultFields })
     this.props.onSubmit(this.state.fields)
+    this.props.onClose()
   }
 
   render() {

@@ -18,4 +18,5 @@
 9. Запускаем команду `php artisan passport:client --password`. Имя приложения: `marshal-back`
 
 # Тестовые данные
-1. Запускаем команду `php artisan db:seed`
+1. Если добавились новые файлы в /database `composer dumpautoload`
+2. Запускаем сидеры `php artisan db:seed`

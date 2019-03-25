@@ -6,6 +6,11 @@ use App\Shop;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/**
+ * @group Shop
+ *
+ * API методы для работы с магазинами
+ */
 class ShopController extends Controller
 {
     /**

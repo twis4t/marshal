@@ -6,6 +6,11 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/**
+ * @group Category
+ *
+ * API методы для работы с категориями
+ */
 class CategoryController extends Controller
 {
     /**

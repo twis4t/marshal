@@ -29,12 +29,24 @@ const styles = theme => ({
 })
 
 class CompanyForm extends React.Component {
-  state = {
+  defaultFields = {
     name: '',
     description: '',
     address: '',
     phone: '',
     comment: '',
+  }
+  state = {
+    //
+  }
+
+  componentDidMount = () => {
+    this.setState(this.defaultFields)
+  }
+
+  handleFormClose = () => {
+    this.setState(this.defaultFields)
+    this.props.onClose()
   }
 
   handleInputChange = event => {
@@ -48,6 +60,7 @@ class CompanyForm extends React.Component {
   }
 
   handleFormSubmit = () => {
+    this.setState({ ...this.defaultFields })
     this.props.onSubmit(this.state)
   }
 
@@ -93,7 +106,7 @@ class CompanyForm extends React.Component {
                   variant="outlined"
                   id="address"
                   name="address"
-                  value={this.state.adress}
+                  value={this.state.address}
                   autoComplete="street-address"
                   autoFocus
                   onChange={this.handleInputChange}
@@ -127,7 +140,7 @@ class CompanyForm extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={onClose} color="secondary" autoFocus>
+            <Button onClick={this.handleFormClose} color="secondary" autoFocus>
               Отмена
             </Button>
             <Button onClick={this.handleFormSubmit} color="primary" autoFocus>

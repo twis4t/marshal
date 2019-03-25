@@ -19,6 +19,9 @@ class Shop extends Model
         'comment'
     ];
 
-    
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category', 'shop_categories');
+    }
 
 }

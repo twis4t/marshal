@@ -15,4 +15,9 @@ class Category extends Model
         'category',
     ];
 
+    public function shops()
+    {
+        return $this->belongsToMany('App\Shop', 'shop_categories');
+    }
+
 }

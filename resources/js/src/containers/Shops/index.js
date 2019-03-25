@@ -14,7 +14,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { Grid as DxGrid, Table, TableHeaderRow, SearchPanel, Toolbar } from '@devexpress/dx-react-grid-material-ui'
 import { DataTypeProvider } from '@devexpress/dx-react-grid'
 import { SearchState, IntegratedFiltering } from '@devexpress/dx-react-grid'
-import { Paper } from '@material-ui/core'
+import { Paper, Button } from '@material-ui/core'
 
 const ImageTypeProvider = props => <DataTypeProvider formatterComponent={ShopImage} {...props} />
 const ShopImage = ({ value }) => <img src={value} width={80} />
@@ -38,7 +38,7 @@ class Shops extends Component {
     rowData: rowData,
     userDialog: false,
     companyFormDialog: false,
-    companyFormMode: true, // false - edit, true - new element
+    isNewCompany: true,
     сompanyForm: {},
     currentRow: {},
   }
@@ -54,7 +54,7 @@ class Shops extends Component {
     {
       title: 'Редактировать',
       action: () => {
-        this.setState({ сompanyForm: data, companyFormMode: false })
+        this.setState({ сompanyForm: data, isNewCompany: false })
         this.companyFormOpen()
       },
     },
@@ -82,6 +82,11 @@ class Shops extends Component {
     this.setState({ companyFormDialog: false })
   }
 
+  addCompanyDialog = () => {
+    this.setState({ сompanyForm: {}, isNewCompany: true })
+    this.companyFormOpen()
+  }
+
   companyFormSubmit = data => {
     this.setState({
       сompanyForm: data,
@@ -94,6 +99,19 @@ class Shops extends Component {
     return (
       <div className={classes.flexGrow}>
         <ModuleTitle title="Управление магазинами" />
+
+        <div className={classes.actionsBox}>
+          <Button variant="outlined" color="primary" onClick={this.addCompanyDialog}>
+            Добавить
+          </Button>
+          <Button variant="outlined" color="primary">
+            Категории
+          </Button>
+          <div className={classes.flexGrow} />
+          <Button variant="outlined" color="secondary">
+            Помощь
+          </Button>
+        </div>
 
         <Paper className={classNames(classes.paperCard, classes.flexGrow)}>
           <DxGrid
@@ -131,7 +149,7 @@ class Shops extends Component {
           data={this.state.currentRow}
         />
         <CompanyForm
-          isNew={this.state.companyFormMode}
+          isNew={this.state.isNewCompany}
           status={this.state.companyFormDialog}
           onOpen={this.companyFormOpen}
           onClose={this.companyFormClose}

@@ -38,6 +38,7 @@ class Shops extends Component {
     rowData: rowData,
     userDialog: false,
     companyFormDialog: false,
+    companyFormMode: true, // false - edit, true - new element
     сompanyForm: {},
     currentRow: {},
   }
@@ -129,6 +130,7 @@ class Shops extends Component {
           data={this.state.currentRow}
         />
         <CompanyForm
+          isNew={this.state.companyFormMode}
           status={this.state.companyFormDialog}
           onOpen={this.companyFormOpen}
           onClose={this.companyFormClose}

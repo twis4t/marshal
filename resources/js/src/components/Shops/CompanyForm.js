@@ -37,15 +37,28 @@ class CompanyForm extends React.Component {
     comment: '',
   }
   state = {
-    //
+    status: false,
+    isNew: true,
+    fields: {},
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.status !== state.status && props.isNew === false) {
+      return {
+        status: props.status,
+        isNew: props.isNew,
+        fields: props.data,
+      }
+    }
+    return null
   }
 
   componentDidMount = () => {
-    this.setState(this.defaultFields)
+    this.setState({ fields: this.defaultFields })
   }
 
   handleFormClose = () => {
-    this.setState(this.defaultFields)
+    this.setState({ fields: this.defaultFields })
     this.props.onClose()
   }
 
@@ -54,18 +67,21 @@ class CompanyForm extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value
     const name = target.name
 
+    const currentFields = this.state.fields
     this.setState({
-      [name]: value,
+      fields: {
+        ...currentFields,
+        [name]: value,
+      },
     })
   }
 
   handleFormSubmit = () => {
-    this.setState({ ...this.defaultFields })
-    this.props.onSubmit(this.state)
+    this.setState({ fields: this.defaultFields })
+    this.props.onSubmit(this.state.fields)
   }
 
   render() {
-    console.log('form render')
     const { status, onClose, classes } = this.props
     return (
       <div>
@@ -84,7 +100,7 @@ class CompanyForm extends React.Component {
                   variant="outlined"
                   id="name"
                   name="name"
-                  value={this.state.name}
+                  value={this.state.fields.name}
                   autoComplete="organization"
                   autoFocus
                   onChange={this.handleInputChange}
@@ -96,7 +112,7 @@ class CompanyForm extends React.Component {
                   variant="outlined"
                   name="description"
                   id="description"
-                  value={this.state.description}
+                  value={this.state.fields.description}
                   onChange={this.handleInputChange}
                 />
               </FormControl>
@@ -106,7 +122,7 @@ class CompanyForm extends React.Component {
                   variant="outlined"
                   id="address"
                   name="address"
-                  value={this.state.address}
+                  value={this.state.fields.address}
                   autoComplete="street-address"
                   autoFocus
                   onChange={this.handleInputChange}
@@ -118,7 +134,7 @@ class CompanyForm extends React.Component {
                   variant="outlined"
                   id="phone"
                   name="phone"
-                  value={this.state.phone}
+                  value={this.state.fields.phone}
                   autoComplete="tel"
                   autoFocus
                   onChange={this.handleInputChange}
@@ -130,7 +146,7 @@ class CompanyForm extends React.Component {
                   variant="outlined"
                   name="comment"
                   id="comment"
-                  value={this.state.comment}
+                  value={this.state.fields.comment}
                   onChange={this.handleInputChange}
                 />
               </FormControl>
@@ -155,6 +171,7 @@ class CompanyForm extends React.Component {
 
 CompanyForm.propTypes = {
   status: PropTypes.bool.isRequired,
+  isNew: PropTypes.bool.isRequired,
   onOpen: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,

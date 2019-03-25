@@ -11,6 +11,9 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2,
     '& button': {
       marginRight: theme.spacing.unit,
+      '&:last-child': {
+        marginRight: 0,
+      },
     },
   },
 })

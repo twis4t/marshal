@@ -9,7 +9,8 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     padding: theme.spacing.unit * 1,
     marginBottom: theme.spacing.unit * 2,
-    boxShadow: '0px 3px 4px 0px rgba(115, 127, 136, 0.3)',
+    boxShadow: '0px 0px 0px 0px rgba(115, 127, 136, 0.3)',
+    background: '#eeeff3',
   },
 })
 

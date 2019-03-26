@@ -4,6 +4,7 @@ const styles = theme => ({
   },
   paperCard: {
     color: theme.palette.text.secondary,
+    position: 'relative',
     boxShadow: '0px 3px 4px 0px rgba(115, 127, 136, 0.3)',
   },
   actionsBox: {
@@ -15,6 +16,10 @@ const styles = theme => ({
         marginRight: 0,
       },
     },
+  },
+  progress: {
+    width: '100%',
+    position: 'absolute',
   },
 })
 

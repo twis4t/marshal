@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { getShops } from '@/actions/ShopActions'
 import classNames from 'classnames'
 import styles from './styles'
 import rowData from './data'
@@ -12,9 +13,8 @@ import CompanyForm from '@/components/Shops/CompanyForm'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Grid as DxGrid, Table, TableHeaderRow, SearchPanel, Toolbar } from '@devexpress/dx-react-grid-material-ui'
-import { DataTypeProvider } from '@devexpress/dx-react-grid'
-import { SearchState, IntegratedFiltering } from '@devexpress/dx-react-grid'
-import { Paper, Button } from '@material-ui/core'
+import { DataTypeProvider, SearchState, IntegratedFiltering } from '@devexpress/dx-react-grid'
+import { Paper, Button, LinearProgress } from '@material-ui/core'
 
 const ImageTypeProvider = props => <DataTypeProvider formatterComponent={ShopImage} {...props} />
 const ShopImage = ({ value }) => <img src={value} width={80} />
@@ -41,6 +41,10 @@ class Shops extends Component {
     isNewCompany: true,
     сompanyForm: {},
     currentRow: {},
+  }
+
+  componentDidMount = () => {
+    this.props.getShops()
   }
 
   ActionsList = data => [
@@ -94,12 +98,11 @@ class Shops extends Component {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, shopsData } = this.props
 
     return (
       <div className={classes.flexGrow}>
         <ModuleTitle title="Управление магазинами" />
-
         <div className={classes.actionsBox}>
           <Button variant="outlined" color="primary" onClick={this.addCompanyDialog}>
             Добавить
@@ -114,15 +117,16 @@ class Shops extends Component {
         </div>
 
         <Paper className={classNames(classes.paperCard, classes.flexGrow)}>
+          {shopsData.isFetching ? <LinearProgress color="primary" className={classes.progress} /> : ''}
           <DxGrid
-            rows={this.state.rowData}
+            rows={shopsData.shops}
             columns={[
               { name: 'logo', title: 'Логотип', width: 100 },
               { name: 'name', title: 'Наименование' },
               { name: 'description', title: 'Описание' },
               { name: 'address', title: 'Адрес' },
               { name: 'phone', title: 'Телефон' },
-              { name: 'staff', title: 'Сотрудники' },
+              { name: 'comment', title: 'Примечание' },
               { name: 'actions', title: 'Действия' },
             ]}
           >
@@ -163,16 +167,21 @@ class Shops extends Component {
 
 Shops.propTypes = {
   classes: PropTypes.object.isRequired,
+  shopsData: PropTypes.object.isRequired,
+  getShops: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = store => {
   return {
-    user: store.user,
+    shopsData: store.shop,
   }
 }
 
-Shops.propTypes = {
-  //
-}
+const mapDispatchToProps = dispatch => ({
+  getShops: () => dispatch(getShops()),
+})
 
-export default connect(mapStateToProps)(withStyles(styles)(Shops))
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Shops))

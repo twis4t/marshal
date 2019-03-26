@@ -30,6 +30,7 @@ import {
   Store as StoreIcon,
   Search as SearchIcon,
 } from '@material-ui/icons'
+import Notifier from '@/components/Notifier'
 import styles from './styles'
 import Logo from '@/static/logo.svg'
 
@@ -56,6 +57,7 @@ export default function MainLayout(Component) {
       return (
         <div className={classes.root}>
           <CssBaseline />
+          <Notifier />
           <AppBar
             position="absolute"
             className={classNames(classes.appBar, settings.navBarOpen && classes.appBarShift)}

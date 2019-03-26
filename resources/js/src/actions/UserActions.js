@@ -1,4 +1,4 @@
-import { instance as axios } from '@/axios'
+import axios from '@/axios'
 import { enqueueSnackbar } from './NotistackActions'
 
 export const GET_USER_REQUEST = 'GET_USER_REQUEST'

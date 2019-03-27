@@ -29,36 +29,44 @@ const styles = theme => ({
 })
 
 class CompanyForm extends React.Component {
-  defaultFields = {
-    name: '',
-    description: '',
-    address: '',
-    phone: '',
-    comment: '',
-  }
   state = {
+    defaultFields: {
+      name: '',
+      description: '',
+      address: '',
+      phone: '',
+      comment: '',
+    },
     status: false,
     isNew: true,
     fields: {},
   }
 
   static getDerivedStateFromProps(props, state) {
-    if (props.status !== state.status && props.isNew === false) {
-      return {
-        status: props.status,
-        isNew: props.isNew,
-        fields: props.data,
+    if (props.status !== state.status) {
+      if (props.isNew === false) {
+        return {
+          status: props.status,
+          isNew: props.isNew,
+          fields: props.data,
+        }
+      } else {
+        return {
+          status: props.status,
+          isNew: props.isNew,
+          fields: state.defaultFields,
+        }
       }
     }
     return null
   }
 
   componentDidMount = () => {
-    this.setState({ fields: this.defaultFields })
+    this.setState({ fields: this.state.defaultFields })
   }
 
   handleFormClose = () => {
-    this.setState({ fields: this.defaultFields })
+    this.setState({ fields: this.state.defaultFields })
     this.props.onClose()
   }
 
@@ -77,7 +85,7 @@ class CompanyForm extends React.Component {
   }
 
   handleFormSubmit = () => {
-    this.setState({ fields: this.defaultFields })
+    this.setState({ fields: this.state.defaultFields })
     this.props.onSubmit(this.state.fields)
     this.props.onClose()
   }

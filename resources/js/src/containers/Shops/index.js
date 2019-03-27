@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getShops } from '@/actions/ShopActions'
+import { getShops, editShop } from '@/actions/ShopActions'
 import classNames from 'classnames'
 import styles from './styles'
 import rowData from './data'
@@ -91,10 +91,12 @@ class Shops extends Component {
     this.companyFormOpen()
   }
 
-  companyFormSubmit = data => {
+  companyFormSubmit = async data => {
     this.setState({
       сompanyForm: data,
     })
+    await this.props.editShop(data.id, data)
+    this.props.getShops()
   }
 
   render() {
@@ -169,6 +171,7 @@ Shops.propTypes = {
   classes: PropTypes.object.isRequired,
   shopsData: PropTypes.object.isRequired,
   getShops: PropTypes.func.isRequired,
+  editShop: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = store => {
@@ -179,6 +182,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => ({
   getShops: () => dispatch(getShops()),
+  editShop: (id, data) => dispatch(editShop(id, data)),
 })
 
 export default connect(

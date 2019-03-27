@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
+import FullSizeLoader from '@/components/FullSizeLoader'
 import {
   Button,
   Dialog,
@@ -40,6 +41,7 @@ class CompanyForm extends React.Component {
     status: false,
     isNew: true,
     fields: {},
+    loader: false,
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -84,23 +86,24 @@ class CompanyForm extends React.Component {
     })
   }
 
-  handleFormSubmit = () => {
-    this.setState({ fields: this.state.defaultFields })
-    this.props.onSubmit(this.state.fields)
-    this.props.onClose()
+  handleFormSubmit = async () => {
+    this.setState({ loader: true })
+    await this.props.onSubmit(this.state.fields)
+    this.setState({ loader: false })
+    this.handleFormClose()
   }
 
   render() {
-    const { status, onClose, classes } = this.props
+    const { status, classes } = this.props
     return (
       <div>
         <Dialog
           open={status}
-          onClose={onClose}
+          onClose={this.handleFormClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">Добавить компанию</DialogTitle>
+          <DialogTitle id="alert-dialog-title">{this.state.isNew ? 'Добавить' : 'Изменить'} компанию</DialogTitle>
           <DialogContent>
             <form className={classes.form}>
               <FormControl margin="normal" required fullWidth>
@@ -169,9 +172,10 @@ class CompanyForm extends React.Component {
               Отмена
             </Button>
             <Button onClick={this.handleFormSubmit} color="primary" autoFocus>
-              Добавить
+              {this.state.isNew ? 'Добавить' : 'Сохранить'}
             </Button>
           </DialogActions>
+          {this.state.loader ? <FullSizeLoader enable={true} /> : ''}
         </Dialog>
       </div>
     )

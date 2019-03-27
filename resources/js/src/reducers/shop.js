@@ -2,9 +2,9 @@ import {
   GET_SHOPS_REQUEST,
   GET_SHOPS_SUCCESS,
   GET_SHOPS_ERROR,
-  EDIT_SHOPS_REQUEST,
-  EDIT_SHOPS_SUCCESS,
-  EDIT_SHOPS_ERROR,
+  EDIT_SHOP_REQUEST,
+  EDIT_SHOP_SUCCESS,
+  EDIT_SHOP_ERROR,
 } from '@/actions/ShopActions'
 
 const initialState = {
@@ -20,11 +20,11 @@ export const shopReducer = (state = initialState, action) => {
       return { ...state, shops: [...action.payload], isFetching: false }
     case GET_SHOPS_ERROR:
       return { ...state, isFetching: false }
-    case EDIT_SHOPS_REQUEST:
+    case EDIT_SHOP_REQUEST:
       return { ...state, isFetching: true }
-    case EDIT_SHOPS_SUCCESS:
+    case EDIT_SHOP_SUCCESS:
       return { ...state, isFetching: false }
-    case EDIT_SHOPS_ERROR:
+    case EDIT_SHOP_ERROR:
       return { ...state, isFetching: false }
     default:
       return state

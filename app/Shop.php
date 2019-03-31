@@ -16,7 +16,8 @@ class Shop extends Model
         'description',
         'address',
         'phone',
-        'comment'
+        'comment',
+        'archive_date'
     ];
 
     public function categories()

@@ -13,6 +13,10 @@ export const ADD_SHOP_REQUEST = 'ADD_SHOP_REQUEST'
 export const ADD_SHOP_SUCCESS = 'ADD_SHOP_SUCCESS'
 export const ADD_SHOP_ERROR = 'ADD_SHOP_ERROR'
 
+export const ARCHIVE_SHOP_REQUEST = 'ARCHIVE_SHOP_REQUEST'
+export const ARCHIVE_SHOP_SUCCESS = 'ARCHIVE_SHOP_SUCCESS'
+export const ARCHIVE_SHOP_ERROR = 'ARCHIVE_SHOP_ERROR'
+
 export const getShops = () => async dispatch => {
   dispatch({
     type: GET_SHOPS_REQUEST,
@@ -139,5 +143,47 @@ export const addShop = data => async dispatch => {
         })
       )
       console.log('Add shop failed', e)
+    })
+}
+
+export const archiveShop = (id, date) => async dispatch => {
+  dispatch({
+    type: ARCHIVE_SHOP_REQUEST,
+  })
+
+  axios
+    .put('/shop-update/' + id, { archive_date: date })
+    .then(res => {
+      if (res.data.result) {
+        dispatch({
+          type: ARCHIVE_SHOP_SUCCESS,
+        })
+        dispatch(
+          enqueueSnackbar({
+            message: 'Компания выведена в архив',
+            options: {
+              variant: 'success',
+            },
+          })
+        )
+      } else {
+        dispatch({
+          type: ARCHIVE_SHOP_ERROR,
+        })
+      }
+    })
+    .catch(e => {
+      dispatch({
+        type: ARCHIVE_SHOP_ERROR,
+      })
+      dispatch(
+        enqueueSnackbar({
+          message: 'Не удалось вывести в архив',
+          options: {
+            variant: 'error',
+          },
+        })
+      )
+      console.log('Archive shop failed', e)
     })
 }

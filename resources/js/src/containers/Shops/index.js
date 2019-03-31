@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getShops, editShop, addShop } from '@/actions/ShopActions'
+import { getShops, editShop, addShop, archiveShop } from '@/actions/ShopActions'
 import classNames from 'classnames'
 import styles from './styles'
-import rowData from './data'
+import moment from 'moment'
 
 import ModuleTitle from '@/components/ModuleTitle'
 import ActionButton from '@/components/ActionButton'
@@ -14,7 +14,8 @@ import CompanyForm from '@/components/Shops/CompanyForm'
 import { withStyles } from '@material-ui/core/styles'
 import { Grid as DxGrid, Table, TableHeaderRow, SearchPanel, Toolbar } from '@devexpress/dx-react-grid-material-ui'
 import { DataTypeProvider, SearchState, IntegratedFiltering } from '@devexpress/dx-react-grid'
-import { Paper, Button, LinearProgress } from '@material-ui/core'
+import { Paper, Button, LinearProgress, Switch, FormControlLabel } from '@material-ui/core'
+import { isNull } from 'util'
 
 const ImageTypeProvider = props => <DataTypeProvider formatterComponent={ShopImage} {...props} />
 const ShopImage = ({ value }) => <img src={value} width={80} />
@@ -35,7 +36,7 @@ ActionTypeProvider.propTypes = {
 
 class Shops extends Component {
   state = {
-    rowData: rowData,
+    showArchiveRow: false,
     userDialog: false,
     companyFormDialog: false,
     isNewCompany: true,
@@ -63,12 +64,21 @@ class Shops extends Component {
       },
     },
     {
-      title: 'Удалить',
+      title: 'В архив',
       action: () => {
-        console.log('remove company')
+        this.archiveShop(data.id)
       },
     },
   ]
+
+  filteredArchiveShops = () => {
+    const showArchiveRow = this.state.showArchiveRow
+    const rows = this.props.shopsData.shops
+    const result = rows.filter(
+      row => isNull(row.archive_date) || moment().diff(row.archive_date, 'minutes') < 0 || showArchiveRow
+    )
+    return result
+  }
 
   userDialogOpen = () => {
     this.setState({ userDialog: true })
@@ -105,6 +115,16 @@ class Shops extends Component {
     this.props.getShops()
   }
 
+  archiveShop = async (id, date) => {
+    date = date || moment().format('YYYY-MM-DD')
+    await this.props.archiveShop(id, date)
+    this.props.getShops()
+  }
+
+  handleArchiveChange = event => {
+    this.setState({ showArchiveRow: event.target.checked })
+  }
+
   render() {
     const { classes, shopsData } = this.props
 
@@ -119,15 +139,18 @@ class Shops extends Component {
             Категории
           </Button>
           <div className={classes.flexGrow} />
-          <Button variant="outlined" color="secondary">
-            Помощь
-          </Button>
+          <FormControlLabel
+            control={
+              <Switch checked={this.state.showArchiveRow} onChange={this.handleArchiveChange} value="showArchive" />
+            }
+            label="Архив"
+          />
         </div>
 
         <Paper className={classNames(classes.paperCard, classes.flexGrow)}>
           {shopsData.isFetching ? <LinearProgress color="primary" className={classes.progress} /> : ''}
           <DxGrid
-            rows={shopsData.shops}
+            rows={this.filteredArchiveShops()}
             columns={[
               { name: 'logo', title: 'Логотип', width: 100 },
               { name: 'name', title: 'Наименование' },
@@ -179,6 +202,7 @@ Shops.propTypes = {
   getShops: PropTypes.func.isRequired,
   editShop: PropTypes.func.isRequired,
   addShop: PropTypes.func.isRequired,
+  archiveShop: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = store => {
@@ -191,6 +215,7 @@ const mapDispatchToProps = dispatch => ({
   getShops: () => dispatch(getShops()),
   editShop: (id, data) => dispatch(editShop(id, data)),
   addShop: data => dispatch(addShop(data)),
+  archiveShop: (id, date) => dispatch(archiveShop(id, date)),
 })
 
 export default connect(

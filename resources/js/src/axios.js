@@ -3,7 +3,7 @@ import axios from 'axios'
 // axios.defaults.headers.common['Authorization'] = this.props.user.token_type + ' ' + this.props.user.access_token
 
 const instance = axios.create({
-  baseURL: 'http://marshal/api/',
+  baseURL: 'https://marshal.bh-app.ru/api/',
 })
 
 const lsUser = JSON.parse(localStorage.getItem('user')) || {}

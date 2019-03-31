@@ -39,7 +39,7 @@ class UserController extends Controller
             // Запрашиваем ключ
             $user = Auth::user();
             $http = new Client;
-            $response = $http->post($_SERVER['HTTP_HOST'].'/oauth/token', [
+            $response = $http->post('https://marshal.bh-app.ru/oauth/token', [
                 'form_params' => [
                     'grant_type' => 'password',
                     'client_id' => $client->id,

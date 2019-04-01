@@ -2,29 +2,29 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Category;
-use App\Http\Controllers\Controller;
+use App\Request as RequestModel;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 /**
- * @group Category
+ * @group Request
  *
- * API методы для работы с категориями
+ * API методы для работы с заявками
  */
-class CategoryController extends Controller
+class RequestController extends Controller
 {
     /**
-     * Получение списка категорий
+     * Получение списка заявок
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return Category::with('shops')->get();
+        return RequestModel::all();
     }
 
     /**
-     * Создание новой категории
+     * Создание новой заявки
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -32,23 +32,23 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $requestData = $request->all();
-        $result = Category::create($requestData);
+        $result = RequestModel::create($requestData);
         return response()->json(['result' => $result], 200);
     }
 
     /**
-     * Получение данных и списка магазинов по конкретной категории
+     * Получение данных по заявке и списка ответов
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return Category::where('id', $id)->with('shops')->get();
+        return RequestModel::where('id', $id)->with('answers')->get();
     }
 
     /**
-     * Изменение категории
+     * Изменение заявки
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -57,19 +57,19 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $requestData = $request->all();
-        $result = Category::where('id', $id)->update($requestData);
+        $result = RequestModel::where('id', $id)->update($requestData);
         return response()->json(['result' => $result], 200);
     }
 
     /**
-     * Удаление категории
+     * Удаление заявки
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $result = Category::where('id', $id)->delete();
+        $result = RequestModel::where('id', $id)->delete();
         return response()->json(['result' => $result], 200);
     }
 }

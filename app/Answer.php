@@ -34,7 +34,7 @@ class Answer extends Model
         'is_new' => 'boolean'
     ];
 
-    public function message(){
+    public function messages(){
         return $this->hasMany(Message::class);
     }
 

@@ -17,18 +17,24 @@ import { DataTypeProvider, SearchState, IntegratedFiltering } from '@devexpress/
 import { Paper, Button, LinearProgress, Switch, FormControlLabel } from '@material-ui/core'
 import { isNull } from 'util'
 
-const ImageTypeProvider = props => <DataTypeProvider formatterComponent={ShopImage} {...props} />
-const ShopImage = ({ value }) => <img src={value} width={80} />
+// const ImageTypeProvider = props => <DataTypeProvider formatterComponent={ShopImage} {...props} />
+// const ShopImage = ({ value }) => <img src={value} width={80} />
+const CategoryTypeProvider = props => <DataTypeProvider formatterComponent={CategoryFormatter} {...props} />
+const CategoryFormatter = ({ value }) => value.map(cat => cat.category).join(', ')
 
 const ActionTypeProvider = props => (
   <DataTypeProvider formatterComponent={data => ActionButtonFormatter({ ...data, ...props })} {...props} />
 )
 
-const ActionButtonFormatter = meta => <ActionButton actions={meta.actions(meta.row)} />
-
-ShopImage.propTypes = {
+/*ShopImage.propTypes = {
   value: PropTypes.string.isRequired,
+}*/
+
+CategoryFormatter.propTypes = {
+  value: PropTypes.array.isRequired,
 }
+
+const ActionButtonFormatter = meta => <ActionButton actions={meta.actions(meta.row)} />
 
 ActionTypeProvider.propTypes = {
   actions: PropTypes.func.isRequired,
@@ -152,24 +158,22 @@ class Shops extends Component {
           <DxGrid
             rows={this.filteredArchiveShops()}
             columns={[
-              { name: 'logo', title: 'Логотип', width: 100 },
               { name: 'name', title: 'Наименование' },
               { name: 'description', title: 'Описание' },
+              { name: 'categories', title: 'Категории' },
               { name: 'address', title: 'Адрес' },
               { name: 'phone', title: 'Телефон' },
               { name: 'comment', title: 'Примечание' },
               { name: 'actions', title: 'Действия' },
             ]}
           >
-            <ImageTypeProvider for={['logo']} />
+            {/* <ImageTypeProvider for={['logo']} /> */}
+            <CategoryTypeProvider for={['categories']} />
             <ActionTypeProvider for={['actions']} actions={this.ActionsList} />
             <SearchState defaultValue="" searchPlaceholder="Поиск" />
             <IntegratedFiltering />
             <Table
-              columnExtensions={[
-                { columnName: 'logo', width: 130 },
-                { columnName: 'actions', width: 100, align: 'center' },
-              ]}
+              columnExtensions={[{ columnName: 'actions', width: 100, align: 'center' }]}
               messages={{ noData: 'Нет данных' }}
             />
             <Toolbar />

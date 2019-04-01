@@ -59,7 +59,7 @@ export const editShop = (id, data) => async dispatch => {
     comment: data.comment,
   }
 
-  axios
+  await axios
     .put('/shop-update/' + id, fields)
     .then(res => {
       if (res.data.result) {
@@ -109,7 +109,7 @@ export const addShop = data => async dispatch => {
     comment: data.comment,
   }
 
-  axios
+  await axios
     .post('/shop-add', fields)
     .then(res => {
       if (res.data.result) {
@@ -151,7 +151,7 @@ export const archiveShop = (id, date) => async dispatch => {
     type: ARCHIVE_SHOP_REQUEST,
   })
 
-  axios
+  await axios
     .put('/shop-update/' + id, { archive_date: date })
     .then(res => {
       if (res.data.result) {

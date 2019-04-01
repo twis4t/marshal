@@ -46,8 +46,132 @@
           <!-- START_INFO -->
 <h1>Info</h1>
 <p>Welcome to the generated API reference.
-<a href="http://localhost/docs/collection.json">Get Postman Collection</a></p>
+<a href="http://marshal/docs/collection.json">Get Postman Collection</a></p>
 <!-- END_INFO -->
+<h1>Answer</h1>
+<p>API методы для работы с ответами (откликами) на заявки</p>
+<!-- START_ffba39ee142f0e0f3df7d5ab3a06906b -->
+<h2>Получение списка ответов</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/answers" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/answers");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/answers</code></p>
+<!-- END_ffba39ee142f0e0f3df7d5ab3a06906b -->
+<!-- START_55a883d02cc8a9d0fbedc14330d96ac0 -->
+<h2>Получение данных ответа и сообщений по нему</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/answer/{id}" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/answer/{id}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/answer/{id}</code></p>
+<!-- END_55a883d02cc8a9d0fbedc14330d96ac0 -->
+<!-- START_58930841cebafd39d57bb15e55429d79 -->
+<h2>Создание нового ответа</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST "http://marshal/api/answer-add" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/answer-add");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/answer-add</code></p>
+<!-- END_58930841cebafd39d57bb15e55429d79 -->
+<!-- START_94acdbbb2fd39a6986d5c237442948aa -->
+<h2>Изменение параметров ответа</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT "http://marshal/api/answer-update/{id}" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/answer-update/{id}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT api/answer-update/{id}</code></p>
+<!-- END_94acdbbb2fd39a6986d5c237442948aa -->
+<!-- START_2004f51cb9764abff326b3da3344d606 -->
+<h2>Удаление ответа</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE "http://marshal/api/answer-detele/{id}" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/answer-detele/{id}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE api/answer-detele/{id}</code></p>
+<!-- END_2004f51cb9764abff326b3da3344d606 -->
 <h1>Category</h1>
 <p>API методы для работы с категориями</p>
 <!-- START_109013899e0bc43247b0f00b67f889cf -->
@@ -55,8 +179,8 @@
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/categories" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/categories");
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/categories" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/categories");
 
 let headers = {
     "Accept": "application/json",
@@ -83,8 +207,8 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/category/{id}" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/category/{id}");
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/category/{id}" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/category/{id}");
 
 let headers = {
     "Accept": "application/json",
@@ -111,8 +235,8 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/category-add" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/category-add");
+<pre><code class="language-bash">curl -X POST "http://marshal/api/category-add" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/category-add");
 
 let headers = {
     "Accept": "application/json",
@@ -133,8 +257,8 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X PUT "http://localhost/api/category-update/{id}" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/category-update/{id}");
+<pre><code class="language-bash">curl -X PUT "http://marshal/api/category-update/{id}" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/category-update/{id}");
 
 let headers = {
     "Accept": "application/json",
@@ -155,8 +279,8 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://localhost/api/category-detele/{id}" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/category-detele/{id}");
+<pre><code class="language-bash">curl -X DELETE "http://marshal/api/category-detele/{id}" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/category-detele/{id}");
 
 let headers = {
     "Accept": "application/json",
@@ -172,6 +296,130 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>DELETE api/category-detele/{id}</code></p>
 <!-- END_0ddf8bc62feef253fc2ad60405005853 -->
+<h1>Request</h1>
+<p>API методы для работы с заявками</p>
+<!-- START_8f3e0849f59d202e000098a13fc95f23 -->
+<h2>Получение списка заявок</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/requests" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/requests");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/requests</code></p>
+<!-- END_8f3e0849f59d202e000098a13fc95f23 -->
+<!-- START_8c27fe57ed283926960b1f2821c3dce9 -->
+<h2>Получение данных по заявке и списка ответов</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/request/{id}" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/request/{id}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/request/{id}</code></p>
+<!-- END_8c27fe57ed283926960b1f2821c3dce9 -->
+<!-- START_4e156c3f4b1d4057d00862f18071d036 -->
+<h2>Создание новой заявки</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST "http://marshal/api/request-add" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/request-add");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/request-add</code></p>
+<!-- END_4e156c3f4b1d4057d00862f18071d036 -->
+<!-- START_01ceca6128a7cd6c8dca4cd4b3b7f0eb -->
+<h2>Изменение заявки</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT "http://marshal/api/request-update/{id}" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/request-update/{id}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT api/request-update/{id}</code></p>
+<!-- END_01ceca6128a7cd6c8dca4cd4b3b7f0eb -->
+<!-- START_d62ce0015a84418e64c348d457504dd6 -->
+<h2>Удаление заявки</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE "http://marshal/api/request-detele/{id}" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/request-detele/{id}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE api/request-detele/{id}</code></p>
+<!-- END_d62ce0015a84418e64c348d457504dd6 -->
 <h1>Shop</h1>
 <p>API методы для работы с магазинами</p>
 <!-- START_8f173edd89d1c1da6a80dad0d9d5121f -->
@@ -179,8 +427,8 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/shops" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/shops");
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/shops" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/shops");
 
 let headers = {
     "Accept": "application/json",
@@ -207,8 +455,8 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/shop/{id}" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/shop/{id}");
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/shop/{id}" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/shop/{id}");
 
 let headers = {
     "Accept": "application/json",
@@ -235,8 +483,8 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/shop-add" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/shop-add");
+<pre><code class="language-bash">curl -X POST "http://marshal/api/shop-add" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/shop-add");
 
 let headers = {
     "Accept": "application/json",
@@ -257,8 +505,8 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X PUT "http://localhost/api/shop-update/{id}" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/shop-update/{id}");
+<pre><code class="language-bash">curl -X PUT "http://marshal/api/shop-update/{id}" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/shop-update/{id}");
 
 let headers = {
     "Accept": "application/json",
@@ -279,8 +527,8 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://localhost/api/shop-detele/{id}" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/shop-detele/{id}");
+<pre><code class="language-bash">curl -X DELETE "http://marshal/api/shop-detele/{id}" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/shop-detele/{id}");
 
 let headers = {
     "Accept": "application/json",
@@ -302,8 +550,8 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/login" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/login");
+<pre><code class="language-bash">curl -X POST "http://marshal/api/login" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/login");
 
 let headers = {
     "Accept": "application/json",
@@ -324,8 +572,8 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/register" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/register");
+<pre><code class="language-bash">curl -X POST "http://marshal/api/register" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/register");
 
 let headers = {
     "Accept": "application/json",
@@ -346,8 +594,8 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/details" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/details");
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/details" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/details");
 
 let headers = {
     "Accept": "application/json",

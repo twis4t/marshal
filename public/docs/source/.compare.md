@@ -16,9 +16,186 @@ toc_footers:
 # Info
 
 Welcome to the generated API reference.
-[Get Postman Collection](http://localhost/docs/collection.json)
+[Get Postman Collection](http://marshal/docs/collection.json)
 
 <!-- END_INFO -->
+
+#Answer
+
+API методы для работы с ответами (откликами) на заявки
+<!-- START_ffba39ee142f0e0f3df7d5ab3a06906b -->
+## Получение списка ответов
+
+> Example request:
+
+```bash
+curl -X GET -G "http://marshal/api/answers" 
+```
+
+```javascript
+const url = new URL("http://marshal/api/answers");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/answers`
+
+
+<!-- END_ffba39ee142f0e0f3df7d5ab3a06906b -->
+
+<!-- START_55a883d02cc8a9d0fbedc14330d96ac0 -->
+## Получение данных ответа и сообщений по нему
+
+> Example request:
+
+```bash
+curl -X GET -G "http://marshal/api/answer/{id}" 
+```
+
+```javascript
+const url = new URL("http://marshal/api/answer/{id}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/answer/{id}`
+
+
+<!-- END_55a883d02cc8a9d0fbedc14330d96ac0 -->
+
+<!-- START_58930841cebafd39d57bb15e55429d79 -->
+## Создание нового ответа
+
+> Example request:
+
+```bash
+curl -X POST "http://marshal/api/answer-add" 
+```
+
+```javascript
+const url = new URL("http://marshal/api/answer-add");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/answer-add`
+
+
+<!-- END_58930841cebafd39d57bb15e55429d79 -->
+
+<!-- START_94acdbbb2fd39a6986d5c237442948aa -->
+## Изменение параметров ответа
+
+> Example request:
+
+```bash
+curl -X PUT "http://marshal/api/answer-update/{id}" 
+```
+
+```javascript
+const url = new URL("http://marshal/api/answer-update/{id}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/answer-update/{id}`
+
+
+<!-- END_94acdbbb2fd39a6986d5c237442948aa -->
+
+<!-- START_2004f51cb9764abff326b3da3344d606 -->
+## Удаление ответа
+
+> Example request:
+
+```bash
+curl -X DELETE "http://marshal/api/answer-detele/{id}" 
+```
+
+```javascript
+const url = new URL("http://marshal/api/answer-detele/{id}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/answer-detele/{id}`
+
+
+<!-- END_2004f51cb9764abff326b3da3344d606 -->
 
 #Category
 
@@ -29,11 +206,11 @@ API методы для работы с категориями
 > Example request:
 
 ```bash
-curl -X GET -G "http://localhost/api/categories" 
+curl -X GET -G "http://marshal/api/categories" 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/categories");
+const url = new URL("http://marshal/api/categories");
 
 let headers = {
     "Accept": "application/json",
@@ -68,11 +245,11 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://localhost/api/category/{id}" 
+curl -X GET -G "http://marshal/api/category/{id}" 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/category/{id}");
+const url = new URL("http://marshal/api/category/{id}");
 
 let headers = {
     "Accept": "application/json",
@@ -107,11 +284,11 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/category-add" 
+curl -X POST "http://marshal/api/category-add" 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/category-add");
+const url = new URL("http://marshal/api/category-add");
 
 let headers = {
     "Accept": "application/json",
@@ -139,11 +316,11 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/category-update/{id}" 
+curl -X PUT "http://marshal/api/category-update/{id}" 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/category-update/{id}");
+const url = new URL("http://marshal/api/category-update/{id}");
 
 let headers = {
     "Accept": "application/json",
@@ -171,11 +348,11 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X DELETE "http://localhost/api/category-detele/{id}" 
+curl -X DELETE "http://marshal/api/category-detele/{id}" 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/category-detele/{id}");
+const url = new URL("http://marshal/api/category-detele/{id}");
 
 let headers = {
     "Accept": "application/json",
@@ -197,6 +374,183 @@ fetch(url, {
 
 <!-- END_0ddf8bc62feef253fc2ad60405005853 -->
 
+#Request
+
+API методы для работы с заявками
+<!-- START_8f3e0849f59d202e000098a13fc95f23 -->
+## Получение списка заявок
+
+> Example request:
+
+```bash
+curl -X GET -G "http://marshal/api/requests" 
+```
+
+```javascript
+const url = new URL("http://marshal/api/requests");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/requests`
+
+
+<!-- END_8f3e0849f59d202e000098a13fc95f23 -->
+
+<!-- START_8c27fe57ed283926960b1f2821c3dce9 -->
+## Получение данных по заявке и списка ответов
+
+> Example request:
+
+```bash
+curl -X GET -G "http://marshal/api/request/{id}" 
+```
+
+```javascript
+const url = new URL("http://marshal/api/request/{id}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/request/{id}`
+
+
+<!-- END_8c27fe57ed283926960b1f2821c3dce9 -->
+
+<!-- START_4e156c3f4b1d4057d00862f18071d036 -->
+## Создание новой заявки
+
+> Example request:
+
+```bash
+curl -X POST "http://marshal/api/request-add" 
+```
+
+```javascript
+const url = new URL("http://marshal/api/request-add");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/request-add`
+
+
+<!-- END_4e156c3f4b1d4057d00862f18071d036 -->
+
+<!-- START_01ceca6128a7cd6c8dca4cd4b3b7f0eb -->
+## Изменение заявки
+
+> Example request:
+
+```bash
+curl -X PUT "http://marshal/api/request-update/{id}" 
+```
+
+```javascript
+const url = new URL("http://marshal/api/request-update/{id}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/request-update/{id}`
+
+
+<!-- END_01ceca6128a7cd6c8dca4cd4b3b7f0eb -->
+
+<!-- START_d62ce0015a84418e64c348d457504dd6 -->
+## Удаление заявки
+
+> Example request:
+
+```bash
+curl -X DELETE "http://marshal/api/request-detele/{id}" 
+```
+
+```javascript
+const url = new URL("http://marshal/api/request-detele/{id}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/request-detele/{id}`
+
+
+<!-- END_d62ce0015a84418e64c348d457504dd6 -->
+
 #Shop
 
 API методы для работы с магазинами
@@ -206,11 +560,11 @@ API методы для работы с магазинами
 > Example request:
 
 ```bash
-curl -X GET -G "http://localhost/api/shops" 
+curl -X GET -G "http://marshal/api/shops" 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/shops");
+const url = new URL("http://marshal/api/shops");
 
 let headers = {
     "Accept": "application/json",
@@ -245,11 +599,11 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://localhost/api/shop/{id}" 
+curl -X GET -G "http://marshal/api/shop/{id}" 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/shop/{id}");
+const url = new URL("http://marshal/api/shop/{id}");
 
 let headers = {
     "Accept": "application/json",
@@ -284,11 +638,11 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/shop-add" 
+curl -X POST "http://marshal/api/shop-add" 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/shop-add");
+const url = new URL("http://marshal/api/shop-add");
 
 let headers = {
     "Accept": "application/json",
@@ -316,11 +670,11 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/shop-update/{id}" 
+curl -X PUT "http://marshal/api/shop-update/{id}" 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/shop-update/{id}");
+const url = new URL("http://marshal/api/shop-update/{id}");
 
 let headers = {
     "Accept": "application/json",
@@ -348,11 +702,11 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X DELETE "http://localhost/api/shop-detele/{id}" 
+curl -X DELETE "http://marshal/api/shop-detele/{id}" 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/shop-detele/{id}");
+const url = new URL("http://marshal/api/shop-detele/{id}");
 
 let headers = {
     "Accept": "application/json",
@@ -381,11 +735,11 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/login" 
+curl -X POST "http://marshal/api/login" 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/login");
+const url = new URL("http://marshal/api/login");
 
 let headers = {
     "Accept": "application/json",
@@ -413,11 +767,11 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/register" 
+curl -X POST "http://marshal/api/register" 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/register");
+const url = new URL("http://marshal/api/register");
 
 let headers = {
     "Accept": "application/json",
@@ -445,11 +799,11 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://localhost/api/details" 
+curl -X GET -G "http://marshal/api/details" 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/details");
+const url = new URL("http://marshal/api/details");
 
 let headers = {
     "Accept": "application/json",

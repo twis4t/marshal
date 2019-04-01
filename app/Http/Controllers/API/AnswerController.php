@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 /**
- * @group Category
+ * @group Answer
  *
  * API методы для работы с ответами (откликами) на заявки
  */

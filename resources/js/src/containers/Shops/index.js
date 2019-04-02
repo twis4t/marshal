@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getShops, editShop, addShop, archiveShop } from '@/actions/ShopActions'
+import { getCategories } from '@/actions/CategoryActions'
 import classNames from 'classnames'
 import styles from './styles'
 import moment from 'moment'
@@ -132,7 +133,7 @@ class Shops extends Component {
   }
 
   render() {
-    const { classes, shopsData } = this.props
+    const { classes, shopsData, categories } = this.props
 
     return (
       <div className={classes.flexGrow}>
@@ -143,6 +144,7 @@ class Shops extends Component {
           </Button>
           <Button variant="outlined" color="primary">
             Категории
+            {categories.isFetching ? <LinearProgress color="primary" className={classes.buttonProgress} /> : ''}
           </Button>
           <div className={classes.flexGrow} />
           <FormControlLabel
@@ -152,7 +154,6 @@ class Shops extends Component {
             label="Архив"
           />
         </div>
-
         <Paper className={classNames(classes.paperCard, classes.flexGrow)}>
           {shopsData.isFetching ? <LinearProgress color="primary" className={classes.progress} /> : ''}
           <DxGrid
@@ -207,11 +208,15 @@ Shops.propTypes = {
   editShop: PropTypes.func.isRequired,
   addShop: PropTypes.func.isRequired,
   archiveShop: PropTypes.func.isRequired,
+  getCategories: PropTypes.func.isRequired,
+
+  categories: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = store => {
   return {
     shopsData: store.shop,
+    categories: store.category,
   }
 }
 
@@ -220,6 +225,7 @@ const mapDispatchToProps = dispatch => ({
   editShop: (id, data) => dispatch(editShop(id, data)),
   addShop: data => dispatch(addShop(data)),
   archiveShop: (id, date) => dispatch(archiveShop(id, date)),
+  getCategories: () => dispatch(getCategories()),
 })
 
 export default connect(

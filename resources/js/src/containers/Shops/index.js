@@ -11,6 +11,7 @@ import ModuleTitle from '@/components/ModuleTitle'
 import ActionButton from '@/components/ActionButton'
 import UsersList from '@/components/Shops/UsersList'
 import CompanyForm from '@/components/Shops/CompanyForm'
+import CategoryModal from '@/components/Shops/CategoryModal'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Grid as DxGrid, Table, TableHeaderRow, SearchPanel, Toolbar } from '@devexpress/dx-react-grid-material-ui'
@@ -46,6 +47,7 @@ class Shops extends Component {
     showArchiveRow: false,
     userDialog: false,
     companyFormDialog: false,
+    categoryDialog: false,
     isNewCompany: true,
     сompanyForm: {},
     currentRow: {},
@@ -103,6 +105,15 @@ class Shops extends Component {
     this.setState({ companyFormDialog: false })
   }
 
+  categoryDialogOpen = async () => {
+    await this.props.getCategories()
+    this.setState({ categoryDialog: true })
+  }
+
+  categoryDialogClose = () => {
+    this.setState({ categoryDialog: false })
+  }
+
   addCompanyDialog = () => {
     this.setState({ сompanyForm: {}, isNewCompany: true })
     this.companyFormOpen()
@@ -142,7 +153,7 @@ class Shops extends Component {
           <Button variant="outlined" color="primary" onClick={this.addCompanyDialog}>
             Добавить
           </Button>
-          <Button variant="outlined" color="primary">
+          <Button variant="outlined" color="primary" onClick={this.categoryDialogOpen}>
             Категории
             {categories.isFetching ? <LinearProgress color="primary" className={classes.buttonProgress} /> : ''}
           </Button>
@@ -195,6 +206,12 @@ class Shops extends Component {
           onClose={this.companyFormClose}
           onSubmit={this.companyFormSubmit}
           data={this.state.сompanyForm}
+        />
+        <CategoryModal
+          status={this.state.categoryDialog}
+          onOpen={this.categoryDialogOpen}
+          onClose={this.categoryDialogClose}
+          data={categories.categories}
         />
       </div>
     )

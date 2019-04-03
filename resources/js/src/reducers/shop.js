@@ -20,9 +20,9 @@ const initialState = {
 
 export const shopReducer = (state = initialState, action) => {
   switch (action.type) {
+    /* Получение */
     case GET_SHOPS_REQUEST:
       return { ...state, isFetching: true }
-    /* Получение */
     case GET_SHOPS_SUCCESS:
       return { ...state, shops: [...action.payload], isFetching: false }
     case GET_SHOPS_ERROR:

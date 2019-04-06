@@ -33,7 +33,8 @@ class CategoryController extends Controller
     {
         $requestData = $request->all();
         $result = Category::create($requestData);
-        return response()->json(['result' => $result], 200);
+        $category = Category::where('id', $result->id)->with('shops')->first();
+        return response()->json(['result' => $category], 200);
     }
 
     /**

@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+
+/* actions */
 import { getShops, editShop, addShop, archiveShop } from '@/actions/ShopActions'
-import { getCategories } from '@/actions/CategoryActions'
+import { getCategories, addCategory, editCategory, removeCategory } from '@/actions/CategoryActions'
+
 import classNames from 'classnames'
 import styles from './styles'
 import moment from 'moment'
@@ -21,25 +24,32 @@ import { isNull } from 'util'
 
 // const ImageTypeProvider = props => <DataTypeProvider formatterComponent={ShopImage} {...props} />
 // const ShopImage = ({ value }) => <img src={value} width={80} />
+
+// Отображаем список категорий магазина в ячейке
 const CategoryTypeProvider = props => <DataTypeProvider formatterComponent={CategoryFormatter} {...props} />
 const CategoryFormatter = ({ value }) => value.map(cat => cat.category).join(', ')
-
-const ActionTypeProvider = props => (
-  <DataTypeProvider formatterComponent={data => ActionButtonFormatter({ ...data, ...props })} {...props} />
-)
 
 /*ShopImage.propTypes = {
   value: PropTypes.string.isRequired,
 }*/
-
 CategoryFormatter.propTypes = {
   value: PropTypes.array.isRequired,
 }
 
+// Компонент отображения кнопки действий
+const ActionTypeProvider = props => (
+  <DataTypeProvider formatterComponent={data => ActionButtonFormatter({ ...data, ...props })} {...props} />
+)
 const ActionButtonFormatter = meta => <ActionButton actions={meta.actions(meta.row)} />
-
 ActionTypeProvider.propTypes = {
   actions: PropTypes.func.isRequired,
+}
+
+// Выделение строк при наведении
+const CustomTableRowBase = ({ classes, ...restProps }) => <Table.Row className={classes.customRow} {...restProps} />
+const CustomTableRow = withStyles(styles, { name: 'CustomTableRow' })(CustomTableRowBase)
+CustomTableRowBase.propTypes = {
+  classes: PropTypes.object.isRequired,
 }
 
 class Shops extends Component {
@@ -57,6 +67,10 @@ class Shops extends Component {
     this.props.getShops()
   }
 
+  /**
+   * Функция возвращает список возможных
+   * действий со строкой реестра
+   */
   ActionsList = data => [
     {
       title: 'Сотрудники',
@@ -80,6 +94,7 @@ class Shops extends Component {
     },
   ]
 
+  // Прячем строки, выведенные в архив
   filteredArchiveShops = () => {
     const showArchiveRow = this.state.showArchiveRow
     const rows = this.props.shopsData.shops
@@ -117,6 +132,18 @@ class Shops extends Component {
   addCompanyDialog = () => {
     this.setState({ сompanyForm: {}, isNewCompany: true })
     this.companyFormOpen()
+  }
+
+  addCategory = async data => {
+    await this.props.addCategory(data)
+  }
+
+  editCategory = async (id, data) => {
+    await this.props.editCategory(id, data)
+  }
+
+  removeCategory = async id => {
+    await this.props.removeCategory(id)
   }
 
   companyFormSubmit = async data => {
@@ -185,6 +212,7 @@ class Shops extends Component {
             <SearchState defaultValue="" searchPlaceholder="Поиск" />
             <IntegratedFiltering />
             <Table
+              rowComponent={CustomTableRow}
               columnExtensions={[{ columnName: 'actions', width: 100, align: 'center' }]}
               messages={{ noData: 'Нет данных' }}
             />
@@ -209,6 +237,9 @@ class Shops extends Component {
         />
         <CategoryModal
           status={this.state.categoryDialog}
+          onAdd={this.addCategory}
+          onEdit={this.editCategory}
+          onRemove={this.removeCategory}
           onOpen={this.categoryDialogOpen}
           onClose={this.categoryDialogClose}
           data={categories.categories}
@@ -225,9 +256,12 @@ Shops.propTypes = {
   editShop: PropTypes.func.isRequired,
   addShop: PropTypes.func.isRequired,
   archiveShop: PropTypes.func.isRequired,
-  getCategories: PropTypes.func.isRequired,
 
+  getCategories: PropTypes.func.isRequired,
   categories: PropTypes.object.isRequired,
+  addCategory: PropTypes.func.isRequired,
+  editCategory: PropTypes.func.isRequired,
+  removeCategory: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = store => {
@@ -243,6 +277,9 @@ const mapDispatchToProps = dispatch => ({
   addShop: data => dispatch(addShop(data)),
   archiveShop: (id, date) => dispatch(archiveShop(id, date)),
   getCategories: () => dispatch(getCategories()),
+  addCategory: data => dispatch(addCategory(data)),
+  editCategory: (id, data) => dispatch(editCategory(id, data)),
+  removeCategory: id => dispatch(removeCategory(id)),
 })
 
 export default connect(

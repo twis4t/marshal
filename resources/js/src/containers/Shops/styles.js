@@ -26,6 +26,11 @@ const styles = theme => ({
     position: 'absolute',
     bottom: 0,
   },
+  customRow: {
+    '&:hover': {
+      backgroundColor: '#f4f4f4',
+    },
+  },
 })
 
 export default styles

@@ -13,6 +13,7 @@ import {
   ListItem,
   ListItemSecondaryAction,
   ListItemText,
+  LinearProgress,
   IconButton,
   Tooltip,
   TextField,
@@ -53,10 +54,16 @@ const styles = theme => ({
   noShadow: {
     boxShadow: 'none',
   },
+  buttonProgress: {
+    width: '100%',
+    position: 'absolute',
+    bottom: 0,
+  },
 })
 
 class CategoryModal extends React.Component {
   state = {
+    loader: false,
     menuAnchorEl: null,
     newCategory: '',
     editableCategory: {
@@ -88,6 +95,24 @@ class CategoryModal extends React.Component {
     })
   }
 
+  handleAddCategory = async () => {
+    this.setState({ loader: true })
+    await this.props.onAdd({ category: this.state.newCategory.trim() })
+    this.setState({ loader: false, newCategory: '' })
+  }
+
+  handleEditCategory = async () => {
+    this.setState({ loader: true })
+    await this.props.onEdit(this.state.editableCategory.id, this.state.editableCategory)
+    this.setState({ loader: false, menuAnchorEl: null })
+  }
+
+  handleRemoveCategory = async id => {
+    this.setState({ loader: true })
+    await this.props.onRemove(id)
+    this.setState({ loader: false })
+  }
+
   render() {
     const { status, onClose, classes } = this.props
     return (
@@ -113,7 +138,7 @@ class CategoryModal extends React.Component {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton aria-label="Toggle password visibility" onClick={''}>
+                    <IconButton aria-label="Toggle password visibility" onClick={this.handleAddCategory}>
                       <AddBoxIcon />
                     </IconButton>
                   </InputAdornment>
@@ -123,7 +148,7 @@ class CategoryModal extends React.Component {
 
             <List>
               {this.props.data.map(value => (
-                <ListItem key={value.category} button onClick={e => this.menuHandleClick(e, value)}>
+                <ListItem key={value.id} button onClick={e => this.menuHandleClick(e, value)}>
                   <Avatar className={value.shops.length > 0 ? classes.activeCategory : null}>
                     {value.shops.length || 0}
                   </Avatar>
@@ -134,7 +159,11 @@ class CategoryModal extends React.Component {
                   <ListItemSecondaryAction>
                     <Tooltip title="Удалить">
                       <div>
-                        <IconButton aria-label="Ban" disabled={value.shops.length > 0}>
+                        <IconButton
+                          aria-label="Ban"
+                          disabled={value.shops.length > 0}
+                          onClick={() => this.handleRemoveCategory(value.id)}
+                        >
                           <ClearIcon fontSize="small" />
                         </IconButton>
                       </div>
@@ -159,8 +188,9 @@ class CategoryModal extends React.Component {
                   variant="outlined"
                   onChange={this.handleEditName}
                 />
-                <Button variant="outlined" color="primary">
+                <Button variant="outlined" color="primary" onClick={this.handleEditCategory}>
                   Сохранить
+                  {this.state.loader ? <LinearProgress color="primary" className={classes.buttonProgress} /> : ''}
                 </Button>
               </Paper>
             </Menu>
@@ -179,6 +209,9 @@ class CategoryModal extends React.Component {
 CategoryModal.propTypes = {
   status: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
   data: PropTypes.array.isRequired,
   theme: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,

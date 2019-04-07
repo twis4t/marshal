@@ -11,6 +11,9 @@ import {
   ARCHIVE_SHOP_REQUEST,
   ARCHIVE_SHOP_SUCCESS,
   ARCHIVE_SHOP_ERROR,
+  SET_CATEGORIES_SHOP_REQUEST,
+  SET_CATEGORIES_SHOP_SUCCESS,
+  SET_CATEGORIES_SHOP_ERROR,
 } from '@/actions/ShopActions'
 
 const initialState = {
@@ -47,6 +50,13 @@ export const shopReducer = (state = initialState, action) => {
     case ARCHIVE_SHOP_SUCCESS:
       return { ...state, isFetching: false }
     case ARCHIVE_SHOP_ERROR:
+      return { ...state, isFetching: false }
+    /* Установка категорий */
+    case SET_CATEGORIES_SHOP_REQUEST:
+      return { ...state, isFetching: true }
+    case SET_CATEGORIES_SHOP_SUCCESS:
+      return { ...state, isFetching: false }
+    case SET_CATEGORIES_SHOP_ERROR:
       return { ...state, isFetching: false }
     default:
       return state

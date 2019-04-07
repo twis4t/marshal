@@ -19,8 +19,9 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('shop/{id}', 'API\ShopController@show');
 	Route::post('shop-add', 'API\ShopController@store');
 	Route::put('shop-update/{id}', 'API\ShopController@update');
+	Route::put('shop-set-categories/{id}', 'API\ShopController@setCategories');
 	Route::delete('shop-detele/{id}', 'API\ShopController@destroy');
-
+	
 	/* Category */
 	Route::get('categories', 'API\CategoryController@index');
 	Route::get('category/{id}', 'API\CategoryController@show');

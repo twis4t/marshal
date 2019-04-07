@@ -17,6 +17,10 @@ export const ARCHIVE_SHOP_REQUEST = 'ARCHIVE_SHOP_REQUEST'
 export const ARCHIVE_SHOP_SUCCESS = 'ARCHIVE_SHOP_SUCCESS'
 export const ARCHIVE_SHOP_ERROR = 'ARCHIVE_SHOP_ERROR'
 
+export const SET_CATEGORIES_SHOP_REQUEST = 'SET_CATEGORIES_SHOP_REQUEST'
+export const SET_CATEGORIES_SHOP_SUCCESS = 'SET_CATEGORIES_SHOP_SUCCESS'
+export const SET_CATEGORIES_SHOP_ERROR = 'SET_CATEGORIES_SHOP_ERROR'
+
 export const getShops = () => async dispatch => {
   dispatch({
     type: GET_SHOPS_REQUEST,
@@ -185,5 +189,47 @@ export const archiveShop = (id, date) => async dispatch => {
         })
       )
       console.log('Archive shop failed', e)
+    })
+}
+
+export const setCategories = (id, categories) => async dispatch => {
+  dispatch({
+    type: SET_CATEGORIES_SHOP_REQUEST,
+  })
+
+  await axios
+    .put('/shop-set-categories/' + id, { categories: JSON.stringify(categories) })
+    .then(res => {
+      if (res.data.result) {
+        dispatch({
+          type: SET_CATEGORIES_SHOP_SUCCESS,
+        })
+        dispatch(
+          enqueueSnackbar({
+            message: 'Категории установлены',
+            options: {
+              variant: 'success',
+            },
+          })
+        )
+      } else {
+        dispatch({
+          type: SET_CATEGORIES_SHOP_ERROR,
+        })
+      }
+    })
+    .catch(e => {
+      dispatch({
+        type: SET_CATEGORIES_SHOP_ERROR,
+      })
+      dispatch(
+        enqueueSnackbar({
+          message: 'Не удалось установить категории',
+          options: {
+            variant: 'error',
+          },
+        })
+      )
+      console.log('Set shop categories failed', e)
     })
 }

@@ -11,6 +11,12 @@ import {
   DialogTitle,
   TextField,
   FormControl,
+  InputLabel,
+  Select,
+  OutlinedInput,
+  ListItemText,
+  Checkbox,
+  MenuItem,
 } from '@material-ui/core'
 
 const styles = theme => ({
@@ -42,6 +48,7 @@ class CompanyForm extends React.Component {
     isNew: true,
     fields: {},
     loader: false,
+    selectedCategories: [],
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -51,12 +58,14 @@ class CompanyForm extends React.Component {
           status: props.status,
           isNew: props.isNew,
           fields: props.data,
+          selectedCategories: props.data.categories.map(val => val.id),
         }
       } else {
         return {
           status: props.status,
           isNew: props.isNew,
           fields: state.defaultFields,
+          selectedCategories: [],
         }
       }
     }
@@ -88,9 +97,16 @@ class CompanyForm extends React.Component {
 
   handleFormSubmit = async () => {
     this.setState({ loader: true })
-    await this.props.onSubmit(this.state.fields)
+    await this.props.onSubmit(this.state.fields, this.state.selectedCategories)
     this.setState({ loader: false })
     this.handleFormClose()
+  }
+
+  handleChangeMultiple = event => {
+    const options = event.target.value || []
+    this.setState({
+      selectedCategories: [...options],
+    })
   }
 
   render() {
@@ -162,6 +178,27 @@ class CompanyForm extends React.Component {
                   onChange={this.handleInputChange}
                 />
               </FormControl>
+              <FormControl variant="outlined" margin="normal" fullWidth>
+                <InputLabel htmlFor="outlined-cat">Категории</InputLabel>
+                <Select
+                  multiple
+                  value={this.state.selectedCategories}
+                  onChange={this.handleChangeMultiple}
+                  input={<OutlinedInput name="cat" labelWidth={76} id="outlined-cat" />}
+                  renderValue={selected =>
+                    selected
+                      .map(id => this.props.categories.filter(item => item.id === id).map(cat => cat.category))
+                      .join(', ')
+                  }
+                >
+                  {this.props.categories.map(cat => (
+                    <MenuItem key={cat.id} value={cat.id}>
+                      <Checkbox checked={this.state.selectedCategories.indexOf(cat.id) > -1} />
+                      <ListItemText primary={cat.category} />
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </form>
             <DialogContentText id="alert-dialog-description">
               * Помечены поля, обязательные для заполнения
@@ -189,6 +226,7 @@ CompanyForm.propTypes = {
   onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
+  categories: PropTypes.array.isRequired,
   theme: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
 }

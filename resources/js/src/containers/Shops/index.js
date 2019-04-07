@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 /* actions */
-import { getShops, editShop, addShop, archiveShop } from '@/actions/ShopActions'
+import { getShops, editShop, addShop, archiveShop, setCategories } from '@/actions/ShopActions'
 import { getCategories, addCategory, editCategory, removeCategory } from '@/actions/CategoryActions'
 
 import classNames from 'classnames'
@@ -18,7 +18,13 @@ import CategoryModal from '@/components/Shops/CategoryModal'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Grid as DxGrid, Table, TableHeaderRow, SearchPanel, Toolbar } from '@devexpress/dx-react-grid-material-ui'
-import { DataTypeProvider, SearchState, IntegratedFiltering } from '@devexpress/dx-react-grid'
+import {
+  DataTypeProvider,
+  SearchState,
+  IntegratedFiltering,
+  SortingState,
+  IntegratedSorting,
+} from '@devexpress/dx-react-grid'
 import { Paper, Button, LinearProgress, Switch, FormControlLabel } from '@material-ui/core'
 import { isNull } from 'util'
 
@@ -61,11 +67,15 @@ class Shops extends Component {
     isNewCompany: true,
     сompanyForm: {},
     currentRow: {},
+    sorting: [{ columnName: 'name', direction: 'asc' }],
   }
 
   componentDidMount = () => {
     this.props.getShops()
+    this.props.getCategories()
   }
+
+  changeSorting = sorting => this.setState({ sorting })
 
   /**
    * Функция возвращает список возможных
@@ -146,15 +156,15 @@ class Shops extends Component {
     await this.props.removeCategory(id)
   }
 
-  companyFormSubmit = async data => {
+  companyFormSubmit = async (data, categories) => {
     this.setState({
       сompanyForm: data,
     })
-
     if (this.state.isNewCompany) {
       await this.props.addShop(data)
     } else {
       await this.props.editShop(data.id, data)
+      await this.props.setCategories(data.id, categories)
     }
 
     this.props.getShops()
@@ -207,18 +217,24 @@ class Shops extends Component {
             ]}
           >
             {/* <ImageTypeProvider for={['logo']} /> */}
+            <SortingState
+              sorting={this.state.sorting}
+              onSortingChange={this.changeSorting}
+              columnExtensions={[{ columnName: 'actions', sortingEnabled: false }]}
+            />
+            <IntegratedSorting />
             <CategoryTypeProvider for={['categories']} />
             <ActionTypeProvider for={['actions']} actions={this.ActionsList} />
             <SearchState defaultValue="" searchPlaceholder="Поиск" />
             <IntegratedFiltering />
             <Table
               rowComponent={CustomTableRow}
-              columnExtensions={[{ columnName: 'actions', width: 100, align: 'center' }]}
+              columnExtensions={[{ columnName: 'actions', width: 120, align: 'center' }]}
               messages={{ noData: 'Нет данных' }}
             />
             <Toolbar />
             <SearchPanel defaultValue="" messages={{ searchPlaceholder: 'Поиск' }} />
-            <TableHeaderRow />
+            <TableHeaderRow showSortingControls messages={{ sortingHint: 'Сортировка' }} />
           </DxGrid>
         </Paper>
         <UsersList
@@ -234,6 +250,7 @@ class Shops extends Component {
           onClose={this.companyFormClose}
           onSubmit={this.companyFormSubmit}
           data={this.state.сompanyForm}
+          categories={categories.categories.map(item => ({ id: item.id, category: item.category }))}
         />
         <CategoryModal
           status={this.state.categoryDialog}
@@ -256,6 +273,7 @@ Shops.propTypes = {
   editShop: PropTypes.func.isRequired,
   addShop: PropTypes.func.isRequired,
   archiveShop: PropTypes.func.isRequired,
+  setCategories: PropTypes.func.isRequired,
 
   getCategories: PropTypes.func.isRequired,
   categories: PropTypes.object.isRequired,
@@ -276,6 +294,7 @@ const mapDispatchToProps = dispatch => ({
   editShop: (id, data) => dispatch(editShop(id, data)),
   addShop: data => dispatch(addShop(data)),
   archiveShop: (id, date) => dispatch(archiveShop(id, date)),
+  setCategories: (id, categories) => dispatch(setCategories(id, categories)),
   getCategories: () => dispatch(getCategories()),
   addCategory: data => dispatch(addCategory(data)),
   editCategory: (id, data) => dispatch(editCategory(id, data)),

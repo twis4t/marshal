@@ -72,4 +72,19 @@ class ShopController extends Controller
         $result = Shop::where('id', $request->id)->delete();
         return response()->json(['result' => $result], 200);
     }
+
+    /**
+     * Установить категории
+     *
+     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function setCategories($id, Request $request)
+    {
+        $requestData = $request->all();
+        $shop = Shop::where('id', $request->id)->first();
+        $result = $shop->categories()->sync(json_decode($requestData['categories']));
+        return response()->json(['result' => $result], 200);
+    }
 }

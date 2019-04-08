@@ -5,6 +5,7 @@ import MainLayout from '@/containers/layouts/main'
 import App from '@/containers/App'
 import Login from '@/containers/Login'
 import Shops from '@/containers/Shops'
+import Users from '@/containers/Users'
 import Test from '@/components/Test'
 
 const routes = (
@@ -21,6 +22,12 @@ const routes = (
         path="/shops"
         {...createPrivateRoute({
           component: MainLayout(Shops),
+        })}
+      />
+      <Route
+        path="/users"
+        {...createPrivateRoute({
+          component: MainLayout(Users),
         })}
       />
       <Route path="/login" component={Login} />

@@ -10,6 +10,11 @@ use App\User;
 use App\ClientApp;
 use Validator;
 
+/**
+ * @group Users
+ *
+ * API методы для работы с пользователями
+ */
 class UserController extends Controller
 {
     public $successStatus = 200;
@@ -108,4 +113,18 @@ class UserController extends Controller
         $user = Auth::user();
         return response()->json(['success' => $user], $this->successStatus);
     }
+
+    /**
+     * Получение списка пользователей
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return User::with('role')->get();
+    }
+
+
+
+
 }

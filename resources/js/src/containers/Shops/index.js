@@ -162,6 +162,8 @@ class Shops extends Component {
     })
     if (this.state.isNewCompany) {
       await this.props.addShop(data)
+      if (this.props.shopsData.insertedId > 0 && categories.length > 0)
+        await this.props.setCategories(this.props.shopsData.insertedId, categories)
     } else {
       await this.props.editShop(data.id, data)
       await this.props.setCategories(data.id, categories)

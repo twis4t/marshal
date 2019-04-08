@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { logOut } from '@/actions/UserActions'
 import { navBarVisible } from '@/actions/SettingsActions'
 import { withStyles } from '@material-ui/core/styles'
@@ -29,6 +30,7 @@ import {
   ChevronLeft as ChevronLeftIcon,
   Store as StoreIcon,
   Search as SearchIcon,
+  AccountCircle as AccountCircleIcon,
 } from '@material-ui/icons'
 import Notifier from '@/components/Notifier'
 import styles from './styles'
@@ -116,6 +118,7 @@ export default function MainLayout(Component) {
             <List>
               <ListItemLink to="/" primary="Главная" icon={<HomeIcon />} />
               <ListItemLink to="/shops" primary="Магазины" icon={<StoreIcon />} />
+              <ListItemLink to="/users" primary="Пользователи" icon={<AccountCircleIcon />} />
               {['All mail', 'Trash', 'Spam'].map((text, index) => (
                 <ListItem button key={text}>
                   <ListItemIcon>{index % 2 === 0 ? <NotificationsIcon /> : <MenuIcon />}</ListItemIcon>
@@ -136,7 +139,15 @@ export default function MainLayout(Component) {
           </Drawer>
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
-            <Component {...other} />
+            <ReactCSSTransitionGroup
+              transitionName="anim"
+              transitionAppear={true}
+              transitionAppearTimeout={300}
+              transitionEnter={false}
+              transitionLeave={false}
+            >
+              <Component {...other} />
+            </ReactCSSTransitionGroup>
           </main>
         </div>
       )

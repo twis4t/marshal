@@ -6,3 +6,21 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+.anim-appear {
+  opacity: 0.3;
+}
+
+.anim-appear.anim-appear-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.anim-enter {
+  opacity: 0.01;
+}
+
+.anim-enter.anim-enter-active {
+  opacity: 2;
+  transition: opacity 5s ease-in;
+}

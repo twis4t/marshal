@@ -119,6 +119,7 @@ export const addShop = data => async dispatch => {
       if (res.data.result) {
         dispatch({
           type: ADD_SHOP_SUCCESS,
+          payload: { insertedId: res.data.result.id },
         })
         dispatch(
           enqueueSnackbar({

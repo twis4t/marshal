@@ -19,6 +19,7 @@ import {
 const initialState = {
   shops: [],
   isFetching: false,
+  insertedId: 0,
 }
 
 export const shopReducer = (state = initialState, action) => {
@@ -39,9 +40,9 @@ export const shopReducer = (state = initialState, action) => {
       return { ...state, isFetching: false }
     /* Добавление */
     case ADD_SHOP_REQUEST:
-      return { ...state, isFetching: true }
+      return { ...state, isFetching: true, insertedId: 0 }
     case ADD_SHOP_SUCCESS:
-      return { ...state, isFetching: false }
+      return { ...state, isFetching: false, insertedId: action.payload.insertedId }
     case ADD_SHOP_ERROR:
       return { ...state, isFetching: false }
     /* Вывод в архив */

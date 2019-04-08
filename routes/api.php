@@ -14,6 +14,9 @@ Route::post('register', 'API\UserController@register');
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('details', 'API\UserController@details');
 
+	/* User */
+	Route::get('users', 'API\UserController@index');
+
 	/* Shop */
 	Route::get('shops', 'API\ShopController@index');
 	Route::get('shop/{id}', 'API\ShopController@show');

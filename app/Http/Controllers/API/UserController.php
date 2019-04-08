@@ -115,6 +115,20 @@ class UserController extends Controller
     }
 
     /**
+     * Изменение профиля пользователя
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $requestData = $request->all();
+        $result = User::where('id', $id)->update($requestData);
+        return response()->json(['result' => $result], 200);
+    }
+
+    /**
      * Получение списка пользователей
      *
      * @return \Illuminate\Http\Response

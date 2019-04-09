@@ -26,13 +26,16 @@ class RequestController extends Controller
 
     /**
      * Получение списка заявок пользователя
-     *
+     * 
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function userRequests()
+    public function userRequests(Request $request)
     {
+        $requestData = $request->all();       
         $user = Auth::user();
-        return RequestModel::where('user_id', $user->id)->get();
+        $user_id = $request['id'] ?? $user->id;
+        return RequestModel::where('user_id', $user_id)->get();
     }
 
     /**

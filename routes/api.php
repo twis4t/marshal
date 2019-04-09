@@ -48,4 +48,12 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::put('answer-update/{id}', 'API\AnswerController@update');
 	Route::delete('answer-detele/{id}', 'API\AnswerController@destroy');
 
+	/* Messages */
+	Route::get('messages', 'API\MessageController@index');
+	Route::get('answerMessages', 'API\MessageController@answerMessages');
+	Route::get('message/{id}', 'API\MessageController@show');
+	Route::post('message-add', 'API\MessageController@store');
+	Route::put('message-update/{id}', 'API\MessageController@update');
+	Route::delete('message-detele/{id}', 'API\MessageController@destroy');
+
 });

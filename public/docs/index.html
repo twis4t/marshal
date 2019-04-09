@@ -55,10 +55,12 @@
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://marshal/api/answers" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/answers" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/answers");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -83,10 +85,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://marshal/api/answer/{id}" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/answer/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/answer/{id}");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -111,10 +115,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://marshal/api/answer-add" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://marshal/api/answer-add" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/answer-add");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -125,6 +131,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/answer-add</code></p>
 <!-- END_58930841cebafd39d57bb15e55429d79 -->
@@ -133,10 +145,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X PUT "http://marshal/api/answer-update/{id}" </code></pre>
+<pre><code class="language-bash">curl -X PUT "http://marshal/api/answer-update/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/answer-update/{id}");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -147,6 +161,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>PUT api/answer-update/{id}</code></p>
 <!-- END_94acdbbb2fd39a6986d5c237442948aa -->
@@ -155,10 +175,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://marshal/api/answer-detele/{id}" </code></pre>
+<pre><code class="language-bash">curl -X DELETE "http://marshal/api/answer-detele/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/answer-detele/{id}");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -169,6 +191,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>DELETE api/answer-detele/{id}</code></p>
 <!-- END_2004f51cb9764abff326b3da3344d606 -->
@@ -179,10 +207,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://marshal/api/categories" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/categories" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/categories");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -207,10 +237,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://marshal/api/category/{id}" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/category/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/category/{id}");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -235,10 +267,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://marshal/api/category-add" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://marshal/api/category-add" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/category-add");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -249,6 +283,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/category-add</code></p>
 <!-- END_0a11b0eb186d7dd32d34472a639afeb4 -->
@@ -257,10 +297,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X PUT "http://marshal/api/category-update/{id}" </code></pre>
+<pre><code class="language-bash">curl -X PUT "http://marshal/api/category-update/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/category-update/{id}");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -271,6 +313,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>PUT api/category-update/{id}</code></p>
 <!-- END_bc5a68f03fdde1265e94acde87f4b417 -->
@@ -279,10 +327,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://marshal/api/category-detele/{id}" </code></pre>
+<pre><code class="language-bash">curl -X DELETE "http://marshal/api/category-detele/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/category-detele/{id}");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -293,9 +343,381 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>DELETE api/category-detele/{id}</code></p>
 <!-- END_0ddf8bc62feef253fc2ad60405005853 -->
+<h1>Message</h1>
+<p>API методы для работы с сообщениями</p>
+<!-- START_c61e9c2b3fdeea56ee207c8db3d88546 -->
+<h2>Получение списка сообщений</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/messages" \
+    -H "Authorization: Bearer {token}"</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/messages");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/messages</code></p>
+<!-- END_c61e9c2b3fdeea56ee207c8db3d88546 -->
+<!-- START_ad3844700cec77fd28fd7c7f97f6e087 -->
+<h2>Получение списка сообщений для ответа</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/answerMessages" \
+    -H "Authorization: Bearer {token}"</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/answerMessages");
+
+    let params = {
+            "answer_id": "ROBvgpMNPpMbAiu0",
+        };
+    Object.keys(params).forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/answerMessages</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>answer_id</td>
+<td>required</td>
+<td>ID ответа</td>
+</tr>
+</tbody>
+</table>
+<!-- END_ad3844700cec77fd28fd7c7f97f6e087 -->
+<!-- START_1f140340ce023e790c35181bfe2ff246 -->
+<h2>Получение данных по сообщению</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/message/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/message/{id}");
+
+    let params = {
+            "id": "1",
+        };
+    Object.keys(params).forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/message/{id}</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>ID сообщения</td>
+</tr>
+</tbody>
+</table>
+<!-- END_1f140340ce023e790c35181bfe2ff246 -->
+<!-- START_6151e138de030bf121525bbe10ba43b5 -->
+<h2>Создание нового сообщения</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST "http://marshal/api/message-add" \
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"hxw8NH1VfhnyjmYQ"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/message-add");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "answer_id": 4,
+    "user_id": 1,
+    "message": "hello",
+    "attachment": "hxw8NH1VfhnyjmYQ"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/message-add</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>answer_id</td>
+<td>integer</td>
+<td>required</td>
+<td>ID ответа</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>integer</td>
+<td>optional</td>
+<td>ID пользователя</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>optional</td>
+<td>сообщение</td>
+</tr>
+<tr>
+<td>attachment</td>
+<td>string</td>
+<td>optional</td>
+<td>вложение</td>
+</tr>
+</tbody>
+</table>
+<!-- END_6151e138de030bf121525bbe10ba43b5 -->
+<!-- START_572e7976574d0ce4f740defe3e5a3399 -->
+<h2>Изменение сообщения</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT "http://marshal/api/message-update/{id}" \
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"YcYPHvEJD7T1jmiL"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/message-update/{id}");
+
+    let params = {
+            "id": "1",
+        };
+    Object.keys(params).forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "answer_id": 4,
+    "user_id": 1,
+    "message": "hello",
+    "attachment": "YcYPHvEJD7T1jmiL"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT api/message-update/{id}</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>answer_id</td>
+<td>integer</td>
+<td>optional</td>
+<td>ID ответа</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>integer</td>
+<td>optional</td>
+<td>ID пользователя</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>optional</td>
+<td>сообщение</td>
+</tr>
+<tr>
+<td>attachment</td>
+<td>string</td>
+<td>optional</td>
+<td>вложение</td>
+</tr>
+</tbody>
+</table>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>ID сообщения</td>
+</tr>
+</tbody>
+</table>
+<!-- END_572e7976574d0ce4f740defe3e5a3399 -->
+<!-- START_0ab67881d34189f015be0d972fd6b6ff -->
+<h2>Удаление сообщения</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE "http://marshal/api/message-detele/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/message-detele/{id}");
+
+    let params = {
+            "id": "ReBo7eR1yWmprBn4",
+        };
+    Object.keys(params).forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE api/message-detele/{id}</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>ID сообщения</td>
+</tr>
+</tbody>
+</table>
+<!-- END_0ab67881d34189f015be0d972fd6b6ff -->
 <h1>Request</h1>
 <p>API методы для работы с заявками</p>
 <!-- START_8f3e0849f59d202e000098a13fc95f23 -->
@@ -303,10 +725,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://marshal/api/requests" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/requests" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/requests");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -326,15 +750,47 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET api/requests</code></p>
 <!-- END_8f3e0849f59d202e000098a13fc95f23 -->
+<!-- START_ac047069d815902d680786e49aee8877 -->
+<h2>Получение списка заявок пользователя</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/userRequests" \
+    -H "Authorization: Bearer {token}"</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/userRequests");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/userRequests</code></p>
+<!-- END_ac047069d815902d680786e49aee8877 -->
 <!-- START_8c27fe57ed283926960b1f2821c3dce9 -->
 <h2>Получение данных по заявке и списка ответов</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://marshal/api/request/{id}" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/request/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/request/{id}");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -359,10 +815,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://marshal/api/request-add" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://marshal/api/request-add" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/request-add");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -373,6 +831,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/request-add</code></p>
 <!-- END_4e156c3f4b1d4057d00862f18071d036 -->
@@ -381,10 +845,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X PUT "http://marshal/api/request-update/{id}" </code></pre>
+<pre><code class="language-bash">curl -X PUT "http://marshal/api/request-update/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/request-update/{id}");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -395,6 +861,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>PUT api/request-update/{id}</code></p>
 <!-- END_01ceca6128a7cd6c8dca4cd4b3b7f0eb -->
@@ -403,10 +875,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://marshal/api/request-detele/{id}" </code></pre>
+<pre><code class="language-bash">curl -X DELETE "http://marshal/api/request-detele/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/request-detele/{id}");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -417,6 +891,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>DELETE api/request-detele/{id}</code></p>
 <!-- END_d62ce0015a84418e64c348d457504dd6 -->
@@ -427,10 +907,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://marshal/api/shops" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/shops" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/shops");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -455,10 +937,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://marshal/api/shop/{id}" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/shop/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/shop/{id}");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -483,10 +967,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://marshal/api/shop-add" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://marshal/api/shop-add" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/shop-add");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -497,6 +983,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/shop-add</code></p>
 <!-- END_c2ea90c93f08a6a9f395c7bf37ba570c -->
@@ -505,10 +997,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X PUT "http://marshal/api/shop-update/{id}" </code></pre>
+<pre><code class="language-bash">curl -X PUT "http://marshal/api/shop-update/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/shop-update/{id}");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -519,18 +1013,56 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>PUT api/shop-update/{id}</code></p>
 <!-- END_4b1439459a6cf265dbdb516e6bfadf18 -->
+<!-- START_b7c0c2cfd1e39dd0697eb7d193abd036 -->
+<h2>Установить категории</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT "http://marshal/api/shop-set-categories/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/shop-set-categories/{id}");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT api/shop-set-categories/{id}</code></p>
+<!-- END_b7c0c2cfd1e39dd0697eb7d193abd036 -->
 <!-- START_56087f92d4830df772b98a7bf3ef71e9 -->
 <h2>Удаление магазина</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://marshal/api/shop-detele/{id}" </code></pre>
+<pre><code class="language-bash">curl -X DELETE "http://marshal/api/shop-detele/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/shop-detele/{id}");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -541,19 +1073,28 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>DELETE api/shop-detele/{id}</code></p>
 <!-- END_56087f92d4830df772b98a7bf3ef71e9 -->
-<h1>general</h1>
+<h1>Users</h1>
+<p>API методы для работы с пользователями</p>
 <!-- START_c3fa189a6c95ca36ad6ac4791a873d23 -->
 <h2>login api</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://marshal/api/login" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://marshal/api/login" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/login");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -564,6 +1105,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": "Unauthorised"
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/login</code></p>
 <!-- END_c3fa189a6c95ca36ad6ac4791a873d23 -->
@@ -572,10 +1119,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://marshal/api/register" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://marshal/api/register" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/register");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -586,6 +1135,25 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": {
+        "name": [
+            "The name field is required."
+        ],
+        "email": [
+            "The email field is required."
+        ],
+        "password": [
+            "The password field is required."
+        ],
+        "c_password": [
+            "The c password field is required."
+        ]
+    }
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/register</code></p>
 <!-- END_d7b7952e7fdddc07c978c9bdaf757acf -->
@@ -594,10 +1162,12 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://marshal/api/details" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/details" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/details");
 
 let headers = {
+    "Authorization": "Bearer {token}",
     "Accept": "application/json",
     "Content-Type": "application/json",
 }
@@ -617,6 +1187,66 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET api/details</code></p>
 <!-- END_f50fecb2993d22653a99f84a5951e92c -->
+<!-- START_fc1e4f6a697e3c48257de845299b71d5 -->
+<h2>Получение списка пользователей</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://marshal/api/users" \
+    -H "Authorization: Bearer {token}"</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/users");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/users</code></p>
+<!-- END_fc1e4f6a697e3c48257de845299b71d5 -->
+<!-- START_0adb2a0611d68b1dde0a5561bc20a189 -->
+<h2>Изменение профиля пользователя</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT "http://marshal/api/user-update/{id}" \
+    -H "Authorization: Bearer {token}"</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://marshal/api/user-update/{id}");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT api/user-update/{id}</code></p>
+<!-- END_0adb2a0611d68b1dde0a5561bc20a189 -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">

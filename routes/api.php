@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	/* Request */
 	Route::get('requests', 'API\RequestController@index');
+	Route::get('userRequests', 'API\RequestController@userRequests');
 	Route::get('request/{id}', 'API\RequestController@show');
 	Route::post('request-add', 'API\RequestController@store');
 	Route::put('request-update/{id}', 'API\RequestController@update');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Request as RequestModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -21,6 +22,17 @@ class RequestController extends Controller
     public function index()
     {
         return RequestModel::all();
+    }
+
+    /**
+     * Получение списка заявок пользователя
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function userRequests()
+    {
+        $user = Auth::user();
+        return RequestModel::where('user_id', $user->id)->get();
     }
 
     /**

@@ -31,6 +31,22 @@ const styles = theme => ({
       backgroundColor: '#f4f4f4',
     },
   },
+  userColumnWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  userColumnAvatar: {
+    width: 30,
+    height: 30,
+    marginRight: 8,
+    fontSize: 14,
+  },
+  nameTextWrapper: {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
 })
 
 export default styles

@@ -21,7 +21,7 @@ import {
   SortingState,
   IntegratedSorting,
 } from '@devexpress/dx-react-grid'
-import { Paper, Button, LinearProgress, Switch, FormControlLabel } from '@material-ui/core'
+import { Paper, Button, LinearProgress, Switch, FormControlLabel, Avatar } from '@material-ui/core'
 
 // Выделение строк при наведении
 const CustomTableRowBase = ({ classes, ...restProps }) => <Table.Row className={classes.customRow} {...restProps} />
@@ -29,6 +29,29 @@ const CustomTableRow = withStyles(styles, { name: 'CustomTableRow' })(CustomTabl
 CustomTableRowBase.propTypes = {
   classes: PropTypes.object.isRequired,
 }
+
+// Форматер для имени
+const UserNameTypeProvider = props => <DataTypeProvider formatterComponent={UserNameFormatter} {...props} />
+const UserNameFormatterBase = ({ classes, value }) => (
+  <div className={classes.userColumnWrapper} title={value}>
+    <Avatar className={classes.userColumnAvatar}>{value[0]}</Avatar>
+    <span className={classes.nameTextWrapper}>{value}</span>
+  </div>
+)
+const UserNameFormatter = withStyles(styles)(UserNameFormatterBase)
+UserNameFormatterBase.propTypes = {
+  value: PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired,
+}
+
+// Форматер для отношения
+const RatioTypeProvider = props => <DataTypeProvider formatterComponent={RatioFormatter} {...props} />
+const RatioFormatterBase = () => <LinearProgress variant="determinate" value={30} />
+const RatioFormatter = withStyles(styles)(RatioFormatterBase)
+/*RatioFormatterBase.propTypes = {
+  value: PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired,
+}*/
 
 // Отображаем роль в ячейке
 const RoleTypeProvider = props => <DataTypeProvider formatterComponent={RoleFormatter} {...props} />
@@ -40,8 +63,8 @@ class Users extends Component {
     showBanned: false,
   }
 
-  componentDidMount = () => {
-    this.props.getAccounts()
+  componentDidMount = async () => {
+    await this.props.getAccounts()
   }
 
   changeSorting = sorting => this.setState({ sorting })
@@ -53,12 +76,15 @@ class Users extends Component {
     const result = rows.filter(
       row => isNull(row.banned_date) || moment().diff(row.banned_date, 'minutes') < 0 || showBanned
     )
-    console.log(rows)
     return result
   }
 
   handleArchiveChange = event => {
     this.setState({ showBanned: event.target.checked })
+  }
+
+  totalRequests = () => {
+    return this.props.account.accounts.reduce((a, val) => (a += val.requests_count), 0)
   }
 
   render() {
@@ -87,6 +113,7 @@ class Users extends Component {
               { name: 'email', title: 'Email' },
               { name: 'role', title: 'Роль' },
               { name: 'shop', title: 'Магазин' },
+              { name: 'requests_ratio', title: 'От общего' },
               { name: 'requests_count', title: 'Заявок' },
               { name: 'answers_count', title: 'Ответов' },
               { name: 'cars_count', title: 'Машин' },
@@ -104,13 +131,22 @@ class Users extends Component {
             <IntegratedFiltering />
             <Table
               rowComponent={CustomTableRow}
-              columnExtensions={[{ columnName: 'actions', width: 120, align: 'center' }]}
+              columnExtensions={[
+                { columnName: 'actions', width: 120, align: 'center' },
+                { columnName: 'requests_count', width: 120, align: 'left' },
+                { columnName: 'answers_count', width: 120, align: 'left' },
+                { columnName: 'cars_count', width: 120, align: 'left' },
+                { columnName: 'messages_count', width: 120, align: 'left' },
+              ]}
               messages={{ noData: 'Нет данных' }}
             />
-            <RoleTypeProvider for={['role']} />
             <Toolbar />
             <SearchPanel defaultValue="" messages={{ searchPlaceholder: 'Поиск' }} />
             <TableHeaderRow showSortingControls messages={{ sortingHint: 'Сортировка' }} />
+
+            <RoleTypeProvider for={['role']} />
+            <UserNameTypeProvider for={['name']} />
+            <RatioTypeProvider for={['requests_ratio']} />
           </DxGrid>
         </Paper>
       </div>

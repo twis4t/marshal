@@ -10,7 +10,7 @@ export const getAccounts = () => async dispatch => {
     type: GET_ACCOUNTS_REQUEST,
   })
 
-  axios
+  await axios
     .get('/users')
     .then(res => {
       dispatch({

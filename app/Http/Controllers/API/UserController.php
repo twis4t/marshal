@@ -135,7 +135,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::with('role')->get();
+        return User::with('role')->withCount(['requests', 'answers', 'cars', 'messages'])->get();
     }
 
 

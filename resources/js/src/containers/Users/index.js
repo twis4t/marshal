@@ -15,7 +15,7 @@ import ModuleTitle from '@/components/ModuleTitle'
 import { withStyles } from '@material-ui/core/styles'
 import { Grid as DxGrid, Table, TableHeaderRow, SearchPanel, Toolbar } from '@devexpress/dx-react-grid-material-ui'
 import {
-  // DataTypeProvider,
+  DataTypeProvider,
   SearchState,
   IntegratedFiltering,
   SortingState,
@@ -29,6 +29,10 @@ const CustomTableRow = withStyles(styles, { name: 'CustomTableRow' })(CustomTabl
 CustomTableRowBase.propTypes = {
   classes: PropTypes.object.isRequired,
 }
+
+// Отображаем роль в ячейке
+const RoleTypeProvider = props => <DataTypeProvider formatterComponent={RoleFormatter} {...props} />
+const RoleFormatter = ({ value }) => value.role
 
 class Users extends Component {
   state = {
@@ -49,7 +53,12 @@ class Users extends Component {
     const result = rows.filter(
       row => isNull(row.banned_date) || moment().diff(row.banned_date, 'minutes') < 0 || showBanned
     )
+    console.log(rows)
     return result
+  }
+
+  handleArchiveChange = event => {
+    this.setState({ showBanned: event.target.checked })
   }
 
   render() {
@@ -63,8 +72,10 @@ class Users extends Component {
           </Button>
           <div className={classes.flexGrow} />
           <FormControlLabel
-            control={<Switch checked={this.state.showArchiveRow} value="showArchive" />}
-            label="Архив"
+            control={
+              <Switch checked={this.state.showArchiveRow} onChange={this.handleArchiveChange} value="showArchive" />
+            }
+            label="Заблокированные"
           />
         </div>
         <Paper className={classNames(classes.paperCard, classes.flexGrow)}>
@@ -76,6 +87,10 @@ class Users extends Component {
               { name: 'email', title: 'Email' },
               { name: 'role', title: 'Роль' },
               { name: 'shop', title: 'Магазин' },
+              { name: 'requests_count', title: 'Заявок' },
+              { name: 'answers_count', title: 'Ответов' },
+              { name: 'cars_count', title: 'Машин' },
+              { name: 'messages_count', title: 'Сообщений' },
               { name: 'actions', title: 'Действия' },
             ]}
           >
@@ -92,6 +107,7 @@ class Users extends Component {
               columnExtensions={[{ columnName: 'actions', width: 120, align: 'center' }]}
               messages={{ noData: 'Нет данных' }}
             />
+            <RoleTypeProvider for={['role']} />
             <Toolbar />
             <SearchPanel defaultValue="" messages={{ searchPlaceholder: 'Поиск' }} />
             <TableHeaderRow showSortingControls messages={{ sortingHint: 'Сортировка' }} />

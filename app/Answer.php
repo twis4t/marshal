@@ -46,6 +46,10 @@ class Answer extends Model
         return $this->hasOne(Status::class, 'status_id');
     }
 
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 
 
 }

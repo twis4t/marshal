@@ -52,13 +52,32 @@ class User extends Authenticatable
         return $this->where('name', $username)->first();
     }
 
-
     public function role(){
         return $this->belongsTo(Role::class, 'role_id');
     }
 
     public function shop(){
         return $this->belongsTo(Shop::class, 'shop_id');
+    }
+
+    public function requests()
+    {
+        return $this->hasMany(Request::class, 'user_id');
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class, 'user_id');
+    }
+
+    public function cars()
+    {
+        return $this->hasMany(Car::class, 'user_id');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Car::class, 'user_id');
     }
     
 }

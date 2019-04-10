@@ -35,7 +35,7 @@ class RequestController extends Controller
         $requestData = $request->all();       
         $user = Auth::user();
         $user_id = $request['id'] ?? $user->id;
-        return RequestModel::where('user_id', $user_id)->get();
+        return RequestModel::where('user_id', $user_id)->withCount('answers')->get();
     }
 
     /**

@@ -46,12 +46,12 @@ UserNameFormatterBase.propTypes = {
 
 // Форматер для отношения
 const RatioTypeProvider = props => <DataTypeProvider formatterComponent={RatioFormatter} {...props} />
-const RatioFormatterBase = () => <LinearProgress variant="determinate" value={30} />
+const RatioFormatterBase = props => <LinearProgress variant="determinate" value={props.value} />
 const RatioFormatter = withStyles(styles)(RatioFormatterBase)
-/*RatioFormatterBase.propTypes = {
-  value: PropTypes.string.isRequired,
-  classes: PropTypes.object.isRequired,
-}*/
+RatioFormatterBase.propTypes = {
+  props: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+}
 
 // Отображаем роль в ячейке
 const RoleTypeProvider = props => <DataTypeProvider formatterComponent={RoleFormatter} {...props} />
@@ -83,10 +83,6 @@ class Users extends Component {
     this.setState({ showBanned: event.target.checked })
   }
 
-  totalRequests = () => {
-    return this.props.account.accounts.reduce((a, val) => (a += val.requests_count), 0)
-  }
-
   render() {
     const { classes, account } = this.props
     return (
@@ -113,7 +109,7 @@ class Users extends Component {
               { name: 'email', title: 'Email' },
               { name: 'role', title: 'Роль' },
               { name: 'shop', title: 'Магазин' },
-              { name: 'requests_ratio', title: 'От общего' },
+              { name: 'requests_ratio', title: '% Заявок' },
               { name: 'requests_count', title: 'Заявок' },
               { name: 'answers_count', title: 'Ответов' },
               { name: 'cars_count', title: 'Машин' },

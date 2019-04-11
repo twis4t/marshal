@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\ClientApp;
+use App\Request as RequestModel;
 use Validator;
 
 /**
@@ -135,10 +136,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::with('role')->withCount(['requests', 'answers', 'cars', 'messages'])->get();
+        $requestsCount = RequestModel::count();        
+        $users = User::with('role')->withCount(['requests', 'answers', 'cars', 'messages'])->get();
+        $users->each(function($user) use($requestsCount){       
+            $user->requests_ratio = ($user->requests_count * 100 / $requestsCount);           
+        });       
+        return $users;
     }
-
-
-
-
 }

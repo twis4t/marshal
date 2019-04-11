@@ -49,7 +49,6 @@ const RatioTypeProvider = props => <DataTypeProvider formatterComponent={RatioFo
 const RatioFormatterBase = props => <LinearProgress variant="determinate" value={props.value} />
 const RatioFormatter = withStyles(styles)(RatioFormatterBase)
 RatioFormatterBase.propTypes = {
-  props: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
 }
 

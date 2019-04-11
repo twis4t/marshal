@@ -44,9 +44,7 @@ class AnswerController extends Controller
      */
     public function show($id)
     {
-        return Answer::where('id', $id)->with(['messages', 'messages.user' => function($query){
-            $query->select('id', 'name');
-        }])->get();
+        return Answer::where('id', $id)->with(['messages', 'messages.user:id,name'])->get();
     }
 
     /**

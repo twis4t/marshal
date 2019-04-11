@@ -34,7 +34,7 @@ CustomTableRowBase.propTypes = {
 const UserNameTypeProvider = props => <DataTypeProvider formatterComponent={UserNameFormatter} {...props} />
 const UserNameFormatterBase = ({ classes, value }) => (
   <div className={classes.userColumnWrapper} title={value}>
-    <Avatar className={classes.userColumnAvatar}>{value[0]}</Avatar>
+    <Avatar className={classes.userColumnAvatar}>{value[0].toUpperCase()}</Avatar>
     <span className={classes.nameTextWrapper}>{value}</span>
   </div>
 )
@@ -55,7 +55,7 @@ const RatioFormatter = withStyles(styles)(RatioFormatterBase)
 
 // Отображаем роль в ячейке
 const RoleTypeProvider = props => <DataTypeProvider formatterComponent={RoleFormatter} {...props} />
-const RoleFormatter = ({ value }) => value.role
+const RoleFormatter = ({ value }) => (isNull(value) ? '' : value.role)
 
 class Users extends Component {
   state = {

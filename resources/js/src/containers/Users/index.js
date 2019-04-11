@@ -21,6 +21,7 @@ import {
   SortingState,
   IntegratedSorting,
 } from '@devexpress/dx-react-grid'
+import { LockOpen as LockOpenIcon } from '@material-ui/icons'
 import { Paper, Button, LinearProgress, Switch, FormControlLabel, Avatar } from '@material-ui/core'
 
 // Выделение строк при наведении
@@ -55,6 +56,18 @@ RatioFormatterBase.propTypes = {
 // Отображаем роль в ячейке
 const RoleTypeProvider = props => <DataTypeProvider formatterComponent={RoleFormatter} {...props} />
 const RoleFormatter = ({ value }) => (isNull(value) ? '' : value.role)
+
+// Отображаем блокировку
+const BanTypeProvider = props => <DataTypeProvider formatterComponent={BanFormatter} {...props} />
+const BanFormatter = ({ value }) =>
+  isNull(value) ? '' : (
+    <span title={'Заблокирован с ' + moment(value).format('DD.MM.YYYY')}>
+      <LockOpenIcon color="secondary" />
+    </span>
+  )
+BanFormatter.propTypes = {
+  value: PropTypes.string,
+}
 
 class Users extends Component {
   state = {
@@ -107,7 +120,8 @@ class Users extends Component {
               { name: 'name', title: 'Имя' },
               { name: 'email', title: 'Email' },
               { name: 'role', title: 'Роль' },
-              { name: 'shop', title: 'Магазин' },
+              // { name: 'shop', title: 'Магазин' },
+              { name: 'banned_date', title: 'Блок' },
               { name: 'requests_ratio', title: '% Заявок' },
               { name: 'requests_count', title: 'Заявок' },
               { name: 'answers_count', title: 'Ответов' },
@@ -132,6 +146,7 @@ class Users extends Component {
                 { columnName: 'answers_count', width: 120, align: 'left' },
                 { columnName: 'cars_count', width: 120, align: 'left' },
                 { columnName: 'messages_count', width: 120, align: 'left' },
+                { columnName: 'banned_date', width: 120, align: 'left' },
               ]}
               messages={{ noData: 'Нет данных' }}
             />
@@ -141,6 +156,7 @@ class Users extends Component {
 
             <RoleTypeProvider for={['role']} />
             <UserNameTypeProvider for={['name']} />
+            <BanTypeProvider for={['banned_date']} />
             <RatioTypeProvider for={['requests_ratio']} />
           </DxGrid>
         </Paper>

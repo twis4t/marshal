@@ -12,7 +12,7 @@ use App\Request as RequestModel;
 use Validator;
 
 /**
- * @group Users
+ * @group User
  *
  * API методы для работы с пользователями
  */

@@ -35,11 +35,11 @@ class Car extends Model
     }
 
     public function car_brand(){
-        return $this->hasOne(CarBrand::class, 'car_brand_id');
+        return $this->belongsTo(CarBrand::class, 'car_brand_id');
     }
 
     public function car_model(){
-        return $this->hasOne(CarModel::class, 'car_model_id');
+        return $this->belongsTo(CarModel::class, 'car_model_id');
     }
 
 }

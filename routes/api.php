@@ -55,5 +55,27 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('message-add', 'API\MessageController@store');
 	Route::put('message-update/{id}', 'API\MessageController@update');
 	Route::delete('message-detele/{id}', 'API\MessageController@destroy');
+	
+	/* Car */
+	Route::get('cars', 'API\CarController@index');
+	Route::get('car/{id}', 'API\CarController@show');
+	Route::post('car-add', 'API\CarController@store');
+	Route::put('car-update/{id}', 'API\CarController@update');
+	Route::delete('car-detele/{id}', 'API\CarController@destroy');
+
+	/* CarBrands */
+	Route::get('carbrands', 'API\CarBrandController@index');
+	Route::get('carbrand/{id}', 'API\CarBrandController@show');
+	Route::post('carbrand-add', 'API\CarBrandController@store');
+	Route::put('carbrand-update/{id}', 'API\CarBrandController@update');
+	Route::delete('carbrand-detele/{id}', 'API\CarBrandController@destroy');
+
+	/* CarModels */
+	Route::get('carmodels', 'API\CarModelController@index');
+	Route::get('models', 'API\CarModelController@models');
+	Route::get('carmodel/{id}', 'API\CarModelController@show');
+	Route::post('carmodel-add', 'API\CarModelController@store');
+	Route::put('carmodel-update/{id}', 'API\CarModelController@update');
+	Route::delete('carmodel-detele/{id}', 'API\CarModelController@destroy');
 
 });

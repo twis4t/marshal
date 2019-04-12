@@ -228,6 +228,872 @@ fetch(url, {
 
 <!-- END_2004f51cb9764abff326b3da3344d606 -->
 
+#Car
+
+API методы для работы с автомобилями пользователя
+<!-- START_b5807964b67925bcb310ef24f51967da -->
+## Получение списка автомобилей
+
+> Example request:
+
+```bash
+curl -X GET -G "http://marshal/api/cars" \
+    -H "Authorization: Bearer {token}"
+```
+
+```javascript
+const url = new URL("http://marshal/api/cars");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/cars`
+
+
+<!-- END_b5807964b67925bcb310ef24f51967da -->
+
+<!-- START_aba474a5cdf326a52188f558e43ce4ab -->
+## Получение данных по автомобилю
+
+> Example request:
+
+```bash
+curl -X GET -G "http://marshal/api/car/{id}" \
+    -H "Authorization: Bearer {token}"
+```
+
+```javascript
+const url = new URL("http://marshal/api/car/{id}");
+
+    let params = {
+            "id": "1",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/car/{id}`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  required  | ID автомобиля
+
+<!-- END_aba474a5cdf326a52188f558e43ce4ab -->
+
+<!-- START_5f33245fbcedb8d7c9d362711d7ad82c -->
+## Создание нового автомобиля
+
+> Example request:
+
+```bash
+curl -X POST "http://marshal/api/car-add" \
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"user_id":4,"car_brand_id":2,"car_model_id":2,"year":2008,"vin":"2GNFLGEK6C6345315"}'
+
+```
+
+```javascript
+const url = new URL("http://marshal/api/car-add");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "user_id": 4,
+    "car_brand_id": 2,
+    "car_model_id": 2,
+    "year": 2008,
+    "vin": "2GNFLGEK6C6345315"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`POST api/car-add`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    user_id | integer |  required  | ID пользователя
+    car_brand_id | integer |  required  | ID марки
+    car_model_id | integer |  required  | ID модели
+    year | integer |  optional  | Год выпуска
+    vin | string |  optional  | VIN номер
+
+<!-- END_5f33245fbcedb8d7c9d362711d7ad82c -->
+
+<!-- START_e1be7d1a160d7c8fc89eb443565cf03d -->
+## Изменение автомобиля
+
+> Example request:
+
+```bash
+curl -X PUT "http://marshal/api/car-update/{id}" \
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"user_id":4,"car_brand_id":2,"car_model_id":2,"year":2008,"vin":"2GNFLGEK6C6345315"}'
+
+```
+
+```javascript
+const url = new URL("http://marshal/api/car-update/{id}");
+
+    let params = {
+            "id": "1",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "user_id": 4,
+    "car_brand_id": 2,
+    "car_model_id": 2,
+    "year": 2008,
+    "vin": "2GNFLGEK6C6345315"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`PUT api/car-update/{id}`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    user_id | integer |  optional  | ID пользователя
+    car_brand_id | integer |  optional  | ID марки
+    car_model_id | integer |  optional  | ID модели
+    year | integer |  optional  | Год выпуска
+    vin | string |  optional  | VIN номер
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  required  | ID автомобиля
+
+<!-- END_e1be7d1a160d7c8fc89eb443565cf03d -->
+
+<!-- START_2cd771e389f74156c2fe26aada9c0701 -->
+## Удаление автомобиля
+
+> Example request:
+
+```bash
+curl -X DELETE "http://marshal/api/car-detele/{id}" \
+    -H "Authorization: Bearer {token}"
+```
+
+```javascript
+const url = new URL("http://marshal/api/car-detele/{id}");
+
+    let params = {
+            "id": "1",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`DELETE api/car-detele/{id}`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  required  | ID автомобиля
+
+<!-- END_2cd771e389f74156c2fe26aada9c0701 -->
+
+#CarBrand
+
+API методы для работы с марками автомобилей
+<!-- START_533fc2081a71a38ab0ceaa37ebb7f4f7 -->
+## Получение списка марок машин
+
+> Example request:
+
+```bash
+curl -X GET -G "http://marshal/api/carbrands" \
+    -H "Authorization: Bearer {token}"
+```
+
+```javascript
+const url = new URL("http://marshal/api/carbrands");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/carbrands`
+
+
+<!-- END_533fc2081a71a38ab0ceaa37ebb7f4f7 -->
+
+<!-- START_d99b7a8b6e69be47f854bd92dc240784 -->
+## Получение данных по марке
+
+> Example request:
+
+```bash
+curl -X GET -G "http://marshal/api/carbrand/{id}" \
+    -H "Authorization: Bearer {token}"
+```
+
+```javascript
+const url = new URL("http://marshal/api/carbrand/{id}");
+
+    let params = {
+            "id": "1",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/carbrand/{id}`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  required  | ID марки
+
+<!-- END_d99b7a8b6e69be47f854bd92dc240784 -->
+
+<!-- START_279003fcd7f4facd3b5789334254dc50 -->
+## Добавление марки
+
+> Example request:
+
+```bash
+curl -X POST "http://marshal/api/carbrand-add" \
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"car_brand":"Opel"}'
+
+```
+
+```javascript
+const url = new URL("http://marshal/api/carbrand-add");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "car_brand": "Opel"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`POST api/carbrand-add`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    car_brand | string |  optional  | Марка
+
+<!-- END_279003fcd7f4facd3b5789334254dc50 -->
+
+<!-- START_aa6b6df1c7fa425ed33849e3bd323b5b -->
+## Изменение марки
+
+> Example request:
+
+```bash
+curl -X PUT "http://marshal/api/carbrand-update/{id}" \
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"car_brand":"Opel"}'
+
+```
+
+```javascript
+const url = new URL("http://marshal/api/carbrand-update/{id}");
+
+    let params = {
+            "id": "1",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "car_brand": "Opel"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`PUT api/carbrand-update/{id}`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    car_brand | string |  optional  | Марка
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  required  | ID марки
+
+<!-- END_aa6b6df1c7fa425ed33849e3bd323b5b -->
+
+<!-- START_88a981c3d9a08a4e0521efd01c4acfa3 -->
+## Удаление марки
+
+> Example request:
+
+```bash
+curl -X DELETE "http://marshal/api/carbrand-detele/{id}" \
+    -H "Authorization: Bearer {token}"
+```
+
+```javascript
+const url = new URL("http://marshal/api/carbrand-detele/{id}");
+
+    let params = {
+            "id": "1",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`DELETE api/carbrand-detele/{id}`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  required  | ID марки
+
+<!-- END_88a981c3d9a08a4e0521efd01c4acfa3 -->
+
+#CarBrand
+
+API методы для работы с моделями автомобилей
+<!-- START_0fb8c82cae07f2e3c3ffb70fcb88c0ae -->
+## Получение списка моделей машин
+
+> Example request:
+
+```bash
+curl -X GET -G "http://marshal/api/carmodels" \
+    -H "Authorization: Bearer {token}"
+```
+
+```javascript
+const url = new URL("http://marshal/api/carmodels");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/carmodels`
+
+
+<!-- END_0fb8c82cae07f2e3c3ffb70fcb88c0ae -->
+
+<!-- START_cd79f5317500db45acc17082ef273c9c -->
+## Получение списка моделей конкретной марки
+
+> Example request:
+
+```bash
+curl -X GET -G "http://marshal/api/models" \
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"car_brand_id":1}'
+
+```
+
+```javascript
+const url = new URL("http://marshal/api/models");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "car_brand_id": 1
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/models`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    car_brand_id | integer |  optional  | ID марки
+
+<!-- END_cd79f5317500db45acc17082ef273c9c -->
+
+<!-- START_870ad1ac852b769f132ee3a334c3ef03 -->
+## Получение данных по модели
+
+> Example request:
+
+```bash
+curl -X GET -G "http://marshal/api/carmodel/{id}" \
+    -H "Authorization: Bearer {token}"
+```
+
+```javascript
+const url = new URL("http://marshal/api/carmodel/{id}");
+
+    let params = {
+            "id": "1",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/carmodel/{id}`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  required  | ID модели
+
+<!-- END_870ad1ac852b769f132ee3a334c3ef03 -->
+
+<!-- START_9a5f1a20f610b9b354656cc7062aad70 -->
+## Добавление модели
+
+> Example request:
+
+```bash
+curl -X POST "http://marshal/api/carmodel-add" \
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"car_model":"Astra","car_brand_id":2}'
+
+```
+
+```javascript
+const url = new URL("http://marshal/api/carmodel-add");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "car_model": "Astra",
+    "car_brand_id": 2
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`POST api/carmodel-add`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    car_model | string |  optional  | Модель
+    car_brand_id | integer |  optional  | ID марки
+
+<!-- END_9a5f1a20f610b9b354656cc7062aad70 -->
+
+<!-- START_df384e0592b162816baf342e7ddf32c8 -->
+## Изменение модели
+
+> Example request:
+
+```bash
+curl -X PUT "http://marshal/api/carmodel-update/{id}" \
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"car_model":"Opel","car_brand_id":2}'
+
+```
+
+```javascript
+const url = new URL("http://marshal/api/carmodel-update/{id}");
+
+    let params = {
+            "id": "1",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "car_model": "Opel",
+    "car_brand_id": 2
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`PUT api/carmodel-update/{id}`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    car_model | string |  optional  | Модель
+    car_brand_id | integer |  optional  | ID марки
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  required  | ID модели
+
+<!-- END_df384e0592b162816baf342e7ddf32c8 -->
+
+<!-- START_1f518bd8be35e69d4d5528e52886d6d1 -->
+## Удаление модели
+
+> Example request:
+
+```bash
+curl -X DELETE "http://marshal/api/carmodel-detele/{id}" \
+    -H "Authorization: Bearer {token}"
+```
+
+```javascript
+const url = new URL("http://marshal/api/carmodel-detele/{id}");
+
+    let params = {
+            "id": "1",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`DELETE api/carmodel-detele/{id}`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  required  | ID модели
+
+<!-- END_1f518bd8be35e69d4d5528e52886d6d1 -->
+
 #Category
 
 API методы для работы с категориями
@@ -494,7 +1360,7 @@ curl -X GET -G "http://marshal/api/answerMessages" \
 const url = new URL("http://marshal/api/answerMessages");
 
     let params = {
-            "answer_id": "ROBvgpMNPpMbAiu0",
+            "answer_id": "FKTjJUQsVHoAvcHu",
         };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -591,7 +1457,7 @@ Parameter | Status | Description
 curl -X POST "http://marshal/api/message-add" \
     -H "Authorization: Bearer {token}" \
     -H "Content-Type: application/json" \
-    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"hxw8NH1VfhnyjmYQ"}'
+    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"rdxINIGhJMyEZ4ff"}'
 
 ```
 
@@ -608,7 +1474,7 @@ let body = {
     "answer_id": 4,
     "user_id": 1,
     "message": "hello",
-    "attachment": "hxw8NH1VfhnyjmYQ"
+    "attachment": "rdxINIGhJMyEZ4ff"
 }
 
 fetch(url, {
@@ -651,7 +1517,7 @@ Parameter | Type | Status | Description
 curl -X PUT "http://marshal/api/message-update/{id}" \
     -H "Authorization: Bearer {token}" \
     -H "Content-Type: application/json" \
-    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"YcYPHvEJD7T1jmiL"}'
+    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"bnGrwNSJbHR4oCLQ"}'
 
 ```
 
@@ -673,7 +1539,7 @@ let body = {
     "answer_id": 4,
     "user_id": 1,
     "message": "hello",
-    "attachment": "YcYPHvEJD7T1jmiL"
+    "attachment": "bnGrwNSJbHR4oCLQ"
 }
 
 fetch(url, {
@@ -726,7 +1592,7 @@ curl -X DELETE "http://marshal/api/message-detele/{id}" \
 const url = new URL("http://marshal/api/message-detele/{id}");
 
     let params = {
-            "id": "ReBo7eR1yWmprBn4",
+            "id": "to1yTbmeQBDdNyFH",
         };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -1261,7 +2127,7 @@ fetch(url, {
 
 <!-- END_56087f92d4830df772b98a7bf3ef71e9 -->
 
-#Users
+#User
 
 API методы для работы с пользователями
 <!-- START_c3fa189a6c95ca36ad6ac4791a873d23 -->

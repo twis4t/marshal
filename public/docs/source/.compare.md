@@ -1360,7 +1360,7 @@ curl -X GET -G "http://marshal/api/answerMessages" \
 const url = new URL("http://marshal/api/answerMessages");
 
     let params = {
-            "answer_id": "UR66TskFvZRHi3JB",
+            "answer_id": "6IREBqI4RdmNid1R",
         };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -1457,7 +1457,7 @@ Parameter | Status | Description
 curl -X POST "http://marshal/api/message-add" \
     -H "Authorization: Bearer {token}" \
     -H "Content-Type: application/json" \
-    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"h1GvlxB4mWRjMJNY"}'
+    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"G4Pl60k0Hrztu81N"}'
 
 ```
 
@@ -1474,7 +1474,7 @@ let body = {
     "answer_id": 4,
     "user_id": 1,
     "message": "hello",
-    "attachment": "h1GvlxB4mWRjMJNY"
+    "attachment": "G4Pl60k0Hrztu81N"
 }
 
 fetch(url, {
@@ -1517,7 +1517,7 @@ Parameter | Type | Status | Description
 curl -X PUT "http://marshal/api/message-update/{id}" \
     -H "Authorization: Bearer {token}" \
     -H "Content-Type: application/json" \
-    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"Rr62L1z0kLOJX0KD"}'
+    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"MJB6S4gP6p5ZbzR9"}'
 
 ```
 
@@ -1539,7 +1539,7 @@ let body = {
     "answer_id": 4,
     "user_id": 1,
     "message": "hello",
-    "attachment": "Rr62L1z0kLOJX0KD"
+    "attachment": "MJB6S4gP6p5ZbzR9"
 }
 
 fetch(url, {
@@ -1592,7 +1592,7 @@ curl -X DELETE "http://marshal/api/message-delete/{id}" \
 const url = new URL("http://marshal/api/message-delete/{id}");
 
     let params = {
-            "id": "n1GxaeuDbLxGwQcM",
+            "id": "q7UfPGZi3EX5xvg4",
         };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -2334,7 +2334,10 @@ fetch(url, {
 
 ```bash
 curl -X POST "http://marshal/api/register" \
-    -H "Authorization: Bearer {token}"
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"name":"Test","email":"test@test.ru","password":"abS34T3fSg4","c_password":"abS34T3fSg4","initial":true}'
+
 ```
 
 ```javascript
@@ -2342,13 +2345,22 @@ const url = new URL("http://marshal/api/register");
 
 let headers = {
     "Authorization": "Bearer {token}",
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "name": "Test",
+    "email": "test@test.ru",
+    "password": "abS34T3fSg4",
+    "c_password": "abS34T3fSg4",
+    "initial": true
 }
 
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -2378,6 +2390,15 @@ fetch(url, {
 ### HTTP Request
 `POST api/register`
 
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    name | string |  required  | Имя пользователя
+    email | string |  required  | Email
+    password | string |  required  | Пароль
+    c_password | string |  required  | Повторить пароль
+    initial | boolean |  optional  | Признак первичной регистрации
 
 <!-- END_d7b7952e7fdddc07c978c9bdaf757acf -->
 
@@ -2470,21 +2491,37 @@ fetch(url, {
 
 ```bash
 curl -X PUT "http://marshal/api/user-update/{id}" \
-    -H "Authorization: Bearer {token}"
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"name":"Test","email":"test@test.ru","password":"abS34T3fSg4","initial":true}'
+
 ```
 
 ```javascript
 const url = new URL("http://marshal/api/user-update/{id}");
 
+    let params = {
+            "id": "1",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
 let headers = {
     "Authorization": "Bearer {token}",
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "name": "Test",
+    "email": "test@test.ru",
+    "password": "abS34T3fSg4",
+    "initial": true
 }
 
 fetch(url, {
     method: "PUT",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -2501,6 +2538,19 @@ fetch(url, {
 ### HTTP Request
 `PUT api/user-update/{id}`
 
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    name | string |  optional  | Имя пользователя
+    email | string |  optional  | Email
+    password | string |  optional  | Пароль
+    initial | boolean |  optional  | Признак первичной регистрации
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  required  | ID пользователя
 
 <!-- END_0adb2a0611d68b1dde0a5561bc20a189 -->
 

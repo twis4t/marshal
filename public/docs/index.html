@@ -1337,7 +1337,7 @@ fetch(url, {
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/answerMessages");
 
     let params = {
-            "answer_id": "UR66TskFvZRHi3JB",
+            "answer_id": "6IREBqI4RdmNid1R",
         };
     Object.keys(params).forEach(key =&gt; url.searchParams.append(key, params[key]));
 
@@ -1439,7 +1439,7 @@ fetch(url, {
 <pre><code class="language-bash">curl -X POST "http://marshal/api/message-add" \
     -H "Authorization: Bearer {token}" \
     -H "Content-Type: application/json" \
-    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"h1GvlxB4mWRjMJNY"}'
+    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"G4Pl60k0Hrztu81N"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/message-add");
 
@@ -1453,7 +1453,7 @@ let body = {
     "answer_id": 4,
     "user_id": 1,
     "message": "hello",
-    "attachment": "h1GvlxB4mWRjMJNY"
+    "attachment": "G4Pl60k0Hrztu81N"
 }
 
 fetch(url, {
@@ -1517,7 +1517,7 @@ fetch(url, {
 <pre><code class="language-bash">curl -X PUT "http://marshal/api/message-update/{id}" \
     -H "Authorization: Bearer {token}" \
     -H "Content-Type: application/json" \
-    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"Rr62L1z0kLOJX0KD"}'
+    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"MJB6S4gP6p5ZbzR9"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/message-update/{id}");
 
@@ -1536,7 +1536,7 @@ let body = {
     "answer_id": 4,
     "user_id": 1,
     "message": "hello",
-    "attachment": "Rr62L1z0kLOJX0KD"
+    "attachment": "MJB6S4gP6p5ZbzR9"
 }
 
 fetch(url, {
@@ -1619,7 +1619,7 @@ fetch(url, {
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/message-delete/{id}");
 
     let params = {
-            "id": "n1GxaeuDbLxGwQcM",
+            "id": "q7UfPGZi3EX5xvg4",
         };
     Object.keys(params).forEach(key =&gt; url.searchParams.append(key, params[key]));
 
@@ -2224,18 +2224,30 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://marshal/api/register" \
-    -H "Authorization: Bearer {token}"</code></pre>
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"name":"Test","email":"test@test.ru","password":"abS34T3fSg4","c_password":"abS34T3fSg4","initial":true}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/register");
 
 let headers = {
     "Authorization": "Bearer {token}",
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "name": "Test",
+    "email": "test@test.ru",
+    "password": "abS34T3fSg4",
+    "c_password": "abS34T3fSg4",
+    "initial": true
 }
 
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
@@ -2260,6 +2272,49 @@ fetch(url, {
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/register</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>required</td>
+<td>Имя пользователя</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>required</td>
+<td>Email</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>required</td>
+<td>Пароль</td>
+</tr>
+<tr>
+<td>c_password</td>
+<td>string</td>
+<td>required</td>
+<td>Повторить пароль</td>
+</tr>
+<tr>
+<td>initial</td>
+<td>boolean</td>
+<td>optional</td>
+<td>Признак первичной регистрации</td>
+</tr>
+</tbody>
+</table>
 <!-- END_d7b7952e7fdddc07c978c9bdaf757acf -->
 <!-- START_f50fecb2993d22653a99f84a5951e92c -->
 <h2>details api</h2>
@@ -2327,18 +2382,34 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT "http://marshal/api/user-update/{id}" \
-    -H "Authorization: Bearer {token}"</code></pre>
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"name":"Test","email":"test@test.ru","password":"abS34T3fSg4","initial":true}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://marshal/api/user-update/{id}");
+
+    let params = {
+            "id": "1",
+        };
+    Object.keys(params).forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 let headers = {
     "Authorization": "Bearer {token}",
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "name": "Test",
+    "email": "test@test.ru",
+    "password": "abS34T3fSg4",
+    "initial": true
 }
 
 fetch(url, {
     method: "PUT",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
@@ -2350,6 +2421,60 @@ fetch(url, {
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>PUT api/user-update/{id}</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>optional</td>
+<td>Имя пользователя</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>optional</td>
+<td>Email</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>optional</td>
+<td>Пароль</td>
+</tr>
+<tr>
+<td>initial</td>
+<td>boolean</td>
+<td>optional</td>
+<td>Признак первичной регистрации</td>
+</tr>
+</tbody>
+</table>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>ID пользователя</td>
+</tr>
+</tbody>
+</table>
 <!-- END_0adb2a0611d68b1dde0a5561bc20a189 -->
       </div>
       <div class="dark-box">

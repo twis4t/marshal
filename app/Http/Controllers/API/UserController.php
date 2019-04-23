@@ -79,6 +79,12 @@ class UserController extends Controller
 
     /**
      * Register api
+     * 
+     * @bodyParam name string required Имя пользователя Example: Test
+     * @bodyParam email string required Email Example: test@test.ru
+     * @bodyParam password string required Пароль Example: abS34T3fSg4
+     * @bodyParam c_password string required Повторить пароль Example: abS34T3fSg4
+     * @bodyParam initial bool Признак первичной регистрации Example: 1
      *
      * @return \Illuminate\Http\Response
      */
@@ -117,6 +123,13 @@ class UserController extends Controller
 
     /**
      * Изменение профиля пользователя
+     * 
+     * @bodyParam name string Имя пользователя Example: Test
+     * @bodyParam email string Email Example: test@test.ru
+     * @bodyParam password string Пароль Example: abS34T3fSg4
+     * @bodyParam initial bool Признак первичной регистрации Example: 1
+     * 
+     * @queryParam id required ID пользователя Example: 1
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

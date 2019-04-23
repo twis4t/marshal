@@ -22,7 +22,12 @@ class Shop extends Model
 
     public function categories()
     {
-        return $this->belongsToMany('App\Category', 'shop_categories');
+        return $this->belongsToMany(Category::class, 'shop_categories');
+    }
+
+    public function inFavorites()
+    {
+        return $this->belongsToMany(User::class, 'favorite_shops')->withPivot('comment');
     }
 
 }

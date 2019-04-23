@@ -17,7 +17,7 @@ class Category extends Model
 
     public function shops()
     {
-        return $this->belongsToMany('App\Shop', 'shop_categories');
+        return $this->belongsToMany(Shop::class, 'shop_categories');
     }
 
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Shop;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -85,6 +87,50 @@ class ShopController extends Controller
         $requestData = $request->all();
         $shop = Shop::where('id', $request->id)->first();
         $result = $shop->categories()->sync(json_decode($requestData['categories']));
+        return response()->json(['result' => $result], 200);
+    }
+
+    /**
+     * Получить избранные магазины
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getFavoriteShops()
+    {
+        $user = Auth::user();
+        $result = $user->favoriteShops()->get();
+        return response()->json(['result' => $result], 200);
+    }
+
+    /**
+     * Добавить в избранное
+     *
+     * @queryParam id integer required ID магазина Example: 4
+     * @bodyParam comment string Комментарий Example: 'Отличный магазин'
+     * 
+     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addToFavorite($id, Request $request)
+    {
+        $user = Auth::user();
+        $result = $user->favoriteShops()->syncWithoutDetaching([$id => ['comment' => $request->comment ?? null]]);
+        return response()->json(['result' => $result], 200);
+    }
+
+    /**
+     * Удалить из избранного
+     *
+     * @queryParam id integer required ID магазина Example: 4
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function removeFromFavorite($id)
+    {
+        $user = Auth::user();
+        $result = $user->favoriteShops()->detach($id);
         return response()->json(['result' => $result], 200);
     }
 }

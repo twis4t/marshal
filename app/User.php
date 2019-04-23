@@ -79,5 +79,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Car::class, 'user_id');
     }
+
+    public function favoriteShops()
+    {
+        return $this->belongsToMany(Shop::class, 'favorite_shops')->withPivot('comment');
+    }
     
 }

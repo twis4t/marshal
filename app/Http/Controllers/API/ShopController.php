@@ -105,7 +105,7 @@ class ShopController extends Controller
     /**
      * Добавить в избранное
      *
-     * @queryParam id integer required ID магазина Example: 4
+     * @queryParam id required ID магазина Example: 4
      * @bodyParam comment string Комментарий Example: 'Отличный магазин'
      * 
      * @param  int  $id
@@ -122,7 +122,7 @@ class ShopController extends Controller
     /**
      * Удалить из избранного
      *
-     * @queryParam id integer required ID магазина Example: 4
+     * @queryParam id required ID магазина Example: 4
      * 
      * @param  int  $id
      * @return \Illuminate\Http\Response

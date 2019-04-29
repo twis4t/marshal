@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Role;
 use App\ClientApp;
 use App\Request as RequestModel;
 use Validator;
@@ -155,5 +156,16 @@ class UserController extends Controller
             $user->requests_ratio = ($user->requests_count * 100 / $requestsCount);           
         });       
         return $users;
+    }
+
+     /**
+     * Получение списка ролей пользователей
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function roles()
+    {
+        $roles = Role::all();
+        return $roles;
     }
 }

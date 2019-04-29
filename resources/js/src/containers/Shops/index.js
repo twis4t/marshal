@@ -98,6 +98,7 @@ class Shops extends Component {
     },
     {
       title: 'В архив',
+      disabled: data.archive_date !== null,
       action: () => {
         this.archiveShop(data.id)
       },

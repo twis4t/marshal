@@ -5,6 +5,7 @@ import { accountReducer } from './account'
 import { settingsReducer } from './settings'
 import { shopReducer } from './shop'
 import { categoryReducer } from './category'
+import { roleReducer } from './role'
 import { notistackReducer } from './notistack'
 
 export const rootReducer = history =>
@@ -14,6 +15,7 @@ export const rootReducer = history =>
     account: accountReducer,
     shop: shopReducer,
     category: categoryReducer,
+    role: roleReducer,
     settings: settingsReducer,
     notistack: notistackReducer,
   })

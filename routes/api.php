@@ -16,6 +16,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	/* User */
 	Route::get('users', 'API\UserController@index');
+	Route::get('roles', 'API\UserController@roles');
 	Route::put('user-update/{id}', 'API\UserController@update');
 
 	/* Shop */

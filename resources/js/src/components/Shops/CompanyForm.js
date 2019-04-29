@@ -119,7 +119,7 @@ class CompanyForm extends React.Component {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{this.state.isNew ? 'Добавить' : 'Изменить'} компанию</DialogTitle>
+          <DialogTitle id="alert-dialog-title">{this.state.isNew ? 'Добавить' : 'Редактировать'} компанию</DialogTitle>
           <DialogContent>
             <form className={classes.form}>
               <FormControl margin="normal" required fullWidth>

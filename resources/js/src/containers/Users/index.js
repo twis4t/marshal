@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 /* actions */
-import { getAccounts } from '@/actions/AccountActions'
+import { getAccounts, editUser, addUser, setStatus } from '@/actions/AccountActions'
+import { getRoles } from '@/actions/RoleActions'
 
 import classNames from 'classnames'
 import styles from './styles'
@@ -11,6 +12,8 @@ import moment from 'moment'
 import { isNull } from 'util'
 
 import ModuleTitle from '@/components/ModuleTitle'
+import UserForm from '@/components/Users/UserForm'
+import ActionButton from '@/components/ActionButton'
 
 import { withStyles } from '@material-ui/core/styles'
 import { Grid as DxGrid, Table, TableHeaderRow, SearchPanel, Toolbar } from '@devexpress/dx-react-grid-material-ui'
@@ -23,6 +26,15 @@ import {
 } from '@devexpress/dx-react-grid'
 import { LockOpen as LockOpenIcon } from '@material-ui/icons'
 import { Paper, Button, LinearProgress, Switch, FormControlLabel, Avatar } from '@material-ui/core'
+
+// Компонент отображения кнопки действий
+const ActionTypeProvider = props => (
+  <DataTypeProvider formatterComponent={data => ActionButtonFormatter({ ...data, ...props })} {...props} />
+)
+const ActionButtonFormatter = meta => <ActionButton actions={meta.actions(meta.row)} />
+ActionTypeProvider.propTypes = {
+  actions: PropTypes.func.isRequired,
+}
 
 // Выделение строк при наведении
 const CustomTableRowBase = ({ classes, ...restProps }) => <Table.Row className={classes.customRow} {...restProps} />
@@ -75,10 +87,14 @@ class Users extends Component {
   state = {
     sorting: [{ columnName: 'name', direction: 'asc' }],
     showBanned: false,
+    userFormDialog: false,
+    isNewUser: true,
+    userForm: {},
   }
 
   componentDidMount = async () => {
-    await this.props.getAccounts()
+    this.props.getAccounts()
+    this.props.getRoles()
   }
 
   changeSorting = sorting => this.setState({ sorting })
@@ -97,13 +113,73 @@ class Users extends Component {
     this.setState({ showBanned: event.target.checked })
   }
 
+  userFormOpen = () => {
+    this.setState({ userFormDialog: true })
+  }
+
+  userFormClose = () => {
+    this.setState({ userFormDialog: false })
+  }
+
+  userFormSubmit = async data => {
+    this.setState({
+      userForm: data,
+    })
+    if (this.state.isNewUser) {
+      await this.props.addUser(data)
+    } else {
+      await this.props.editUser(data.id, data)
+    }
+
+    this.props.getAccounts()
+  }
+
+  addUserDialog = () => {
+    this.setState({ userForm: {}, isNewUser: true })
+    this.userFormOpen()
+  }
+
+  setUserStatus = async (id, date) => {
+    date = date === null ? date : date || moment().format('YYYY-MM-DD')
+    await this.props.setStatus(id, date)
+    this.props.getAccounts()
+  }
+
+  /**
+   * Функция возвращает список возможных
+   * действий со строкой реестра
+   */
+  ActionsList = data => [
+    {
+      title: 'Редактировать',
+      action: () => {
+        this.setState({ userForm: data, isNewUser: false })
+        this.userFormOpen()
+      },
+    },
+    {
+      title: 'Заблокировать',
+      visible: data.banned_date === null,
+      action: () => {
+        this.setUserStatus(data.id)
+      },
+    },
+    {
+      title: 'Восстановить',
+      visible: data.banned_date !== null,
+      action: () => {
+        this.setUserStatus(data.id, null)
+      },
+    },
+  ]
+
   render() {
     const { classes, account } = this.props
     return (
       <div className={classes.flexGrow}>
         <ModuleTitle title="Управление пользователями" />
         <div className={classes.actionsBox}>
-          <Button variant="outlined" color="primary">
+          <Button variant="outlined" color="primary" onClick={this.addUserDialog}>
             Добавить
           </Button>
           <div className={classes.flexGrow} />
@@ -157,12 +233,22 @@ class Users extends Component {
             <SearchPanel defaultValue="" messages={{ searchPlaceholder: 'Поиск' }} />
             <TableHeaderRow showSortingControls messages={{ sortingHint: 'Сортировка' }} />
 
+            <ActionTypeProvider for={['actions']} actions={this.ActionsList} />
             <RoleTypeProvider for={['role']} />
             <UserNameTypeProvider for={['name']} />
             <BanTypeProvider for={['banned_date']} />
             <RatioTypeProvider for={['requests_ratio']} />
           </DxGrid>
         </Paper>
+        <UserForm
+          isNew={this.state.isNewUser}
+          status={this.state.userFormDialog}
+          onOpen={this.userFormOpen}
+          onClose={this.userFormClose}
+          onSubmit={this.userFormSubmit}
+          data={this.state.userForm}
+          roles={this.props.role.roles}
+        />
       </div>
     )
   }
@@ -171,17 +257,27 @@ class Users extends Component {
 Users.propTypes = {
   classes: PropTypes.object.isRequired,
   account: PropTypes.object.isRequired,
+  role: PropTypes.object.isRequired,
   getAccounts: PropTypes.func.isRequired,
+  editUser: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
+  addUser: PropTypes.func.isRequired,
+  getRoles: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = store => {
   return {
     account: store.account,
+    role: store.role,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   getAccounts: () => dispatch(getAccounts()),
+  editUser: (id, data) => dispatch(editUser(id, data)),
+  setStatus: (id, date) => dispatch(setStatus(id, date)),
+  addUser: data => dispatch(addUser(data)),
+  getRoles: () => dispatch(getRoles()),
 })
 
 export default connect(

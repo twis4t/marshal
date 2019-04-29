@@ -55,11 +55,17 @@ class ActionButton extends React.Component {
             },
           }}
         >
-          {actions.map(option => (
-            <MenuItem key={generateKey(option.title)} onClick={() => this.handleItemClick(option.action)}>
-              {option.title}
-            </MenuItem>
-          ))}
+          {actions
+            .filter(item => item.visible || item.visible === undefined)
+            .map(option => (
+              <MenuItem
+                key={generateKey(option.title)}
+                disabled={option.disabled || false}
+                onClick={() => this.handleItemClick(option.action)}
+              >
+                {option.title}
+              </MenuItem>
+            ))}
         </Menu>
       </div>
     )

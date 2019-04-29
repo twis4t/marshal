@@ -187,18 +187,18 @@ fetch(url, {
 
 <!-- END_94acdbbb2fd39a6986d5c237442948aa -->
 
-<!-- START_2004f51cb9764abff326b3da3344d606 -->
+<!-- START_25a994f99a99a06997539cf1012d139c -->
 ## Удаление ответа
 
 > Example request:
 
 ```bash
-curl -X DELETE "http://marshal/api/answer-detele/{id}" \
+curl -X DELETE "http://marshal/api/answer-delete/{id}" \
     -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
-const url = new URL("http://marshal/api/answer-detele/{id}");
+const url = new URL("http://marshal/api/answer-delete/{id}");
 
 let headers = {
     "Authorization": "Bearer {token}",
@@ -223,10 +223,10 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`DELETE api/answer-detele/{id}`
+`DELETE api/answer-delete/{id}`
 
 
-<!-- END_2004f51cb9764abff326b3da3344d606 -->
+<!-- END_25a994f99a99a06997539cf1012d139c -->
 
 #Car
 
@@ -457,18 +457,18 @@ Parameter | Status | Description
 
 <!-- END_e1be7d1a160d7c8fc89eb443565cf03d -->
 
-<!-- START_2cd771e389f74156c2fe26aada9c0701 -->
+<!-- START_a7493535a62a79701734e132c253ea79 -->
 ## Удаление автомобиля
 
 > Example request:
 
 ```bash
-curl -X DELETE "http://marshal/api/car-detele/{id}" \
+curl -X DELETE "http://marshal/api/car-delete/{id}" \
     -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
-const url = new URL("http://marshal/api/car-detele/{id}");
+const url = new URL("http://marshal/api/car-delete/{id}");
 
     let params = {
             "id": "1",
@@ -498,7 +498,7 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`DELETE api/car-detele/{id}`
+`DELETE api/car-delete/{id}`
 
 #### Query Parameters
 
@@ -506,7 +506,7 @@ Parameter | Status | Description
 --------- | ------- | ------- | -----------
     id |  required  | ID автомобиля
 
-<!-- END_2cd771e389f74156c2fe26aada9c0701 -->
+<!-- END_a7493535a62a79701734e132c253ea79 -->
 
 #CarBrand
 
@@ -721,18 +721,18 @@ Parameter | Status | Description
 
 <!-- END_aa6b6df1c7fa425ed33849e3bd323b5b -->
 
-<!-- START_88a981c3d9a08a4e0521efd01c4acfa3 -->
+<!-- START_99aecbf73cc1b6b537760aed7104be26 -->
 ## Удаление марки
 
 > Example request:
 
 ```bash
-curl -X DELETE "http://marshal/api/carbrand-detele/{id}" \
+curl -X DELETE "http://marshal/api/carbrand-delete/{id}" \
     -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
-const url = new URL("http://marshal/api/carbrand-detele/{id}");
+const url = new URL("http://marshal/api/carbrand-delete/{id}");
 
     let params = {
             "id": "1",
@@ -762,7 +762,7 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`DELETE api/carbrand-detele/{id}`
+`DELETE api/carbrand-delete/{id}`
 
 #### Query Parameters
 
@@ -770,7 +770,7 @@ Parameter | Status | Description
 --------- | ------- | ------- | -----------
     id |  required  | ID марки
 
-<!-- END_88a981c3d9a08a4e0521efd01c4acfa3 -->
+<!-- END_99aecbf73cc1b6b537760aed7104be26 -->
 
 #CarBrand
 
@@ -1043,18 +1043,18 @@ Parameter | Status | Description
 
 <!-- END_df384e0592b162816baf342e7ddf32c8 -->
 
-<!-- START_1f518bd8be35e69d4d5528e52886d6d1 -->
+<!-- START_e583d8d756ef5459d24eebf16f473716 -->
 ## Удаление модели
 
 > Example request:
 
 ```bash
-curl -X DELETE "http://marshal/api/carmodel-detele/{id}" \
+curl -X DELETE "http://marshal/api/carmodel-delete/{id}" \
     -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
-const url = new URL("http://marshal/api/carmodel-detele/{id}");
+const url = new URL("http://marshal/api/carmodel-delete/{id}");
 
     let params = {
             "id": "1",
@@ -1084,7 +1084,7 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`DELETE api/carmodel-detele/{id}`
+`DELETE api/carmodel-delete/{id}`
 
 #### Query Parameters
 
@@ -1092,7 +1092,7 @@ Parameter | Status | Description
 --------- | ------- | ------- | -----------
     id |  required  | ID модели
 
-<!-- END_1f518bd8be35e69d4d5528e52886d6d1 -->
+<!-- END_e583d8d756ef5459d24eebf16f473716 -->
 
 #Category
 
@@ -1261,18 +1261,18 @@ fetch(url, {
 
 <!-- END_bc5a68f03fdde1265e94acde87f4b417 -->
 
-<!-- START_0ddf8bc62feef253fc2ad60405005853 -->
+<!-- START_884b14946889011c735504c58cc4eed4 -->
 ## Удаление категории
 
 > Example request:
 
 ```bash
-curl -X DELETE "http://marshal/api/category-detele/{id}" \
+curl -X DELETE "http://marshal/api/category-delete/{id}" \
     -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
-const url = new URL("http://marshal/api/category-detele/{id}");
+const url = new URL("http://marshal/api/category-delete/{id}");
 
 let headers = {
     "Authorization": "Bearer {token}",
@@ -1297,10 +1297,10 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`DELETE api/category-detele/{id}`
+`DELETE api/category-delete/{id}`
 
 
-<!-- END_0ddf8bc62feef253fc2ad60405005853 -->
+<!-- END_884b14946889011c735504c58cc4eed4 -->
 
 #Message
 
@@ -1360,7 +1360,7 @@ curl -X GET -G "http://marshal/api/answerMessages" \
 const url = new URL("http://marshal/api/answerMessages");
 
     let params = {
-            "answer_id": "FKTjJUQsVHoAvcHu",
+            "answer_id": "6IREBqI4RdmNid1R",
         };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -1457,7 +1457,7 @@ Parameter | Status | Description
 curl -X POST "http://marshal/api/message-add" \
     -H "Authorization: Bearer {token}" \
     -H "Content-Type: application/json" \
-    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"rdxINIGhJMyEZ4ff"}'
+    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"G4Pl60k0Hrztu81N"}'
 
 ```
 
@@ -1474,7 +1474,7 @@ let body = {
     "answer_id": 4,
     "user_id": 1,
     "message": "hello",
-    "attachment": "rdxINIGhJMyEZ4ff"
+    "attachment": "G4Pl60k0Hrztu81N"
 }
 
 fetch(url, {
@@ -1517,7 +1517,7 @@ Parameter | Type | Status | Description
 curl -X PUT "http://marshal/api/message-update/{id}" \
     -H "Authorization: Bearer {token}" \
     -H "Content-Type: application/json" \
-    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"bnGrwNSJbHR4oCLQ"}'
+    -d '{"answer_id":4,"user_id":1,"message":"hello","attachment":"MJB6S4gP6p5ZbzR9"}'
 
 ```
 
@@ -1539,7 +1539,7 @@ let body = {
     "answer_id": 4,
     "user_id": 1,
     "message": "hello",
-    "attachment": "bnGrwNSJbHR4oCLQ"
+    "attachment": "MJB6S4gP6p5ZbzR9"
 }
 
 fetch(url, {
@@ -1578,21 +1578,21 @@ Parameter | Status | Description
 
 <!-- END_572e7976574d0ce4f740defe3e5a3399 -->
 
-<!-- START_0ab67881d34189f015be0d972fd6b6ff -->
+<!-- START_e8adc2d02144370ed930106b8330a039 -->
 ## Удаление сообщения
 
 > Example request:
 
 ```bash
-curl -X DELETE "http://marshal/api/message-detele/{id}" \
+curl -X DELETE "http://marshal/api/message-delete/{id}" \
     -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
-const url = new URL("http://marshal/api/message-detele/{id}");
+const url = new URL("http://marshal/api/message-delete/{id}");
 
     let params = {
-            "id": "to1yTbmeQBDdNyFH",
+            "id": "q7UfPGZi3EX5xvg4",
         };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -1619,7 +1619,7 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`DELETE api/message-detele/{id}`
+`DELETE api/message-delete/{id}`
 
 #### Query Parameters
 
@@ -1627,7 +1627,7 @@ Parameter | Status | Description
 --------- | ------- | ------- | -----------
     id |  required  | ID сообщения
 
-<!-- END_0ab67881d34189f015be0d972fd6b6ff -->
+<!-- END_e8adc2d02144370ed930106b8330a039 -->
 
 #Request
 
@@ -1837,18 +1837,18 @@ fetch(url, {
 
 <!-- END_01ceca6128a7cd6c8dca4cd4b3b7f0eb -->
 
-<!-- START_d62ce0015a84418e64c348d457504dd6 -->
+<!-- START_47d746fe47d935af7176bab8bd78afc0 -->
 ## Удаление заявки
 
 > Example request:
 
 ```bash
-curl -X DELETE "http://marshal/api/request-detele/{id}" \
+curl -X DELETE "http://marshal/api/request-delete/{id}" \
     -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
-const url = new URL("http://marshal/api/request-detele/{id}");
+const url = new URL("http://marshal/api/request-delete/{id}");
 
 let headers = {
     "Authorization": "Bearer {token}",
@@ -1873,10 +1873,10 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`DELETE api/request-detele/{id}`
+`DELETE api/request-delete/{id}`
 
 
-<!-- END_d62ce0015a84418e64c348d457504dd6 -->
+<!-- END_47d746fe47d935af7176bab8bd78afc0 -->
 
 #Shop
 
@@ -1962,6 +1962,47 @@ fetch(url, {
 
 
 <!-- END_9094ff55330ddf830e2a603f42fcebf7 -->
+
+<!-- START_bebfc0a8c45164027b88ad5710fe3437 -->
+## Получить избранные магазины
+
+> Example request:
+
+```bash
+curl -X GET -G "http://marshal/api/favorite-shops" \
+    -H "Authorization: Bearer {token}"
+```
+
+```javascript
+const url = new URL("http://marshal/api/favorite-shops");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/favorite-shops`
+
+
+<!-- END_bebfc0a8c45164027b88ad5710fe3437 -->
 
 <!-- START_c2ea90c93f08a6a9f395c7bf37ba570c -->
 ## Добавление нового магазина
@@ -2086,18 +2127,133 @@ fetch(url, {
 
 <!-- END_b7c0c2cfd1e39dd0697eb7d193abd036 -->
 
-<!-- START_56087f92d4830df772b98a7bf3ef71e9 -->
+<!-- START_21f421204fc013f8cc46abcab3f9a166 -->
+## Добавить в избранное
+
+> Example request:
+
+```bash
+curl -X PUT "http://marshal/api/favorite-shop-add/{id}" \
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"comment":"'\u041e\u0442\u043b\u0438\u0447\u043d\u044b\u0439 \u043c\u0430\u0433\u0430\u0437\u0438\u043d'"}'
+
+```
+
+```javascript
+const url = new URL("http://marshal/api/favorite-shop-add/{id}");
+
+    let params = {
+            "id": "4",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "comment": "'\u041e\u0442\u043b\u0438\u0447\u043d\u044b\u0439 \u043c\u0430\u0433\u0430\u0437\u0438\u043d'"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`PUT api/favorite-shop-add/{id}`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    comment | string |  optional  | Комментарий
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  required  | ID магазина
+
+<!-- END_21f421204fc013f8cc46abcab3f9a166 -->
+
+<!-- START_da04524bfcf3b0a5d5f4d0c73ee6b5e0 -->
+## Удалить из избранного
+
+> Example request:
+
+```bash
+curl -X PUT "http://marshal/api/favorite-shop-remove/{id}" \
+    -H "Authorization: Bearer {token}"
+```
+
+```javascript
+const url = new URL("http://marshal/api/favorite-shop-remove/{id}");
+
+    let params = {
+            "id": "4",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`PUT api/favorite-shop-remove/{id}`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  required  | ID магазина
+
+<!-- END_da04524bfcf3b0a5d5f4d0c73ee6b5e0 -->
+
+<!-- START_163c55e940a56ff97ed791554db5e084 -->
 ## Удаление магазина
 
 > Example request:
 
 ```bash
-curl -X DELETE "http://marshal/api/shop-detele/{id}" \
+curl -X DELETE "http://marshal/api/shop-delete/{id}" \
     -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
-const url = new URL("http://marshal/api/shop-detele/{id}");
+const url = new URL("http://marshal/api/shop-delete/{id}");
 
 let headers = {
     "Authorization": "Bearer {token}",
@@ -2122,10 +2278,10 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`DELETE api/shop-detele/{id}`
+`DELETE api/shop-delete/{id}`
 
 
-<!-- END_56087f92d4830df772b98a7bf3ef71e9 -->
+<!-- END_163c55e940a56ff97ed791554db5e084 -->
 
 #User
 
@@ -2178,7 +2334,10 @@ fetch(url, {
 
 ```bash
 curl -X POST "http://marshal/api/register" \
-    -H "Authorization: Bearer {token}"
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"name":"Test","email":"test@test.ru","password":"abS34T3fSg4","c_password":"abS34T3fSg4","initial":true}'
+
 ```
 
 ```javascript
@@ -2186,13 +2345,22 @@ const url = new URL("http://marshal/api/register");
 
 let headers = {
     "Authorization": "Bearer {token}",
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "name": "Test",
+    "email": "test@test.ru",
+    "password": "abS34T3fSg4",
+    "c_password": "abS34T3fSg4",
+    "initial": true
 }
 
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -2222,6 +2390,15 @@ fetch(url, {
 ### HTTP Request
 `POST api/register`
 
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    name | string |  required  | Имя пользователя
+    email | string |  required  | Email
+    password | string |  required  | Пароль
+    c_password | string |  required  | Повторить пароль
+    initial | boolean |  optional  | Признак первичной регистрации
 
 <!-- END_d7b7952e7fdddc07c978c9bdaf757acf -->
 
@@ -2314,21 +2491,37 @@ fetch(url, {
 
 ```bash
 curl -X PUT "http://marshal/api/user-update/{id}" \
-    -H "Authorization: Bearer {token}"
+    -H "Authorization: Bearer {token}" \
+    -H "Content-Type: application/json" \
+    -d '{"name":"Test","email":"test@test.ru","password":"abS34T3fSg4","initial":true}'
+
 ```
 
 ```javascript
 const url = new URL("http://marshal/api/user-update/{id}");
 
+    let params = {
+            "id": "1",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
 let headers = {
     "Authorization": "Bearer {token}",
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "name": "Test",
+    "email": "test@test.ru",
+    "password": "abS34T3fSg4",
+    "initial": true
 }
 
 fetch(url, {
     method: "PUT",
     headers: headers,
+    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -2345,6 +2538,19 @@ fetch(url, {
 ### HTTP Request
 `PUT api/user-update/{id}`
 
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    name | string |  optional  | Имя пользователя
+    email | string |  optional  | Email
+    password | string |  optional  | Пароль
+    initial | boolean |  optional  | Признак первичной регистрации
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    id |  required  | ID пользователя
 
 <!-- END_0adb2a0611d68b1dde0a5561bc20a189 -->
 

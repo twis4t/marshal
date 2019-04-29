@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password'
+        'name', 'email', 'password', 'initial'
     ];
 
     /**
@@ -78,6 +78,11 @@ class User extends Authenticatable
     public function messages()
     {
         return $this->hasMany(Car::class, 'user_id');
+    }
+
+    public function favoriteShops()
+    {
+        return $this->belongsToMany(Shop::class, 'favorite_shops')->withPivot('comment');
     }
     
 }

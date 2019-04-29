@@ -60,7 +60,9 @@ const RoleFormatter = ({ value }) => (isNull(value) ? '' : value.role)
 // Отображаем блокировку
 const BanTypeProvider = props => <DataTypeProvider formatterComponent={BanFormatter} {...props} />
 const BanFormatter = ({ value }) =>
-  isNull(value) ? '' : (
+  isNull(value) ? (
+    ''
+  ) : (
     <span title={'Заблокирован с ' + moment(value).format('DD.MM.YYYY')}>
       <LockOpenIcon color="secondary" />
     </span>
@@ -121,12 +123,12 @@ class Users extends Component {
               { name: 'email', title: 'Email' },
               { name: 'role', title: 'Роль' },
               // { name: 'shop', title: 'Магазин' },
-              { name: 'banned_date', title: 'Блок' },
               { name: 'requests_ratio', title: '% Заявок' },
               { name: 'requests_count', title: 'Заявок' },
               { name: 'answers_count', title: 'Ответов' },
               { name: 'cars_count', title: 'Машин' },
               { name: 'messages_count', title: 'Сообщений' },
+              { name: 'banned_date', title: 'Блок' },
               { name: 'actions', title: 'Действия' },
             ]}
           >
@@ -142,11 +144,12 @@ class Users extends Component {
               rowComponent={CustomTableRow}
               columnExtensions={[
                 { columnName: 'actions', width: 120, align: 'center' },
-                { columnName: 'requests_count', width: 120, align: 'left' },
-                { columnName: 'answers_count', width: 120, align: 'left' },
-                { columnName: 'cars_count', width: 120, align: 'left' },
-                { columnName: 'messages_count', width: 120, align: 'left' },
-                { columnName: 'banned_date', width: 120, align: 'left' },
+                { columnName: 'requests_count', width: 105, align: 'left' },
+                { columnName: 'answers_count', width: 105, align: 'left' },
+                { columnName: 'cars_count', width: 105, align: 'left' },
+                { columnName: 'messages_count', width: 110, align: 'left' },
+                { columnName: 'banned_date', width: 100, align: 'left' },
+                { columnName: 'requests_ratio', width: 170, align: 'left' },
               ]}
               messages={{ noData: 'Нет данных' }}
             />

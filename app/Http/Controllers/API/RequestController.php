@@ -21,7 +21,7 @@ class RequestController extends Controller
      */
     public function index()
     {
-        return RequestModel::all();
+        return RequestModel::with('user:id,name')->withCount('answers')->get();
     }
 
     /**

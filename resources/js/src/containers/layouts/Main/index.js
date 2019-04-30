@@ -31,6 +31,7 @@ import {
   Store as StoreIcon,
   Search as SearchIcon,
   AccountCircle as AccountCircleIcon,
+  ListAlt as ListAltIcon,
 } from '@material-ui/icons'
 import Notifier from '@/components/Notifier'
 import styles from './styles'
@@ -119,12 +120,7 @@ export default function MainLayout(Component) {
               <ListItemLink to="/" primary="Главная" icon={<HomeIcon />} />
               <ListItemLink to="/shops" primary="Магазины" icon={<StoreIcon />} />
               <ListItemLink to="/users" primary="Пользователи" icon={<AccountCircleIcon />} />
-              {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon>{index % 2 === 0 ? <NotificationsIcon /> : <MenuIcon />}</ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
+              <ListItemLink to="/requests" primary="Заявки" icon={<ListAltIcon />} />
             </List>
             <Divider />
             <div className={classes.flexGrow} />

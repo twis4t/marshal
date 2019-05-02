@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Answer;
+use App\Request as RequestModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,6 +32,13 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
+        // Обновляем статус заявки (Новая -> В работе) при необходимости
+        $req = RequestModel::find($request->request_id);
+        if ($req->status_id == 1) {
+            $req->status_id = 2;
+            $req->save();
+        }
+
         $requestData = $request->all();
         $result = Answer::create($requestData);
         return response()->json(['result' => $result], 200);

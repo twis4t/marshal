@@ -16,6 +16,7 @@ class Request extends Model
         'car_id',
         'category_id',
         'shop_id',
+        'status_id',
         'text',
         'vin'
     ];
@@ -29,7 +30,8 @@ class Request extends Model
         'user_id' => 'integer',
         'car_id' => 'integer',
         'category_id' => 'integer',
-        'shop_id' => 'integer'
+        'shop_id' => 'integer',
+        'status_id' => 'integer'
     ];
 
     public function category(){
@@ -42,6 +44,14 @@ class Request extends Model
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function shop(){
+        return $this->belongsTo(Shop::class, 'shop_id');
+    }
+
+    public function status(){
+        return $this->belongsTo(RequestStatus::class, 'status_id');
     }
 
     public function answers()

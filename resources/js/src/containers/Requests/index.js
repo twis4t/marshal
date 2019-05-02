@@ -17,7 +17,7 @@ import ModuleTitle from '@/components/ModuleTitle'
 import ActionButton from '@/components/ActionButton'
 
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, Button, LinearProgress } from '@material-ui/core'
+import { Paper, LinearProgress } from '@material-ui/core'
 
 // Компонент отображения кнопки действий
 const ActionTypeProvider = props => (
@@ -39,6 +39,14 @@ CustomTableRowBase.propTypes = {
 const UserTypeProvider = props => <DataTypeProvider formatterComponent={UserFormatter} {...props} />
 const UserFormatter = ({ value }) => (isNull(value) ? '' : value.name)
 
+// Отображаем статус в ячейке
+const StatusTypeProvider = props => <DataTypeProvider formatterComponent={StatusFormatter} {...props} />
+const StatusFormatter = ({ value }) => (isNull(value) ? '' : value.status)
+
+// Отображаем магазин в ячейке
+const ShopTypeProvider = props => <DataTypeProvider formatterComponent={ShopFormatter} {...props} />
+const ShopFormatter = ({ value }) => (isNull(value) ? '' : value.name)
+
 // Отображаем дату в ячейке
 const DateTypeProvider = props => <DataTypeProvider formatterComponent={DateFormatter} {...props} />
 const DateFormatter = ({ value }) => moment(value).format('DD.MM.YYYY HH:mm:SS')
@@ -50,12 +58,12 @@ NumberFormatter.propTypes = {
   value: PropTypes.number.isRequired,
 }
 
-// Отображаем номер в ячейке
+// Отображаем количество ответов в ячейке
 const AnswerTypeProvider = props => (
   <DataTypeProvider formatterComponent={withStyles(styles)(AnswerFormatter)} {...props} />
 )
 const AnswerFormatter = ({ classes, value }) => (
-  <span className={value ? classes.answersCountRed : classes.answersCountGreen}>{value}</span>
+  <span className={value ? classes.answersCountGreen : classes.answersCountRed}>{value}</span>
 )
 AnswerFormatter.propTypes = {
   value: PropTypes.number.isRequired,
@@ -65,6 +73,10 @@ AnswerFormatter.propTypes = {
 class Requests extends Component {
   state = {
     sorting: [{ columnName: 'id', direction: 'asc' }],
+    dateFrom: new Date(),
+    dateTo: new Date(),
+    currentUser: 0,
+    currentShop: 0,
   }
 
   componentDidMount = async () => {
@@ -72,6 +84,14 @@ class Requests extends Component {
   }
 
   changeSorting = sorting => this.setState({ sorting })
+
+  handleDateFromChange = date => {
+    this.setState({ dateFrom: date })
+  }
+
+  handleDateToChange = date => {
+    this.setState({ dateTo: date })
+  }
 
   /**
    * Функция возвращает список возможных
@@ -92,9 +112,6 @@ class Requests extends Component {
       <div className={classes.flexGrow}>
         <ModuleTitle title="Просмотр заявок" />
         <div className={classes.actionsBox}>
-          <Button variant="outlined" color="primary" onClick={console.log(0)}>
-            Button
-          </Button>
           <div className={classes.flexGrow} />
         </div>
         <Paper className={classNames(classes.paperCard, classes.flexGrow)}>
@@ -104,9 +121,11 @@ class Requests extends Component {
             rows={request.requests}
             columns={[
               { name: 'id', title: 'Номер' },
+              { name: 'status', title: 'Статус' },
               { name: 'user', title: 'Пользователь' },
               { name: 'created_at', title: 'Добавлена' },
               { name: 'text', title: 'Текст' },
+              { name: 'shop', title: 'Магазин' },
               { name: 'answers_count', title: 'Ответы' },
               { name: 'actions', title: 'Действия' },
             ]}
@@ -122,7 +141,8 @@ class Requests extends Component {
               rowComponent={CustomTableRow}
               columnExtensions={[
                 { columnName: 'actions', width: 120, align: 'center' },
-                { columnName: 'id', width: 105, align: 'left' },
+                { columnName: 'answers_count', width: 100, align: 'center' },
+                { columnName: 'id', width: 130, align: 'left' },
               ]}
               messages={{ noData: 'Нет данных' }}
             />
@@ -130,6 +150,8 @@ class Requests extends Component {
 
             <ActionTypeProvider for={['actions']} actions={this.ActionsList} />
             <UserTypeProvider for={['user']} />
+            <StatusTypeProvider for={['status']} />
+            <ShopTypeProvider for={['shop']} />
             <DateTypeProvider for={['created_at']} />
             <NumberTypeProvider for={['id']} />
             <AnswerTypeProvider for={['answers_count']} />

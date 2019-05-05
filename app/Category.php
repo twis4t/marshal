@@ -13,6 +13,7 @@ class Category extends Model
      */
     protected $fillable = [
         'category',
+        'icon'
     ];
 
     public function shops()

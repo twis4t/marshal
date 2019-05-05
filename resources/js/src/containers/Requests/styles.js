@@ -2,6 +2,9 @@ const styles = theme => ({
   flexGrow: {
     flexGrow: 1,
   },
+  hidden: {
+    display: 'none',
+  },
   paperCard: {
     color: theme.palette.text.secondary,
     position: 'relative',
@@ -12,12 +15,15 @@ const styles = theme => ({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: theme.spacing.unit * 2,
-    '& button, & div': {
+    '& .submitBtn, & div': {
       height: 42,
       marginRight: theme.spacing.unit,
       '&:last-child': {
         marginRight: 0,
       },
+    },
+    '& .filterBtn': {
+      marginRight: theme.spacing.unit,
     },
   },
   progress: {

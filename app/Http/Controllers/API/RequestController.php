@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Request as RequestModel;
+use App\RequestStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,10 +20,37 @@ class RequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return RequestModel::with(['user:id,name', 'status:id,status', 'shop:id,name'])->withCount('answers')->get();
+    public function index(Request $request)
+    {      
+        $requestsQuery = RequestModel::query();
+        if (isset($request->users)){
+            $requestsQuery = $requestsQuery->whereIn('user_id', $request->users);
+        }
+        if (isset($request->shops)){
+            $requestsQuery = $requestsQuery->whereIn('shop_id', $request->shops);
+        }
+        if (isset($request->statuses)){
+            $requestsQuery = $requestsQuery->whereIn('status_id', $request->statuses);
+        }
+        if (isset($request->dateFrom)){
+            $requestsQuery = $requestsQuery->whereDate('created_at', '>=', $request->dateFrom);
+        }
+        if (isset($request->dateTo)){
+            $requestsQuery = $requestsQuery->whereDate('created_at', '<=', $request->dateTo);
+        }
+        return $requestsQuery->with(['user:id,name', 'status:id,status', 'shop:id,name'])->withCount('answers')->get();
     }
+
+    /**
+     * Получение списка статусов заявок
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function requestStatuses()
+    {
+        return RequestStatus::all();
+    }
+
 
     /**
      * Получение списка заявок пользователя

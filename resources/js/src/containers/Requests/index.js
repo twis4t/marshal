@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 /* actions */
-import { getRequests } from '@/actions/RequestActions'
+import { getRequests, getRequestStatuses } from '@/actions/RequestActions'
+import { getShops } from '@/actions/ShopActions'
+import { getAccounts } from '@/actions/AccountActions'
 
 import { Grid as DxGrid, Table, TableHeaderRow } from '@devexpress/dx-react-grid-material-ui'
 import { DataTypeProvider, IntegratedFiltering, SortingState, IntegratedSorting } from '@devexpress/dx-react-grid'
@@ -18,9 +20,11 @@ import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers'
 
 import ModuleTitle from '@/components/ModuleTitle'
 import ActionButton from '@/components/ActionButton'
+import Autocomplete from '@/components/Autocomplete'
 
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, LinearProgress, Button } from '@material-ui/core'
+import { Paper, LinearProgress, Button, IconButton, Grid } from '@material-ui/core'
+import { FilterList as FilterListIcon } from '@material-ui/icons'
 
 // Компонент отображения кнопки действий
 const ActionTypeProvider = props => (
@@ -78,12 +82,17 @@ class Requests extends Component {
     sorting: [{ columnName: 'id', direction: 'asc' }],
     dateFrom: new Date(),
     dateTo: new Date(),
-    currentUser: 0,
-    currentShop: 0,
+    showFilters: false,
+    selectedStatuses: [],
+    selectedUsers: [],
+    selectedShops: [],
   }
 
   componentDidMount = async () => {
     this.props.getRequests()
+    this.props.getRequestStatuses()
+    this.props.getShops()
+    this.props.getAccounts()
   }
 
   changeSorting = sorting => this.setState({ sorting })
@@ -96,9 +105,42 @@ class Requests extends Component {
     this.setState({ dateTo: date })
   }
 
-  applyFilter = () => {
-    this.props.getRequests()
+  handleShopsChanges = shops => {
+    this.setState({ selectedShops: shops })
   }
+
+  handleUsersChanges = users => {
+    this.setState({ selectedUsers: users })
+  }
+
+  handleStatusesChanges = statuses => {
+    this.setState({ selectedStatuses: statuses })
+  }
+
+  toggleFiltersArea = () => {
+    if (this.state.showFilters) {
+      this.setState({
+        selectedShops: [],
+        selectedUsers: [],
+        selectedStatuses: [],
+      })
+    }
+    this.setState({ showFilters: !this.state.showFilters })
+  }
+
+  applyFilter = () => {
+    this.props.getRequests({
+      shops: this.state.selectedShops.map(v => v.value),
+      users: this.state.selectedUsers.map(v => v.value),
+      statuses: this.state.selectedStatuses.map(v => v.value),
+      dateFrom: moment(this.state.dateFrom).format('YYYY-MM-DD'),
+      dateTo: moment(this.state.dateTo).format('YYYY-MM-DD'),
+    })
+  }
+
+  requestStatusesList = () => this.props.request.requestStatuses.map(v => ({ value: v.id, label: v.status }))
+  requestShopsList = () => this.props.shop.shops.map(v => ({ value: v.id, label: v.name }))
+  requestUsersList = () => this.props.account.accounts.map(v => ({ value: v.id, label: v.name }))
 
   /**
    * Функция возвращает список возможных
@@ -148,10 +190,47 @@ class Requests extends Component {
             />
           </MuiPickersUtilsProvider>
           <div className={classes.flexGrow} />
-          <Button variant="outlined" color="primary" height={30} onClick={this.applyFilter}>
+          <IconButton
+            onClick={this.toggleFiltersArea}
+            className="filterBtn"
+            color={this.state.showFilters ? 'secondary' : 'default'}
+          >
+            <FilterListIcon />
+          </IconButton>
+          <Button className="submitBtn" variant="outlined" color="primary" height={30} onClick={this.applyFilter}>
             Применить
           </Button>
         </div>
+        {this.state.showFilters ? (
+          <Grid container spacing={8}>
+            <Grid item xs={12} md={4}>
+              <Autocomplete
+                items={this.requestShopsList()}
+                label="Магазины"
+                placeholder="Выберите магазины"
+                onChange={this.handleShopsChanges}
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Autocomplete
+                items={this.requestUsersList()}
+                label="Пользователи"
+                placeholder="Выберите пользователей"
+                onChange={this.handleUsersChanges}
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Autocomplete
+                items={this.requestStatusesList()}
+                label="Статусы"
+                placeholder="Выберите статусы"
+                onChange={this.handleStatusesChanges}
+              />
+            </Grid>
+          </Grid>
+        ) : (
+          ''
+        )}
         <Paper className={classNames(classes.paperCard, classes.flexGrow)}>
           {request.isFetching ? <LinearProgress color="primary" className={classes.progress} /> : ''}
 
@@ -203,17 +282,27 @@ class Requests extends Component {
 Requests.propTypes = {
   classes: PropTypes.object.isRequired,
   request: PropTypes.object.isRequired,
+  account: PropTypes.object.isRequired,
+  shop: PropTypes.object.isRequired,
   getRequests: PropTypes.func.isRequired,
+  getShops: PropTypes.func.isRequired,
+  getAccounts: PropTypes.func.isRequired,
+  getRequestStatuses: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = store => {
   return {
     request: store.request,
+    account: store.account,
+    shop: store.shop,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  getRequests: () => dispatch(getRequests()),
+  getRequests: options => dispatch(getRequests(options)),
+  getRequestStatuses: () => dispatch(getRequestStatuses()),
+  getShops: () => dispatch(getShops()),
+  getAccounts: () => dispatch(getAccounts()),
 })
 
 export default connect(

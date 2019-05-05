@@ -9,8 +9,11 @@ const styles = theme => ({
   },
   actionsBox: {
     display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: theme.spacing.unit * 2,
     '& button': {
+      height: 42,
       marginRight: theme.spacing.unit,
       '&:last-child': {
         marginRight: 0,

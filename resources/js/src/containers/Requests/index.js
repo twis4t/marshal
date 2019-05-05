@@ -12,12 +12,15 @@ import classNames from 'classnames'
 import styles from './styles'
 import moment from 'moment'
 import { isNull } from 'util'
+import MomentUtils from '@date-io/moment'
+import 'moment/locale/ru'
+import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers'
 
 import ModuleTitle from '@/components/ModuleTitle'
 import ActionButton from '@/components/ActionButton'
 
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, LinearProgress } from '@material-ui/core'
+import { Paper, LinearProgress, Button } from '@material-ui/core'
 
 // Компонент отображения кнопки действий
 const ActionTypeProvider = props => (
@@ -93,6 +96,10 @@ class Requests extends Component {
     this.setState({ dateTo: date })
   }
 
+  applyFilter = () => {
+    this.props.getRequests()
+  }
+
   /**
    * Функция возвращает список возможных
    * действий со строкой реестра
@@ -112,7 +119,38 @@ class Requests extends Component {
       <div className={classes.flexGrow}>
         <ModuleTitle title="Просмотр заявок" />
         <div className={classes.actionsBox}>
+          <MuiPickersUtilsProvider locale={'ru'} utils={MomentUtils}>
+            <DatePicker
+              margin="normal"
+              variant="outlined"
+              label="Период - С"
+              cancelLabel="Отмена"
+              todayLabel="Сегодня"
+              format="DD.MM.YYYY"
+              autoOk
+              showTodayButton
+              maxDate={this.state.dateTo}
+              value={this.state.dateFrom}
+              onChange={this.handleDateFromChange}
+            />
+            <DatePicker
+              margin="normal"
+              variant="outlined"
+              label="Период - По"
+              cancelLabel="Отмена"
+              todayLabel="Сегодня"
+              format="DD.MM.YYYY"
+              autoOk
+              showTodayButton
+              minDate={this.state.dateFrom}
+              value={this.state.dateTo}
+              onChange={this.handleDateToChange}
+            />
+          </MuiPickersUtilsProvider>
           <div className={classes.flexGrow} />
+          <Button variant="outlined" color="primary" height={30} onClick={this.applyFilter}>
+            Применить
+          </Button>
         </div>
         <Paper className={classNames(classes.paperCard, classes.flexGrow)}>
           {request.isFetching ? <LinearProgress color="primary" className={classes.progress} /> : ''}

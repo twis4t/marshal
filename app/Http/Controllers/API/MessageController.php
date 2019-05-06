@@ -58,7 +58,14 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $requestData = $request->all();
+        $requestData = $request->all();        
+
+        if ($request->hasFile('attachment')){
+            $file = $request->file('attachment');
+            $filename = md5(time().$file->getClientOriginalName());
+            $file->move('/images/attachments/', $filename); 
+            $requestData['attachment'] = '/images/attachments/'.$filename;   
+        }
         $result = Message::create($requestData);
         return response()->json(['result' => $result], 200);
     }

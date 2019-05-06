@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Message;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 
 /**
@@ -42,7 +43,14 @@ class MessageController extends Controller
 
         $requestData = request()->all();
         $answer_id = $requestData['answer_id'];
-        return Message::where('answer_id', $answer_id)->get();
+        $messages = Message::where('answer_id', $answer_id)->get();
+        foreach ($messages as $key => $message){
+            if ($message->attachment != null){
+                $message->attachment = base64_encode(Storage::get($message->attachment));
+                $messages[$key] = $message;
+            }            
+        }
+        return $messages;
     }
 
     /**
@@ -51,7 +59,7 @@ class MessageController extends Controller
      * @bodyParam answer_id integer required ID ответа Example: 4
      * @bodyParam user_id integer ID пользователя Example: 1
      * @bodyParam message string сообщение Example: hello
-     * @bodyParam attachment string вложение
+     * @bodyParam attachment file вложение
      * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -61,10 +69,8 @@ class MessageController extends Controller
         $requestData = $request->all();        
 
         if ($request->hasFile('attachment')){
-            $file = $request->file('attachment');
-            $filename = md5(time().$file->getClientOriginalName());
-            $file->move('/images/attachments/', $filename); 
-            $requestData['attachment'] = '/images/attachments/'.$filename;   
+            $path = $request->file('attachment')->store('attachments');
+            $requestData['attachment'] = $path;
         }
         $result = Message::create($requestData);
         return response()->json(['result' => $result], 200);
@@ -80,7 +86,11 @@ class MessageController extends Controller
      */
     public function show($id)
     {
-        return Message::where('id', $id)->get();
+        $message = Message::find($id);
+        if ($message->attachment != null){
+            $message->attachment = base64_encode(Storage::get($message->attachment));
+        }         
+        return $message;
     }
 
     /**

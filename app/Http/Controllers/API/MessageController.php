@@ -87,9 +87,10 @@ class MessageController extends Controller
     public function show($id)
     {
         $message = Message::find($id);
-        if ($message->attachment != null){
+        if (isset($message->attachment) && $message->attachment != null){
             $message->attachment = base64_encode(Storage::get($message->attachment));
-        }         
+        }  
+        if ($message == null) return response()->json(['error'=>'Mssage not found'], 404);
         return $message;
     }
 

@@ -48,7 +48,9 @@ class CarBrandController extends Controller
      */
     public function show($id)
     {
-        return CarBrand::where('id', $id)->with('car_models')->get();
+        $carBrand = CarBrand::where('id', $id)->with('car_models')->get();
+        if ($carBrand->count() == 0) return response()->json(['error'=>'Car brand not found'], 404);
+        return $carBrand;
     }
 
     /**

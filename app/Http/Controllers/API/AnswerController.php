@@ -52,7 +52,9 @@ class AnswerController extends Controller
      */
     public function show($id)
     {
-        return Answer::where('id', $id)->with(['messages', 'messages.user:id,email,name'])->get();
+        $answer = Answer::where('id', $id)->with(['messages', 'messages.user:id,email,name'])->get();
+        if ($answer->count() == 0) return response()->json(['error'=>'Answer not found'], 404);
+        return $answer;
     }
 
     /**

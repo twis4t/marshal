@@ -71,7 +71,9 @@ class CarModelController extends Controller
      */
     public function show($id)
     {
-        return CarModel::where('id', $id)->get();
+        $carModel = CarModel::where('id', $id)->get();
+        if ($carModel->count() == 0) return response()->json(['error'=>'Car model not found'], 404);
+        return $carModel;
     }
 
     /**

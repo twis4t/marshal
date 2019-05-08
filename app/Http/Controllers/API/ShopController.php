@@ -46,7 +46,9 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-        return Shop::where('id', $id)->with('categories')->get();
+        $shop = Shop::where('id', $id)->with('categories')->get();
+        if ($shop->count() == 0) return response()->json(['error'=>'Shop not found'], 404);
+        return $shop;
     }
     
     /**

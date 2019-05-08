@@ -45,7 +45,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        return Category::where('id', $id)->with('shops')->get();
+        $category = Category::where('id', $id)->with('shops')->get();
+        if ($category->count() == 0) return response()->json(['error'=>'Category not found'], 404);
+        return $category;
     }
 
     /**

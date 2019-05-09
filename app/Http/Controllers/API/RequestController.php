@@ -87,7 +87,14 @@ class RequestController extends Controller
      */
     public function show($id)
     {
-        $req = RequestModel::where('id', $id)->with('answers')->get();
+        $req = RequestModel::where('id', $id)->with([
+            'answers',
+            'user:id,name',
+            'status:id,status',
+            'car.car_brand:id,car_brand',
+            'car.car_model:id,car_model',
+            'category:id,category'
+        ])->withCount('answers')->get();
         if ($req->count() == 0) return response()->json(['error'=>'Request not found'], 404);
         return $req;
     }

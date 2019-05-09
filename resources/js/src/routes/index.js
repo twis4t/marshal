@@ -7,6 +7,8 @@ import Login from '@/containers/Login'
 import Shops from '@/containers/Shops'
 import Users from '@/containers/Users'
 import Requests from '@/containers/Requests'
+import Request from '@/containers/Request'
+import RequestNotFound from '@/containers/RequestNotFound'
 import Test from '@/components/Test'
 
 const routes = (
@@ -35,6 +37,18 @@ const routes = (
         path="/requests"
         {...createPrivateRoute({
           component: MainLayout(Requests),
+        })}
+      />
+      <Route
+        path="/request/:id"
+        {...createPrivateRoute({
+          component: MainLayout(Request),
+        })}
+      />
+      <Route
+        path="/request-not-found"
+        {...createPrivateRoute({
+          component: MainLayout(RequestNotFound),
         })}
       />
       <Route path="/login" component={Login} />

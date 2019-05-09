@@ -112,10 +112,12 @@ const styles = theme => ({
     width: theme.spacing.unit * 7,
     height: '100%',
     position: 'absolute',
-    pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    '& button': {
+      padding: 6,
+    },
   },
   searchInputRoot: {
     color: 'inherit',

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 
 /* actions */
 import { getRequests, getRequestStatuses } from '@/actions/RequestActions'
@@ -47,8 +48,22 @@ const UserTypeProvider = props => <DataTypeProvider formatterComponent={UserForm
 const UserFormatter = ({ value }) => (isNull(value) ? '' : value.name)
 
 // Отображаем статус в ячейке
+const statusesColor = {
+  1: 'status--info',
+  2: 'status--warning',
+  3: 'status--reserved',
+  4: 'status--success',
+  5: 'status--danger',
+}
 const StatusTypeProvider = props => <DataTypeProvider formatterComponent={StatusFormatter} {...props} />
-const StatusFormatter = ({ value }) => (isNull(value) ? '' : value.status)
+const StatusFormatter = ({ value }) => (
+  <div>
+    <div className={classNames(statusesColor[value.id || 1], 'status--dot')} /> {isNull(value) ? '' : value.status}
+  </div>
+)
+StatusFormatter.propTypes = {
+  value: PropTypes.object.isRequired,
+}
 
 // Отображаем магазин в ячейке
 const ShopTypeProvider = props => <DataTypeProvider formatterComponent={ShopFormatter} {...props} />
@@ -59,8 +74,13 @@ const DateTypeProvider = props => <DataTypeProvider formatterComponent={DateForm
 const DateFormatter = ({ value }) => moment(value).format('DD.MM.YYYY HH:mm:SS')
 
 // Отображаем номер в ячейке
+const leadingZero = (num, count = 4) => {
+  num = num + ''
+  while (num.length < count) num = '0' + num
+  return num
+}
 const NumberTypeProvider = props => <DataTypeProvider formatterComponent={NumberFormatter} {...props} />
-const NumberFormatter = ({ value }) => <b>#{value}</b>
+const NumberFormatter = ({ value }) => <b>#{leadingZero(value)}</b>
 NumberFormatter.propTypes = {
   value: PropTypes.number.isRequired,
 }
@@ -148,9 +168,9 @@ class Requests extends Component {
    */
   ActionsList = data => [
     {
-      title: 'Test',
+      title: 'Открыть',
       action: () => {
-        console.log(data)
+        this.props.push('/request/' + data.id)
       },
     },
   ]
@@ -288,6 +308,7 @@ Requests.propTypes = {
   getShops: PropTypes.func.isRequired,
   getAccounts: PropTypes.func.isRequired,
   getRequestStatuses: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = store => {
@@ -303,6 +324,7 @@ const mapDispatchToProps = dispatch => ({
   getRequestStatuses: () => dispatch(getRequestStatuses()),
   getShops: () => dispatch(getShops()),
   getAccounts: () => dispatch(getAccounts()),
+  push: path => dispatch(push(path)),
 })
 
 export default connect(

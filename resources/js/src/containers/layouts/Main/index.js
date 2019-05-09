@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { logOut } from '@/actions/UserActions'
 import { navBarVisible } from '@/actions/SettingsActions'
@@ -39,6 +40,10 @@ import Logo from '@/static/logo.svg'
 
 export default function MainLayout(Component) {
   class MainLayoutComponent extends React.Component {
+    state = {
+      search: '',
+    }
+
     handleDrawerOpen = () => {
       this.props.navBarVisible(true)
     }
@@ -51,8 +56,24 @@ export default function MainLayout(Component) {
       this.props.logOut()
     }
 
+    handleSearchChange = e => {
+      const search = e.currentTarget.validity.valid ? e.currentTarget.value : this.state.search
+      this.setState({ search: search })
+    }
+
     ListItemLink = props => {
       return <ListItem button component="a" {...props} />
+    }
+
+    handleSearchSubmit = () => {
+      this.props.push('/request/' + this.state.search)
+      this.setState({ search: '' })
+    }
+
+    searchKeyPress = e => {
+      if (e.key === 'Enter') {
+        this.handleSearchSubmit()
+      }
     }
 
     render() {
@@ -72,10 +93,19 @@ export default function MainLayout(Component) {
 
               <div className={classes.search}>
                 <div className={classes.searchIcon}>
-                  <SearchIcon />
+                  <IconButton aria-label="Search" onClick={this.handleSearchSubmit}>
+                    <SearchIcon fontSize="small" />
+                  </IconButton>
                 </div>
                 <InputBase
-                  placeholder="Поиск.."
+                  autoFocus
+                  placeholder="Номер заявки.."
+                  onChange={this.handleSearchChange}
+                  value={this.state.search}
+                  onKeyPress={this.searchKeyPress}
+                  inputProps={{
+                    pattern: '[0-9]*',
+                  }}
                   classes={{
                     root: classes.searchInputRoot,
                     input: classes.searchInputInput,
@@ -155,6 +185,7 @@ export default function MainLayout(Component) {
     user: PropTypes.object.isRequired,
     settings: PropTypes.object.isRequired,
     logOut: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
     navBarVisible: PropTypes.func.isRequired,
   }
 
@@ -168,6 +199,7 @@ export default function MainLayout(Component) {
   const mapDispatchToProps = dispatch => ({
     logOut: () => dispatch(logOut()),
     navBarVisible: visible => dispatch(navBarVisible(visible)),
+    push: path => dispatch(push(path)),
   })
 
   return connect(

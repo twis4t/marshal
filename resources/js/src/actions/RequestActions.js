@@ -6,6 +6,10 @@ export const GET_REQUESTS_REQUEST = 'GET_REQUESTS_REQUEST'
 export const GET_REQUESTS_SUCCESS = 'GET_REQUESTS_SUCCESS'
 export const GET_REQUESTS_ERROR = 'GET_REQUESTS_ERROR'
 
+export const GET_REQUEST_REQUEST = 'GET_REQUEST_REQUEST'
+export const GET_REQUEST_SUCCESS = 'GET_REQUEST_SUCCESS'
+export const GET_REQUEST_ERROR = 'GET_REQUEST_ERROR'
+
 export const GET_REQUEST_STATUSES_REQUEST = 'GET_REQUEST_STATUSES_REQUEST'
 export const GET_REQUEST_STATUSES_SUCCESS = 'GET_REQUEST_STATUSES_SUCCESS'
 export const GET_REQUEST_STATUSES_ERROR = 'GET_REQUEST_STATUSES_ERROR'
@@ -45,6 +49,27 @@ export const getRequests = options => async dispatch => {
         })
       )
       console.log('Get request list failed', e)
+    })
+}
+
+export const getRequest = id => async dispatch => {
+  dispatch({
+    type: GET_REQUEST_REQUEST,
+  })
+  await axios
+    .get('/request/' + id)
+    .then(res => {
+      dispatch({
+        type: GET_REQUEST_SUCCESS,
+        payload: res.data[0],
+      })
+    })
+    .catch(e => {
+      dispatch({
+        type: GET_REQUEST_ERROR,
+        payload: e.response.status,
+      })
+      console.log('Get request failed', e)
     })
 }
 

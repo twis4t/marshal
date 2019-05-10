@@ -66,8 +66,10 @@ export default function MainLayout(Component) {
     }
 
     handleSearchSubmit = () => {
-      this.props.push('/request/' + this.state.search)
-      this.setState({ search: '' })
+      if (this.state.search !== '') {
+        this.props.push('/request/' + this.state.search)
+        this.setState({ search: '' })
+      }
     }
 
     searchKeyPress = e => {

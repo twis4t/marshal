@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 
 /* actions */
-import { getRequest } from '@/actions/RequestActions'
+import { getRequest, getAnswer } from '@/actions/RequestActions'
 
 import ModuleTitle from '@/components/ModuleTitle'
 import FullSizeLoader from '@/components/FullSizeLoader'
@@ -14,13 +14,31 @@ import styles from './styles'
 import moment from 'moment'
 //import { isNull } from 'util'
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, Grid, Typography, Chip, Fade, Divider } from '@material-ui/core'
+import {
+  Paper,
+  Grid,
+  Typography,
+  Chip,
+  Fade,
+  Divider,
+  List,
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+  ListItemSecondaryAction,
+  LinearProgress,
+} from '@material-ui/core'
 import {
   NewReleases as NewReleasesIcon,
   SettingsBackupRestore as SettingsBackupRestoreIcon,
   Schedule as ScheduleIcon,
   CheckCircleOutline as CheckCircleOutlineIcon,
   HighlightOff as HighlightOffIcon,
+  Folder as FolderIcon,
+  KeyboardArrowRight as KeyboardArrowRightIcon,
+  Warning as WarningIcon,
+  Message as MessageIcon,
 } from '@material-ui/icons'
 
 class Request extends Component {
@@ -44,6 +62,10 @@ class Request extends Component {
     if (this.props.errorCode === 404) this.props.push('/request-not-found')
   }
 
+  getAnswer = async id => {
+    this.props.getAnswer(id)
+  }
+
   leadingZero = (num, count = 4) => {
     num = num + ''
     while (num.length < count) num = '0' + num
@@ -61,6 +83,59 @@ class Request extends Component {
     return statusesIcons[id]
   }
 
+  printAnswers = answers => {
+    answers = answers || []
+    return (
+      <List>
+        {answers.map(answer => (
+          <ListItem key={'answer-' + answer.id} button onClick={() => this.getAnswer(answer.id)}>
+            <ListItemAvatar>
+              <Avatar className={this.props.classes.answerAvatar}>
+                <FolderIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary={answer.shop.name} secondary={answer.user.name} />
+            <ListItemSecondaryAction>
+              <KeyboardArrowRightIcon />
+            </ListItemSecondaryAction>
+          </ListItem>
+        ))}
+      </List>
+    )
+  }
+
+  printMessages = messages => {
+    messages = messages || []
+    return (
+      <div className={this.props.classes.messagesBox}>
+        {messages.map(message => (
+          <div key={'message-' + message.id} className={this.props.classes.messageRow}>
+            {message.message}
+            <Divider />
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  noAnswers = () => (
+    <div className={this.props.classes.noAnswers}>
+      <div className={this.props.classes.noAnswersTitle}>
+        <WarningIcon /> Ответов нет
+      </div>
+      <div>На эту заявку никто не откликнулся</div>
+    </div>
+  )
+
+  noMessages = () => (
+    <div className={this.props.classes.noMessages}>
+      <div className={this.props.classes.noMessagesTitle}>
+        <MessageIcon /> Сообщений нет
+      </div>
+      <div>Нет сообщений по данному отклику</div>
+    </div>
+  )
+
   infoRow = (title, value, devided = true) => (
     <div>
       <div className={this.props.classes.infoRow}>
@@ -72,7 +147,7 @@ class Request extends Component {
   )
 
   render() {
-    const { classes, isFetching, request } = this.props
+    const { classes, isFetching, isAnswerFetching, request, answer } = this.props
     return (
       <div className={classes.flexGrow}>
         {isFetching ? (
@@ -96,20 +171,37 @@ class Request extends Component {
                   />
                   <Paper className={classNames(classes.paperCard, classes.infoBlock)}>
                     {this.infoRow('Дата создания', moment(request.created_at).format('DD.MM.YYYY HH:mm'))}
+                    {this.infoRow('Дата обновления', moment(request.updated_at).format('DD.MM.YYYY HH:mm'))}
                     {this.infoRow('Категория', request.category.category || '-')}
                     {this.infoRow('Пользователь', request.user.name || '-')}
-                    {/* {!isNull(request.car)
+                    {request.car !== null && request.car !== undefined
                       ? this.infoRow(
                           'Автомобиль',
                           request.car.car_brand.car_brand + ' ' + request.car.car_model.car_model
                         )
-                      : ''} */}
+                      : ''}
                     {request.VIN ? this.infoRow('VIN', request.VIN) : ''}
                     {this.infoRow('Ответов', request.answers_count, false)}
                   </Paper>
                 </Grid>
                 <Grid item xs={12} md={8}>
-                  <Paper className={classes.paperCard}>345</Paper>
+                  <Grid container spacing={24}>
+                    <Grid item xs={12} md={6}>
+                      <Typography variant="h6" gutterBottom>
+                        Ответы на заявку
+                      </Typography>
+                      {request.answers.length === 0 ? this.noAnswers() : this.printAnswers(request.answers)}
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Typography variant="h6" gutterBottom>
+                        Переписка с клиентом
+                      </Typography>
+                      <Paper className={classNames(classes.paperCard, classes.infoBlock)}>
+                        {isAnswerFetching ? <LinearProgress /> : ''}
+                        {answer.messages.length === 0 ? this.noMessages() : this.printMessages(answer.messages)}
+                      </Paper>
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
             </div>
@@ -124,22 +216,28 @@ Request.propTypes = {
   classes: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   request: PropTypes.object.isRequired,
+  answer: PropTypes.object.isRequired,
   errorCode: PropTypes.number.isRequired,
   push: PropTypes.func.isRequired,
   getRequest: PropTypes.func.isRequired,
+  getAnswer: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  isAnswerFetching: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = store => {
   return {
     request: store.request.currentRequest,
+    answer: store.request.answer,
     errorCode: store.request.errorCode,
     isFetching: store.request.isSingleFetching,
+    isAnswerFetching: store.request.isAnswerFetching,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   getRequest: id => dispatch(getRequest(id)),
+  getAnswer: id => dispatch(getAnswer(id)),
   push: path => dispatch(push(path)),
 })
 

@@ -8,6 +8,9 @@ import {
   GET_REQUEST_STATUSES_REQUEST,
   GET_REQUEST_STATUSES_SUCCESS,
   GET_REQUEST_STATUSES_ERROR,
+  GET_ANSWER_REQUEST,
+  GET_ANSWER_SUCCESS,
+  GET_ANSWER_ERROR,
 } from '@/actions/RequestActions'
 
 const initialState = {
@@ -16,8 +19,13 @@ const initialState = {
     status: {},
     category: {},
     user: {},
+    answers: [],
   },
   requestStatuses: [],
+  answer: {
+    messages: [],
+  },
+  isAnswerFetching: false,
   isSingleFetching: false,
   isFetching: false,
   errorCode: 0,
@@ -39,6 +47,13 @@ export const requestReducer = (state = initialState, action) => {
       return { ...state, currentRequest: action.payload, isSingleFetching: false }
     case GET_REQUEST_ERROR:
       return { ...state, errorCode: action.payload, isSingleFetching: false }
+    /* Получение ответа */
+    case GET_ANSWER_REQUEST:
+      return { ...state, isAnswerFetching: true }
+    case GET_ANSWER_SUCCESS:
+      return { ...state, answer: action.payload, isAnswerFetching: false }
+    case GET_ANSWER_ERROR:
+      return { ...state, isAnswerFetching: false }
     /* Список заявок */
     case GET_REQUEST_STATUSES_REQUEST:
       return { ...state, isFetching: true }

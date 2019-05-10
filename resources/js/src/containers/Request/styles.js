@@ -35,6 +35,35 @@ const styles = theme => ({
   infoRowValue: {
     color: '#36363a',
   },
+  answerAvatar: {
+    backgroundColor: '#2e3344',
+  },
+  noAnswersTitle: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: '500',
+    color: '#ff9800',
+  },
+  noAnswers: {
+    textAlign: 'center',
+    color: '#a5a5a5',
+    padding: 20,
+  },
+  noMessagesTitle: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: '500',
+    color: '#2196f3',
+  },
+  noMessages: {
+    textAlign: 'center',
+    color: '#a5a5a5',
+    padding: 20,
+  },
 })
 
 export default styles

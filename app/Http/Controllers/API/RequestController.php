@@ -88,7 +88,8 @@ class RequestController extends Controller
     public function show($id)
     {
         $req = RequestModel::where('id', $id)->with([
-            'answers',
+            'answers.user:id,name',
+            'answers.shop:id,name',
             'user:id,name',
             'status:id,status',
             'car.car_brand:id,car_brand',

@@ -42,7 +42,14 @@ export const requestReducer = (state = initialState, action) => {
       return { ...state, isFetching: false }
     /* Получение заявки */
     case GET_REQUEST_REQUEST:
-      return { ...state, errorCode: 0, isSingleFetching: true }
+      return {
+        ...state,
+        errorCode: 0,
+        isSingleFetching: true,
+        answer: {
+          messages: [],
+        },
+      }
     case GET_REQUEST_SUCCESS:
       return { ...state, currentRequest: action.payload, isSingleFetching: false }
     case GET_REQUEST_ERROR:

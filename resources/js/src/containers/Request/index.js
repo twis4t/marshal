@@ -28,6 +28,7 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   LinearProgress,
+  Collapse,
 } from '@material-ui/core'
 import {
   NewReleases as NewReleasesIcon,
@@ -175,7 +176,7 @@ class Request extends Component {
         ) : (
           <Fade in={!isFetching}>
             <div>
-              <ModuleTitle title="Просмотр заявки" />
+              <ModuleTitle title="Просмотр заявки" breadcrumbs={[{ text: 'Главная', path: '/' },{ text: 'Все заявки', path: '/requests' },{ text: '#' + this.leadingZero(this.props.match.params.id) }]} />
 
               <Grid container spacing={24}>
                 <Grid item xs={12} md={4}>
@@ -214,13 +215,17 @@ class Request extends Component {
                       <Typography variant="h6" gutterBottom>
                         Переписка с клиентом
                       </Typography>
-                      {isAnswerFetching ? <LinearProgress /> : ''}
+                      <Collapse in={isAnswerFetching}>
+                        <LinearProgress />
+                      </Collapse>
                       {answer.messages.length === 0 ? (
                         this.noMessages()
                       ) : (
-                        <Paper className={classNames(classes.paperCard, classes.infoBlock, classes.messagesWrapper)}>
-                          {this.printMessages(answer.messages)}
-                        </Paper>
+                        <Fade in={!isAnswerFetching}>
+                          <Paper className={classNames(classes.paperCard, classes.infoBlock, classes.messagesWrapper)}>
+                            {this.printMessages(answer.messages)}
+                          </Paper>
+                        </Fade>
                       )}
                     </Grid>
                   </Grid>

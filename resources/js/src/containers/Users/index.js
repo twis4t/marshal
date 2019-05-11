@@ -16,13 +16,22 @@ import UserForm from '@/components/Users/UserForm'
 import ActionButton from '@/components/ActionButton'
 
 import { withStyles } from '@material-ui/core/styles'
-import { Grid as DxGrid, Table, TableHeaderRow, SearchPanel, Toolbar } from '@devexpress/dx-react-grid-material-ui'
+import {
+  Grid as DxGrid,
+  Table,
+  TableHeaderRow,
+  SearchPanel,
+  Toolbar,
+  PagingPanel,
+} from '@devexpress/dx-react-grid-material-ui'
 import {
   DataTypeProvider,
   SearchState,
   IntegratedFiltering,
   SortingState,
   IntegratedSorting,
+  PagingState,
+  IntegratedPaging,
 } from '@devexpress/dx-react-grid'
 import { LockOpen as LockOpenIcon } from '@material-ui/icons'
 import { Paper, Button, LinearProgress, Switch, FormControlLabel, Avatar } from '@material-ui/core'
@@ -177,7 +186,7 @@ class Users extends Component {
     const { classes, account } = this.props
     return (
       <div className={classes.flexGrow}>
-        <ModuleTitle title="Управление пользователями" />
+        <ModuleTitle title="Управление пользователями" breadcrumbs={[{ text: 'Главная', path: '/' },{ text: 'Пользователи'}]}/>
         <div className={classes.actionsBox}>
           <Button variant="outlined" color="primary" onClick={this.addUserDialog}>
             Добавить
@@ -232,6 +241,9 @@ class Users extends Component {
             <Toolbar />
             <SearchPanel defaultValue="" messages={{ searchPlaceholder: 'Поиск' }} />
             <TableHeaderRow showSortingControls messages={{ sortingHint: 'Сортировка' }} />
+            <PagingState defaultCurrentPage={0} pageSize={10} />
+            <IntegratedPaging />
+            <PagingPanel />
 
             <ActionTypeProvider for={['actions']} actions={this.ActionsList} />
             <RoleTypeProvider for={['role']} />

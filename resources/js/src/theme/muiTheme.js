@@ -7,6 +7,11 @@ const theme = createMuiTheme({
       main: '#F44336',
       dark: '#e2372b',
     },
+    secondary: {
+      light: '#f95245',
+      main: '#F44336',
+      dark: '#e2372b',
+    },
   },
   typography: {
     useNextVariants: true,

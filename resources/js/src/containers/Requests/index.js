@@ -8,8 +8,15 @@ import { getRequests, getRequestStatuses } from '@/actions/RequestActions'
 import { getShops } from '@/actions/ShopActions'
 import { getAccounts } from '@/actions/AccountActions'
 
-import { Grid as DxGrid, Table, TableHeaderRow } from '@devexpress/dx-react-grid-material-ui'
-import { DataTypeProvider, IntegratedFiltering, SortingState, IntegratedSorting } from '@devexpress/dx-react-grid'
+import { Grid as DxGrid, Table, TableHeaderRow, PagingPanel } from '@devexpress/dx-react-grid-material-ui'
+import {
+  DataTypeProvider,
+  IntegratedFiltering,
+  SortingState,
+  IntegratedSorting,
+  PagingState,
+  IntegratedPaging,
+} from '@devexpress/dx-react-grid'
 
 import classNames from 'classnames'
 import styles from './styles'
@@ -24,7 +31,7 @@ import ActionButton from '@/components/ActionButton'
 import Autocomplete from '@/components/Autocomplete'
 
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, LinearProgress, Button, IconButton, Grid } from '@material-ui/core'
+import { Paper, LinearProgress, Button, IconButton, Grid, Collapse } from '@material-ui/core'
 import { FilterList as FilterListIcon } from '@material-ui/icons'
 
 // Компонент отображения кнопки действий
@@ -138,13 +145,13 @@ class Requests extends Component {
   }
 
   toggleFiltersArea = () => {
-    if (this.state.showFilters) {
-      this.setState({
-        selectedShops: [],
-        selectedUsers: [],
-        selectedStatuses: [],
-      })
-    }
+    // if (this.state.showFilters) {
+    //   this.setState({
+    //     selectedShops: [],
+    //     selectedUsers: [],
+    //     selectedStatuses: [],
+    //   })
+    // }
     this.setState({ showFilters: !this.state.showFilters })
   }
 
@@ -179,7 +186,7 @@ class Requests extends Component {
     const { classes, request } = this.props
     return (
       <div className={classes.flexGrow}>
-        <ModuleTitle title="Просмотр заявок" />
+        <ModuleTitle title="Просмотр заявок" breadcrumbs={[{ text: 'Главная', path: '/' },{ text: 'Заявки'}]} />
         <div className={classes.actionsBox}>
           <MuiPickersUtilsProvider locale={'ru'} utils={MomentUtils}>
             <DatePicker
@@ -221,36 +228,36 @@ class Requests extends Component {
             Применить
           </Button>
         </div>
-        {this.state.showFilters ? (
-          <Grid container spacing={8}>
-            <Grid item xs={12} md={4}>
-              <Autocomplete
-                items={this.requestShopsList()}
-                label="Магазины"
-                placeholder="Выберите магазины"
-                onChange={this.handleShopsChanges}
-              />
+        <Collapse in={this.state.showFilters}>
+          <div>
+            <Grid container spacing={8}>
+              <Grid item xs={12} md={4}>
+                <Autocomplete
+                  items={this.requestShopsList()}
+                  label="Магазины"
+                  placeholder="Выберите магазины"
+                  onChange={this.handleShopsChanges}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Autocomplete
+                  items={this.requestUsersList()}
+                  label="Пользователи"
+                  placeholder="Выберите пользователей"
+                  onChange={this.handleUsersChanges}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Autocomplete
+                  items={this.requestStatusesList()}
+                  label="Статусы"
+                  placeholder="Выберите статусы"
+                  onChange={this.handleStatusesChanges}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={4}>
-              <Autocomplete
-                items={this.requestUsersList()}
-                label="Пользователи"
-                placeholder="Выберите пользователей"
-                onChange={this.handleUsersChanges}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Autocomplete
-                items={this.requestStatusesList()}
-                label="Статусы"
-                placeholder="Выберите статусы"
-                onChange={this.handleStatusesChanges}
-              />
-            </Grid>
-          </Grid>
-        ) : (
-          ''
-        )}
+          </div>
+        </Collapse>
         <Paper className={classNames(classes.paperCard, classes.flexGrow)}>
           {request.isFetching ? <LinearProgress color="primary" className={classes.progress} /> : ''}
 
@@ -284,6 +291,9 @@ class Requests extends Component {
               messages={{ noData: 'Нет данных' }}
             />
             <TableHeaderRow showSortingControls messages={{ sortingHint: 'Сортировка' }} />
+            <PagingState defaultCurrentPage={0} pageSize={10} />
+            <IntegratedPaging />
+            <PagingPanel />
 
             <ActionTypeProvider for={['actions']} actions={this.ActionsList} />
             <UserTypeProvider for={['user']} />

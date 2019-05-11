@@ -17,13 +17,22 @@ import CompanyForm from '@/components/Shops/CompanyForm'
 import CategoryModal from '@/components/Shops/CategoryModal'
 
 import { withStyles } from '@material-ui/core/styles'
-import { Grid as DxGrid, Table, TableHeaderRow, SearchPanel, Toolbar } from '@devexpress/dx-react-grid-material-ui'
+import {
+  Grid as DxGrid,
+  Table,
+  TableHeaderRow,
+  SearchPanel,
+  Toolbar,
+  PagingPanel,
+} from '@devexpress/dx-react-grid-material-ui'
 import {
   DataTypeProvider,
   SearchState,
   IntegratedFiltering,
   SortingState,
   IntegratedSorting,
+  PagingState,
+  IntegratedPaging,
 } from '@devexpress/dx-react-grid'
 import { Paper, Button, LinearProgress, Switch, FormControlLabel } from '@material-ui/core'
 import { isNull } from 'util'
@@ -188,7 +197,7 @@ class Shops extends Component {
 
     return (
       <div className={classes.flexGrow}>
-        <ModuleTitle title="Управление магазинами" />
+        <ModuleTitle title="Управление магазинами" breadcrumbs={[{ text: 'Главная', path: '/' },{ text: 'Магазины'}]}/>
         <div className={classes.actionsBox}>
           <Button variant="outlined" color="primary" onClick={this.addCompanyDialog}>
             Добавить
@@ -229,6 +238,9 @@ class Shops extends Component {
             <CategoryTypeProvider for={['categories']} />
             <ActionTypeProvider for={['actions']} actions={this.ActionsList} />
             <SearchState defaultValue="" searchPlaceholder="Поиск" />
+            <PagingState defaultCurrentPage={0} pageSize={10} />
+            <IntegratedPaging />
+            <PagingPanel />
             <IntegratedFiltering />
             <Table
               rowComponent={CustomTableRow}

@@ -11,6 +11,10 @@ const styles = theme => ({
     position: 'relative',
     height: '80vh',
   },
+  progress: {
+    width: '100%',
+    position: 'absolute',
+  },
   buttonProgress: {
     width: '100%',
     position: 'absolute',
@@ -63,6 +67,43 @@ const styles = theme => ({
     textAlign: 'center',
     color: '#a5a5a5',
     padding: 20,
+  },
+  messageRow: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '15px 5px',
+  },
+  messageText: {
+    padding: '10px 12px',
+    maxWidth: '80%',
+  },
+  messageFromSeller: {
+    alignItems: 'flex-start',
+  },
+  messageFromСustomer: {
+    alignItems: 'flex-end',
+  },
+  messageFromSellerParam: {
+    alignItems: 'flex-start',
+    backgroundColor: theme.palette.marshal.main,
+    color: '#fff',
+    borderRadius: '0 12px 12px 12px',
+  },
+  messageFromСustomerParam: {
+    alignItems: 'flex-end',
+    backgroundColor: '#dcdee4',
+    color: '#424548',
+    borderRadius: '12px 0 12px 12px',
+  },
+  messageUser: {
+    paddingBottom: 4,
+    color: '#a5a5a5',
+    fontSize: 'smaller',
+  },
+  messageDate: {
+    paddingTop: 4,
+    color: '#a5a5a5',
+    fontSize: 'smaller',
   },
 })
 

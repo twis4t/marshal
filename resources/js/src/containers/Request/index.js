@@ -109,9 +109,27 @@ class Request extends Component {
     return (
       <div className={this.props.classes.messagesBox}>
         {messages.map(message => (
-          <div key={'message-' + message.id} className={this.props.classes.messageRow}>
-            {message.message}
-            <Divider />
+          <div
+            key={'message-' + message.id}
+            className={classNames(
+              this.props.classes.messageRow,
+              message.user.role.id === 3 ? this.props.classes.messageFromSeller : this.props.classes.messageFromСustomer
+            )}
+          >
+            <div className={this.props.classes.messageUser}>{message.user.name}</div>
+            <div
+              className={classNames(
+                this.props.classes.messageText,
+                message.user.role.id === 3
+                  ? this.props.classes.messageFromSellerParam
+                  : this.props.classes.messageFromСustomerParam
+              )}
+            >
+              {message.message}
+            </div>
+            <div className={this.props.classes.messageDate}>
+              {moment(message.created_at).format('DD.MM.YYYY HH:mm')}
+            </div>
           </div>
         ))}
       </div>
@@ -132,7 +150,7 @@ class Request extends Component {
       <div className={this.props.classes.noMessagesTitle}>
         <MessageIcon /> Сообщений нет
       </div>
-      <div>Нет сообщений по данному отклику</div>
+      <div>Нет сообщений по выбранному отклику</div>
     </div>
   )
 
@@ -180,7 +198,7 @@ class Request extends Component {
                           request.car.car_brand.car_brand + ' ' + request.car.car_model.car_model
                         )
                       : ''}
-                    {request.VIN ? this.infoRow('VIN', request.VIN) : ''}
+                    {request.vin !== null && request.vin !== undefined ? this.infoRow('VIN', request.vin) : ''}
                     {this.infoRow('Ответов', request.answers_count, false)}
                   </Paper>
                 </Grid>
@@ -196,10 +214,14 @@ class Request extends Component {
                       <Typography variant="h6" gutterBottom>
                         Переписка с клиентом
                       </Typography>
-                      <Paper className={classNames(classes.paperCard, classes.infoBlock)}>
-                        {isAnswerFetching ? <LinearProgress /> : ''}
-                        {answer.messages.length === 0 ? this.noMessages() : this.printMessages(answer.messages)}
-                      </Paper>
+                      {isAnswerFetching ? <LinearProgress /> : ''}
+                      {answer.messages.length === 0 ? (
+                        this.noMessages()
+                      ) : (
+                        <Paper className={classNames(classes.paperCard, classes.infoBlock)}>
+                          {this.printMessages(answer.messages)}
+                        </Paper>
+                      )}
                     </Grid>
                   </Grid>
                 </Grid>

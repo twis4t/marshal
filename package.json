@@ -68,6 +68,7 @@
     "react-router-dom": "^4.4.0",
     "react-select": "^2.4.3",
     "react-swipeable-views": "^0.13.1",
+    "react-trend": "^1.2.5",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   }

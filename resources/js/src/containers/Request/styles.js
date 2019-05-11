@@ -30,6 +30,10 @@ const styles = theme => ({
       paddingBottom: 0,
     },
   },
+  messagesWrapper: {
+    maxHeight: 720,
+    overflow: 'auto',
+  },
   infoRow: {
     display: 'flex',
     flexDirection: 'row',
@@ -61,7 +65,7 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     fontWeight: '500',
-    color: '#2196f3',
+    color: '#2e3344',
   },
   noMessages: {
     textAlign: 'center',

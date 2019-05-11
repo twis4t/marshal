@@ -91,7 +91,7 @@ class Request extends Component {
           <ListItem key={'answer-' + answer.id} button onClick={() => this.getAnswer(answer.id)}>
             <ListItemAvatar>
               <Avatar className={this.props.classes.answerAvatar}>
-                <FolderIcon />
+                {answer.is_new ? <NewReleasesIcon /> : <FolderIcon />}
               </Avatar>
             </ListItemAvatar>
             <ListItemText primary={answer.shop.name} secondary={answer.user.name} />
@@ -218,7 +218,7 @@ class Request extends Component {
                       {answer.messages.length === 0 ? (
                         this.noMessages()
                       ) : (
-                        <Paper className={classNames(classes.paperCard, classes.infoBlock)}>
+                        <Paper className={classNames(classes.paperCard, classes.infoBlock, classes.messagesWrapper)}>
                           {this.printMessages(answer.messages)}
                         </Paper>
                       )}

@@ -83,4 +83,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::put('carmodel-update/{id}', 'API\CarModelController@update');
 	Route::delete('carmodel-delete/{id}', 'API\CarModelController@destroy');
 
+	/* Statistic */
+	Route::get('statistic', 'API\StatisticController@index');
+
 });

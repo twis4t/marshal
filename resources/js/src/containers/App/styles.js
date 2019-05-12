@@ -13,6 +13,30 @@ const styles = theme => ({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  trendDates: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '0 10px',
+    fontSize: 'smaller',
+    position: 'absolute',
+    width: '100%',
+    bottom: '10px',
+    '& div': {
+      transition: 'all .2s',
+      opacity: 0,
+      borderRadius: 4,
+      background: '#ffffffdb',
+      padding: '4px 6px',
+      border: 'solid 1px #f3f3f3',
+    },
+    '&:hover': {
+      '& div': {
+        opacity: 1,
+      },
+    },
+  },
   infoBoxCol: {
     //
   },

@@ -74,11 +74,27 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $requestData = $request->all();        
+        $requestData = $request->all();   
+        $requestData['attachment'] = '';     
 
+        // Если пришел файл - обрабатываем
         if ($request->hasFile('attachment')){
             $path = $request->file('attachment')->store('attachments');
             $requestData['attachment'] = $path;
+        } elseif (isset($request->attachment)){
+            // Если пришла строка, то base64?
+            if (preg_match('/^data:image\/(.*?);base64,/', $request->attachment)) {
+                // Указано ли имя?
+                if (preg_match('/name=(.*?)\.(\w*?);/', $request->attachment, $matches)) {
+                    $fileName = $matches[1];
+                    $fileExt = $matches[2];
+                    $encodedImg = substr($request->attachment, strpos($request->attachment, ',') + 1);            
+                    $img = base64_decode($encodedImg);   
+                    $path = 'attachments/'.md5(time().$fileName).".".$fileExt;     
+                    Storage::put($path, $img);
+                    $requestData['attachment'] = $path;
+                }
+            }
         }
         $result = Message::create($requestData);
         return response()->json(['result' => $result], 200);

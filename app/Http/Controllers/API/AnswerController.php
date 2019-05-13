@@ -54,7 +54,7 @@ class AnswerController extends Controller
     public function show($id)
     {
         $answer = Answer::where('id', $id)->with(['messages', 'messages.user:id,email,name,role_id', 'messages.user.role:id,role'])->get();
-        
+        // TODO: get() -> first(). Пока оставил для совместимости
         foreach ($answer[0]->messages ?? [] as $key => $message){            
             if ($message->attachment != null){                
                 $message->attachment = base64_encode(Storage::get($message->attachment));

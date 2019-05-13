@@ -12,7 +12,7 @@ Route::post('login', 'API\UserController@login');
 Route::post('register', 'API\UserController@register');
 
 Route::group([    
-	'namespace' => 'Auth',    
+	'namespace' => 'API',    
 	'middleware' => 'api',    
 	'prefix' => 'password'
 ], function () {    

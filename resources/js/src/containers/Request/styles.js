@@ -34,6 +34,10 @@ const styles = theme => ({
     maxHeight: 720,
     overflow: 'auto',
   },
+  messageAttachment: {
+    display: 'block',
+    padding: '10px 0 2px 0',
+  },
   infoRow: {
     display: 'flex',
     flexDirection: 'row',

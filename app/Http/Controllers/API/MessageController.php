@@ -22,7 +22,15 @@ class MessageController extends Controller
      */
     public function index()  
     {
-        return Message::all();
+        $messages = Message::all();
+        foreach ($messages as $key => $message){            
+            if ($message->attachment != null){                
+                $message->attachment = base64_encode(Storage::get($message->attachment));
+                $messages[$key] = $message;
+            }            
+        }
+        return $messages;
+
     }
 
     /**
@@ -44,8 +52,8 @@ class MessageController extends Controller
         $requestData = request()->all();
         $answer_id = $requestData['answer_id'];
         $messages = Message::where('answer_id', $answer_id)->get();
-        foreach ($messages as $key => $message){
-            if ($message->attachment != null){
+        foreach ($messages as $key => $message){            
+            if ($message->attachment != null){                
                 $message->attachment = base64_encode(Storage::get($message->attachment));
                 $messages[$key] = $message;
             }            

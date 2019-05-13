@@ -127,6 +127,11 @@ class Request extends Component {
               )}
             >
               {message.message}
+              {message.attachment ? (
+                <img src={'data:image/x-icon;base64,' + message.attachment} className={this.props.classes.messageAttachment} alt="attachment" width="100%" />
+              ) : (
+                ''
+              )}
             </div>
             <div className={this.props.classes.messageDate}>
               {moment(message.created_at).format('DD.MM.YYYY HH:mm')}

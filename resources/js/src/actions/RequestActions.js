@@ -86,7 +86,7 @@ export const getAnswer = id => async dispatch => {
     .then(res => {
       dispatch({
         type: GET_ANSWER_SUCCESS,
-        payload: res.data[0],
+        payload: res.data,
       })
     })
     .catch(e => {

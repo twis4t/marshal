@@ -6,6 +6,7 @@ use App\Answer;
 use App\Request as RequestModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @group Answer
@@ -52,7 +53,13 @@ class AnswerController extends Controller
      */
     public function show($id)
     {
-        $answer = Answer::where('id', $id)->with(['messages', 'messages.user:id,email,name,role_id', 'messages.user.role:id,role'])->get();
+        $answer = Answer::where('id', $id)->with(['messages', 'messages.user:id,email,name,role_id', 'messages.user.role:id,role'])->first();
+        foreach ($answer->messages ?? [] as $key => $message){            
+            if ($message->attachment != null){                
+                $message->attachment = base64_encode(Storage::get($message->attachment));
+                $answer->messages[$key] = $message;
+            }            
+        }
         if ($answer->count() == 0) return response()->json(['error'=>'Answer not found'], 404);
         return $answer;
     }

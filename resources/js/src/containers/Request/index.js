@@ -176,7 +176,14 @@ class Request extends Component {
         ) : (
           <Fade in={!isFetching}>
             <div>
-              <ModuleTitle title="Просмотр заявки" breadcrumbs={[{ text: 'Главная', path: '/' },{ text: 'Все заявки', path: '/requests' },{ text: '#' + this.leadingZero(this.props.match.params.id) }]} />
+              <ModuleTitle
+                title="Просмотр заявки"
+                breadcrumbs={[
+                  { text: 'Главная', path: '/' },
+                  { text: 'Все заявки', path: '/requests' },
+                  { text: '#' + this.leadingZero(this.props.match.params.id) },
+                ]}
+              />
 
               <Grid container spacing={24}>
                 <Grid item xs={12} md={4}>
@@ -191,8 +198,8 @@ class Request extends Component {
                   <Paper className={classNames(classes.paperCard, classes.infoBlock)}>
                     {this.infoRow('Дата создания', moment(request.created_at).format('DD.MM.YYYY HH:mm'))}
                     {this.infoRow('Дата обновления', moment(request.updated_at).format('DD.MM.YYYY HH:mm'))}
-                    {this.infoRow('Категория', request.category.category || '-')}
-                    {this.infoRow('Пользователь', request.user.name || '-')}
+                    {request.category ? this.infoRow('Категория', request.category.category) : ''}
+                    {request.user ? this.infoRow('Пользователь', request.user.name) : ''}
                     {request.car !== null && request.car !== undefined
                       ? this.infoRow(
                           'Автомобиль',

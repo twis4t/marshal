@@ -25,7 +25,7 @@ class MessageController extends Controller
         $messages = Message::all();
         foreach ($messages as $key => $message){            
             if ($message->attachment != null){                
-                $message->attachment = base64_encode(Storage::get($message->attachment));
+                $message->attachment = "data:image/x-icon;base64," . base64_encode(Storage::get($message->attachment));
                 $messages[$key] = $message;
             }            
         }
@@ -54,7 +54,7 @@ class MessageController extends Controller
         $messages = Message::where('answer_id', $answer_id)->get();
         foreach ($messages as $key => $message){            
             if ($message->attachment != null){                
-                $message->attachment = base64_encode(Storage::get($message->attachment));
+                $message->attachment = "data:image/x-icon;base64," . base64_encode(Storage::get($message->attachment));
                 $messages[$key] = $message;
             }            
         }
@@ -112,7 +112,7 @@ class MessageController extends Controller
     {
         $message = Message::find($id);
         if (isset($message->attachment) && $message->attachment != null){
-            $message->attachment = base64_encode(Storage::get($message->attachment));
+            $message->attachment = "data:image/x-icon;base64," . base64_encode(Storage::get($message->attachment));
         }  
         if ($message == null) return response()->json(['error'=>'Mssage not found'], 404);
         return $message;

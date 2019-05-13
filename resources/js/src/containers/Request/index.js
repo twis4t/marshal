@@ -128,7 +128,12 @@ class Request extends Component {
             >
               {message.message}
               {message.attachment ? (
-                <img src={'data:image/x-icon;base64,' + message.attachment} className={this.props.classes.messageAttachment} alt="attachment" width="100%" />
+                <img
+                  src={message.attachment}
+                  className={this.props.classes.messageAttachment}
+                  alt="attachment"
+                  width="100%"
+                />
               ) : (
                 ''
               )}

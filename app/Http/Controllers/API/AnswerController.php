@@ -57,7 +57,7 @@ class AnswerController extends Controller
         // TODO: get() -> first(). Пока оставил для совместимости
         foreach ($answer[0]->messages ?? [] as $key => $message){            
             if ($message->attachment != null){                
-                $message->attachment = base64_encode(Storage::get($message->attachment));
+                $message->attachment = "data:image/x-icon;base64," . base64_encode(Storage::get($message->attachment));
                 $answer[0]->messages[$key] = $message;
             }            
         }

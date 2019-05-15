@@ -33,6 +33,7 @@ import {
   Search as SearchIcon,
   AccountCircle as AccountCircleIcon,
   ListAlt as ListAltIcon,
+  AspectRatio as AspectRatioIcon,
 } from '@material-ui/icons'
 import Notifier from '@/components/Notifier'
 import styles from './styles'
@@ -153,6 +154,7 @@ export default function MainLayout(Component) {
               <ListItemLink to="/shops" primary="Магазины" icon={<StoreIcon />} />
               <ListItemLink to="/users" primary="Пользователи" icon={<AccountCircleIcon />} />
               <ListItemLink to="/requests" primary="Заявки" icon={<ListAltIcon />} />
+              <ListItemLink to="/banners" primary="Баннеры" icon={<AspectRatioIcon />} />
             </List>
             <Divider />
             <div className={classes.flexGrow} />

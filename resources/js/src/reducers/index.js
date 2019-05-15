@@ -8,6 +8,7 @@ import { categoryReducer } from './category'
 import { roleReducer } from './role'
 import { requestReducer } from './request'
 import { statisticReducer } from './statistic'
+import { bannerReducer } from './banner'
 import { notistackReducer } from './notistack'
 
 export const rootReducer = history =>
@@ -20,6 +21,7 @@ export const rootReducer = history =>
     role: roleReducer,
     request: requestReducer,
     statistic: statisticReducer,
+    banner: bannerReducer,
     settings: settingsReducer,
     notistack: notistackReducer,
   })

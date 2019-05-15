@@ -8,6 +8,7 @@ import Shops from '@/containers/Shops'
 import Users from '@/containers/Users'
 import Requests from '@/containers/Requests'
 import Request from '@/containers/Request'
+import Banners from '@/containers/Banners'
 import RequestNotFound from '@/containers/RequestNotFound'
 import Test from '@/components/Test'
 
@@ -37,6 +38,12 @@ const routes = (
         path="/requests"
         {...createPrivateRoute({
           component: MainLayout(Requests),
+        })}
+      />
+      <Route
+        path="/banners"
+        {...createPrivateRoute({
+          component: MainLayout(Banners),
         })}
       />
       <Route

@@ -139,6 +139,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $requestData = $request->all();
+        if (isset($requestData['password'])) {
+            $requestData['password'] = bcrypt($requestData['password']);
+        }
         $result = User::where('id', $id)->update($requestData);
         return response()->json(['result' => $result], 200);
     }

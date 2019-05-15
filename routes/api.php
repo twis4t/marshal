@@ -93,6 +93,13 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::put('carmodel-update/{id}', 'API\CarModelController@update');
 	Route::delete('carmodel-delete/{id}', 'API\CarModelController@destroy');
 
+	/* Banner */
+		Route::get('banners', 'API\BannerController@index');
+		Route::get('banner/{id}', 'API\BannerController@show');
+		Route::post('banner-add', 'API\BannerController@store');
+		Route::put('banner-update/{id}', 'API\BannerController@update');
+		Route::delete('banner-delete/{id}', 'API\BannerController@destroy');
+
 	/* Statistic */
 	Route::get('statistic', 'API\StatisticController@index');
 

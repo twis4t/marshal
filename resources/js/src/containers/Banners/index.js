@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { getBanners } from '@/actions/BannerActions'
 
 import ModuleTitle from '@/components/ModuleTitle'
+import Dropzone from '@/components/Dropzone'
 
 import { Grid, Collapse, LinearProgress, Paper } from '@material-ui/core'
 // import {
@@ -21,6 +22,10 @@ class Banners extends Component {
     this.props.getBanners()
   }
 
+  dropFilesHandler = files => {
+    console.log(files)
+  }
+
   render() {
     const { classes, isFetching } = this.props
     return (
@@ -30,10 +35,10 @@ class Banners extends Component {
         {!isFetching ? (
           <Grid container spacing={24}>
             <Grid item xs={12} md={3}>
-              <Paper className={classes.paperCard}>1</Paper>
+              <Dropzone onChange={this.dropFilesHandler} />
             </Grid>
             <Grid item xs={12} md={3}>
-              2
+              <Paper className={classes.paperCard}>1</Paper>
             </Grid>
           </Grid>
         ) : (

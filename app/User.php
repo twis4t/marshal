@@ -85,4 +85,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Shop::class, 'favorite_shops')->withPivot('comment');
     }
     
+    public function authLogs()
+    {
+        return $this->hasMany(AuthLog::class, 'email', 'email');
+    }
 }

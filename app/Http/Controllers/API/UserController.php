@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\AuthLog;
 use App\Role;
 use App\ClientApp;
 use App\Request as RequestModel;
@@ -27,6 +28,15 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function login(){
+
+         // Записываем в лог попытку входа
+         $authlog = AuthLog::create([
+            "email" => request('email'),
+            "password" => bcrypt(request('password')),
+            "browser" => request()->header('User-Agent'),
+            "ip" => request()->ip(),
+        ]);
+
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
 
             // Валидация входных параметров
@@ -62,6 +72,8 @@ class UserController extends Controller
             {
                 case 200:case 201:
                 case 202:
+                    $authlog->result = 1;
+                    $authlog->save();
                     $output = json_decode((string) $body, $this->successStatus);
                     break;
                 default:
@@ -170,5 +182,21 @@ class UserController extends Controller
     {
         $roles = Role::all();
         return $roles;
+    }
+
+    /**
+     * Получение лога входов
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function logs()
+    {
+        $logs = [];
+        if (isset(request()->email)) {
+            $logs = AuthLog::where('email', request()->email)->get();
+        } else {
+            $logs = AuthLog::all();
+        }        
+        return $logs;
     }
 }

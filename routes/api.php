@@ -23,6 +23,7 @@ Route::group([
 
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('details', 'API\UserController@details');
+	Route::get('auth-logs', 'API\UserController@logs');
 
 	/* User */
 	Route::get('users', 'API\UserController@index');

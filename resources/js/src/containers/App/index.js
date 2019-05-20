@@ -74,7 +74,7 @@ class App extends Component {
   }
 
   render() {
-    const { statistic, statisticFeatch } = this.props
+    const { classes, statistic, statisticFeatch } = this.props
     return (
       <div className="App">
         <ModuleTitle title="Главная" />
@@ -120,6 +120,12 @@ class App extends Component {
                 dates: Object.keys(statistic.answersStat.dates),
                 gradient: ['#ff5722', '#ff7043'],
               })}
+            </Grid>
+            <Grid item xs={12} md={6}>
+            <Paper className={classes.paperCard}>2</Paper>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Paper className={classes.paperCard}>3</Paper>
             </Grid>
           </Grid>
         ) : (

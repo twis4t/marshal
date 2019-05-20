@@ -192,11 +192,13 @@ class UserController extends Controller
     public function logs()
     {
         $logs = [];
+        $query = AuthLog::query();
         if (isset(request()->email)) {
-            $logs = AuthLog::where('email', request()->email)->get();
-        } else {
-            $logs = AuthLog::all();
-        }        
-        return $logs;
+            $query = $query->where('email', request()->email);
+        }
+        if (isset(request()->limit)) {
+            $query = $query->limit(request()->limit);
+        }
+        return $query->orderBy('id','DESC')->get();
     }
 }

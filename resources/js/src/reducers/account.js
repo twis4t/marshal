@@ -11,10 +11,15 @@ import {
   USER_STATUS_REQUEST,
   USER_STATUS_SUCCESS,
   USER_STATUS_ERROR,
+  AUTH_LOGS_REQUEST,
+  AUTH_LOGS_SUCCESS,
+  AUTH_LOGS_ERROR,
 } from '@/actions/AccountActions'
 
 const initialState = {
   accounts: [],
+  authLogs: [],
+  isLogFetching: false,
   isFetching: false,
 }
 
@@ -27,6 +32,13 @@ export const accountReducer = (state = initialState, action) => {
       return { ...state, accounts: action.payload, isFetching: false }
     case GET_ACCOUNTS_ERROR:
       return { ...state, isFetching: false }
+    /* Лог входа */
+    case AUTH_LOGS_REQUEST:
+      return { ...state, isLogFetching: true }
+    case AUTH_LOGS_SUCCESS:
+      return { ...state, authLogs: action.payload, isLogFetching: false }
+    case AUTH_LOGS_ERROR:
+      return { ...state, isLogFetching: false }
     /* Редактирование */
     case EDIT_USER_REQUEST:
       return { ...state, isFetching: true }

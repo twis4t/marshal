@@ -17,6 +17,10 @@ export const USER_STATUS_REQUEST = 'USER_STATUS_REQUEST'
 export const USER_STATUS_SUCCESS = 'USER_STATUS_SUCCESS'
 export const USER_STATUS_ERROR = 'USER_STATUS_ERROR'
 
+export const AUTH_LOGS_REQUEST = 'AUTH_LOGS_REQUEST'
+export const AUTH_LOGS_SUCCESS = 'AUTH_LOGS_SUCCESS'
+export const AUTH_LOGS_ERROR = 'AUTH_LOGS_ERROR'
+
 export const getAccounts = () => async dispatch => {
   dispatch({
     type: GET_ACCOUNTS_REQUEST,
@@ -43,6 +47,43 @@ export const getAccounts = () => async dispatch => {
         })
       )
       console.log('Get accounts list failed', e)
+    })
+}
+
+export const getAuthLogs = options => async dispatch => {
+  options = options || {}
+
+  /* default params */
+  const params = {
+    email: options.email || '',
+    limit: options.users || 8,
+  }
+
+  dispatch({
+    type: AUTH_LOGS_REQUEST,
+  })
+
+  await axios
+    .get('/auth-logs', { params: params })
+    .then(res => {
+      dispatch({
+        type: AUTH_LOGS_SUCCESS,
+        payload: res.data,
+      })
+    })
+    .catch(e => {
+      dispatch({
+        type: AUTH_LOGS_ERROR,
+      })
+      dispatch(
+        enqueueSnackbar({
+          message: 'Не удалось получить лог попыток авторизации',
+          options: {
+            variant: 'error',
+          },
+        })
+      )
+      console.log('Get auth logs failed', e)
     })
 }
 

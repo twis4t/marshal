@@ -52,6 +52,25 @@ const styles = theme => ({
     width: 60,
     height: 60,
   },
+  logResult: {
+    display: 'block',
+    textTransform: 'uppercase',
+    padding: '6px 8px',
+    borderRadius: 2,
+    border: 'solid 1px',
+    textAlign: 'center',
+    fontWeight: 600,
+  },
+  logResultTrue: {
+    borderColor: '#b7e285',
+    background: '#edf5e5',
+    color: '#8bc34a',
+  },
+  logResultFalse: {
+    borderColor: '#ffc9b8',
+    background: '#fff3f3',
+    color: '#ff784d',
+  },
 })
 
 export default styles

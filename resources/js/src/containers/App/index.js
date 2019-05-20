@@ -4,11 +4,25 @@ import { push } from 'connected-react-router'
 import PropTypes from 'prop-types'
 /* actions */
 import { getStatistic } from '@/actions/StatisticActions'
+import { getAuthLogs } from '@/actions/AccountActions'
 
 import ModuleTitle from '@/components/ModuleTitle'
 import Trend from 'react-trend'
 
-import { Paper, Grid, Avatar, Typography, IconButton, Collapse, LinearProgress } from '@material-ui/core'
+import {
+  Paper,
+  Grid,
+  Avatar,
+  Typography,
+  IconButton,
+  Collapse,
+  LinearProgress,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Table,
+} from '@material-ui/core'
 import {
   ListAlt as ListAltIcon,
   KeyboardArrowRight as KeyboardArrowRightIcon,
@@ -17,13 +31,14 @@ import {
   Forum as ForumIcon,
 } from '@material-ui/icons'
 import styles from './styles'
-//import classNames from 'classnames'
+import classNames from 'classnames'
 import moment from 'moment'
 import { withStyles } from '@material-ui/core/styles'
 
 class App extends Component {
   componentDidMount = () => {
     this.props.getStatistic()
+    this.props.getAuthLogs()
     //console.log(Object.values(this.props.statistic.requestsStat.dates))
   }
 
@@ -70,6 +85,45 @@ class App extends Component {
           </div>
         </div>
       </Paper>
+    )
+  }
+
+  logResult = res => {
+    const { classes } = this.props
+    return (
+      <div className={classNames(classes.logResult, res ? classes.logResultTrue : classes.logResultFalse)}>
+        {res ? 'ok' : 'fail'}
+      </div>
+    )
+  }
+
+  logsTable = () => {
+    const { classes, authLogs } = this.props
+    return (
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Email</TableCell>
+            {/* <TableCell>Браузер</TableCell> */}
+            <TableCell>IP</TableCell>
+            <TableCell>Время</TableCell>
+            <TableCell>Результат</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {authLogs.map(row => (
+            <TableRow key={row.id}>
+              <TableCell component="th" scope="row">
+                {row.email || '-'}
+              </TableCell>
+              {/* <TableCell>{row.browser}</TableCell> */}
+              <TableCell>{row.ip}</TableCell>
+              <TableCell>{moment(row.created_at).format('DD.MM.YYYY HH:mm:SS')}</TableCell>
+              <TableCell>{this.logResult(row.result)}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     )
   }
 
@@ -122,7 +176,7 @@ class App extends Component {
               })}
             </Grid>
             <Grid item xs={12} md={6}>
-            <Paper className={classes.paperCard}>2</Paper>
+              <Paper className={classes.paperCard}>{this.logsTable()}</Paper>
             </Grid>
             <Grid item xs={12} md={6}>
               <Paper className={classes.paperCard}>3</Paper>
@@ -141,8 +195,11 @@ class App extends Component {
 App.propTypes = {
   classes: PropTypes.object.isRequired,
   statistic: PropTypes.object.isRequired,
+  authLogs: PropTypes.array.isRequired,
   statisticFeatch: PropTypes.bool.isRequired,
+  isLogFetching: PropTypes.bool.isRequired,
   getStatistic: PropTypes.func.isRequired,
+  getAuthLogs: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
 }
 
@@ -150,11 +207,14 @@ const mapStateToProps = store => {
   return {
     statistic: store.statistic.statistic,
     statisticFeatch: store.statistic.isFetching,
+    authLogs: store.account.authLogs,
+    isLogFetching: store.account.isLogFetching,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   getStatistic: () => dispatch(getStatistic()),
+  getAuthLogs: options => dispatch(getAuthLogs(options)),
   push: path => dispatch(push(path)),
 })
 

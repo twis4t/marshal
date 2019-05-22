@@ -32,6 +32,7 @@ import {
 } from '@material-ui/icons'
 import styles from './styles'
 import classNames from 'classnames'
+import Chart from 'react-apexcharts'
 import moment from 'moment'
 import { withStyles } from '@material-ui/core/styles'
 
@@ -127,6 +128,22 @@ class App extends Component {
     )
   }
 
+  chartOptions = () => ({
+    responsive: [
+      {
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200,
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+    ],
+  })
+
   render() {
     const { classes, statistic, statisticFeatch } = this.props
     return (
@@ -179,7 +196,39 @@ class App extends Component {
               <Paper className={classes.paperCard}>{this.logsTable()}</Paper>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Paper className={classes.paperCard}>3</Paper>
+              <Grid container spacing={24}>
+                <Grid item xs={12} md={6}>
+                  <Paper className={classes.paperCard}>1</Paper>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Paper className={classes.paperCard}>2</Paper>
+                </Grid>
+                <Grid item xs={12}>
+                  <Paper className={classes.paperCard}>
+                    <Chart
+                      options={{
+                        responsive: [
+                          {
+                            breakpoint: 480,
+                            options: {
+                              chart: {
+                                width: 200,
+                              },
+                              legend: {
+                                position: 'bottom',
+                              },
+                            },
+                            colors: ['#F44336', '#E91E63', '#9C27B0'],
+                          },
+                        ],
+                      }}
+                      series={[4, 12, 4, 6, 8]}
+                      type="donut"
+                      width="380"
+                    />
+                  </Paper>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         ) : (

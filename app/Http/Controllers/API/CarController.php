@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Car;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -20,7 +21,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        return Car::all();
+        $user = Auth::user();
+        return Car::where('user_id', $user->id)->get();
     }
 
     /**

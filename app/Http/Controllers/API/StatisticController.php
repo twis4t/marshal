@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
+use App\Category;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -49,6 +50,21 @@ class StatisticController extends Controller
     {
        $result = $model::get( [DB::raw( 'COUNT( * ) as "count"' )] )->first();      
        return $result['count']; 
+    }
+
+    
+    /**
+     * Получение количества заявок по категориям
+     * @param $model model
+     * @return Array
+     */
+    public function RequestCategoriesStat()
+    {
+        $result = Category::join('requests', 'category_id', '=', 'categories.id')
+            ->groupBy('categories.id')
+            ->select('categories.category', DB::raw('count(1) AS count'))
+            ->get();
+        return $result; 
     }
 
 

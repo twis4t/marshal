@@ -71,6 +71,12 @@ const styles = theme => ({
     background: '#fff3f3',
     color: '#ff784d',
   },
+  chartWrap: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 })
 
 export default styles

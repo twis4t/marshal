@@ -37,44 +37,109 @@ import moment from 'moment'
 import { withStyles } from '@material-ui/core/styles'
 
 class App extends Component {
+  state = {
+    chartOptions: {
+      states: {
+        normal: {
+          filter: {
+            type: 'none',
+            value: 0,
+          },
+        },
+        hover: {
+          filter: {
+            type: 'lighten',
+            value: 0.08,
+          },
+        },
+        active: {
+          allowMultipleDataPointsSelection: false,
+          filter: {
+            type: 'lighten',
+            value: 0.08,
+          },
+        },
+      },
+      plotOptions: {
+        pie: {
+          expandOnClick: false,
+          donut: {
+            labels: {
+              show: true,
+            },
+          },
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      colors: ['#8bc34a', '#ff9800', '#ff5722', '#2196f3', '#9c27b0'],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
+      stroke: {
+        show: true,
+        curve: 'smooth', // "smooth" / "straight" / "stepline"
+        lineCap: 'butt', // round, butt , square
+        width: 10,
+      },
+    },
+  }
+
   componentDidMount = () => {
     this.props.getStatistic()
     this.props.getAuthLogs()
     //console.log(Object.values(this.props.statistic.requestsStat.dates))
   }
 
+  infoTitle = (title, value, icon, action) => {
+    const classes = this.props.classes
+    return (
+      <div className={classes.infoBox}>
+        <div>
+          <Avatar className={classes.iconAvatar}>{icon}</Avatar>
+        </div>
+        <div>
+          <Typography className={classes.infoBoxValue} variant="h4" gutterBottom>
+            {value}
+          </Typography>
+          <div>{title}</div>
+        </div>
+        <div className={classes.flexGrow} />
+        {action ? (
+          <IconButton className={classes.infoBoxActionButton} aria-label="More" onClick={() => action()}>
+            <KeyboardArrowRightIcon />
+          </IconButton>
+        ) : (
+          ''
+        )}
+      </div>
+    )
+  }
   infoBox = (title, value, icon, action, trend) => {
     trend = trend || {}
     const classes = this.props.classes
     return (
       <Paper className={classes.paperCard}>
-        <div className={classes.infoBox}>
-          <div>
-            <Avatar className={classes.iconAvatar}>{icon}</Avatar>
-          </div>
-          <div>
-            <Typography className={classes.infoBoxValue} variant="h4" gutterBottom>
-              {value}
-            </Typography>
-            <div>{title}</div>
-          </div>
-          <div className={classes.flexGrow} />
-          {action ? (
-            <IconButton className={classes.infoBoxActionButton} aria-label="More" onClick={() => action()}>
-              <KeyboardArrowRightIcon />
-            </IconButton>
-          ) : (
-            ''
-          )}
-        </div>
+        {this.infoTitle(title, value, icon, action)}
         <div>
           <Trend
             smooth
             autoDraw
             autoDrawDuration={700}
             autoDrawEasing="ease-out"
-            data={trend.data}
-            gradient={trend.gradient}
+            data={trend.data || [0, 0]}
+            gradient={trend.gradient || []}
             radius={25}
             strokeWidth={3.3}
             strokeLinecap={'round'}
@@ -128,24 +193,9 @@ class App extends Component {
     )
   }
 
-  chartOptions = () => ({
-    responsive: [
-      {
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200,
-          },
-          legend: {
-            position: 'bottom',
-          },
-        },
-      },
-    ],
-  })
-
   render() {
     const { classes, statistic, statisticFeatch } = this.props
+    const { chartOptions } = this.state
     return (
       <div className="App">
         <ModuleTitle title="Главная" />
@@ -198,34 +248,16 @@ class App extends Component {
             <Grid item xs={12} md={6}>
               <Grid container spacing={24}>
                 <Grid item xs={12} md={6}>
-                  <Paper className={classes.paperCard}>1</Paper>
+                  <Paper className={classes.paperCard}>
+                    {this.infoTitle('Заявок создано', 56, <ListAltIcon />, () => this.props.push('/requests'))}
+                  </Paper>
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <Paper className={classes.paperCard}>2</Paper>
                 </Grid>
                 <Grid item xs={12}>
-                  <Paper className={classes.paperCard}>
-                    <Chart
-                      options={{
-                        responsive: [
-                          {
-                            breakpoint: 480,
-                            options: {
-                              chart: {
-                                width: 200,
-                              },
-                              legend: {
-                                position: 'bottom',
-                              },
-                            },
-                            colors: ['#F44336', '#E91E63', '#9C27B0'],
-                          },
-                        ],
-                      }}
-                      series={[4, 12, 4, 6, 8]}
-                      type="donut"
-                      width="380"
-                    />
+                  <Paper className={classNames(classes.paperCard, classes.chartWrap)}>
+                    <Chart options={chartOptions} series={[4, 12, 4, 6, 8]} type="donut" height="316" width="400" />
                   </Paper>
                 </Grid>
               </Grid>

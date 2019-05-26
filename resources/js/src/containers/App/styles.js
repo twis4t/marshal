@@ -52,6 +52,20 @@ const styles = theme => ({
     width: 60,
     height: 60,
   },
+  iconDiv: {
+    fontSize: 32,
+    margin: 20,
+    width: 60,
+    height: 60,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '& svg': {
+      width: '1.5em',
+      height: '1.5em',
+      color: '#7d8294',
+    },
+  },
   logResult: {
     display: 'block',
     textTransform: 'uppercase',
@@ -73,7 +87,7 @@ const styles = theme => ({
   },
   chartWrap: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
   },

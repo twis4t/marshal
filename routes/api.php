@@ -104,5 +104,6 @@ Route::group(['middleware' => 'auth:api'], function(){
 	/* Statistic */
 	Route::get('statistic', 'API\StatisticController@index');
 	Route::get('categories-stat', 'API\StatisticController@RequestCategoriesStat');
+	Route::get('status-count', 'API\StatisticController@RequestStatusCount');
 
 });

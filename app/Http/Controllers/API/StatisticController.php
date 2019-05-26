@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\RequestStatus;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -52,10 +53,22 @@ class StatisticController extends Controller
        return $result['count']; 
     }
 
+    /**
+     * Получение количества записей по условию
+     * @param $model model
+     * @param $filterColumn
+     * @param $value
+     * @return Array
+     */
+    public function FilteredCountRows($model, $filterColumn, $value)
+    {
+       $result = $model::where($filterColumn, $value)->get( [DB::raw( 'COUNT( * ) as "count"' )] )->first();      
+       return $result['count']; 
+    }
+
     
     /**
      * Получение количества заявок по категориям
-     * @param $model model
      * @return Array
      */
     public function RequestCategoriesStat()
@@ -67,8 +80,20 @@ class StatisticController extends Controller
         return $result; 
     }
 
+    /**
+     * Получение количества заявок по статусам
+     * @return Array
+     */
+    public function RequestStatusCount()
+    {
+        $result = RequestStatus::join('requests', 'status_id', '=', 'request_statuses.id')
+            ->groupBy('request_statuses.id')
+            ->select('request_statuses.status', 'request_statuses.id', DB::raw('count(1) AS count'))
+            ->get();
+        return $result; 
+    }
 
-     /**
+    /**
      * Получение общей статистики ресурса
      *
      * @return \Illuminate\Http\Response
@@ -89,7 +114,12 @@ class StatisticController extends Controller
         $answersStat['dates']  = $this->RangeStat(app("App\\Answer"), $days);
         $answersStat['total'] = $this->TotalRows(app("App\\Answer"));
 
-        return compact( 'requestsStat', 'usersStat', 'messagesStat', 'answersStat' );
+        $carsStat['total'] = $this->TotalRows(app("App\\Car"));
+
+        $complaintsStat['total'] = $this->TotalRows(app("App\\Complaint"));
+        $complaintsStat['open'] = $this->FilteredCountRows(app("App\\Complaint"), 'finished', null);
+
+        return compact( 'requestsStat', 'usersStat', 'messagesStat', 'answersStat', 'carsStat', 'complaintsStat' );
     }
 
    

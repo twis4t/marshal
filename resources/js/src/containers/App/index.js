@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import PropTypes from 'prop-types'
 /* actions */
-import { getStatistic } from '@/actions/StatisticActions'
+import { getStatistic, getRequestCategoriesStat, getRequestStatusesCount } from '@/actions/StatisticActions'
 import { getAuthLogs } from '@/actions/AccountActions'
 
 import ModuleTitle from '@/components/ModuleTitle'
@@ -29,6 +29,8 @@ import {
   AccountCircle as AccountCircleIcon,
   Message as MessageIcon,
   Forum as ForumIcon,
+  DirectionsCar as DirectionsCarIcon,
+  Warning as WarningIcon,
 } from '@material-ui/icons'
 import styles from './styles'
 import classNames from 'classnames'
@@ -39,6 +41,7 @@ import { withStyles } from '@material-ui/core/styles'
 class App extends Component {
   state = {
     chartOptions: {
+      labels: ['wait'],
       states: {
         normal: {
           filter: {
@@ -62,6 +65,7 @@ class App extends Component {
       },
       plotOptions: {
         pie: {
+          size: 90,
           expandOnClick: false,
           donut: {
             labels: {
@@ -73,7 +77,6 @@ class App extends Component {
       dataLabels: {
         enabled: false,
       },
-      colors: ['#8bc34a', '#ff9800', '#ff5722', '#2196f3', '#9c27b0'],
       responsive: [
         {
           breakpoint: 480,
@@ -91,24 +94,31 @@ class App extends Component {
         show: true,
         curve: 'smooth', // "smooth" / "straight" / "stepline"
         lineCap: 'butt', // round, butt , square
-        width: 10,
+        width: 6,
       },
     },
+    catSeries: [0, 0],
+    statSeries: [0, 0],
+    catLabels: ['wait..'],
+    statLabels: ['wait..'],
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     this.props.getStatistic()
     this.props.getAuthLogs()
-    //console.log(Object.values(this.props.statistic.requestsStat.dates))
+    await this.props.getRequestCategoriesStat()
+    this.setState({ catSeries: this.props.categoriesStat.map(v => v.count) })
+    this.setState({ catLabels: this.props.categoriesStat.map(v => v.category) })
+    await this.props.getRequestStatusesCount()
+    this.setState({ statSeries: this.props.statusesStat.map(v => v.count) })
+    this.setState({ statLabels: this.props.statusesStat.map(v => v.status) })
   }
 
-  infoTitle = (title, value, icon, action) => {
+  infoTitle = (title, value, icon, action, iconBg = true) => {
     const classes = this.props.classes
     return (
       <div className={classes.infoBox}>
-        <div>
-          <Avatar className={classes.iconAvatar}>{icon}</Avatar>
-        </div>
+        <div>{iconBg ? <Avatar className={classes.iconAvatar}>{icon}</Avatar> : <div className={classes.iconDiv}>{icon}</div>}</div>
         <div>
           <Typography className={classes.infoBoxValue} variant="h4" gutterBottom>
             {value}
@@ -131,7 +141,7 @@ class App extends Component {
     const classes = this.props.classes
     return (
       <Paper className={classes.paperCard}>
-        {this.infoTitle(title, value, icon, action)}
+        {this.infoTitle(title, value, icon, action, true)}
         <div>
           <Trend
             smooth
@@ -193,9 +203,34 @@ class App extends Component {
     )
   }
 
+  getStatuscColor = id => {
+    const statusesColor = {
+      1: '#2196f3',
+      2: '#ff9800',
+      3: '#9c27b0',
+      4: '#4caf50',
+      5: '#ff5722',
+    }
+    return statusesColor[id]
+  }
+
+  getChartOptions = chart => {
+    const options = { ...this.state.chartOptions }
+    switch (chart) {
+      case 'categories':
+        options.labels = this.state.catLabels
+        return options
+      case 'statuses':
+        options.labels = this.state.statLabels
+        options.colors = this.props.statusesStat.map(v => this.getStatuscColor(v.id))
+        return options
+      default:
+        return {}
+    }
+  }
+
   render() {
     const { classes, statistic, statisticFeatch } = this.props
-    const { chartOptions } = this.state
     return (
       <div className="App">
         <ModuleTitle title="Главная" />
@@ -249,15 +284,48 @@ class App extends Component {
               <Grid container spacing={24}>
                 <Grid item xs={12} md={6}>
                   <Paper className={classes.paperCard}>
-                    {this.infoTitle('Заявок создано', 56, <ListAltIcon />, () => this.props.push('/requests'))}
+                    {this.infoTitle(
+                      'Машин зарегистрировано',
+                      statistic.carsStat.total || 0,
+                      <DirectionsCarIcon />,
+                      null,
+                      false
+                    )}
                   </Paper>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                  <Paper className={classes.paperCard}>2</Paper>
+                  <Paper className={classes.paperCard}>
+                    {this.infoTitle(
+                      'Необработанных жалоб',
+                      statistic.complaintsStat.open || 0,
+                      <WarningIcon />,
+                      null,
+                      false
+                    )}
+                  </Paper>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} lg={6}>
                   <Paper className={classNames(classes.paperCard, classes.chartWrap)}>
-                    <Chart options={chartOptions} series={[4, 12, 4, 6, 8]} type="donut" height="316" width="400" />
+                    <h4>Статистика по категориям</h4>
+                    <Chart
+                      options={this.getChartOptions('categories')}
+                      series={this.state.catSeries}
+                      type="donut"
+                      height="255"
+                      width="340"
+                    />
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} lg={6}>
+                  <Paper className={classNames(classes.paperCard, classes.chartWrap)}>
+                    <h4>Статистика по статусам</h4>
+                    <Chart
+                      options={this.getChartOptions('statuses')}
+                      series={this.state.statSeries}
+                      type="donut"
+                      height="255"
+                      width="340"
+                    />
                   </Paper>
                 </Grid>
               </Grid>
@@ -276,10 +344,16 @@ class App extends Component {
 App.propTypes = {
   classes: PropTypes.object.isRequired,
   statistic: PropTypes.object.isRequired,
+  categoriesStat: PropTypes.array.isRequired,
+  statusesStat: PropTypes.array.isRequired,
   authLogs: PropTypes.array.isRequired,
   statisticFeatch: PropTypes.bool.isRequired,
   isLogFetching: PropTypes.bool.isRequired,
+  statisticCatFeatch: PropTypes.bool.isRequired,
+  statisticStatusesFeatch: PropTypes.bool.isRequired,
   getStatistic: PropTypes.func.isRequired,
+  getRequestCategoriesStat: PropTypes.func.isRequired,
+  getRequestStatusesCount: PropTypes.func.isRequired,
   getAuthLogs: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
 }
@@ -287,7 +361,11 @@ App.propTypes = {
 const mapStateToProps = store => {
   return {
     statistic: store.statistic.statistic,
+    categoriesStat: store.statistic.categoriesStat,
+    statusesStat: store.statistic.statusesStat,
     statisticFeatch: store.statistic.isFetching,
+    statisticCatFeatch: store.statistic.isCatFetching,
+    statisticStatusesFeatch: store.statistic.isStatusesFetching,
     authLogs: store.account.authLogs,
     isLogFetching: store.account.isLogFetching,
   }
@@ -295,6 +373,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => ({
   getStatistic: () => dispatch(getStatistic()),
+  getRequestCategoriesStat: () => dispatch(getRequestCategoriesStat()),
+  getRequestStatusesCount: () => dispatch(getRequestStatusesCount()),
   getAuthLogs: options => dispatch(getAuthLogs(options)),
   push: path => dispatch(push(path)),
 })

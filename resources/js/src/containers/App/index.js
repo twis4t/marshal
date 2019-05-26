@@ -118,7 +118,13 @@ class App extends Component {
     const classes = this.props.classes
     return (
       <div className={classes.infoBox}>
-        <div>{iconBg ? <Avatar className={classes.iconAvatar}>{icon}</Avatar> : <div className={classes.iconDiv}>{icon}</div>}</div>
+        <div>
+          {iconBg ? (
+            <Avatar className={classes.iconAvatar}>{icon}</Avatar>
+          ) : (
+            <div className={classes.iconDiv}>{icon}</div>
+          )}
+        </div>
         <div>
           <Typography className={classes.infoBoxValue} variant="h4" gutterBottom>
             {value}
@@ -230,7 +236,14 @@ class App extends Component {
   }
 
   render() {
-    const { classes, statistic, statisticFeatch } = this.props
+    const {
+      classes,
+      statistic,
+      statisticFeatch,
+      statisticCatFeatch,
+      statisticStatusesFeatch,
+      isLogFetching,
+    } = this.props
     return (
       <div className="App">
         <ModuleTitle title="Главная" />
@@ -278,6 +291,9 @@ class App extends Component {
               })}
             </Grid>
             <Grid item xs={12} md={6}>
+              <Collapse in={isLogFetching}>
+                <LinearProgress />
+              </Collapse>
               <Paper className={classes.paperCard}>{this.logsTable()}</Paper>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -305,8 +321,12 @@ class App extends Component {
                   </Paper>
                 </Grid>
                 <Grid item xs={12} lg={6}>
+                  <Collapse in={statisticCatFeatch}>
+                    <LinearProgress />
+                  </Collapse>
                   <Paper className={classNames(classes.paperCard, classes.chartWrap)}>
                     <h4>Статистика по категориям</h4>
+
                     <Chart
                       options={this.getChartOptions('categories')}
                       series={this.state.catSeries}
@@ -317,6 +337,9 @@ class App extends Component {
                   </Paper>
                 </Grid>
                 <Grid item xs={12} lg={6}>
+                  <Collapse in={statisticStatusesFeatch}>
+                    <LinearProgress />
+                  </Collapse>
                   <Paper className={classNames(classes.paperCard, classes.chartWrap)}>
                     <h4>Статистика по статусам</h4>
                     <Chart

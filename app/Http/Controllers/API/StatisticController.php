@@ -87,7 +87,7 @@ class StatisticController extends Controller
     public function RequestStatusCount()
     {
         $result = RequestStatus::join('requests', 'status_id', '=', 'request_statuses.id')
-            ->groupBy('request_statuses.id')
+            ->groupBy('request_statuses.status', 'request_statuses.id')
             ->select('request_statuses.status', 'request_statuses.id', DB::raw('count(1) AS count'))
             ->get();
         return $result; 

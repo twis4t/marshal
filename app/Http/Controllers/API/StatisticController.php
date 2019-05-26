@@ -74,7 +74,7 @@ class StatisticController extends Controller
     public function RequestCategoriesStat()
     {
         $result = Category::join('requests', 'category_id', '=', 'categories.id')
-            ->groupBy('categories.id')
+            ->groupBy('categories.category')
             ->select('categories.category', DB::raw('count(1) AS count'))
             ->get();
         return $result; 

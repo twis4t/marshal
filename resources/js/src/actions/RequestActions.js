@@ -24,7 +24,11 @@ export const getRequests = options => async dispatch => {
     shops: options.shops || [],
     users: options.users || [],
     statuses: options.statuses || [],
-    dateFrom: options.dateFrom || moment().format('YYYY-MM-DD'),
+    dateFrom:
+      options.dateFrom ||
+      moment()
+        .subtract(1, 'months')
+        .format('YYYY-MM-DD'),
     dateTo: options.dateTo || moment().format('YYYY-MM-DD'),
   }
 

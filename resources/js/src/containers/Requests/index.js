@@ -107,8 +107,8 @@ AnswerFormatter.propTypes = {
 class Requests extends Component {
   state = {
     sorting: [{ columnName: 'id', direction: 'asc' }],
-    dateFrom: new Date(),
-    dateTo: new Date(),
+    dateFrom: moment(new Date()).subtract(1, 'months'),
+    dateTo: moment(new Date()),
     showFilters: false,
     selectedStatuses: [],
     selectedUsers: [],
@@ -186,7 +186,7 @@ class Requests extends Component {
     const { classes, request } = this.props
     return (
       <div className={classes.flexGrow}>
-        <ModuleTitle title="Просмотр заявок" breadcrumbs={[{ text: 'Главная', path: '/' },{ text: 'Заявки'}]} />
+        <ModuleTitle title="Просмотр заявок" breadcrumbs={[{ text: 'Главная', path: '/' }, { text: 'Заявки' }]} />
         <div className={classes.actionsBox}>
           <MuiPickersUtilsProvider locale={'ru'} utils={MomentUtils}>
             <DatePicker

@@ -2,19 +2,21 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 /* actions */
-import { getBanners } from '@/actions/BannerActions'
+import { getBanners, uploadBanners, removeBanner } from '@/actions/BannerActions'
 
 import ModuleTitle from '@/components/ModuleTitle'
 import Dropzone from '@/components/Dropzone'
 
-import { Grid, Collapse, LinearProgress, Paper } from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete'
+
+import { Grid, Collapse, LinearProgress, Paper, IconButton } from '@material-ui/core'
 // import {
 //   ListAlt as ListAltIcon,
 // } from '@material-ui/icons'
 import styles from './styles'
 //import { useDropzone } from 'react-dropzone'
 //import classNames from 'classnames'
-//import moment from 'moment'
+import moment from 'moment'
 import { withStyles } from '@material-ui/core/styles'
 
 class Banners extends Component {
@@ -22,12 +24,18 @@ class Banners extends Component {
     this.props.getBanners()
   }
 
-  dropFilesHandler = files => {
-    console.log(files)
+  uploadBanners = async data => {
+    await this.props.uploadBanners(data)
+    this.props.getBanners()
+  }
+
+  removeBanner = async id => {
+    await this.props.removeBanner(id)
+    this.props.getBanners()
   }
 
   render() {
-    const { classes, isFetching } = this.props
+    const { classes, isFetching, banners } = this.props
     return (
       <div>
         <ModuleTitle title="Управление баннерами" breadcrumbs={[{ text: 'Главная', path: '/' }, { text: 'Баннеры' }]} />
@@ -35,10 +43,29 @@ class Banners extends Component {
         {!isFetching ? (
           <Grid container spacing={24}>
             <Grid item xs={12} md={3}>
-              <Dropzone onChange={this.dropFilesHandler} />
+              <Dropzone onSubmit={this.uploadBanners} />
             </Grid>
-            <Grid item xs={12} md={3}>
-              <Paper className={classes.paperCard}>1</Paper>
+            <Grid item xs={12} md={9}>
+              <Grid container spacing={24}>
+                <Grid item xs={12} md={6}>
+                  {banners.map(v => (
+                    <Paper key={'banner -' + v.id} className={classes.paperCard}>
+                      <img src={v.banner} alt="banner" width="100%" />
+                      <div className={classes.actions}>
+                        <div>Добавлен: {moment(v.created_at).format('DD.MM.YYYY')}</div>
+                        <IconButton
+                          color="secondary"
+                          className={classes.button}
+                          aria-label="Delete"
+                          onClick={() => this.removeBanner(v.id)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </div>
+                    </Paper>
+                  ))}
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         ) : (
@@ -56,6 +83,8 @@ Banners.propTypes = {
   banners: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   getBanners: PropTypes.func.isRequired,
+  uploadBanners: PropTypes.func.isRequired,
+  removeBanner: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = store => {
@@ -67,6 +96,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => ({
   getBanners: () => dispatch(getBanners()),
+  uploadBanners: data => dispatch(uploadBanners(data)),
+  removeBanner: id => dispatch(removeBanner(id)),
 })
 
 export default connect(

@@ -166,7 +166,7 @@ class UserController extends Controller
     public function index()
     {
         $requestsCount = RequestModel::count();        
-        $users = User::with('role')->withCount(['requests', 'answers', 'cars', 'messages'])->get();
+        $users = User::with('role')->withCount(['requests', 'answers', 'cars', 'messages'])->where('initial', 0)->get();
         $users->each(function($user) use($requestsCount){       
             $user->requests_ratio = ($user->requests_count * 100 / $requestsCount);           
         });       

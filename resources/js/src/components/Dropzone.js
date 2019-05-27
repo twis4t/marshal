@@ -1,9 +1,11 @@
 import React, { useMemo } from 'react'
 import { useDropzone } from 'react-dropzone'
 import PropTypes from 'prop-types'
+import { Button } from '@material-ui/core'
 
 const baseStyle = {
   flex: 1,
+  textAlign: 'center',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -30,13 +32,16 @@ const rejectStyle = {
   borderColor: '#ff1744',
 }
 
+const btnWrap = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: 20,
+}
+
 export default function StyledDropzone(props) {
   const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject, acceptedFiles } = useDropzone({
     accept: 'image/*',
-    onDrop: acceptedFiles => {
-      //console.log(props)
-      props.onDrop(acceptedFiles)
-    },
   })
 
   const files = acceptedFiles.map(file => {
@@ -53,6 +58,12 @@ export default function StyledDropzone(props) {
     [isDragActive, isDragReject]
   )
 
+  const uploadBanners = () => {
+    let formData = new FormData()
+    formData.append('banner', acceptedFiles[0])
+    props.onSubmit(formData)
+  }
+
   return (
     <div>
       <div {...getRootProps({ style })}>
@@ -60,10 +71,15 @@ export default function StyledDropzone(props) {
         <p>Перетащите сюда изображение или кликните для выбора файла</p>
       </div>
       {files}
+      <div style={btnWrap}>
+        <Button variant="outlined" color="primary" disabled={!files.length} onClick={uploadBanners}>
+          Загрузить
+        </Button>
+      </div>
     </div>
   )
 }
 
 StyledDropzone.propTypes = {
-  onDrop: PropTypes.func,
+  onSubmit: PropTypes.func,
 }

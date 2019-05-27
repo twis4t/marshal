@@ -87,6 +87,7 @@ class RequestController extends Controller
      */
     public function show($id)
     {
+        $user = Auth::user();
         $req = RequestModel::where('id', $id)->with([
             'answers.user:id,name',
             'answers.shop:id,name',

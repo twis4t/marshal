@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Banner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @group Banner
@@ -44,7 +45,7 @@ class BannerController extends Controller
     {
         $requestData = $request->all();
         $requestData['banner'] = '';
-
+        
         // Если пришел файл - обрабатываем
         if ($request->hasFile('banner')){
             $path = $request->file('banner')->store('banners');
@@ -130,7 +131,11 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-        $result = Banner::where('id', $id)->delete();
+        $result = false;
+        $banner = Banner::find($id);
+        if (Storage::delete($banner->banner)){
+            $result = Banner::where('id', $id)->delete();
+        }
         return response()->json(['result' => $result], 200);
     }
 }

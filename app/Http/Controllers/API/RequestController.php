@@ -96,9 +96,20 @@ class RequestController extends Controller
             'car.car_brand:id,car_brand',
             'car.car_model:id,car_model',
             'category:id,category'
-        ])->withCount('answers')->get();
-        if ($req->count() == 0) return response()->json(['error'=>'Request not found'], 404);
-        return $req;
+        ])->withCount('answers')->get()->first();
+
+        if (!isset($req)) return response()->json(['error'=>'Request not found'], 404);
+
+        // для продавцов оставляем только ответы магазина
+        if ($user->role_id === 3){
+            $answers = []; 
+            foreach ($req->answers as $answer){
+                if ($answer->shop_id === $user->shop_id) $answers[] = $answer;
+            }
+            $req->answers = collect($answers);          
+        }
+        
+        return [$req];
     }
 
     /**

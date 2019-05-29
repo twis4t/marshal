@@ -13,6 +13,7 @@ class Complaint extends Model
      */
     protected $fillable = [
         'request_id',
+        'user_id',
         'comment',
         'finished',
     ];
@@ -24,5 +25,10 @@ class Complaint extends Model
      */
     protected $casts = [
         'request_id' => 'integer',
+        'user_id' => 'integer',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

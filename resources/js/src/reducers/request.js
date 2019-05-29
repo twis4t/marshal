@@ -11,6 +11,9 @@ import {
   GET_ANSWER_REQUEST,
   GET_ANSWER_SUCCESS,
   GET_ANSWER_ERROR,
+  GET_COMPLAINTS_REQUEST,
+  GET_COMPLAINTS_SUCCESS,
+  GET_COMPLAINTS_ERROR,
 } from '@/actions/RequestActions'
 
 const initialState = {
@@ -25,8 +28,10 @@ const initialState = {
   answer: {
     messages: [],
   },
+  complaints: [],
   isAnswerFetching: false,
   isSingleFetching: false,
+  isComplaintsFetching: false,
   isFetching: false,
   errorCode: 0,
 }
@@ -68,6 +73,13 @@ export const requestReducer = (state = initialState, action) => {
       return { ...state, requestStatuses: action.payload, isFetching: false }
     case GET_REQUEST_STATUSES_ERROR:
       return { ...state, isFetching: false }
+    /* Список жалоб */
+    case GET_COMPLAINTS_REQUEST:
+      return { ...state, isComplaintsFetching: true }
+    case GET_COMPLAINTS_SUCCESS:
+      return { ...state, complaints: action.payload, isComplaintsFetching: false }
+    case GET_COMPLAINTS_ERROR:
+      return { ...state, isComplaintsFetching: false }
 
     default:
       return state

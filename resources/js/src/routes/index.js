@@ -9,6 +9,7 @@ import Users from '@/containers/Users'
 import Requests from '@/containers/Requests'
 import Request from '@/containers/Request'
 import Banners from '@/containers/Banners'
+import Complaints from '@/containers/Complaints'
 import RequestNotFound from '@/containers/RequestNotFound'
 import Test from '@/components/Test'
 
@@ -50,6 +51,12 @@ const routes = (
         path="/request/:id"
         {...createPrivateRoute({
           component: MainLayout(Request),
+        })}
+      />
+      <Route
+        path="/complaints"
+        {...createPrivateRoute({
+          component: MainLayout(Complaints),
         })}
       />
       <Route

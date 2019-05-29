@@ -70,6 +70,11 @@ class User extends Authenticatable
         return $this->hasMany(Answer::class, 'user_id');
     }
 
+    public function complaints()
+    {
+        return $this->hasMany(Complaint::class, 'user_id');
+    }
+
     public function cars()
     {
         return $this->hasMany(Car::class, 'user_id');

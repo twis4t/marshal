@@ -18,6 +18,10 @@ export const GET_REQUEST_STATUSES_REQUEST = 'GET_REQUEST_STATUSES_REQUEST'
 export const GET_REQUEST_STATUSES_SUCCESS = 'GET_REQUEST_STATUSES_SUCCESS'
 export const GET_REQUEST_STATUSES_ERROR = 'GET_REQUEST_STATUSES_ERROR'
 
+export const GET_COMPLAINTS_REQUEST = 'GET_COMPLAINTS_REQUEST'
+export const GET_COMPLAINTS_SUCCESS = 'GET_COMPLAINTS_SUCCESS'
+export const GET_COMPLAINTS_ERROR = 'GET_COMPLAINTS_ERROR'
+
 export const getRequests = options => async dispatch => {
   options = options || {}
   const params = {
@@ -136,5 +140,34 @@ export const getRequestStatuses = () => async dispatch => {
         })
       )
       console.log('Get request statuses failed', e)
+    })
+}
+
+export const getComplaints = () => async dispatch => {
+  dispatch({
+    type: GET_COMPLAINTS_REQUEST,
+  })
+
+  await axios
+    .get('/complaints')
+    .then(res => {
+      dispatch({
+        type: GET_COMPLAINTS_SUCCESS,
+        payload: res.data,
+      })
+    })
+    .catch(e => {
+      dispatch({
+        type: GET_COMPLAINTS_ERROR,
+      })
+      dispatch(
+        enqueueSnackbar({
+          message: 'Не удалось получить список жалоб',
+          options: {
+            variant: 'error',
+          },
+        })
+      )
+      console.log('Get complaints list failed', e)
     })
 }

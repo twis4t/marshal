@@ -50,11 +50,14 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 	/* Request */
 	Route::get('requests', 'API\RequestController@index');
+	Route::get('complaints', 'API\RequestController@complaints');
 	Route::get('request-statuses', 'API\RequestController@requestStatuses');
 	Route::get('userRequests', 'API\RequestController@userRequests');
 	Route::get('request/{id}', 'API\RequestController@show');
 	Route::post('request-add', 'API\RequestController@store');
+	Route::post('complain', 'API\RequestController@complain');
 	Route::put('request-update/{id}', 'API\RequestController@update');
+	Route::put('complaint-finish/{id}', 'API\RequestController@finishComplaint');
 	Route::delete('request-delete/{id}', 'API\RequestController@destroy');
 
 	/* Answer */
@@ -95,11 +98,11 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::delete('carmodel-delete/{id}', 'API\CarModelController@destroy');
 
 	/* Banner */
-		Route::get('banners', 'API\BannerController@index');
-		Route::get('banner/{id}', 'API\BannerController@show');
-		Route::post('banner-add', 'API\BannerController@store');
-		Route::put('banner-update/{id}', 'API\BannerController@update');
-		Route::delete('banner-delete/{id}', 'API\BannerController@destroy');
+	Route::get('banners', 'API\BannerController@index');
+	Route::get('banner/{id}', 'API\BannerController@show');
+	Route::post('banner-add', 'API\BannerController@store');
+	Route::put('banner-update/{id}', 'API\BannerController@update');
+	Route::delete('banner-delete/{id}', 'API\BannerController@destroy');
 
 	/* Statistic */
 	Route::get('statistic', 'API\StatisticController@index');

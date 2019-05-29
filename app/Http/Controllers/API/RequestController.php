@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Request as RequestModel;
+use App\Complaint;
 use App\RequestStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use Validator;
 
 /**
  * @group Request
@@ -136,5 +139,60 @@ class RequestController extends Controller
     {
         $result = RequestModel::where('id', $id)->delete();
         return response()->json(['result' => $result], 200);
+    }
+
+    /**
+     * Пожаловаться на заявку
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function complain(Request $request)
+    {
+        $user = Auth::user();
+        $validator = Validator::make($request->all(), [
+            'request_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 400);            
+        }
+
+        $req = RequestModel::find($request->request_id);
+        if (!isset($req)){
+            return response()->json(['error'=>'Request does not exist'], 404);       
+        }
+
+        $requestData = $request->all();
+        $requestData['user_id'] = $user->id;
+        $result = Complaint::create($requestData);
+        return response()->json(['result' => $result], 200);
+    }
+
+    /**
+     * Обработать заявку
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function finishComplaint($id)
+    {        
+        $complaint = Complaint::find($id);
+        if (!isset($complaint)){
+            return response()->json(['error'=>'Complaint does not exist'], 404);       
+        }
+        $complaint->finished = Carbon::now();
+        $result = $complaint->save();
+        return response()->json(['result' => $result], 200);
+    }
+
+    /**
+     * Получить жалобы
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function complaints()
+    {        
+        $result = Complaint::with('user:id,name')->orderBy( 'created_at', 'desc' )->get();       
+        return $result;
     }
 }

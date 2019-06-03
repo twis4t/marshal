@@ -109,10 +109,11 @@ class RequestController extends Controller
             foreach ($req->answers as $answer){
                 if ($answer->shop_id === $user->shop_id) $answers[] = $answer;
             }
-            $req->answers = collect($answers);          
+            $req = $req->toArray();
+            $req['answers'] = $answers;          
         }
         
-        return [$req];
+        return collect([$req]);
     }
 
     /**

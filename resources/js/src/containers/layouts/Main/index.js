@@ -13,7 +13,7 @@ import {
   Drawer,
   AppBar,
   Toolbar,
-  Typography,
+//  Typography,
   Divider,
   IconButton,
   Badge,
@@ -24,7 +24,7 @@ import {
   ListItemText,
 } from '@material-ui/core'
 import {
-  Menu as MenuIcon,
+// Menu as MenuIcon,
   Home as HomeIcon,
   ExitToApp as ExitToAppIcon,
   Notifications as NotificationsIcon,
@@ -35,6 +35,7 @@ import {
   ListAlt as ListAltIcon,
   AspectRatio as AspectRatioIcon,
   Warning as WarningIcon,
+  Stars as StarsIcon,
 } from '@material-ui/icons'
 import Notifier from '@/components/Notifier'
 import styles from './styles'
@@ -91,9 +92,9 @@ export default function MainLayout(Component) {
             className={classNames(classes.appBar, settings.navBarOpen && classes.appBarShift)}
           >
             <Toolbar className={classes.toolbar}>
-              <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+              {/* <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                 {settings.appName}
-              </Typography>
+              </Typography> */}
 
               <div className={classes.search}>
                 <div className={classes.searchIcon}>
@@ -146,7 +147,7 @@ export default function MainLayout(Component) {
                 className={classes.toolbarIcon}
                 onClick={settings.navBarOpen ? this.handleDrawerClose : this.handleDrawerOpen}
               >
-                {settings.navBarOpen ? <ChevronLeftIcon /> : <MenuIcon />}
+                {settings.navBarOpen ? <ChevronLeftIcon /> : <StarsIcon />}
               </IconButton>
             </div>
             <Divider />

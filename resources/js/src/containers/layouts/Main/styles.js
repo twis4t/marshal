@@ -104,7 +104,6 @@ const styles = theme => ({
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing.unit * 3,
       width: 'auto',
     },
   },

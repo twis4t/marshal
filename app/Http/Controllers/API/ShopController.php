@@ -22,7 +22,7 @@ class ShopController extends Controller
      */
     public function index(Request $request)
     {
-        return Shop::with('categories')->get();
+        return Shop::with(['categories', 'type:id,type', 'carBrands:car_brand'])->get();
     }
 
     /**
@@ -46,7 +46,7 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-        $shop = Shop::where('id', $id)->with('categories')->get();
+        $shop = Shop::where('id', $id)->with(['categories', 'type:id,type', 'carBrands:car_brand'])->get();
         if ($shop->count() == 0) return response()->json(['error'=>'Shop not found'], 404);
         return $shop;
     }

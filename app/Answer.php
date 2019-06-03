@@ -18,8 +18,10 @@ class Answer extends Model
         'shop_id',
         'user_id',
         'price',
-        'is_new',
-        'description'
+        'description',
+        'in_stock',
+        'original',
+        'reserve_date',
     ];
 
     /**
@@ -32,7 +34,8 @@ class Answer extends Model
         'status_id' => 'integer',
         'shop_id' => 'integer',
         'user_id' => 'integer',
-        'is_new' => 'boolean'
+        'in_stock' => 'boolean',
+        'original' => 'boolean',
     ];
 
     public function messages(){

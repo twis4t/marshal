@@ -3,7 +3,7 @@ import { NAVBAR_VISIBLE_CHANGE } from '@/actions/SettingsActions'
 const initialState = {
   lang: 'ru',
   appName: 'Marshal service',
-  navBarOpen: false,
+  navBarOpen: true,
 }
 
 export const settingsReducer = (state = initialState, action) => {

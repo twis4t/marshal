@@ -21,6 +21,10 @@ export const SET_CATEGORIES_SHOP_REQUEST = 'SET_CATEGORIES_SHOP_REQUEST'
 export const SET_CATEGORIES_SHOP_SUCCESS = 'SET_CATEGORIES_SHOP_SUCCESS'
 export const SET_CATEGORIES_SHOP_ERROR = 'SET_CATEGORIES_SHOP_ERROR'
 
+export const GET_SHOP_STAFF_REQUEST = 'GET_SHOP_STAFF_REQUEST'
+export const GET_SHOP_STAFF_SUCCESS = 'GET_SHOP_STAFF_SUCCESS'
+export const GET_SHOP_STAFF_ERROR = 'GET_SHOP_STAFF_ERROR'
+
 export const getShops = () => async dispatch => {
   dispatch({
     type: GET_SHOPS_REQUEST,
@@ -165,7 +169,7 @@ export const archiveShop = (id, date) => async dispatch => {
         })
         dispatch(
           enqueueSnackbar({
-            message: 'Компания выведена в архив',
+            message: 'Статус компании изменен',
             options: {
               variant: 'success',
             },
@@ -183,13 +187,13 @@ export const archiveShop = (id, date) => async dispatch => {
       })
       dispatch(
         enqueueSnackbar({
-          message: 'Не удалось вывести в архив',
+          message: 'Не удалось изменить статус компании',
           options: {
             variant: 'error',
           },
         })
       )
-      console.log('Archive shop failed', e)
+      console.log('Archive date change failed', e)
     })
 }
 
@@ -232,5 +236,34 @@ export const setCategories = (id, categories) => async dispatch => {
         })
       )
       console.log('Set shop categories failed', e)
+    })
+}
+
+export const getShopStaff = id => async dispatch => {
+  dispatch({
+    type: GET_SHOP_STAFF_REQUEST,
+  })
+
+  await axios
+    .get('/shop-staff', { params: { id: id } })
+    .then(res => {
+      dispatch({
+        type: GET_SHOP_STAFF_SUCCESS,
+        payload: res.data,
+      })
+    })
+    .catch(e => {
+      dispatch({
+        type: GET_SHOP_STAFF_ERROR,
+      })
+      dispatch(
+        enqueueSnackbar({
+          message: 'Не удалось получить список сотрудников',
+          options: {
+            variant: 'error',
+          },
+        })
+      )
+      console.log('Get shop staff failed', e)
     })
 }

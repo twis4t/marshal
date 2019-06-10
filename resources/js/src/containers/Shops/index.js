@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 /* actions */
-import { getShops, editShop, addShop, archiveShop, setCategories } from '@/actions/ShopActions'
+import { getShops, editShop, addShop, archiveShop, setCategories, getShopStaff } from '@/actions/ShopActions'
 import { getCategories, addCategory, editCategory, removeCategory } from '@/actions/CategoryActions'
+import { editUser } from '@/actions/AccountActions'
 
 import classNames from 'classnames'
 import styles from './styles'
@@ -35,6 +36,7 @@ import {
   IntegratedPaging,
 } from '@devexpress/dx-react-grid'
 import { Paper, Button, LinearProgress, Switch, FormControlLabel } from '@material-ui/core'
+import { AllInbox as AllInboxIcon } from '@material-ui/icons'
 import { isNull } from 'util'
 
 // const ImageTypeProvider = props => <DataTypeProvider formatterComponent={ShopImage} {...props} />
@@ -49,6 +51,20 @@ const CategoryFormatter = ({ value }) => value.map(cat => cat.category).join(', 
 }*/
 CategoryFormatter.propTypes = {
   value: PropTypes.array.isRequired,
+}
+
+// Отображаем архив
+const BanTypeProvider = props => <DataTypeProvider formatterComponent={BanFormatter} {...props} />
+const BanFormatter = ({ value }) =>
+  isNull(value) ? (
+    ''
+  ) : (
+    <span title={'В архиве с ' + moment(value).format('DD.MM.YYYY')}>
+      <AllInboxIcon color="secondary" />
+    </span>
+  )
+BanFormatter.propTypes = {
+  value: PropTypes.string,
 }
 
 // Компонент отображения кнопки действий
@@ -76,6 +92,7 @@ class Shops extends Component {
     isNewCompany: true,
     сompanyForm: {},
     currentRow: {},
+    currentShopStaff: [],
     sorting: [{ columnName: 'name', direction: 'asc' }],
   }
 
@@ -93,8 +110,9 @@ class Shops extends Component {
   ActionsList = data => [
     {
       title: 'Сотрудники',
-      action: () => {
+      action: async () => {
         this.setState({ currentRow: data })
+        await this.getShopStaff(data.id)
         this.userDialogOpen()
       },
     },
@@ -107,9 +125,16 @@ class Shops extends Component {
     },
     {
       title: 'В архив',
-      disabled: data.archive_date !== null,
+      visible: data.archive_date === null,
       action: () => {
         this.archiveShop(data.id)
+      },
+    },
+    {
+      title: 'Вернуть из архива',
+      visible: data.archive_date !== null,
+      action: () => {
+        this.archiveShop(data.id, null)
       },
     },
   ]
@@ -182,8 +207,7 @@ class Shops extends Component {
     this.props.getShops()
   }
 
-  archiveShop = async (id, date) => {
-    date = date || moment().format('YYYY-MM-DD')
+  archiveShop = async (id, date = moment().format('YYYY-MM-DD')) => {
     await this.props.archiveShop(id, date)
     this.props.getShops()
   }
@@ -192,12 +216,25 @@ class Shops extends Component {
     this.setState({ showArchiveRow: event.target.checked })
   }
 
+  getShopStaff = async id => {
+    this.setState({ currentShopStaff: [] })
+    await this.props.getShopStaff(id)
+    this.setState({ currentShopStaff: this.props.currentShopStaff })
+  }
+
+  editUser = async (id, data) => {
+    await this.props.editUser(id, data)
+  }
+
   render() {
     const { classes, shopsData, categories } = this.props
 
     return (
       <div className={classes.flexGrow}>
-        <ModuleTitle title="Управление магазинами" breadcrumbs={[{ text: 'Главная', path: '/' },{ text: 'Магазины'}]}/>
+        <ModuleTitle
+          title="Управление магазинами"
+          breadcrumbs={[{ text: 'Главная', path: '/' }, { text: 'Магазины' }]}
+        />
         <div className={classes.actionsBox}>
           <Button variant="outlined" color="primary" onClick={this.addCompanyDialog}>
             Добавить
@@ -225,6 +262,7 @@ class Shops extends Component {
               { name: 'address', title: 'Адрес' },
               { name: 'phone', title: 'Телефон' },
               { name: 'comment', title: 'Примечание' },
+              { name: 'archive_date', title: 'Архив' },
               { name: 'actions', title: 'Действия' },
             ]}
           >
@@ -241,10 +279,14 @@ class Shops extends Component {
             <PagingState defaultCurrentPage={0} pageSize={10} />
             <IntegratedPaging />
             <PagingPanel />
+            <BanTypeProvider for={['archive_date']} />
             <IntegratedFiltering />
             <Table
               rowComponent={CustomTableRow}
-              columnExtensions={[{ columnName: 'actions', width: 120, align: 'center' }]}
+              columnExtensions={[
+                { columnName: 'actions', width: 120, align: 'center' },
+                { columnName: 'archive_date', width: 100, align: 'left' },
+              ]}
               messages={{ noData: 'Нет данных' }}
             />
             <Toolbar />
@@ -257,6 +299,9 @@ class Shops extends Component {
           onOpen={this.userDialogOpen}
           onClose={this.userDialogClose}
           data={this.state.currentRow}
+          users={this.state.currentShopStaff || []}
+          editUser={this.editUser}
+          update={this.getShopStaff}
         />
         <CompanyForm
           isNew={this.state.isNewCompany}
@@ -284,28 +329,34 @@ class Shops extends Component {
 Shops.propTypes = {
   classes: PropTypes.object.isRequired,
   shopsData: PropTypes.object.isRequired,
+  currentShopStaff: PropTypes.array.isRequired,
   getShops: PropTypes.func.isRequired,
   editShop: PropTypes.func.isRequired,
   addShop: PropTypes.func.isRequired,
   archiveShop: PropTypes.func.isRequired,
   setCategories: PropTypes.func.isRequired,
+  getShopStaff: PropTypes.func.isRequired,
 
   getCategories: PropTypes.func.isRequired,
   categories: PropTypes.object.isRequired,
   addCategory: PropTypes.func.isRequired,
   editCategory: PropTypes.func.isRequired,
   removeCategory: PropTypes.func.isRequired,
+
+  editUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = store => {
   return {
     shopsData: store.shop,
     categories: store.category,
+    currentShopStaff: store.shop.currentShopStaff,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   getShops: () => dispatch(getShops()),
+  getShopStaff: id => dispatch(getShopStaff(id)),
   editShop: (id, data) => dispatch(editShop(id, data)),
   addShop: data => dispatch(addShop(data)),
   archiveShop: (id, date) => dispatch(archiveShop(id, date)),
@@ -314,6 +365,7 @@ const mapDispatchToProps = dispatch => ({
   addCategory: data => dispatch(addCategory(data)),
   editCategory: (id, data) => dispatch(editCategory(id, data)),
   removeCategory: id => dispatch(removeCategory(id)),
+  editUser: (id, data) => dispatch(editUser(id, data)),
 })
 
 export default connect(

@@ -174,7 +174,7 @@ class Users extends Component {
       },
     },
     {
-      title: 'Восстановить',
+      title: 'Разблокировать',
       visible: data.banned_date !== null,
       action: () => {
         this.setUserStatus(data.id, null)
@@ -186,7 +186,10 @@ class Users extends Component {
     const { classes, account } = this.props
     return (
       <div className={classes.flexGrow}>
-        <ModuleTitle title="Управление пользователями" breadcrumbs={[{ text: 'Главная', path: '/' },{ text: 'Пользователи'}]}/>
+        <ModuleTitle
+          title="Управление пользователями"
+          breadcrumbs={[{ text: 'Главная', path: '/' }, { text: 'Пользователи' }]}
+        />
         <div className={classes.actionsBox}>
           <Button variant="outlined" color="primary" onClick={this.addUserDialog}>
             Добавить

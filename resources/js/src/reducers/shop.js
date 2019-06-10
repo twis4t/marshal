@@ -14,10 +14,14 @@ import {
   SET_CATEGORIES_SHOP_REQUEST,
   SET_CATEGORIES_SHOP_SUCCESS,
   SET_CATEGORIES_SHOP_ERROR,
+  GET_SHOP_STAFF_REQUEST,
+  GET_SHOP_STAFF_SUCCESS,
+  GET_SHOP_STAFF_ERROR,
 } from '@/actions/ShopActions'
 
 const initialState = {
   shops: [],
+  currentShopStaff: [],
   isFetching: false,
   insertedId: 0,
 }
@@ -58,6 +62,13 @@ export const shopReducer = (state = initialState, action) => {
     case SET_CATEGORIES_SHOP_SUCCESS:
       return { ...state, isFetching: false }
     case SET_CATEGORIES_SHOP_ERROR:
+      return { ...state, isFetching: false }
+    /* Получение списка сотрудников магазина */
+    case GET_SHOP_STAFF_REQUEST:
+      return { ...state, isFetching: true }
+    case GET_SHOP_STAFF_SUCCESS:
+      return { ...state, currentShopStaff: action.payload, isFetching: false }
+    case GET_SHOP_STAFF_ERROR:
       return { ...state, isFetching: false }
     default:
       return state

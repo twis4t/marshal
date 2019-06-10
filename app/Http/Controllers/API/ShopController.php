@@ -93,6 +93,20 @@ class ShopController extends Controller
     }
 
     /**
+     * Получить персонал магазина
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getShopStaff(Request $request)
+    {
+        $shop = Shop::find($request->id ?? 0);
+        if (!isset($shop)) return response()->json(['error'=>'Shop not found'], 404);
+        $shopStaff = User::where('shop_id', $request->id)->get();
+        return  $shopStaff;
+    }
+
+    /**
      * Получить избранные магазины
      *
      * @return \Illuminate\Http\Response

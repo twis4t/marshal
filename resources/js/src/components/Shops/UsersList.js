@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import {
   Button,
-  Tabs,
-  Tab,
+  // Tabs,
+  // Tab,
   Dialog,
   DialogActions,
   DialogContent,
@@ -21,7 +21,8 @@ import {
   Tooltip,
 } from '@material-ui/core'
 import { LinkOff as LinkOffIcon, Lock as LockIcon } from '@material-ui/icons'
-import SwipeableViews from 'react-swipeable-views'
+import moment from 'moment'
+//import SwipeableViews from 'react-swipeable-views'
 
 const styles = theme => ({
   root: {
@@ -62,8 +63,22 @@ class UsersList extends React.Component {
     this.setState({ value: index })
   }
 
+  blockUser = async id => {
+    await this.props.editUser(id, { banned_date: moment().format('YYYY-MM-DD') })
+    this.listUpdate()
+  }
+
+  dismissUser = async id => {
+    await this.props.editUser(id, { shop_id: null })
+    this.listUpdate()
+  }
+
+  listUpdate = () => {
+    this.props.update(this.props.data.id)
+  }
+
   render() {
-    const { status, onClose, data, theme, classes } = this.props
+    const { status, onClose, data, classes, users } = this.props
     return (
       <div>
         <Dialog
@@ -74,7 +89,7 @@ class UsersList extends React.Component {
         >
           <DialogTitle id="alert-dialog-title">Сотрудники компании {data.name}</DialogTitle>
           <DialogContent>
-            <Tabs
+            {/* <Tabs
               value={this.state.value}
               indicatorColor="primary"
               textColor="primary"
@@ -84,46 +99,55 @@ class UsersList extends React.Component {
               <Tab label="Активные" />
               <Tab label="Запросы" />
               <Tab label="Заблокированы" disabled />
-            </Tabs>
-            <SwipeableViews
+            </Tabs> 
+              <SwipeableViews
               axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
               index={this.state.value}
               onChangeIndex={this.handleChangeIndex}
-            >
-              {/* Список активных пользователей компании */}
-              <TabContainer dir={theme.direction}>
-                <List>
-                  {[...Array(8)].map(value => (
-                    <ListItem key={value} button>
-                      <ListItemAvatar>
-                        <Avatar className={classes.avatar}>U</Avatar>
-                      </ListItemAvatar>
-                      <ListItemText primary={`Line item ${value + 1}`} secondary={'test@test.ru'} />
-                      <ListItemSecondaryAction>
-                        <Tooltip title="Заблокировать">
-                          <IconButton aria-label="Ban">
-                            <LockIcon fontSize="small" />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Исключить">
-                          <IconButton aria-label="Delete">
-                            <LinkOffIcon fontSize="small" />
-                          </IconButton>
-                        </Tooltip>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                  ))}
-                </List>
-              </TabContainer>
-              {/* Список пользователей, запросивших подтверждение */}
-              <TabContainer dir={theme.direction}>Запросы на подтверждение</TabContainer>
-              {/* Список заблокированных пользователей компании */}
-              <TabContainer dir={theme.direction}>Заблокированы</TabContainer>
-            </SwipeableViews>
-            <DialogContentText id="alert-dialog-description">
-              Let Google help apps determine location. This means sending anonymous location data to Google, even when
-              no apps are running.
-            </DialogContentText>
+            > */}
+            {/* Список активных пользователей компании */}
+            {/* <TabContainer dir={theme.direction}> */}
+            <List>
+              {users.map(value => (
+                <ListItem key={'user-' + value.id} button>
+                  <ListItemAvatar>
+                    <Avatar className={classes.avatar}>{value.name.split('')[0].toUpperCase()}</Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={value.name + (moment().diff(value.banned_date, 'minutes') > 0 ? ' - Заблокирован' : '')}
+                    secondary={value.email}
+                  />
+                  <ListItemSecondaryAction>
+                    {moment().diff(value.banned_date, 'minutes') > 0 ? (
+                      ''
+                    ) : (
+                      <Tooltip title="Заблокировать">
+                        <IconButton aria-label="Ban" onClick={() => this.blockUser(value.id)}>
+                          <LockIcon fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                    )}
+
+                    <Tooltip title="Исключить">
+                      <IconButton aria-label="Delete" onClick={() => this.dismissUser(value.id)}>
+                        <LinkOffIcon fontSize="small" />
+                      </IconButton>
+                    </Tooltip>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              ))}
+            </List>
+            {/* </TabContainer> */}
+            {/* Список пользователей, запросивших подтверждение */}
+            {/* <TabContainer dir={theme.direction}>Запросы на подтверждение</TabContainer> */}
+            {/* Список заблокированных пользователей компании */}
+            {/* <TabContainer dir={theme.direction}>Заблокированы</TabContainer> */}
+            {/* </SwipeableViews> */}
+            {this.props.users.length > 0 ? (
+              ''
+            ) : (
+              <DialogContentText id="alert-dialog-description">Сотрудников нет</DialogContentText>
+            )}
           </DialogContent>
           <DialogActions>
             <Button onClick={onClose} color="primary" autoFocus>
@@ -139,7 +163,10 @@ class UsersList extends React.Component {
 UsersList.propTypes = {
   status: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  editUser: PropTypes.func.isRequired,
+  update: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
+  users: PropTypes.array.isRequired,
   theme: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
 }

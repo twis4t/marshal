@@ -50,6 +50,20 @@ class ShopController extends Controller
         if ($shop->count() == 0) return response()->json(['error'=>'Shop not found'], 404);
         return $shop;
     }
+
+    /**
+     * Получение данных и категории магазина пользователя
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function userShop()
+    {
+        $user = Auth::user();
+        if (!isset($user->shop_id)) return response()->json(['error'=>'User have no shop id'], 404);
+        $shop = Shop::where('id', $user->shop_id)->with(['categories', 'type:id,type', 'carBrands:car_brand'])->get()->first();        
+        if (!isset($shop)) return response()->json(['error'=>'Shop not found'], 404);
+        return $shop;
+    }
     
     /**
      * Обновление данных по магазину
@@ -61,7 +75,16 @@ class ShopController extends Controller
     public function update(Request $request, $id)
     {
         $requestData = $request->all();
-        $result = Shop::where('id', $id)->update($requestData);
+        $shop = Shop::find($id);
+        if (isset($requestData['categories'])){            
+            $sync = $shop->categories()->sync($requestData['categories']);
+            unset($requestData['categories']);
+        }
+        if (isset($requestData['carBrands'])){
+            $sync = $shop->carBrands()->sync($requestData['carBrands']);
+            unset($requestData['carBrands']);
+        }
+        $result = $shop->update($requestData);
         return response()->json(['result' => $result], 200);
     }
 

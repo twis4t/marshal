@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 	/* Shop */
 	Route::get('shops', 'API\ShopController@index');
 	Route::get('shop/{id}', 'API\ShopController@show');
+	Route::get('user-shop', 'API\ShopController@userShop');
 	Route::get('favorite-shops', 'API\ShopController@getFavoriteShops');
 	Route::get('shop-staff', 'API\ShopController@getShopStaff');
 	Route::post('shop-add', 'API\ShopController@store');

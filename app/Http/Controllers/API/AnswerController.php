@@ -22,7 +22,14 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        return Answer::all();
+        $requestsQuery = Answer::query();
+        if (isset(request()->user_id)){
+            $requestsQuery = $requestsQuery->where('user_id', request()->user_id);
+        }
+        if (isset(request()->shop_id)){
+            $requestsQuery = $requestsQuery->where('shop_id', request()->shop_id);
+        }
+        return $requestsQuery->with(['user:id,name'])->get();
     }
 
     /**
@@ -53,7 +60,7 @@ class AnswerController extends Controller
      */
     public function show($id)
     {
-        $answer = Answer::where('id', $id)->with(['messages', 'messages.user:id,email,name,role_id', 'messages.user.role:id,role'])->get();
+        $answer = Answer::where('id', $id)->with(['messages', 'messages.user:id,email,name,role_id', 'messages.user.role:id,role', 'user:id,name'])->get();
         // TODO: get() -> first(). Пока оставил для совместимости
         foreach ($answer[0]->messages ?? [] as $key => $message){            
             if ($message->attachment != null){                

@@ -75,28 +75,33 @@ class ShopController extends Controller
     public function update(Request $request, $id)
     {
         $requestData = $request->all();
-        $shop = Shop::find($id);
-        if (isset($requestData['categories'])){            
-            $sync = $shop->categories()->sync($requestData['categories']);
-            unset($requestData['categories']);
+        if ($id > 0) {
+	        $shop = Shop::find($id);
+	        if (isset($requestData['categories'])){            
+	            $sync = $shop->categories()->sync($requestData['categories']);
+	            unset($requestData['categories']);
+	        }
+	        if (isset($requestData['carBrands'])){
+	            $sync = $shop->carBrands()->sync($requestData['carBrands']);
+	            unset($requestData['carBrands']);
+	        }
+	        $result = $shop->update($requestData);
+        } else {
+        	$result = Shop::create($requestData);
         }
-        if (isset($requestData['carBrands'])){
-            $sync = $shop->carBrands()->sync($requestData['carBrands']);
-            unset($requestData['carBrands']);
-        }
-        $result = $shop->update($requestData);
         return response()->json(['result' => $result], 200);
     }
 
     /**
      * Удаление магазина
      *
+     * @param  \Illuminate\Http\Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $result = Shop::where('id', $request->id)->delete();
+        $result = Shop::where('id', $id)->delete();
         return response()->json(['result' => $result], 200);
     }
 

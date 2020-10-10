@@ -26,6 +26,7 @@ class RequestController extends Controller
     public function index(Request $request)
     {      
         $requestsQuery = RequestModel::query();
+        $user = Auth::user();
         if (isset($request->users)){
             $requestsQuery = $requestsQuery->whereIn('user_id', $request->users);
         }
@@ -36,12 +37,42 @@ class RequestController extends Controller
             $requestsQuery = $requestsQuery->whereIn('status_id', $request->statuses);
         }
         if (isset($request->dateFrom)){
+        	// ->whereDate('created_at', '>', Carbon::now()->subDays(30))
             $requestsQuery = $requestsQuery->whereDate('created_at', '>=', $request->dateFrom);
+        } else {
+            $requestsQuery = $requestsQuery->whereDate('created_at', '>=', Carbon::now()->subDays(7));
         }
         if (isset($request->dateTo)){
             $requestsQuery = $requestsQuery->whereDate('created_at', '<=', $request->dateTo);
         }
-        return $requestsQuery->with(['user:id,name', 'status:id,status', 'shop:id,name'])->withCount('answers')->get();
+        // для продавцов оставляем только ответы магазина
+   //     if ($user->role_id === 3) {
+   //         $requestsQuery = $requestsQuery->whereHas('answers', function($query) use ($user){
+			//     $query->where('shop_id', $user->shop_id);  
+			// });
+   //     }
+        $reqs = $requestsQuery->with([
+        	'user:id,name',
+            'answers.shop:id,name',
+        	'status:id,status',
+        	'shop:id,name',
+        	'car.car_brand:id,car_brand',
+        	'category:id,category,icon'
+        	])->withCount('answers')->orderBy('created_at', 'DESC')->get();
+        	// для продавцов оставляем только ответы магазина
+        if ($user->role_id === 3){
+        	foreach ($reqs as $key => $req) {
+	            $answers = []; 
+	            foreach ($req->answers as $answer){
+	                if ($answer->shop_id === $user->shop_id) $answers[] = $answer;
+	            }
+	            $req = $req->toArray();
+	            $req['answers'] = $answers;  
+	            $req['answers_count'] = count($answers);
+	            $reqs[$key] = $req;
+        	}
+        }
+        return collect($reqs);
     }
 
     /**
@@ -98,7 +129,7 @@ class RequestController extends Controller
             'status:id,status',
             'car.car_brand:id,car_brand',
             'car.car_model:id,car_model',
-            'category:id,category'
+            'category:id,category,icon'
         ])->withCount('answers')->get()->first();
 
         if (!isset($req)) return response()->json(['error'=>'Request not found'], 404);

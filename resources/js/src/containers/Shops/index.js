@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 /* actions */
-import { getShops, editShop, addShop, archiveShop, setCategories, getShopStaff } from '@/actions/ShopActions'
+import { getShops, editShop, addShop, archiveShop, deleteShop, setCategories, getShopStaff } from '@/actions/ShopActions'
 import { getCategories, addCategory, editCategory, removeCategory } from '@/actions/CategoryActions'
 import { editUser } from '@/actions/AccountActions'
 
@@ -131,6 +131,13 @@ class Shops extends Component {
       },
     },
     {
+      title: 'Удалить',
+      visible: true,
+      action: () => {
+        this.deleteShop(data.id)
+      },
+    },
+    {
       title: 'Вернуть из архива',
       visible: data.archive_date !== null,
       action: () => {
@@ -209,6 +216,11 @@ class Shops extends Component {
 
   archiveShop = async (id, date = moment().format('YYYY-MM-DD')) => {
     await this.props.archiveShop(id, date)
+    this.props.getShops()
+  }
+
+  deleteShop = async (id) => {
+    await this.props.deleteShop(id)
     this.props.getShops()
   }
 
@@ -332,6 +344,7 @@ Shops.propTypes = {
   currentShopStaff: PropTypes.array.isRequired,
   getShops: PropTypes.func.isRequired,
   editShop: PropTypes.func.isRequired,
+  deleteShop: PropTypes.func.isRequired,
   addShop: PropTypes.func.isRequired,
   archiveShop: PropTypes.func.isRequired,
   setCategories: PropTypes.func.isRequired,
@@ -360,6 +373,7 @@ const mapDispatchToProps = dispatch => ({
   editShop: (id, data) => dispatch(editShop(id, data)),
   addShop: data => dispatch(addShop(data)),
   archiveShop: (id, date) => dispatch(archiveShop(id, date)),
+  deleteShop: (id) => dispatch(deleteShop(id)),
   setCategories: (id, categories) => dispatch(setCategories(id, categories)),
   getCategories: () => dispatch(getCategories()),
   addCategory: data => dispatch(addCategory(data)),

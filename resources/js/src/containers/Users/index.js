@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 /* actions */
 import { getAccounts, editUser, addUser, setStatus } from '@/actions/AccountActions'
 import { getRoles } from '@/actions/RoleActions'
+import { getShops } from '@/actions/ShopActions'
 
 import classNames from 'classnames'
 import styles from './styles'
@@ -22,7 +23,6 @@ import {
   TableHeaderRow,
   SearchPanel,
   Toolbar,
-  PagingPanel,
 } from '@devexpress/dx-react-grid-material-ui'
 import {
   DataTypeProvider,
@@ -30,8 +30,6 @@ import {
   IntegratedFiltering,
   SortingState,
   IntegratedSorting,
-  PagingState,
-  IntegratedPaging,
 } from '@devexpress/dx-react-grid'
 import { LockOpen as LockOpenIcon } from '@material-ui/icons'
 import { Paper, Button, LinearProgress, Switch, FormControlLabel, Avatar } from '@material-ui/core'
@@ -99,12 +97,15 @@ class Users extends Component {
     userFormDialog: false,
     isNewUser: true,
     userForm: {},
+      currentPage: 0,
+      pageSize: 10,
   }
 
   componentDidMount = async () => {
-    this.props.getAccounts()
-    this.props.getRoles()
-  }
+    this.props.getAccounts();
+    this.props.getRoles();
+    this.props.getShops();
+  };
 
   changeSorting = sorting => this.setState({ sorting })
 
@@ -180,10 +181,23 @@ class Users extends Component {
         this.setUserStatus(data.id, null)
       },
     },
-  ]
+  ];
+
+  changePageSize = (value) => {
+    const { currentPage } = this.state;
+    const totalCount = this.props.account.accounts.length;
+    const totalPages = Math.ceil(totalCount / value);
+    const updatedCurrentPage = Math.min(currentPage, totalPages - 1);
+
+    this.setState({pageSize: value, currentPage: updatedCurrentPage});
+  };
+
+    setCurrentPage = (value) => {
+        this.setState({ currentPage: value});
+    };
 
   render() {
-    const { classes, account } = this.props
+    const { classes, account } = this.props;
     return (
       <div className={classes.flexGrow}>
         <ModuleTitle
@@ -205,12 +219,12 @@ class Users extends Component {
         <Paper className={classNames(classes.paperCard, classes.flexGrow)}>
           {account.isFetching ? <LinearProgress color="primary" className={classes.progress} /> : ''}
           <DxGrid
-            rows={this.filterBannedAccount()}
+            rows={account.accounts}
             columns={[
               { name: 'name', title: 'Имя' },
               { name: 'email', title: 'Email' },
               { name: 'role', title: 'Роль' },
-              // { name: 'shop', title: 'Магазин' },
+              { name: 'shop', title: 'Магазин' },
               { name: 'requests_ratio', title: '% Заявок' },
               { name: 'requests_count', title: 'Заявок' },
               { name: 'answers_count', title: 'Ответов' },
@@ -244,9 +258,6 @@ class Users extends Component {
             <Toolbar />
             <SearchPanel defaultValue="" messages={{ searchPlaceholder: 'Поиск' }} />
             <TableHeaderRow showSortingControls messages={{ sortingHint: 'Сортировка' }} />
-            <PagingState defaultCurrentPage={0} pageSize={10} />
-            <IntegratedPaging />
-            <PagingPanel />
 
             <ActionTypeProvider for={['actions']} actions={this.ActionsList} />
             <RoleTypeProvider for={['role']} />
@@ -263,6 +274,7 @@ class Users extends Component {
           onSubmit={this.userFormSubmit}
           data={this.state.userForm}
           roles={this.props.role.roles}
+          shops={this.props.shop.shops}
         />
       </div>
     )
@@ -273,17 +285,20 @@ Users.propTypes = {
   classes: PropTypes.object.isRequired,
   account: PropTypes.object.isRequired,
   role: PropTypes.object.isRequired,
+  shop: PropTypes.object.isRequired,
   getAccounts: PropTypes.func.isRequired,
   editUser: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,
   addUser: PropTypes.func.isRequired,
   getRoles: PropTypes.func.isRequired,
+  getShops: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = store => {
   return {
     account: store.account,
     role: store.role,
+    shop: store.shop,
   }
 }
 
@@ -293,6 +308,7 @@ const mapDispatchToProps = dispatch => ({
   setStatus: (id, date) => dispatch(setStatus(id, date)),
   addUser: data => dispatch(addUser(data)),
   getRoles: () => dispatch(getRoles()),
+  getShops: () => dispatch(getShops()),
 })
 
 export default connect(

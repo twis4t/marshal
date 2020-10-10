@@ -37,7 +37,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('favorite-shops', 'API\ShopController@getFavoriteShops');
 	Route::get('shop-staff', 'API\ShopController@getShopStaff');
 	Route::post('shop-add', 'API\ShopController@store');
-	Route::put('shop-update/{id}', 'API\ShopController@update');
+    Route::put('shop-update/{id}', 'API\ShopController@update');
+    Route::put('shop-delete/{id}', 'API\ShopController@destroy');
 	Route::put('shop-set-categories/{id}', 'API\ShopController@setCategories');
 	Route::put('favorite-shop-add/{id}', 'API\ShopController@addToFavorite');
 	Route::put('favorite-shop-remove/{id}', 'API\ShopController@removeFromFavorite');

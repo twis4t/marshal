@@ -32,8 +32,6 @@ const styles = theme => ({
     backgroundColor: '#8bc34a',
   },
   textField: {
-    /*marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,*/
     paddingRight: 4,
   },
   editForm: {
@@ -41,8 +39,8 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     boxShadow: 'none',
-    paddingLeft: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
+    paddingLeft: theme.spacing(),
+    paddingRight: theme.spacing(),
   },
   editField: {
     marginRight: 10,

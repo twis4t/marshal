@@ -12,25 +12,25 @@ const mix = require('laravel-mix')
  */
 
 mix
-  .webpackConfig({
-    module: {
-      rules: [
-        {
-          test: /\.(jsx|js|vue)$/,
-          loader: 'eslint-loader',
-          enforce: 'pre',
-          exclude: /(node_modules)/,
-          options: {
-            formatter: require('eslint-friendly-formatter'),
-          },
+    .webpackConfig({
+        module: {
+            rules: [
+                {
+                    test: /\.(jsx|js|vue)$/,
+                    loader: 'eslint-loader',
+                    enforce: 'pre',
+                    exclude: /(node_modules)/,
+                    options: {
+                        formatter: require('eslint-friendly-formatter'),
+                    },
+                },
+            ],
         },
-      ],
-    },
-    resolve: {
-      alias: {
-        '@': __dirname + '/resources/js/src',
-      },
-    },
-  })
-  .react('resources/js/src/index.js', 'public/js')
-  .sass('resources/sass/app.scss', 'public/css')
+        resolve: {
+            alias: {
+                '@': __dirname + '/resources/js/src',
+            },
+        },
+    })
+    .react('resources/js/src/index.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')

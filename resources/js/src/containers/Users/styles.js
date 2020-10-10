@@ -11,10 +11,10 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: theme.spacing.unit * 2,
+    marginBottom: theme.spacing(2),
     '& button': {
       height: 42,
-      marginRight: theme.spacing.unit,
+      marginRight: theme.spacing(),
       '&:last-child': {
         marginRight: 0,
       },

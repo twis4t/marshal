@@ -14,7 +14,7 @@ const styles = theme => ({
     alignItems: 'center',
   },
   progress: {
-    margin: theme.spacing.unit * 2,
+    margin: theme.spacing(2),
     color: theme.palette.marshal.main,
   },
 })

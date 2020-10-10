@@ -8,7 +8,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing(3),
     height: '100vh',
     overflow: 'auto',
   },
@@ -40,7 +40,7 @@ const styles = theme => ({
   appBar: {
     background: '#f4f4f7',
     color: '#3e424c',
-    width: `calc(100% - ${theme.spacing.unit * 7}px)`,
+    width: `calc(100% - ${theme.spacing(7)}px)`,
     boxShadow: '0px 3px 6px 0px rgba(115, 127, 136, 0.3)',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
@@ -64,7 +64,7 @@ const styles = theme => ({
     display: 'none',
   },
   title: {
-    paddingRight: theme.spacing.unit * 3,
+    paddingRight: theme.spacing(3),
   },
   drawerPaper: {
     position: 'relative',
@@ -84,7 +84,7 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    width: theme.spacing.unit * 7,
+    width: theme.spacing(7),
   },
   appBarSpacer: theme.mixins.toolbar,
   chartContainer: {
@@ -100,7 +100,7 @@ const styles = theme => ({
     '&:hover': {
       backgroundColor: fade('#536475', 0.15),
     },
-    marginRight: theme.spacing.unit * 2,
+    marginRight: theme.spacing(2),
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -108,7 +108,7 @@ const styles = theme => ({
     },
   },
   searchIcon: {
-    width: theme.spacing.unit * 7,
+    width: theme.spacing(7),
     height: '100%',
     position: 'absolute',
     display: 'flex',
@@ -123,10 +123,10 @@ const styles = theme => ({
     width: '100%',
   },
   searchInputInput: {
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 7,
+    paddingTop: theme.spacing(),
+    paddingRight: theme.spacing(),
+    paddingBottom: theme.spacing(),
+    paddingLeft: theme.spacing(7),
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {

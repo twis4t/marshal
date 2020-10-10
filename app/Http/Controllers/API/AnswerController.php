@@ -7,6 +7,7 @@ use App\Request as RequestModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @group Answer
@@ -22,14 +23,28 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        $requestsQuery = Answer::query();
+        $answersQuery = Answer::query();
+        $user = Auth::user();
         if (isset(request()->user_id)){
-            $requestsQuery = $requestsQuery->where('user_id', request()->user_id);
+            $answersQuery = $answersQuery->where('user_id', request()->user_id);
         }
         if (isset(request()->shop_id)){
-            $requestsQuery = $requestsQuery->where('shop_id', request()->shop_id);
+            $answersQuery = $answersQuery->where('shop_id', request()->shop_id);
         }
-        return $requestsQuery->with(['user:id,name'])->get();
+        if (isset(request()->all)){
+            return $answersQuery->with(['user:id,name'])->get();
+        }
+        // for mobile (or fix req in the app)
+        $answers = $answersQuery->whereHas('request', function($query) use ($user){
+	        $query->where('user_id', $user->id);
+	    })->get();
+	    
+	    foreach ($answers as $key => $answer) {
+	    	$answers[$key]['reserve_date'] = (time()-(60*60*24)) < strtotime($answer['reserve_date']) ? $answer['reserve_date'] : null;
+	    	$answers[$key]['reserve_date_passed'] = (time()-(60*60*24)) < strtotime($answer['reserve_date']) ? 'true' : 'false';
+        }
+	    
+	    return $answers;
     }
 
     /**

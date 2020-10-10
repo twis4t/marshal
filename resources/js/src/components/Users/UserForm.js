@@ -23,13 +23,13 @@ const styles = theme => ({
     width: 500,
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: theme.spacing(),
+    marginRight: theme.spacing(),
     width: 200,
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(),
   },
 })
 
@@ -98,7 +98,9 @@ class UserForm extends React.Component {
   }
 
   render() {
-    const { status, classes } = this.props
+    const { status, classes, shops } = this.props;
+    const shopsList = [...shops];
+    shopsList.unshift({id: 0, name: 'Без магазина'});
     return (
       <div>
         <Dialog
@@ -151,11 +153,25 @@ class UserForm extends React.Component {
                 <Select
                   value={this.state.fields.role_id}
                   onChange={this.handleInputChange}
-                  input={<OutlinedInput labelWidth={40} name="role_id" id="role_id" />}
+                  input={<OutlinedInput labelWidth={40} name="role_id" id="role_id"/>}
                 >
                   {this.props.roles.map(role => (
                     <MenuItem key={'role-' + role.id} value={role.id}>
                       {role.role}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl margin="normal" variant="outlined" fullWidth>
+                <InputLabel htmlFor="role_id">Магазин</InputLabel>
+                <Select
+                  value={this.state.fields.shop_id}
+                  onChange={this.handleInputChange}
+                  input={<OutlinedInput labelWidth={40} name="shop_id" id="shop_id"/>}
+                >
+                  {shopsList.length && shopsList.map(shop => (
+                    <MenuItem key={'shops-' + shop.id} value={shop.id}>
+                      {shop.name}
                     </MenuItem>
                   ))}
                 </Select>
@@ -190,6 +206,7 @@ UserForm.propTypes = {
   theme: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   roles: PropTypes.array.isRequired,
+  shops: PropTypes.array.isRequired,
 }
 
 export default withStyles(styles, { withTheme: true })(UserForm)

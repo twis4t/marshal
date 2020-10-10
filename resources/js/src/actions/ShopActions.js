@@ -13,6 +13,10 @@ export const ADD_SHOP_REQUEST = 'ADD_SHOP_REQUEST'
 export const ADD_SHOP_SUCCESS = 'ADD_SHOP_SUCCESS'
 export const ADD_SHOP_ERROR = 'ADD_SHOP_ERROR'
 
+export const DELETE_SHOP_REQUEST = 'DELETE_SHOP_REQUEST'
+export const DELETE_SHOP_SUCCESS = 'DELETE_SHOP_SUCCESS'
+export const DELETE_SHOP_ERROR = 'DELETE_SHOP_ERROR'
+
 export const ARCHIVE_SHOP_REQUEST = 'ARCHIVE_SHOP_REQUEST'
 export const ARCHIVE_SHOP_SUCCESS = 'ARCHIVE_SHOP_SUCCESS'
 export const ARCHIVE_SHOP_ERROR = 'ARCHIVE_SHOP_ERROR'
@@ -196,6 +200,49 @@ export const archiveShop = (id, date) => async dispatch => {
       console.log('Archive date change failed', e)
     })
 }
+
+export const deleteShop = (id) => async dispatch => {
+  dispatch({
+    type: DELETE_SHOP_REQUEST,
+  })
+
+  await axios
+    .put('/shop-delete/' + id)
+    .then(res => {
+      if (res.data.result) {
+        dispatch({
+          type: DELETE_SHOP_SUCCESS,
+        })
+        dispatch(
+          enqueueSnackbar({
+            message: 'Магазин удален',
+            options: {
+              variant: 'success',
+            },
+          })
+        )
+      } else {
+        dispatch({
+          type: DELETE_SHOP_ERROR,
+        })
+      }
+    })
+    .catch(e => {
+      dispatch({
+        type: DELETE_SHOP_ERROR,
+      })
+      dispatch(
+        enqueueSnackbar({
+          message: 'Не удалось удалить магазин',
+          options: {
+            variant: 'error',
+          },
+        })
+      )
+      console.log('Delete date change failed', e)
+    })
+}
+
 
 export const setCategories = (id, categories) => async dispatch => {
   dispatch({

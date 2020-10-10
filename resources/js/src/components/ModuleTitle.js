@@ -20,8 +20,8 @@ const styles = theme => ({
   },
   root: {
     ...theme.mixins.gutters(),
-    padding: theme.spacing.unit * 1,
-    marginBottom: theme.spacing.unit * 2,
+    padding: theme.spacing(),
+    marginBottom: theme.spacing(2),
     boxShadow: '0px 0px 0px 0px rgba(115, 127, 136, 0.3)',
     background: '#eeeff3',
     display: 'flex',

@@ -28,6 +28,7 @@ export const getUser = (email, password) => dispatch => {
           ...login.data,
         },
       })
+        console.log(login.data);
       axios.defaults.headers.common['Authorization'] = login.data.token_type + ' ' + login.data.access_token
       axios
         .get('/details')

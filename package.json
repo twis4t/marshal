@@ -57,7 +57,7 @@
     "@material-ui/data-grid": "^4.0.0-alpha.6",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^3.0.0-alpha.30",
-    "apexcharts": "^3.6.12",
+    "apexcharts": "^3.24.0",
     "connected-react-router": "^6.3.2",
     "material-ui-pickers": "^2.2.4",
     "moment": "^2.24.0",
